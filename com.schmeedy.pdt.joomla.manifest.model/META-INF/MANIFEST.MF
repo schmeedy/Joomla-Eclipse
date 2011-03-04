@@ -1,7 +1,16 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: Joomla! Extension Manifest Model
-Bundle-SymbolicName: com.schmeedy.pdt.joomla.manifest.model
+Bundle-Name: %pluginName
+Bundle-SymbolicName: com.schmeedy.pdt.joomla.manifest.model;singleton:=true
 Bundle-Version: 0.1.0.qualifier
-Bundle-Vendor: schmeedy
+Bundle-ClassPath: .
+Bundle-Vendor: %providerName
+Bundle-Localization: plugin
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Export-Package: com.schmeedy.pdt.joomla.manifest.model,
+ com.schmeedy.pdt.joomla.manifest.model.impl,
+ com.schmeedy.pdt.joomla.manifest.model.util
+Require-Bundle: org.eclipse.core.runtime,
+ org.eclipse.emf.ecore;visibility:=reexport,
+ org.eclipse.emf.ecore.xmi;bundle-version="2.5.0"
+Bundle-ActivationPolicy: lazy

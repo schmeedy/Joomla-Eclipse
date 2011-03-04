@@ -1,0 +1,92 @@
+<!ELEMENT install ((name, creationDate, author, authorEmail, authorUrl, copyright, license, version, description, installfile, uninstallfile, install, uninstall, files*, languages*, media*, administration, params?) | (sql | queries))+>
+<!ATTLIST install
+	type NMTOKEN #FIXED "component"
+	version CDATA #IMPLIED
+>
+<!ELEMENT name (#PCDATA)>
+<!ELEMENT creationDate (#PCDATA)>
+<!ELEMENT author (#PCDATA)>
+<!ELEMENT authorEmail (#PCDATA)>
+<!ELEMENT authorUrl (#PCDATA)>
+<!ELEMENT copyright (#PCDATA)>
+<!ELEMENT license (#PCDATA)>
+<!ELEMENT version (#PCDATA)>
+<!ELEMENT description (#PCDATA)>
+<!ELEMENT administration (menu | submenu | files | languages | media)*>
+<!ELEMENT files (filename | folder)*>
+<!ATTLIST files
+	folder CDATA #IMPLIED
+>
+<!ELEMENT filename (#PCDATA)>
+<!ELEMENT folder (#PCDATA)>
+<!ELEMENT languages (language)+>
+<!ATTLIST languages
+	folder CDATA #IMPLIED
+>
+<!ELEMENT language (#PCDATA)>
+<!ATTLIST language
+	tag CDATA #REQUIRED
+>
+<!ELEMENT media (filename)*>
+<!ATTLIST media
+	destination CDATA #IMPLIED
+	folder CDATA #IMPLIED
+>
+<!ELEMENT menu (#PCDATA)>
+<!ATTLIST menu
+	act NMTOKEN #IMPLIED
+	task NMTOKEN #IMPLIED
+	controller NMTOKEN #IMPLIED
+	view NMTOKEN #IMPLIED
+	layout NMTOKEN #IMPLIED
+	sub NMTOKEN #IMPLIED
+	img CDATA #IMPLIED
+	link CDATA #IMPLIED
+>
+<!ELEMENT submenu (menu)+>
+<!ELEMENT uninstall (sql | queries)>
+<!ELEMENT sql (file)*>
+<!ELEMENT queries (query)*>
+<!ELEMENT file (#PCDATA)>
+<!ATTLIST file
+	charset NMTOKEN #FIXED "utf8"
+	driver NMTOKEN #REQUIRED
+>
+<!ELEMENT query (#PCDATA)>
+<!ATTLIST query
+	id NMTOKEN #IMPLIED
+>
+<!ELEMENT installfile (#PCDATA)>
+<!ELEMENT uninstallfile (#PCDATA)>
+<!ELEMENT params (param)*>
+<!ATTLIST param
+	addParameterDir CDATA #IMPLIED
+>
+<!ELEMENT param (#PCDATA | option)*>
+<!ATTLIST param
+	name NMTOKEN #REQUIRED
+	type NMTOKEN #REQUIRED
+	label CDATA #REQUIRED
+	size NMTOKEN #IMPLIED
+	id NMTOKEN #IMPLIED
+	class NMTOKEN #IMPLIED
+	default CDATA #IMPLIED
+	description CDATA #IMPLIED
+	section NMTOKEN #IMPLIED
+	scope NMTOKEN #IMPLIED
+	directory CDATA #IMPLIED
+	filter CDATA #IMPLIED
+	exclude CDATA #IMPLIED
+	stripext CDATA #IMPLIED
+	hide_none NMTOKEN #IMPLIED
+	hide_default NMTOKEN #IMPLIED
+	client NMTOKEN #IMPLIED
+	menu_type NMTOKEN #IMPLIED
+	state NMTOKEN #IMPLIED
+	rows NMTOKEN #IMPLIED
+	cols NMTOKEN #IMPLIED
+>
+<!ELEMENT option (#PCDATA)>
+<!ATTLIST option
+	value CDATA #IMPLIED
+>
