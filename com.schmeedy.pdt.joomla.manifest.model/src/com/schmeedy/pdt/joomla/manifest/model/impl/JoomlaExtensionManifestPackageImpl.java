@@ -6,23 +6,34 @@
  */
 package com.schmeedy.pdt.joomla.manifest.model.impl;
 
-import com.schmeedy.pdt.joomla.manifest.model.InstallDb;
-import com.schmeedy.pdt.joomla.manifest.model.JoomlaExtensionManifest;
-import com.schmeedy.pdt.joomla.manifest.model.JoomlaExtensionManifestFactory;
-import com.schmeedy.pdt.joomla.manifest.model.JoomlaExtensionManifestPackage;
-
-import com.schmeedy.pdt.joomla.manifest.model.ManifestType;
-import com.schmeedy.pdt.joomla.manifest.model.ManifestVersion;
-import com.schmeedy.pdt.joomla.manifest.model.SqlFile;
-import com.schmeedy.pdt.joomla.manifest.model.SqlFileSet;
-import com.schmeedy.pdt.joomla.manifest.model.UninstallDb;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EPackage;
-
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
+
+import com.schmeedy.pdt.joomla.manifest.model.AbstractMultiResourceContainer;
+import com.schmeedy.pdt.joomla.manifest.model.AbstractResource;
+import com.schmeedy.pdt.joomla.manifest.model.AbstractResourceContainer;
+import com.schmeedy.pdt.joomla.manifest.model.Administration;
+import com.schmeedy.pdt.joomla.manifest.model.FileResource;
+import com.schmeedy.pdt.joomla.manifest.model.FileSet;
+import com.schmeedy.pdt.joomla.manifest.model.FolderResource;
+import com.schmeedy.pdt.joomla.manifest.model.InstallDb;
+import com.schmeedy.pdt.joomla.manifest.model.JoomlaExtensionManifest;
+import com.schmeedy.pdt.joomla.manifest.model.JoomlaExtensionManifestFactory;
+import com.schmeedy.pdt.joomla.manifest.model.JoomlaExtensionManifestPackage;
+import com.schmeedy.pdt.joomla.manifest.model.LanguageResource;
+import com.schmeedy.pdt.joomla.manifest.model.LanguageSet;
+import com.schmeedy.pdt.joomla.manifest.model.ManifestType;
+import com.schmeedy.pdt.joomla.manifest.model.ManifestVersion;
+import com.schmeedy.pdt.joomla.manifest.model.MediaSet;
+import com.schmeedy.pdt.joomla.manifest.model.MenuItem;
+import com.schmeedy.pdt.joomla.manifest.model.SqlFileSet;
+import com.schmeedy.pdt.joomla.manifest.model.SqlResource;
+import com.schmeedy.pdt.joomla.manifest.model.SubMenu;
+import com.schmeedy.pdt.joomla.manifest.model.UninstallDb;
 
 /**
  * <!-- begin-user-doc -->
@@ -31,6 +42,13 @@ import org.eclipse.emf.ecore.impl.EPackageImpl;
  * @generated
  */
 public class JoomlaExtensionManifestPackageImpl extends EPackageImpl implements JoomlaExtensionManifestPackage {
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass abstractMultiResourceContainerEClass = null;
+
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -57,6 +75,20 @@ public class JoomlaExtensionManifestPackageImpl extends EPackageImpl implements 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	private EClass abstractResourceEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass abstractResourceContainerEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	private EClass sqlFileSetEClass = null;
 
 	/**
@@ -64,7 +96,70 @@ public class JoomlaExtensionManifestPackageImpl extends EPackageImpl implements 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass sqlFileEClass = null;
+	private EClass sqlResourceEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass fileSetEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass fileResourceEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass folderResourceEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass languageSetEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass languageResourceEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass mediaSetEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass administrationEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass menuItemEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass subMenuEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -138,6 +233,42 @@ public class JoomlaExtensionManifestPackageImpl extends EPackageImpl implements 
 		// Update the registry and return the package
 		EPackage.Registry.INSTANCE.put(JoomlaExtensionManifestPackage.eNS_URI, theJoomlaExtensionManifestPackage);
 		return theJoomlaExtensionManifestPackage;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getAbstractMultiResourceContainer() {
+		return abstractMultiResourceContainerEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getAbstractMultiResourceContainer_FileSets() {
+		return (EReference)abstractMultiResourceContainerEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getAbstractMultiResourceContainer_LanguageSets() {
+		return (EReference)abstractMultiResourceContainerEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getAbstractMultiResourceContainer_MediaSets() {
+		return (EReference)abstractMultiResourceContainerEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -289,6 +420,15 @@ public class JoomlaExtensionManifestPackageImpl extends EPackageImpl implements 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EReference getJoomlaExtensionManifest_Administration() {
+		return (EReference)joomlaExtensionManifestEClass.getEStructuralFeatures().get(15);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getInstallDb() {
 		return installDbEClass;
 	}
@@ -325,6 +465,42 @@ public class JoomlaExtensionManifestPackageImpl extends EPackageImpl implements 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getAbstractResource() {
+		return abstractResourceEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getAbstractResource_Path() {
+		return (EAttribute)abstractResourceEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getAbstractResourceContainer() {
+		return abstractResourceContainerEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getAbstractResourceContainer_BaseFolder() {
+		return (EAttribute)abstractResourceContainerEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getSqlFileSet() {
 		return sqlFileSetEClass;
 	}
@@ -343,8 +519,8 @@ public class JoomlaExtensionManifestPackageImpl extends EPackageImpl implements 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getSqlFile() {
-		return sqlFileEClass;
+	public EClass getSqlResource() {
+		return sqlResourceEClass;
 	}
 
 	/**
@@ -352,8 +528,8 @@ public class JoomlaExtensionManifestPackageImpl extends EPackageImpl implements 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getSqlFile_FileName() {
-		return (EAttribute)sqlFileEClass.getEStructuralFeatures().get(0);
+	public EAttribute getSqlResource_Driver() {
+		return (EAttribute)sqlResourceEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -361,8 +537,8 @@ public class JoomlaExtensionManifestPackageImpl extends EPackageImpl implements 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getSqlFile_Driver() {
-		return (EAttribute)sqlFileEClass.getEStructuralFeatures().get(1);
+	public EAttribute getSqlResource_Charset() {
+		return (EAttribute)sqlResourceEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -370,8 +546,242 @@ public class JoomlaExtensionManifestPackageImpl extends EPackageImpl implements 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getSqlFile_Charset() {
-		return (EAttribute)sqlFileEClass.getEStructuralFeatures().get(2);
+	public EClass getFileSet() {
+		return fileSetEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getFileSet_Files() {
+		return (EReference)fileSetEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getFileSet_Folders() {
+		return (EReference)fileSetEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getFileResource() {
+		return fileResourceEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getFolderResource() {
+		return folderResourceEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getLanguageSet() {
+		return languageSetEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getLanguageSet_Resources() {
+		return (EReference)languageSetEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getLanguageResource() {
+		return languageResourceEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getLanguageResource_Tag() {
+		return (EAttribute)languageResourceEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getMediaSet() {
+		return mediaSetEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getMediaSet_Destination() {
+		return (EAttribute)mediaSetEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getMediaSet_Files() {
+		return (EReference)mediaSetEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getAdministration() {
+		return administrationEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getAdministration_Menu() {
+		return (EReference)administrationEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getAdministration_SubMenu() {
+		return (EReference)administrationEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getMenuItem() {
+		return menuItemEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getMenuItem_Label() {
+		return (EAttribute)menuItemEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getMenuItem_Act() {
+		return (EAttribute)menuItemEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getMenuItem_Task() {
+		return (EAttribute)menuItemEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getMenuItem_Controller() {
+		return (EAttribute)menuItemEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getMenuItem_View() {
+		return (EAttribute)menuItemEClass.getEStructuralFeatures().get(4);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getMenuItem_Layout() {
+		return (EAttribute)menuItemEClass.getEStructuralFeatures().get(5);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getMenuItem_Sub() {
+		return (EAttribute)menuItemEClass.getEStructuralFeatures().get(6);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getMenuItem_Img() {
+		return (EAttribute)menuItemEClass.getEStructuralFeatures().get(7);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getMenuItem_Link() {
+		return (EAttribute)menuItemEClass.getEStructuralFeatures().get(8);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getSubMenu() {
+		return subMenuEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getSubMenu_MenuItems() {
+		return (EReference)subMenuEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -420,6 +830,11 @@ public class JoomlaExtensionManifestPackageImpl extends EPackageImpl implements 
 		isCreated = true;
 
 		// Create classes and their features
+		abstractMultiResourceContainerEClass = createEClass(ABSTRACT_MULTI_RESOURCE_CONTAINER);
+		createEReference(abstractMultiResourceContainerEClass, ABSTRACT_MULTI_RESOURCE_CONTAINER__FILE_SETS);
+		createEReference(abstractMultiResourceContainerEClass, ABSTRACT_MULTI_RESOURCE_CONTAINER__LANGUAGE_SETS);
+		createEReference(abstractMultiResourceContainerEClass, ABSTRACT_MULTI_RESOURCE_CONTAINER__MEDIA_SETS);
+
 		joomlaExtensionManifestEClass = createEClass(JOOMLA_EXTENSION_MANIFEST);
 		createEAttribute(joomlaExtensionManifestEClass, JOOMLA_EXTENSION_MANIFEST__MANIFEST_TYPE);
 		createEAttribute(joomlaExtensionManifestEClass, JOOMLA_EXTENSION_MANIFEST__MANIFEST_VERSION);
@@ -436,6 +851,7 @@ public class JoomlaExtensionManifestPackageImpl extends EPackageImpl implements 
 		createEAttribute(joomlaExtensionManifestEClass, JOOMLA_EXTENSION_MANIFEST__UNINSTALL_FILE);
 		createEReference(joomlaExtensionManifestEClass, JOOMLA_EXTENSION_MANIFEST__INSTALL);
 		createEReference(joomlaExtensionManifestEClass, JOOMLA_EXTENSION_MANIFEST__UNINSTALL);
+		createEReference(joomlaExtensionManifestEClass, JOOMLA_EXTENSION_MANIFEST__ADMINISTRATION);
 
 		installDbEClass = createEClass(INSTALL_DB);
 		createEReference(installDbEClass, INSTALL_DB__SQL);
@@ -443,13 +859,54 @@ public class JoomlaExtensionManifestPackageImpl extends EPackageImpl implements 
 		uninstallDbEClass = createEClass(UNINSTALL_DB);
 		createEReference(uninstallDbEClass, UNINSTALL_DB__SQL);
 
+		abstractResourceEClass = createEClass(ABSTRACT_RESOURCE);
+		createEAttribute(abstractResourceEClass, ABSTRACT_RESOURCE__PATH);
+
+		abstractResourceContainerEClass = createEClass(ABSTRACT_RESOURCE_CONTAINER);
+		createEAttribute(abstractResourceContainerEClass, ABSTRACT_RESOURCE_CONTAINER__BASE_FOLDER);
+
 		sqlFileSetEClass = createEClass(SQL_FILE_SET);
 		createEReference(sqlFileSetEClass, SQL_FILE_SET__FILES);
 
-		sqlFileEClass = createEClass(SQL_FILE);
-		createEAttribute(sqlFileEClass, SQL_FILE__FILE_NAME);
-		createEAttribute(sqlFileEClass, SQL_FILE__DRIVER);
-		createEAttribute(sqlFileEClass, SQL_FILE__CHARSET);
+		sqlResourceEClass = createEClass(SQL_RESOURCE);
+		createEAttribute(sqlResourceEClass, SQL_RESOURCE__DRIVER);
+		createEAttribute(sqlResourceEClass, SQL_RESOURCE__CHARSET);
+
+		fileSetEClass = createEClass(FILE_SET);
+		createEReference(fileSetEClass, FILE_SET__FILES);
+		createEReference(fileSetEClass, FILE_SET__FOLDERS);
+
+		fileResourceEClass = createEClass(FILE_RESOURCE);
+
+		folderResourceEClass = createEClass(FOLDER_RESOURCE);
+
+		languageSetEClass = createEClass(LANGUAGE_SET);
+		createEReference(languageSetEClass, LANGUAGE_SET__RESOURCES);
+
+		languageResourceEClass = createEClass(LANGUAGE_RESOURCE);
+		createEAttribute(languageResourceEClass, LANGUAGE_RESOURCE__TAG);
+
+		mediaSetEClass = createEClass(MEDIA_SET);
+		createEAttribute(mediaSetEClass, MEDIA_SET__DESTINATION);
+		createEReference(mediaSetEClass, MEDIA_SET__FILES);
+
+		administrationEClass = createEClass(ADMINISTRATION);
+		createEReference(administrationEClass, ADMINISTRATION__MENU);
+		createEReference(administrationEClass, ADMINISTRATION__SUB_MENU);
+
+		menuItemEClass = createEClass(MENU_ITEM);
+		createEAttribute(menuItemEClass, MENU_ITEM__LABEL);
+		createEAttribute(menuItemEClass, MENU_ITEM__ACT);
+		createEAttribute(menuItemEClass, MENU_ITEM__TASK);
+		createEAttribute(menuItemEClass, MENU_ITEM__CONTROLLER);
+		createEAttribute(menuItemEClass, MENU_ITEM__VIEW);
+		createEAttribute(menuItemEClass, MENU_ITEM__LAYOUT);
+		createEAttribute(menuItemEClass, MENU_ITEM__SUB);
+		createEAttribute(menuItemEClass, MENU_ITEM__IMG);
+		createEAttribute(menuItemEClass, MENU_ITEM__LINK);
+
+		subMenuEClass = createEClass(SUB_MENU);
+		createEReference(subMenuEClass, SUB_MENU__MENU_ITEMS);
 
 		// Create enums
 		manifestVersionEEnum = createEEnum(MANIFEST_VERSION);
@@ -484,8 +941,22 @@ public class JoomlaExtensionManifestPackageImpl extends EPackageImpl implements 
 		// Set bounds for type parameters
 
 		// Add supertypes to classes
+		joomlaExtensionManifestEClass.getESuperTypes().add(this.getAbstractMultiResourceContainer());
+		sqlResourceEClass.getESuperTypes().add(this.getAbstractResource());
+		fileSetEClass.getESuperTypes().add(this.getAbstractResourceContainer());
+		fileResourceEClass.getESuperTypes().add(this.getAbstractResource());
+		folderResourceEClass.getESuperTypes().add(this.getAbstractResource());
+		languageSetEClass.getESuperTypes().add(this.getAbstractResourceContainer());
+		languageResourceEClass.getESuperTypes().add(this.getAbstractResource());
+		mediaSetEClass.getESuperTypes().add(this.getAbstractResourceContainer());
+		administrationEClass.getESuperTypes().add(this.getAbstractMultiResourceContainer());
 
 		// Initialize classes and features; add operations and parameters
+		initEClass(abstractMultiResourceContainerEClass, AbstractMultiResourceContainer.class, "AbstractMultiResourceContainer", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getAbstractMultiResourceContainer_FileSets(), this.getFileSet(), null, "fileSets", null, 0, -1, AbstractMultiResourceContainer.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getAbstractMultiResourceContainer_LanguageSets(), this.getLanguageSet(), null, "languageSets", null, 0, -1, AbstractMultiResourceContainer.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getAbstractMultiResourceContainer_MediaSets(), this.getMediaSet(), null, "mediaSets", null, 0, -1, AbstractMultiResourceContainer.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
 		initEClass(joomlaExtensionManifestEClass, JoomlaExtensionManifest.class, "JoomlaExtensionManifest", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getJoomlaExtensionManifest_ManifestType(), this.getManifestType(), "manifestType", null, 0, 1, JoomlaExtensionManifest.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getJoomlaExtensionManifest_ManifestVersion(), this.getManifestVersion(), "manifestVersion", null, 0, 1, JoomlaExtensionManifest.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -502,6 +973,7 @@ public class JoomlaExtensionManifestPackageImpl extends EPackageImpl implements 
 		initEAttribute(getJoomlaExtensionManifest_UninstallFile(), ecorePackage.getEString(), "uninstallFile", null, 0, 1, JoomlaExtensionManifest.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getJoomlaExtensionManifest_Install(), this.getInstallDb(), null, "install", null, 0, 1, JoomlaExtensionManifest.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getJoomlaExtensionManifest_Uninstall(), this.getUninstallDb(), null, "uninstall", null, 0, 1, JoomlaExtensionManifest.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getJoomlaExtensionManifest_Administration(), this.getAdministration(), null, "administration", null, 0, 1, JoomlaExtensionManifest.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(installDbEClass, InstallDb.class, "InstallDb", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getInstallDb_Sql(), this.getSqlFileSet(), null, "sql", null, 0, 1, InstallDb.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -509,13 +981,54 @@ public class JoomlaExtensionManifestPackageImpl extends EPackageImpl implements 
 		initEClass(uninstallDbEClass, UninstallDb.class, "UninstallDb", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getUninstallDb_Sql(), this.getSqlFileSet(), null, "sql", null, 0, 1, UninstallDb.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(sqlFileSetEClass, SqlFileSet.class, "SqlFileSet", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getSqlFileSet_Files(), this.getSqlFile(), null, "files", null, 0, -1, SqlFileSet.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(abstractResourceEClass, AbstractResource.class, "AbstractResource", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getAbstractResource_Path(), ecorePackage.getEString(), "path", null, 0, 1, AbstractResource.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(sqlFileEClass, SqlFile.class, "SqlFile", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getSqlFile_FileName(), ecorePackage.getEString(), "fileName", null, 0, 1, SqlFile.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getSqlFile_Driver(), ecorePackage.getEString(), "driver", null, 0, 1, SqlFile.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getSqlFile_Charset(), ecorePackage.getEString(), "charset", null, 0, 1, SqlFile.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(abstractResourceContainerEClass, AbstractResourceContainer.class, "AbstractResourceContainer", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getAbstractResourceContainer_BaseFolder(), ecorePackage.getEString(), "baseFolder", null, 0, 1, AbstractResourceContainer.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(sqlFileSetEClass, SqlFileSet.class, "SqlFileSet", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getSqlFileSet_Files(), this.getSqlResource(), null, "files", null, 0, -1, SqlFileSet.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(sqlResourceEClass, SqlResource.class, "SqlResource", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getSqlResource_Driver(), ecorePackage.getEString(), "driver", null, 0, 1, SqlResource.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getSqlResource_Charset(), ecorePackage.getEString(), "charset", null, 0, 1, SqlResource.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(fileSetEClass, FileSet.class, "FileSet", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getFileSet_Files(), this.getFileResource(), null, "files", null, 0, -1, FileSet.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getFileSet_Folders(), this.getFolderResource(), null, "folders", null, 0, -1, FileSet.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(fileResourceEClass, FileResource.class, "FileResource", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(folderResourceEClass, FolderResource.class, "FolderResource", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(languageSetEClass, LanguageSet.class, "LanguageSet", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getLanguageSet_Resources(), this.getLanguageResource(), null, "resources", null, 1, -1, LanguageSet.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(languageResourceEClass, LanguageResource.class, "LanguageResource", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getLanguageResource_Tag(), ecorePackage.getEString(), "tag", null, 0, 1, LanguageResource.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(mediaSetEClass, MediaSet.class, "MediaSet", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getMediaSet_Destination(), ecorePackage.getEString(), "destination", null, 0, 1, MediaSet.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getMediaSet_Files(), this.getFileResource(), null, "files", null, 0, -1, MediaSet.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(administrationEClass, Administration.class, "Administration", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getAdministration_Menu(), this.getMenuItem(), null, "menu", null, 0, 1, Administration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getAdministration_SubMenu(), this.getSubMenu(), null, "subMenu", null, 0, 1, Administration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(menuItemEClass, MenuItem.class, "MenuItem", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getMenuItem_Label(), ecorePackage.getEString(), "label", null, 0, 1, MenuItem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getMenuItem_Act(), ecorePackage.getEString(), "act", null, 0, 1, MenuItem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getMenuItem_Task(), ecorePackage.getEString(), "task", null, 0, 1, MenuItem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getMenuItem_Controller(), ecorePackage.getEString(), "controller", null, 0, 1, MenuItem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getMenuItem_View(), ecorePackage.getEString(), "view", null, 0, 1, MenuItem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getMenuItem_Layout(), ecorePackage.getEString(), "layout", null, 0, 1, MenuItem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getMenuItem_Sub(), ecorePackage.getEString(), "sub", null, 0, 1, MenuItem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getMenuItem_Img(), ecorePackage.getEString(), "img", null, 0, 1, MenuItem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getMenuItem_Link(), ecorePackage.getEString(), "link", null, 0, 1, MenuItem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(subMenuEClass, SubMenu.class, "SubMenu", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getSubMenu_MenuItems(), this.getMenuItem(), null, "menuItems", null, 1, -1, SubMenu.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Initialize enums and add enum literals
 		initEEnum(manifestVersionEEnum, ManifestVersion.class, "ManifestVersion");
@@ -546,6 +1059,27 @@ public class JoomlaExtensionManifestPackageImpl extends EPackageImpl implements 
 	 */
 	protected void createExtendedMetaDataAnnotations() {
 		String source = "http:///org/eclipse/emf/ecore/util/ExtendedMetaData";		
+		addAnnotation
+		  (getAbstractMultiResourceContainer_FileSets(), 
+		   source, 
+		   new String[] {
+			 "name", "files",
+			 "kind", "element"
+		   });		
+		addAnnotation
+		  (getAbstractMultiResourceContainer_LanguageSets(), 
+		   source, 
+		   new String[] {
+			 "name", "languages",
+			 "kind", "element"
+		   });		
+		addAnnotation
+		  (getAbstractMultiResourceContainer_MediaSets(), 
+		   source, 
+		   new String[] {
+			 "name", "media",
+			 "kind", "element"
+		   });		
 		addAnnotation
 		  (getJoomlaExtensionManifest_ManifestType(), 
 		   source, 
@@ -639,23 +1173,100 @@ public class JoomlaExtensionManifestPackageImpl extends EPackageImpl implements 
 			 "kind", "element"
 		   });		
 		addAnnotation
+		  (getJoomlaExtensionManifest_Administration(), 
+		   source, 
+		   new String[] {
+			 "kind", "element"
+		   });		
+		addAnnotation
+		  (abstractResourceEClass, 
+		   source, 
+		   new String[] {
+			 "kind", "simple"
+		   });		
+		addAnnotation
+		  (getAbstractResource_Path(), 
+		   source, 
+		   new String[] {
+			 "kind", "simple"
+		   });		
+		addAnnotation
+		  (getAbstractResourceContainer_BaseFolder(), 
+		   source, 
+		   new String[] {
+			 "name", "folder"
+		   });		
+		addAnnotation
 		  (getSqlFileSet_Files(), 
 		   source, 
 		   new String[] {
 			 "name", "file"
 		   });		
 		addAnnotation
-		  (sqlFileEClass, 
+		  (sqlResourceEClass, 
 		   source, 
 		   new String[] {
-			 "name", "file",
 			 "kind", "simple"
 		   });		
 		addAnnotation
-		  (getSqlFile_FileName(), 
+		  (getFileSet_Files(), 
+		   source, 
+		   new String[] {
+			 "name", "filename"
+		   });		
+		addAnnotation
+		  (getFileSet_Folders(), 
+		   source, 
+		   new String[] {
+			 "name", "folder"
+		   });		
+		addAnnotation
+		  (fileResourceEClass, 
 		   source, 
 		   new String[] {
 			 "kind", "simple"
+		   });		
+		addAnnotation
+		  (folderResourceEClass, 
+		   source, 
+		   new String[] {
+			 "kind", "simple"
+		   });		
+		addAnnotation
+		  (getLanguageSet_Resources(), 
+		   source, 
+		   new String[] {
+			 "name", "language"
+		   });		
+		addAnnotation
+		  (languageResourceEClass, 
+		   source, 
+		   new String[] {
+			 "kind", "simple"
+		   });		
+		addAnnotation
+		  (getAdministration_SubMenu(), 
+		   source, 
+		   new String[] {
+			 "name", "submenu"
+		   });		
+		addAnnotation
+		  (menuItemEClass, 
+		   source, 
+		   new String[] {
+			 "kind", "simple"
+		   });		
+		addAnnotation
+		  (getMenuItem_Label(), 
+		   source, 
+		   new String[] {
+			 "kind", "simple"
+		   });		
+		addAnnotation
+		  (getSubMenu_MenuItems(), 
+		   source, 
+		   new String[] {
+			 "name", "menu"
 		   });
 	}
 

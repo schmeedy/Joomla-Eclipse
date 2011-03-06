@@ -6,21 +6,19 @@
  */
 package com.schmeedy.pdt.joomla.manifest.model.impl;
 
+import com.schmeedy.pdt.joomla.manifest.model.Administration;
+import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.notify.NotificationChain;
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.InternalEObject;
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
+
 import com.schmeedy.pdt.joomla.manifest.model.InstallDb;
 import com.schmeedy.pdt.joomla.manifest.model.JoomlaExtensionManifest;
 import com.schmeedy.pdt.joomla.manifest.model.JoomlaExtensionManifestPackage;
-
 import com.schmeedy.pdt.joomla.manifest.model.ManifestType;
 import com.schmeedy.pdt.joomla.manifest.model.ManifestVersion;
 import com.schmeedy.pdt.joomla.manifest.model.UninstallDb;
-import org.eclipse.emf.common.notify.Notification;
-
-import org.eclipse.emf.common.notify.NotificationChain;
-import org.eclipse.emf.ecore.EClass;
-
-import org.eclipse.emf.ecore.InternalEObject;
-import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.impl.EObjectImpl;
 
 /**
  * <!-- begin-user-doc -->
@@ -44,12 +42,13 @@ import org.eclipse.emf.ecore.impl.EObjectImpl;
  *   <li>{@link com.schmeedy.pdt.joomla.manifest.model.impl.JoomlaExtensionManifestImpl#getUninstallFile <em>Uninstall File</em>}</li>
  *   <li>{@link com.schmeedy.pdt.joomla.manifest.model.impl.JoomlaExtensionManifestImpl#getInstall <em>Install</em>}</li>
  *   <li>{@link com.schmeedy.pdt.joomla.manifest.model.impl.JoomlaExtensionManifestImpl#getUninstall <em>Uninstall</em>}</li>
+ *   <li>{@link com.schmeedy.pdt.joomla.manifest.model.impl.JoomlaExtensionManifestImpl#getAdministration <em>Administration</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class JoomlaExtensionManifestImpl extends EObjectImpl implements JoomlaExtensionManifest {
+public class JoomlaExtensionManifestImpl extends AbstractMultiResourceContainerImpl implements JoomlaExtensionManifest {
 	/**
 	 * The default value of the '{@link #getManifestType() <em>Manifest Type</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -331,6 +330,16 @@ public class JoomlaExtensionManifestImpl extends EObjectImpl implements JoomlaEx
 	protected UninstallDb uninstall;
 
 	/**
+	 * The cached value of the '{@link #getAdministration() <em>Administration</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getAdministration()
+	 * @generated
+	 * @ordered
+	 */
+	protected Administration administration;
+
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -354,6 +363,7 @@ public class JoomlaExtensionManifestImpl extends EObjectImpl implements JoomlaEx
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public ManifestVersion getManifestVersion() {
 		return manifestVersion;
 	}
@@ -363,6 +373,7 @@ public class JoomlaExtensionManifestImpl extends EObjectImpl implements JoomlaEx
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setManifestVersion(ManifestVersion newManifestVersion) {
 		ManifestVersion oldManifestVersion = manifestVersion;
 		manifestVersion = newManifestVersion == null ? MANIFEST_VERSION_EDEFAULT : newManifestVersion;
@@ -375,6 +386,7 @@ public class JoomlaExtensionManifestImpl extends EObjectImpl implements JoomlaEx
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public ManifestType getManifestType() {
 		return manifestType;
 	}
@@ -384,6 +396,7 @@ public class JoomlaExtensionManifestImpl extends EObjectImpl implements JoomlaEx
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setManifestType(ManifestType newManifestType) {
 		ManifestType oldManifestType = manifestType;
 		manifestType = newManifestType == null ? MANIFEST_TYPE_EDEFAULT : newManifestType;
@@ -396,6 +409,7 @@ public class JoomlaExtensionManifestImpl extends EObjectImpl implements JoomlaEx
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getName() {
 		return name;
 	}
@@ -405,6 +419,7 @@ public class JoomlaExtensionManifestImpl extends EObjectImpl implements JoomlaEx
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setName(String newName) {
 		String oldName = name;
 		name = newName;
@@ -417,6 +432,7 @@ public class JoomlaExtensionManifestImpl extends EObjectImpl implements JoomlaEx
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getCreationDate() {
 		return creationDate;
 	}
@@ -426,6 +442,7 @@ public class JoomlaExtensionManifestImpl extends EObjectImpl implements JoomlaEx
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setCreationDate(String newCreationDate) {
 		String oldCreationDate = creationDate;
 		creationDate = newCreationDate;
@@ -438,6 +455,7 @@ public class JoomlaExtensionManifestImpl extends EObjectImpl implements JoomlaEx
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getAuthor() {
 		return author;
 	}
@@ -447,6 +465,7 @@ public class JoomlaExtensionManifestImpl extends EObjectImpl implements JoomlaEx
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setAuthor(String newAuthor) {
 		String oldAuthor = author;
 		author = newAuthor;
@@ -459,6 +478,7 @@ public class JoomlaExtensionManifestImpl extends EObjectImpl implements JoomlaEx
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getAuthorEmail() {
 		return authorEmail;
 	}
@@ -468,6 +488,7 @@ public class JoomlaExtensionManifestImpl extends EObjectImpl implements JoomlaEx
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setAuthorEmail(String newAuthorEmail) {
 		String oldAuthorEmail = authorEmail;
 		authorEmail = newAuthorEmail;
@@ -480,6 +501,7 @@ public class JoomlaExtensionManifestImpl extends EObjectImpl implements JoomlaEx
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getAuthorUrl() {
 		return authorUrl;
 	}
@@ -489,6 +511,7 @@ public class JoomlaExtensionManifestImpl extends EObjectImpl implements JoomlaEx
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setAuthorUrl(String newAuthorUrl) {
 		String oldAuthorUrl = authorUrl;
 		authorUrl = newAuthorUrl;
@@ -501,6 +524,7 @@ public class JoomlaExtensionManifestImpl extends EObjectImpl implements JoomlaEx
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getCopyright() {
 		return copyright;
 	}
@@ -510,6 +534,7 @@ public class JoomlaExtensionManifestImpl extends EObjectImpl implements JoomlaEx
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setCopyright(String newCopyright) {
 		String oldCopyright = copyright;
 		copyright = newCopyright;
@@ -522,6 +547,7 @@ public class JoomlaExtensionManifestImpl extends EObjectImpl implements JoomlaEx
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getLicense() {
 		return license;
 	}
@@ -531,6 +557,7 @@ public class JoomlaExtensionManifestImpl extends EObjectImpl implements JoomlaEx
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setLicense(String newLicense) {
 		String oldLicense = license;
 		license = newLicense;
@@ -543,6 +570,7 @@ public class JoomlaExtensionManifestImpl extends EObjectImpl implements JoomlaEx
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getVersion() {
 		return version;
 	}
@@ -552,6 +580,7 @@ public class JoomlaExtensionManifestImpl extends EObjectImpl implements JoomlaEx
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setVersion(String newVersion) {
 		String oldVersion = version;
 		version = newVersion;
@@ -564,6 +593,7 @@ public class JoomlaExtensionManifestImpl extends EObjectImpl implements JoomlaEx
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getDescription() {
 		return description;
 	}
@@ -573,6 +603,7 @@ public class JoomlaExtensionManifestImpl extends EObjectImpl implements JoomlaEx
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setDescription(String newDescription) {
 		String oldDescription = description;
 		description = newDescription;
@@ -585,6 +616,7 @@ public class JoomlaExtensionManifestImpl extends EObjectImpl implements JoomlaEx
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getInstallFile() {
 		return installFile;
 	}
@@ -594,6 +626,7 @@ public class JoomlaExtensionManifestImpl extends EObjectImpl implements JoomlaEx
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setInstallFile(String newInstallFile) {
 		String oldInstallFile = installFile;
 		installFile = newInstallFile;
@@ -606,6 +639,7 @@ public class JoomlaExtensionManifestImpl extends EObjectImpl implements JoomlaEx
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getUninstallFile() {
 		return uninstallFile;
 	}
@@ -615,6 +649,7 @@ public class JoomlaExtensionManifestImpl extends EObjectImpl implements JoomlaEx
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setUninstallFile(String newUninstallFile) {
 		String oldUninstallFile = uninstallFile;
 		uninstallFile = newUninstallFile;
@@ -627,6 +662,7 @@ public class JoomlaExtensionManifestImpl extends EObjectImpl implements JoomlaEx
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public InstallDb getInstall() {
 		return install;
 	}
@@ -651,6 +687,7 @@ public class JoomlaExtensionManifestImpl extends EObjectImpl implements JoomlaEx
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setInstall(InstallDb newInstall) {
 		if (newInstall != install) {
 			NotificationChain msgs = null;
@@ -670,6 +707,7 @@ public class JoomlaExtensionManifestImpl extends EObjectImpl implements JoomlaEx
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public UninstallDb getUninstall() {
 		return uninstall;
 	}
@@ -694,6 +732,7 @@ public class JoomlaExtensionManifestImpl extends EObjectImpl implements JoomlaEx
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setUninstall(UninstallDb newUninstall) {
 		if (newUninstall != uninstall) {
 			NotificationChain msgs = null;
@@ -713,6 +752,49 @@ public class JoomlaExtensionManifestImpl extends EObjectImpl implements JoomlaEx
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public Administration getAdministration() {
+		return administration;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetAdministration(Administration newAdministration, NotificationChain msgs) {
+		Administration oldAdministration = administration;
+		administration = newAdministration;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, JoomlaExtensionManifestPackage.JOOMLA_EXTENSION_MANIFEST__ADMINISTRATION, oldAdministration, newAdministration);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setAdministration(Administration newAdministration) {
+		if (newAdministration != administration) {
+			NotificationChain msgs = null;
+			if (administration != null)
+				msgs = ((InternalEObject)administration).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - JoomlaExtensionManifestPackage.JOOMLA_EXTENSION_MANIFEST__ADMINISTRATION, null, msgs);
+			if (newAdministration != null)
+				msgs = ((InternalEObject)newAdministration).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - JoomlaExtensionManifestPackage.JOOMLA_EXTENSION_MANIFEST__ADMINISTRATION, null, msgs);
+			msgs = basicSetAdministration(newAdministration, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, JoomlaExtensionManifestPackage.JOOMLA_EXTENSION_MANIFEST__ADMINISTRATION, newAdministration, newAdministration));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
@@ -720,6 +802,8 @@ public class JoomlaExtensionManifestImpl extends EObjectImpl implements JoomlaEx
 				return basicSetInstall(null, msgs);
 			case JoomlaExtensionManifestPackage.JOOMLA_EXTENSION_MANIFEST__UNINSTALL:
 				return basicSetUninstall(null, msgs);
+			case JoomlaExtensionManifestPackage.JOOMLA_EXTENSION_MANIFEST__ADMINISTRATION:
+				return basicSetAdministration(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -762,6 +846,8 @@ public class JoomlaExtensionManifestImpl extends EObjectImpl implements JoomlaEx
 				return getInstall();
 			case JoomlaExtensionManifestPackage.JOOMLA_EXTENSION_MANIFEST__UNINSTALL:
 				return getUninstall();
+			case JoomlaExtensionManifestPackage.JOOMLA_EXTENSION_MANIFEST__ADMINISTRATION:
+				return getAdministration();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -818,6 +904,9 @@ public class JoomlaExtensionManifestImpl extends EObjectImpl implements JoomlaEx
 				return;
 			case JoomlaExtensionManifestPackage.JOOMLA_EXTENSION_MANIFEST__UNINSTALL:
 				setUninstall((UninstallDb)newValue);
+				return;
+			case JoomlaExtensionManifestPackage.JOOMLA_EXTENSION_MANIFEST__ADMINISTRATION:
+				setAdministration((Administration)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -876,6 +965,9 @@ public class JoomlaExtensionManifestImpl extends EObjectImpl implements JoomlaEx
 			case JoomlaExtensionManifestPackage.JOOMLA_EXTENSION_MANIFEST__UNINSTALL:
 				setUninstall((UninstallDb)null);
 				return;
+			case JoomlaExtensionManifestPackage.JOOMLA_EXTENSION_MANIFEST__ADMINISTRATION:
+				setAdministration((Administration)null);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -918,6 +1010,8 @@ public class JoomlaExtensionManifestImpl extends EObjectImpl implements JoomlaEx
 				return install != null;
 			case JoomlaExtensionManifestPackage.JOOMLA_EXTENSION_MANIFEST__UNINSTALL:
 				return uninstall != null;
+			case JoomlaExtensionManifestPackage.JOOMLA_EXTENSION_MANIFEST__ADMINISTRATION:
+				return administration != null;
 		}
 		return super.eIsSet(featureID);
 	}

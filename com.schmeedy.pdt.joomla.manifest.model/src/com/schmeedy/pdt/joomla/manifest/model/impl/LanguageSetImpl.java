@@ -12,44 +12,43 @@ import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
-import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
 import com.schmeedy.pdt.joomla.manifest.model.JoomlaExtensionManifestPackage;
-import com.schmeedy.pdt.joomla.manifest.model.SqlFileSet;
-import com.schmeedy.pdt.joomla.manifest.model.SqlResource;
+import com.schmeedy.pdt.joomla.manifest.model.LanguageResource;
+import com.schmeedy.pdt.joomla.manifest.model.LanguageSet;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Sql File Set</b></em>'.
+ * An implementation of the model object '<em><b>Language Set</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link com.schmeedy.pdt.joomla.manifest.model.impl.SqlFileSetImpl#getFiles <em>Files</em>}</li>
+ *   <li>{@link com.schmeedy.pdt.joomla.manifest.model.impl.LanguageSetImpl#getResources <em>Resources</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class SqlFileSetImpl extends EObjectImpl implements SqlFileSet {
+public class LanguageSetImpl extends AbstractResourceContainerImpl implements LanguageSet {
 	/**
-	 * The cached value of the '{@link #getFiles() <em>Files</em>}' containment reference list.
+	 * The cached value of the '{@link #getResources() <em>Resources</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getFiles()
+	 * @see #getResources()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<SqlResource> files;
+	protected EList<LanguageResource> resources;
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected SqlFileSetImpl() {
+	protected LanguageSetImpl() {
 		super();
 	}
 
@@ -60,7 +59,7 @@ public class SqlFileSetImpl extends EObjectImpl implements SqlFileSet {
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return JoomlaExtensionManifestPackage.Literals.SQL_FILE_SET;
+		return JoomlaExtensionManifestPackage.Literals.LANGUAGE_SET;
 	}
 
 	/**
@@ -68,11 +67,11 @@ public class SqlFileSetImpl extends EObjectImpl implements SqlFileSet {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<SqlResource> getFiles() {
-		if (files == null) {
-			files = new EObjectContainmentEList<SqlResource>(SqlResource.class, this, JoomlaExtensionManifestPackage.SQL_FILE_SET__FILES);
+	public EList<LanguageResource> getResources() {
+		if (resources == null) {
+			resources = new EObjectContainmentEList<LanguageResource>(LanguageResource.class, this, JoomlaExtensionManifestPackage.LANGUAGE_SET__RESOURCES);
 		}
-		return files;
+		return resources;
 	}
 
 	/**
@@ -83,8 +82,8 @@ public class SqlFileSetImpl extends EObjectImpl implements SqlFileSet {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case JoomlaExtensionManifestPackage.SQL_FILE_SET__FILES:
-				return ((InternalEList<?>)getFiles()).basicRemove(otherEnd, msgs);
+			case JoomlaExtensionManifestPackage.LANGUAGE_SET__RESOURCES:
+				return ((InternalEList<?>)getResources()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -97,8 +96,8 @@ public class SqlFileSetImpl extends EObjectImpl implements SqlFileSet {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case JoomlaExtensionManifestPackage.SQL_FILE_SET__FILES:
-				return getFiles();
+			case JoomlaExtensionManifestPackage.LANGUAGE_SET__RESOURCES:
+				return getResources();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -112,9 +111,9 @@ public class SqlFileSetImpl extends EObjectImpl implements SqlFileSet {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case JoomlaExtensionManifestPackage.SQL_FILE_SET__FILES:
-				getFiles().clear();
-				getFiles().addAll((Collection<? extends SqlResource>)newValue);
+			case JoomlaExtensionManifestPackage.LANGUAGE_SET__RESOURCES:
+				getResources().clear();
+				getResources().addAll((Collection<? extends LanguageResource>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -128,8 +127,8 @@ public class SqlFileSetImpl extends EObjectImpl implements SqlFileSet {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case JoomlaExtensionManifestPackage.SQL_FILE_SET__FILES:
-				getFiles().clear();
+			case JoomlaExtensionManifestPackage.LANGUAGE_SET__RESOURCES:
+				getResources().clear();
 				return;
 		}
 		super.eUnset(featureID);
@@ -143,10 +142,10 @@ public class SqlFileSetImpl extends EObjectImpl implements SqlFileSet {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case JoomlaExtensionManifestPackage.SQL_FILE_SET__FILES:
-				return files != null && !files.isEmpty();
+			case JoomlaExtensionManifestPackage.LANGUAGE_SET__RESOURCES:
+				return resources != null && !resources.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}
 
-} //SqlFileSetImpl
+} //LanguageSetImpl

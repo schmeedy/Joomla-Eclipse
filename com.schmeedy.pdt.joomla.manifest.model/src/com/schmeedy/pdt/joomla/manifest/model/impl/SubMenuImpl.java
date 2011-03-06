@@ -6,50 +6,54 @@
  */
 package com.schmeedy.pdt.joomla.manifest.model.impl;
 
+import com.schmeedy.pdt.joomla.manifest.model.JoomlaExtensionManifestPackage;
+import com.schmeedy.pdt.joomla.manifest.model.MenuItem;
+import com.schmeedy.pdt.joomla.manifest.model.SubMenu;
+
 import java.util.Collection;
 
 import org.eclipse.emf.common.notify.NotificationChain;
+
 import org.eclipse.emf.common.util.EList;
+
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
+
 import org.eclipse.emf.ecore.impl.EObjectImpl;
+
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
-import com.schmeedy.pdt.joomla.manifest.model.JoomlaExtensionManifestPackage;
-import com.schmeedy.pdt.joomla.manifest.model.SqlFileSet;
-import com.schmeedy.pdt.joomla.manifest.model.SqlResource;
-
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Sql File Set</b></em>'.
+ * An implementation of the model object '<em><b>Sub Menu</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link com.schmeedy.pdt.joomla.manifest.model.impl.SqlFileSetImpl#getFiles <em>Files</em>}</li>
+ *   <li>{@link com.schmeedy.pdt.joomla.manifest.model.impl.SubMenuImpl#getMenuItems <em>Menu Items</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class SqlFileSetImpl extends EObjectImpl implements SqlFileSet {
+public class SubMenuImpl extends EObjectImpl implements SubMenu {
 	/**
-	 * The cached value of the '{@link #getFiles() <em>Files</em>}' containment reference list.
+	 * The cached value of the '{@link #getMenuItems() <em>Menu Items</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getFiles()
+	 * @see #getMenuItems()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<SqlResource> files;
+	protected EList<MenuItem> menuItems;
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected SqlFileSetImpl() {
+	protected SubMenuImpl() {
 		super();
 	}
 
@@ -60,7 +64,7 @@ public class SqlFileSetImpl extends EObjectImpl implements SqlFileSet {
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return JoomlaExtensionManifestPackage.Literals.SQL_FILE_SET;
+		return JoomlaExtensionManifestPackage.Literals.SUB_MENU;
 	}
 
 	/**
@@ -68,11 +72,11 @@ public class SqlFileSetImpl extends EObjectImpl implements SqlFileSet {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<SqlResource> getFiles() {
-		if (files == null) {
-			files = new EObjectContainmentEList<SqlResource>(SqlResource.class, this, JoomlaExtensionManifestPackage.SQL_FILE_SET__FILES);
+	public EList<MenuItem> getMenuItems() {
+		if (menuItems == null) {
+			menuItems = new EObjectContainmentEList<MenuItem>(MenuItem.class, this, JoomlaExtensionManifestPackage.SUB_MENU__MENU_ITEMS);
 		}
-		return files;
+		return menuItems;
 	}
 
 	/**
@@ -83,8 +87,8 @@ public class SqlFileSetImpl extends EObjectImpl implements SqlFileSet {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case JoomlaExtensionManifestPackage.SQL_FILE_SET__FILES:
-				return ((InternalEList<?>)getFiles()).basicRemove(otherEnd, msgs);
+			case JoomlaExtensionManifestPackage.SUB_MENU__MENU_ITEMS:
+				return ((InternalEList<?>)getMenuItems()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -97,8 +101,8 @@ public class SqlFileSetImpl extends EObjectImpl implements SqlFileSet {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case JoomlaExtensionManifestPackage.SQL_FILE_SET__FILES:
-				return getFiles();
+			case JoomlaExtensionManifestPackage.SUB_MENU__MENU_ITEMS:
+				return getMenuItems();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -112,9 +116,9 @@ public class SqlFileSetImpl extends EObjectImpl implements SqlFileSet {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case JoomlaExtensionManifestPackage.SQL_FILE_SET__FILES:
-				getFiles().clear();
-				getFiles().addAll((Collection<? extends SqlResource>)newValue);
+			case JoomlaExtensionManifestPackage.SUB_MENU__MENU_ITEMS:
+				getMenuItems().clear();
+				getMenuItems().addAll((Collection<? extends MenuItem>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -128,8 +132,8 @@ public class SqlFileSetImpl extends EObjectImpl implements SqlFileSet {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case JoomlaExtensionManifestPackage.SQL_FILE_SET__FILES:
-				getFiles().clear();
+			case JoomlaExtensionManifestPackage.SUB_MENU__MENU_ITEMS:
+				getMenuItems().clear();
 				return;
 		}
 		super.eUnset(featureID);
@@ -143,10 +147,10 @@ public class SqlFileSetImpl extends EObjectImpl implements SqlFileSet {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case JoomlaExtensionManifestPackage.SQL_FILE_SET__FILES:
-				return files != null && !files.isEmpty();
+			case JoomlaExtensionManifestPackage.SUB_MENU__MENU_ITEMS:
+				return menuItems != null && !menuItems.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}
 
-} //SqlFileSetImpl
+} //SubMenuImpl

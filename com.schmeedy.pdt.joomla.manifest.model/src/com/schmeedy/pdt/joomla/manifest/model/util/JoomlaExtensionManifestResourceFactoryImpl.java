@@ -6,8 +6,15 @@
  */
 package com.schmeedy.pdt.joomla.manifest.model.util;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.impl.EPackageRegistryImpl;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.impl.ResourceFactoryImpl;
@@ -88,6 +95,36 @@ public class JoomlaExtensionManifestResourceFactoryImpl extends ResourceFactoryI
 				}
 			}
 			return super.getName(eClassifier);
+		}
+		
+		@Override
+		public List<EStructuralFeature> getAllElements(final EClass eClass) {
+			// we must copy the list from super as it's an EList that cannot be sorted (due to the uniqueness constraint)
+			final List<EStructuralFeature> list = new ArrayList<EStructuralFeature>(super.getAllElements(eClass));
+
+			if (eClass.getClassifierID() == JoomlaExtensionManifestPackage.JOOMLA_EXTENSION_MANIFEST || eClass.getClassifierID() == JoomlaExtensionManifestPackage.ADMINISTRATION) {
+				Collections.sort(list, new Comparator<EStructuralFeature>() {
+					@Override
+					public int compare(EStructuralFeature o1, EStructuralFeature o2) {
+						if (eClass.getClassifierID() == JoomlaExtensionManifestPackage.JOOMLA_EXTENSION_MANIFEST && (o1.getFeatureID() == JoomlaExtensionManifestPackage.JOOMLA_EXTENSION_MANIFEST__ADMINISTRATION || o2.getFeatureID() == JoomlaExtensionManifestPackage.JOOMLA_EXTENSION_MANIFEST__ADMINISTRATION)) {
+							return o1.getFeatureID() == JoomlaExtensionManifestPackage.JOOMLA_EXTENSION_MANIFEST__ADMINISTRATION ? 1 : -1;
+						}
+						
+						final boolean o1FromMRC = isMultiResourceContainerFeature(o1);
+						final boolean o2FromMRC = isMultiResourceContainerFeature(o2);
+						if ((o1FromMRC && !o2FromMRC) || (o2FromMRC && !o1FromMRC)) {
+							return o1FromMRC ? 1 : -1;
+						}
+						return o1.getFeatureID() - o2.getFeatureID();
+					}
+	
+					private boolean isMultiResourceContainerFeature(EStructuralFeature o1) {
+						return JoomlaExtensionManifestPackage.eINSTANCE.getAbstractMultiResourceContainer().getName().equals(o1.getEContainingClass().getName());
+					}
+				});
+			}
+			
+			return list;
 		}
 	}
 

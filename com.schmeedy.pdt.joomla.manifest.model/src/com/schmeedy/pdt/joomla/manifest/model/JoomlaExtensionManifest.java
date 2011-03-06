@@ -6,7 +6,6 @@
  */
 package com.schmeedy.pdt.joomla.manifest.model;
 
-import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->
@@ -31,6 +30,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link com.schmeedy.pdt.joomla.manifest.model.JoomlaExtensionManifest#getUninstallFile <em>Uninstall File</em>}</li>
  *   <li>{@link com.schmeedy.pdt.joomla.manifest.model.JoomlaExtensionManifest#getInstall <em>Install</em>}</li>
  *   <li>{@link com.schmeedy.pdt.joomla.manifest.model.JoomlaExtensionManifest#getUninstall <em>Uninstall</em>}</li>
+ *   <li>{@link com.schmeedy.pdt.joomla.manifest.model.JoomlaExtensionManifest#getAdministration <em>Administration</em>}</li>
  * </ul>
  * </p>
  *
@@ -38,7 +38,7 @@ import org.eclipse.emf.ecore.EObject;
  * @model
  * @generated
  */
-public interface JoomlaExtensionManifest extends EObject {
+public interface JoomlaExtensionManifest extends AbstractMultiResourceContainer {
 	/**
 	 * Returns the value of the '<em><b>Manifest Version</b></em>' attribute.
 	 * The literals are from the enumeration {@link com.schmeedy.pdt.joomla.manifest.model.ManifestVersion}.
@@ -436,5 +436,32 @@ public interface JoomlaExtensionManifest extends EObject {
 	 * @generated
 	 */
 	void setUninstall(UninstallDb value);
+
+	/**
+	 * Returns the value of the '<em><b>Administration</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Administration</em>' containment reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Administration</em>' containment reference.
+	 * @see #setAdministration(Administration)
+	 * @see com.schmeedy.pdt.joomla.manifest.model.JoomlaExtensionManifestPackage#getJoomlaExtensionManifest_Administration()
+	 * @model containment="true"
+	 *        extendedMetaData="kind='element'"
+	 * @generated
+	 */
+	Administration getAdministration();
+
+	/**
+	 * Sets the value of the '{@link com.schmeedy.pdt.joomla.manifest.model.JoomlaExtensionManifest#getAdministration <em>Administration</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Administration</em>' containment reference.
+	 * @see #getAdministration()
+	 * @generated
+	 */
+	void setAdministration(Administration value);
 
 } // JoomlaExtensionManifest

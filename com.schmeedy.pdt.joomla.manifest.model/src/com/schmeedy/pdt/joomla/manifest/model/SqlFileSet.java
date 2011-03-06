@@ -7,7 +7,6 @@
 package com.schmeedy.pdt.joomla.manifest.model;
 
 import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EObject;
 
 /**
@@ -29,7 +28,7 @@ import org.eclipse.emf.ecore.EObject;
 public interface SqlFileSet extends EObject {
 	/**
 	 * Returns the value of the '<em><b>Files</b></em>' containment reference list.
-	 * The list contents are of type {@link com.schmeedy.pdt.joomla.manifest.model.SqlFile}.
+	 * The list contents are of type {@link com.schmeedy.pdt.joomla.manifest.model.SqlResource}.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Files</em>' containment reference list isn't clear,
@@ -42,6 +41,6 @@ public interface SqlFileSet extends EObject {
 	 *        extendedMetaData="name='file'"
 	 * @generated
 	 */
-	EList<SqlFile> getFiles();
+	EList<SqlResource> getFiles();
 
 } // SqlFileSet

@@ -62,13 +62,94 @@ public interface JoomlaExtensionManifestFactory extends EFactory {
 	SqlFileSet createSqlFileSet();
 
 	/**
-	 * Returns a new object of class '<em>Sql File</em>'.
+	 * Returns a new object of class '<em>Sql Resource</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Sql File</em>'.
+	 * @return a new object of class '<em>Sql Resource</em>'.
 	 * @generated
 	 */
-	SqlFile createSqlFile();
+	SqlResource createSqlResource();
+
+	/**
+	 * Returns a new object of class '<em>File Set</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>File Set</em>'.
+	 * @generated
+	 */
+	FileSet createFileSet();
+
+	/**
+	 * Returns a new object of class '<em>File Resource</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>File Resource</em>'.
+	 * @generated
+	 */
+	FileResource createFileResource();
+
+	/**
+	 * Returns a new object of class '<em>Folder Resource</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Folder Resource</em>'.
+	 * @generated
+	 */
+	FolderResource createFolderResource();
+
+	/**
+	 * Returns a new object of class '<em>Language Set</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Language Set</em>'.
+	 * @generated
+	 */
+	LanguageSet createLanguageSet();
+
+	/**
+	 * Returns a new object of class '<em>Language Resource</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Language Resource</em>'.
+	 * @generated
+	 */
+	LanguageResource createLanguageResource();
+
+	/**
+	 * Returns a new object of class '<em>Media Set</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Media Set</em>'.
+	 * @generated
+	 */
+	MediaSet createMediaSet();
+
+	/**
+	 * Returns a new object of class '<em>Administration</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Administration</em>'.
+	 * @generated
+	 */
+	Administration createAdministration();
+
+	/**
+	 * Returns a new object of class '<em>Menu Item</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Menu Item</em>'.
+	 * @generated
+	 */
+	MenuItem createMenuItem();
+
+	/**
+	 * Returns a new object of class '<em>Sub Menu</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Sub Menu</em>'.
+	 * @generated
+	 */
+	SubMenu createSubMenu();
 
 	/**
 	 * Returns the package supported by this factory.

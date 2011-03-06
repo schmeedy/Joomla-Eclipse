@@ -6,15 +6,13 @@
  */
 package com.schmeedy.pdt.joomla.manifest.model.util;
 
-import com.schmeedy.pdt.joomla.manifest.model.JoomlaExtensionManifestPackage;
-
 import java.util.Map;
 
 import org.eclipse.emf.ecore.EPackage;
-
 import org.eclipse.emf.ecore.resource.Resource;
-
 import org.eclipse.emf.ecore.xmi.util.XMLProcessor;
+
+import com.schmeedy.pdt.joomla.manifest.model.JoomlaExtensionManifestPackage;
 
 /**
  * This class contains helper methods to serialize and deserialize XML documents
