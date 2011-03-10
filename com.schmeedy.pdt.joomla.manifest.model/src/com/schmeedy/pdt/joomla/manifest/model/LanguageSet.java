@@ -39,7 +39,7 @@ public interface LanguageSet extends AbstractResourceContainer {
 	 * @return the value of the '<em>Resources</em>' containment reference list.
 	 * @see com.schmeedy.pdt.joomla.manifest.model.JoomlaExtensionManifestPackage#getLanguageSet_Resources()
 	 * @model containment="true" required="true"
-	 *        extendedMetaData="name='language'"
+	 *        extendedMetaData="name='language' kind='element'"
 	 * @generated
 	 */
 	EList<LanguageResource> getResources();

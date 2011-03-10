@@ -13,6 +13,7 @@ import java.util.List;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.impl.EPackageRegistryImpl;
@@ -55,8 +56,8 @@ public class JoomlaExtensionManifestResourceFactoryImpl extends ResourceFactoryI
 		final ExtendedMetaData extendedMetadata = new JoomlaResourceExtendedMetaData();
 		
 		final XMLResource result = new JoomlaExtensionManifestResourceImpl(uri);
-		result.getDefaultSaveOptions().put(XMLResource.OPTION_EXTENDED_META_DATA, extendedMetadata);
 		result.getDefaultLoadOptions().put(XMLResource.OPTION_EXTENDED_META_DATA, extendedMetadata);
+		result.getDefaultSaveOptions().put(XMLResource.OPTION_EXTENDED_META_DATA, extendedMetadata);
 		
 		result.getDefaultLoadOptions().put(XMLResource.OPTION_ENCODING, "UTF-8");
 		result.getDefaultSaveOptions().put(XMLResource.OPTION_ENCODING, "UTF-8");
@@ -68,18 +69,26 @@ public class JoomlaExtensionManifestResourceFactoryImpl extends ResourceFactoryI
 		result.getDefaultSaveOptions().put(XMLResource.OPTION_USE_ENCODED_ATTRIBUTE_STYLE, Boolean.TRUE);
 
 		result.getDefaultLoadOptions().put(XMLResource.OPTION_USE_LEXICAL_HANDLER, Boolean.TRUE);
+
+		result.getDefaultSaveOptions().put(XMLResource.OPTION_KEEP_DEFAULT_CONTENT, Boolean.TRUE);
+		
 		return result;
 	}
 	
 	final class JoomlaResourceExtendedMetaData extends BasicExtendedMetaData {
 		private ManifestVersion versionCompliance = ManifestVersion.ONE_FIVE;
 		
+		private JoomlaResourceExtendedMetaData() {
+			super(new EPackageRegistryImpl(EPackage.Registry.INSTANCE));
+		}
+		
 		public void setVersionCompliance(ManifestVersion versionCompliance) {
 			this.versionCompliance = versionCompliance;
 		}
 		
-		private JoomlaResourceExtendedMetaData() {
-			super(new EPackageRegistryImpl(EPackage.Registry.INSTANCE));
+		@Override
+		public EPackage getPackage(String namespace) {
+			return namespace == null ? JoomlaExtensionManifestPackage.eINSTANCE : super.getPackage(namespace);
 		}
 
 		@Override
@@ -95,6 +104,20 @@ public class JoomlaExtensionManifestResourceFactoryImpl extends ResourceFactoryI
 				}
 			}
 			return super.getName(eClassifier);
+		}
+		
+//		@Override
+//		public EClass getDocumentRoot(EPackage ePackage) {
+//			if (JoomlaExtensionManifestPackage.eNS_URI.equals(ePackage.getNsURI())) {
+//				return JoomlaExtensionManifestPackage.eINSTANCE.getJoomlaExtensionManifest();
+//			} else {
+//				return super.getDocumentRoot(ePackage);
+//			}
+//		}
+		
+		@Override
+		public EClassifier getType(EPackage ePackage, String name) {
+			return super.getType(ePackage, name);
 		}
 		
 		@Override

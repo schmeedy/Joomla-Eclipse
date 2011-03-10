@@ -37,6 +37,7 @@ public interface InstallDb extends EObject {
 	 * @see #setSql(SqlFileSet)
 	 * @see com.schmeedy.pdt.joomla.manifest.model.JoomlaExtensionManifestPackage#getInstallDb_Sql()
 	 * @model containment="true"
+	 *        extendedMetaData="kind='element'"
 	 * @generated
 	 */
 	SqlFileSet getSql();

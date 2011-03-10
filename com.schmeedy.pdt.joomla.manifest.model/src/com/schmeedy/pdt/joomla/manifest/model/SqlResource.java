@@ -36,7 +36,7 @@ public interface SqlResource extends AbstractResource {
 	 * @return the value of the '<em>Driver</em>' attribute.
 	 * @see #setDriver(String)
 	 * @see com.schmeedy.pdt.joomla.manifest.model.JoomlaExtensionManifestPackage#getSqlResource_Driver()
-	 * @model
+	 * @model extendedMetaData="kind='attribute'"
 	 * @generated
 	 */
 	String getDriver();
@@ -62,7 +62,7 @@ public interface SqlResource extends AbstractResource {
 	 * @return the value of the '<em>Charset</em>' attribute.
 	 * @see #setCharset(String)
 	 * @see com.schmeedy.pdt.joomla.manifest.model.JoomlaExtensionManifestPackage#getSqlResource_Charset()
-	 * @model
+	 * @model extendedMetaData="kind='attribute'"
 	 * @generated
 	 */
 	String getCharset();

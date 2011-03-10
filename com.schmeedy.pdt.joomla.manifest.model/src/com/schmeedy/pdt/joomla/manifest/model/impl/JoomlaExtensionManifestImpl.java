@@ -662,7 +662,6 @@ public class JoomlaExtensionManifestImpl extends AbstractMultiResourceContainerI
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public InstallDb getInstall() {
 		return install;
 	}
@@ -687,7 +686,6 @@ public class JoomlaExtensionManifestImpl extends AbstractMultiResourceContainerI
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setInstall(InstallDb newInstall) {
 		if (newInstall != install) {
 			NotificationChain msgs = null;
@@ -707,7 +705,6 @@ public class JoomlaExtensionManifestImpl extends AbstractMultiResourceContainerI
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public UninstallDb getUninstall() {
 		return uninstall;
 	}
@@ -732,7 +729,6 @@ public class JoomlaExtensionManifestImpl extends AbstractMultiResourceContainerI
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setUninstall(UninstallDb newUninstall) {
 		if (newUninstall != uninstall) {
 			NotificationChain msgs = null;

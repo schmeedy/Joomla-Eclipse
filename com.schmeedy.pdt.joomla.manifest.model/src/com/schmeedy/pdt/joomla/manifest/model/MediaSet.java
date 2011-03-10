@@ -37,7 +37,7 @@ public interface MediaSet extends AbstractResourceContainer {
 	 * @return the value of the '<em>Destination</em>' attribute.
 	 * @see #setDestination(String)
 	 * @see com.schmeedy.pdt.joomla.manifest.model.JoomlaExtensionManifestPackage#getMediaSet_Destination()
-	 * @model
+	 * @model extendedMetaData="kind='attribute'"
 	 * @generated
 	 */
 	String getDestination();
@@ -63,7 +63,7 @@ public interface MediaSet extends AbstractResourceContainer {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Files</em>' reference list.
 	 * @see com.schmeedy.pdt.joomla.manifest.model.JoomlaExtensionManifestPackage#getMediaSet_Files()
-	 * @model
+	 * @model extendedMetaData="kind='element'"
 	 * @generated
 	 */
 	EList<FileResource> getFiles();

@@ -38,7 +38,7 @@ public interface SqlFileSet extends EObject {
 	 * @return the value of the '<em>Files</em>' containment reference list.
 	 * @see com.schmeedy.pdt.joomla.manifest.model.JoomlaExtensionManifestPackage#getSqlFileSet_Files()
 	 * @model containment="true"
-	 *        extendedMetaData="name='file'"
+	 *        extendedMetaData="name='file' kind='element'"
 	 * @generated
 	 */
 	EList<SqlResource> getFiles();

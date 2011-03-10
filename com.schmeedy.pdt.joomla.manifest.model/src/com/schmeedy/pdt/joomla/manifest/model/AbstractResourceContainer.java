@@ -36,7 +36,7 @@ public interface AbstractResourceContainer extends EObject {
 	 * @return the value of the '<em>Base Folder</em>' attribute.
 	 * @see #setBaseFolder(String)
 	 * @see com.schmeedy.pdt.joomla.manifest.model.JoomlaExtensionManifestPackage#getAbstractResourceContainer_BaseFolder()
-	 * @model extendedMetaData="name='folder'"
+	 * @model extendedMetaData="name='folder' kind='attribute'"
 	 * @generated
 	 */
 	String getBaseFolder();

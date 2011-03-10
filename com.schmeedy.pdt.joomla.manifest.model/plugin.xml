@@ -17,6 +17,13 @@
             genModel="model/extension-manifest.genmodel"/>
    </extension>
    <extension
+         point="org.eclipse.emf.ecore.content_parser">
+      <parser
+            class="com.schmeedy.pdt.joomla.manifest.model.util.JoomlaExtensionManifestResourceFactoryImpl"
+            contentTypeIdentifier="com.schmeedy.pdt.joomla.manifest.model.ExtensionManifest">
+      </parser>
+   </extension>
+   <extension
          point="org.eclipse.core.contenttype.contentTypes">
       <content-type
             base-type="org.eclipse.core.runtime.xml"
@@ -26,11 +33,13 @@
       </content-type>
    </extension>
    <extension
-         point="org.eclipse.emf.ecore.content_parser">
-      <parser
-            class="com.schmeedy.pdt.joomla.manifest.model.util.JoomlaExtensionManifestResourceFactoryImpl"
-            contentTypeIdentifier="com.schmeedy.pdt.joomla.manifest.model.ExtensionManifest">
-      </parser>
+         point="org.eclipse.wst.xml.core.catalogContributions">
+      <catalogContribution>
+         <public
+               publicId="com.schmeedy.pdt.joomla.manifest.model.public1"
+               uri="model/xml/component-1.5.dtd">
+         </public>
+      </catalogContribution>
    </extension>
 
 </plugin>

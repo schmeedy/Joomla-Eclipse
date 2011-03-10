@@ -1084,13 +1084,15 @@ public class JoomlaExtensionManifestPackageImpl extends EPackageImpl implements 
 		  (getJoomlaExtensionManifest_ManifestType(), 
 		   source, 
 		   new String[] {
-			 "name", "type"
+			 "name", "type",
+			 "kind", "attribute"
 		   });		
 		addAnnotation
 		  (getJoomlaExtensionManifest_ManifestVersion(), 
 		   source, 
 		   new String[] {
-			 "name", "version"
+			 "name", "version",
+			 "kind", "attribute"
 		   });		
 		addAnnotation
 		  (getJoomlaExtensionManifest_Name(), 
@@ -1179,6 +1181,18 @@ public class JoomlaExtensionManifestPackageImpl extends EPackageImpl implements 
 			 "kind", "element"
 		   });		
 		addAnnotation
+		  (getInstallDb_Sql(), 
+		   source, 
+		   new String[] {
+			 "kind", "element"
+		   });		
+		addAnnotation
+		  (getUninstallDb_Sql(), 
+		   source, 
+		   new String[] {
+			 "kind", "element"
+		   });		
+		addAnnotation
 		  (abstractResourceEClass, 
 		   source, 
 		   new String[] {
@@ -1194,13 +1208,15 @@ public class JoomlaExtensionManifestPackageImpl extends EPackageImpl implements 
 		  (getAbstractResourceContainer_BaseFolder(), 
 		   source, 
 		   new String[] {
-			 "name", "folder"
+			 "name", "folder",
+			 "kind", "attribute"
 		   });		
 		addAnnotation
 		  (getSqlFileSet_Files(), 
 		   source, 
 		   new String[] {
-			 "name", "file"
+			 "name", "file",
+			 "kind", "element"
 		   });		
 		addAnnotation
 		  (sqlResourceEClass, 
@@ -1209,16 +1225,30 @@ public class JoomlaExtensionManifestPackageImpl extends EPackageImpl implements 
 			 "kind", "simple"
 		   });		
 		addAnnotation
+		  (getSqlResource_Driver(), 
+		   source, 
+		   new String[] {
+			 "kind", "attribute"
+		   });		
+		addAnnotation
+		  (getSqlResource_Charset(), 
+		   source, 
+		   new String[] {
+			 "kind", "attribute"
+		   });		
+		addAnnotation
 		  (getFileSet_Files(), 
 		   source, 
 		   new String[] {
-			 "name", "filename"
+			 "name", "filename",
+			 "kind", "element"
 		   });		
 		addAnnotation
 		  (getFileSet_Folders(), 
 		   source, 
 		   new String[] {
-			 "name", "folder"
+			 "name", "folder",
+			 "kind", "element"
 		   });		
 		addAnnotation
 		  (fileResourceEClass, 
@@ -1236,7 +1266,8 @@ public class JoomlaExtensionManifestPackageImpl extends EPackageImpl implements 
 		  (getLanguageSet_Resources(), 
 		   source, 
 		   new String[] {
-			 "name", "language"
+			 "name", "language",
+			 "kind", "element"
 		   });		
 		addAnnotation
 		  (languageResourceEClass, 
@@ -1245,10 +1276,35 @@ public class JoomlaExtensionManifestPackageImpl extends EPackageImpl implements 
 			 "kind", "simple"
 		   });		
 		addAnnotation
+		  (getLanguageResource_Tag(), 
+		   source, 
+		   new String[] {
+			 "kind", "attribute"
+		   });		
+		addAnnotation
+		  (getMediaSet_Destination(), 
+		   source, 
+		   new String[] {
+			 "kind", "attribute"
+		   });		
+		addAnnotation
+		  (getMediaSet_Files(), 
+		   source, 
+		   new String[] {
+			 "kind", "element"
+		   });		
+		addAnnotation
+		  (getAdministration_Menu(), 
+		   source, 
+		   new String[] {
+			 "kind", "element"
+		   });		
+		addAnnotation
 		  (getAdministration_SubMenu(), 
 		   source, 
 		   new String[] {
-			 "name", "submenu"
+			 "name", "submenu",
+			 "kind", "element"
 		   });		
 		addAnnotation
 		  (menuItemEClass, 
@@ -1263,10 +1319,59 @@ public class JoomlaExtensionManifestPackageImpl extends EPackageImpl implements 
 			 "kind", "simple"
 		   });		
 		addAnnotation
+		  (getMenuItem_Act(), 
+		   source, 
+		   new String[] {
+			 "kind", "attribute"
+		   });		
+		addAnnotation
+		  (getMenuItem_Task(), 
+		   source, 
+		   new String[] {
+			 "kind", "attribute"
+		   });		
+		addAnnotation
+		  (getMenuItem_Controller(), 
+		   source, 
+		   new String[] {
+			 "kind", "attribute"
+		   });		
+		addAnnotation
+		  (getMenuItem_View(), 
+		   source, 
+		   new String[] {
+			 "kind", "attribute"
+		   });		
+		addAnnotation
+		  (getMenuItem_Layout(), 
+		   source, 
+		   new String[] {
+			 "kind", "attribute"
+		   });		
+		addAnnotation
+		  (getMenuItem_Sub(), 
+		   source, 
+		   new String[] {
+			 "kind", "attribute"
+		   });		
+		addAnnotation
+		  (getMenuItem_Img(), 
+		   source, 
+		   new String[] {
+			 "kind", "attribute"
+		   });		
+		addAnnotation
+		  (getMenuItem_Link(), 
+		   source, 
+		   new String[] {
+			 "kind", "attribute"
+		   });		
+		addAnnotation
 		  (getSubMenu_MenuItems(), 
 		   source, 
 		   new String[] {
-			 "name", "menu"
+			 "name", "menu",
+			 "kind", "element"
 		   });
 	}
 

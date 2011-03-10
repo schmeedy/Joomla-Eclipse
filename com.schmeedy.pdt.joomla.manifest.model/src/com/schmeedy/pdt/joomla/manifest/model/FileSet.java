@@ -38,7 +38,7 @@ public interface FileSet extends AbstractResourceContainer {
 	 * @return the value of the '<em>Files</em>' containment reference list.
 	 * @see com.schmeedy.pdt.joomla.manifest.model.JoomlaExtensionManifestPackage#getFileSet_Files()
 	 * @model containment="true"
-	 *        extendedMetaData="name='filename'"
+	 *        extendedMetaData="name='filename' kind='element'"
 	 * @generated
 	 */
 	EList<FileResource> getFiles();
@@ -55,7 +55,7 @@ public interface FileSet extends AbstractResourceContainer {
 	 * @return the value of the '<em>Folders</em>' containment reference list.
 	 * @see com.schmeedy.pdt.joomla.manifest.model.JoomlaExtensionManifestPackage#getFileSet_Folders()
 	 * @model containment="true"
-	 *        extendedMetaData="name='folder'"
+	 *        extendedMetaData="name='folder' kind='element'"
 	 * @generated
 	 */
 	EList<FolderResource> getFolders();

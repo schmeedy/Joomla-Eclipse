@@ -70,7 +70,7 @@ public interface MenuItem extends EObject {
 	 * @return the value of the '<em>Act</em>' attribute.
 	 * @see #setAct(String)
 	 * @see com.schmeedy.pdt.joomla.manifest.model.JoomlaExtensionManifestPackage#getMenuItem_Act()
-	 * @model
+	 * @model extendedMetaData="kind='attribute'"
 	 * @generated
 	 */
 	String getAct();
@@ -96,7 +96,7 @@ public interface MenuItem extends EObject {
 	 * @return the value of the '<em>Task</em>' attribute.
 	 * @see #setTask(String)
 	 * @see com.schmeedy.pdt.joomla.manifest.model.JoomlaExtensionManifestPackage#getMenuItem_Task()
-	 * @model
+	 * @model extendedMetaData="kind='attribute'"
 	 * @generated
 	 */
 	String getTask();
@@ -122,7 +122,7 @@ public interface MenuItem extends EObject {
 	 * @return the value of the '<em>Controller</em>' attribute.
 	 * @see #setController(String)
 	 * @see com.schmeedy.pdt.joomla.manifest.model.JoomlaExtensionManifestPackage#getMenuItem_Controller()
-	 * @model
+	 * @model extendedMetaData="kind='attribute'"
 	 * @generated
 	 */
 	String getController();
@@ -148,7 +148,7 @@ public interface MenuItem extends EObject {
 	 * @return the value of the '<em>View</em>' attribute.
 	 * @see #setView(String)
 	 * @see com.schmeedy.pdt.joomla.manifest.model.JoomlaExtensionManifestPackage#getMenuItem_View()
-	 * @model
+	 * @model extendedMetaData="kind='attribute'"
 	 * @generated
 	 */
 	String getView();
@@ -174,7 +174,7 @@ public interface MenuItem extends EObject {
 	 * @return the value of the '<em>Layout</em>' attribute.
 	 * @see #setLayout(String)
 	 * @see com.schmeedy.pdt.joomla.manifest.model.JoomlaExtensionManifestPackage#getMenuItem_Layout()
-	 * @model
+	 * @model extendedMetaData="kind='attribute'"
 	 * @generated
 	 */
 	String getLayout();
@@ -200,7 +200,7 @@ public interface MenuItem extends EObject {
 	 * @return the value of the '<em>Sub</em>' attribute.
 	 * @see #setSub(String)
 	 * @see com.schmeedy.pdt.joomla.manifest.model.JoomlaExtensionManifestPackage#getMenuItem_Sub()
-	 * @model
+	 * @model extendedMetaData="kind='attribute'"
 	 * @generated
 	 */
 	String getSub();
@@ -226,7 +226,7 @@ public interface MenuItem extends EObject {
 	 * @return the value of the '<em>Img</em>' attribute.
 	 * @see #setImg(String)
 	 * @see com.schmeedy.pdt.joomla.manifest.model.JoomlaExtensionManifestPackage#getMenuItem_Img()
-	 * @model
+	 * @model extendedMetaData="kind='attribute'"
 	 * @generated
 	 */
 	String getImg();
@@ -252,7 +252,7 @@ public interface MenuItem extends EObject {
 	 * @return the value of the '<em>Link</em>' attribute.
 	 * @see #setLink(String)
 	 * @see com.schmeedy.pdt.joomla.manifest.model.JoomlaExtensionManifestPackage#getMenuItem_Link()
-	 * @model
+	 * @model extendedMetaData="kind='attribute'"
 	 * @generated
 	 */
 	String getLink();

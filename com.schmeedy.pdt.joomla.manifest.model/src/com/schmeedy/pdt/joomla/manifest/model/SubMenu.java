@@ -39,7 +39,7 @@ public interface SubMenu extends EObject {
 	 * @return the value of the '<em>Menu Items</em>' containment reference list.
 	 * @see com.schmeedy.pdt.joomla.manifest.model.JoomlaExtensionManifestPackage#getSubMenu_MenuItems()
 	 * @model containment="true" required="true"
-	 *        extendedMetaData="name='menu'"
+	 *        extendedMetaData="name='menu' kind='element'"
 	 * @generated
 	 */
 	EList<MenuItem> getMenuItems();

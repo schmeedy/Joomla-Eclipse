@@ -36,7 +36,7 @@ public interface LanguageResource extends AbstractResource {
 	 * @return the value of the '<em>Tag</em>' attribute.
 	 * @see #setTag(String)
 	 * @see com.schmeedy.pdt.joomla.manifest.model.JoomlaExtensionManifestPackage#getLanguageResource_Tag()
-	 * @model
+	 * @model extendedMetaData="kind='attribute'"
 	 * @generated
 	 */
 	String getTag();

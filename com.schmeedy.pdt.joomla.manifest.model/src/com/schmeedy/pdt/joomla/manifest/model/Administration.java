@@ -37,6 +37,7 @@ public interface Administration extends AbstractMultiResourceContainer {
 	 * @see #setMenu(MenuItem)
 	 * @see com.schmeedy.pdt.joomla.manifest.model.JoomlaExtensionManifestPackage#getAdministration_Menu()
 	 * @model containment="true"
+	 *        extendedMetaData="kind='element'"
 	 * @generated
 	 */
 	MenuItem getMenu();
@@ -63,7 +64,7 @@ public interface Administration extends AbstractMultiResourceContainer {
 	 * @see #setSubMenu(SubMenu)
 	 * @see com.schmeedy.pdt.joomla.manifest.model.JoomlaExtensionManifestPackage#getAdministration_SubMenu()
 	 * @model containment="true"
-	 *        extendedMetaData="name='submenu'"
+	 *        extendedMetaData="name='submenu' kind='element'"
 	 * @generated
 	 */
 	SubMenu getSubMenu();

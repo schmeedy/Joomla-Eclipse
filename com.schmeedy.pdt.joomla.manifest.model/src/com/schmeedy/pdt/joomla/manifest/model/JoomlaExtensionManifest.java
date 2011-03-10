@@ -52,7 +52,7 @@ public interface JoomlaExtensionManifest extends AbstractMultiResourceContainer 
 	 * @see com.schmeedy.pdt.joomla.manifest.model.ManifestVersion
 	 * @see #setManifestVersion(ManifestVersion)
 	 * @see com.schmeedy.pdt.joomla.manifest.model.JoomlaExtensionManifestPackage#getJoomlaExtensionManifest_ManifestVersion()
-	 * @model extendedMetaData="name='version'"
+	 * @model extendedMetaData="name='version' kind='attribute'"
 	 * @generated
 	 */
 	ManifestVersion getManifestVersion();
@@ -81,7 +81,7 @@ public interface JoomlaExtensionManifest extends AbstractMultiResourceContainer 
 	 * @see com.schmeedy.pdt.joomla.manifest.model.ManifestType
 	 * @see #setManifestType(ManifestType)
 	 * @see com.schmeedy.pdt.joomla.manifest.model.JoomlaExtensionManifestPackage#getJoomlaExtensionManifest_ManifestType()
-	 * @model extendedMetaData="name='type'"
+	 * @model extendedMetaData="name='type' kind='attribute'"
 	 * @generated
 	 */
 	ManifestType getManifestType();

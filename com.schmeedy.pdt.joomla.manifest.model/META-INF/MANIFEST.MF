@@ -12,5 +12,6 @@ Export-Package: com.schmeedy.pdt.joomla.manifest.model,
  com.schmeedy.pdt.joomla.manifest.model.util
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.emf.ecore;visibility:=reexport,
- org.eclipse.emf.ecore.xmi;bundle-version="2.5.0"
+ org.eclipse.emf.ecore.xmi;bundle-version="2.5.0",
+ org.eclipse.wst.xml.core;bundle-version="1.1.502"
 Bundle-ActivationPolicy: lazy
