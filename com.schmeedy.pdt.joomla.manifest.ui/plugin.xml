@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="org.eclipse.ui.editors">
+      <editor
+            class="com.schmeedy.pdt.joomla.manifest.ui.editor.JoomlaExtensionManifestEditor"
+            default="falsee"
+            icon="icons/joomla16.png"
+            id="com.schmeedy.pdt.joomla.manifest.ui.ExtensionManifestEditor"
+            name="Joomla! Extension Manifest Editor">
+         <contentTypeBinding
+               contentTypeId="com.schmeedy.pdt.joomla.manifest.model.ComponentExtensionManifest">
+         </contentTypeBinding>
+      </editor>
+   </extension>
+
+</plugin>

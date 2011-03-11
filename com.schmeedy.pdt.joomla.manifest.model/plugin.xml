@@ -31,14 +31,31 @@
             name="Joomla! Extension Manifest"
             priority="normal">
       </content-type>
+      <content-type
+            base-type="com.schmeedy.pdt.joomla.manifest.model.ExtensionManifest"
+            id="com.schmeedy.pdt.joomla.manifest.model.ComponentExtensionManifest"
+            name="Joomla! Component Extension Manifest"
+            priority="normal">
+         <describer
+               class="org.eclipse.core.runtime.content.XMLRootElementContentDescriber2">
+            <parameter
+                  name="element"
+                  value="install/http://dev.joomla.org/xml/1.5/component-install.dtd">
+            </parameter>
+         </describer>
+      </content-type>
    </extension>
    <extension
          point="org.eclipse.wst.xml.core.catalogContributions">
       <catalogContribution>
          <public
-               publicId="com.schmeedy.pdt.joomla.manifest.model.public1"
+               publicId="-//Joomla! 1.5//DTD component 1.0//EN"
                uri="model/xml/component-1.5.dtd">
          </public>
+         <system
+               systemId="http://dev.joomla.org/xml/1.5/component-install.dtd"
+               uri="model/xml/component-1.5.dtd">
+         </system>
       </catalogContribution>
    </extension>
 
