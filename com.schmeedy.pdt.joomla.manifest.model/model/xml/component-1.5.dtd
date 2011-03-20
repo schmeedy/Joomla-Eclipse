@@ -1,4 +1,4 @@
-<!ELEMENT install ((name, creationDate, author, authorEmail, authorUrl, copyright, license, version, description, installfile, uninstallfile, install, uninstall, files*, languages*, media*, administration, params?) | (sql | queries))+>
+<!ELEMENT install ((name?, creationDate?, author?, authorEmail?, authorUrl?, copyright?, license?, version?, description?, installfile?, uninstallfile?, install?, uninstall?, files*, languages*, media*, administration?, params?) | (sql | queries))+>
 <!ATTLIST install
 	type NMTOKEN #FIXED "component"
 	version CDATA #IMPLIED

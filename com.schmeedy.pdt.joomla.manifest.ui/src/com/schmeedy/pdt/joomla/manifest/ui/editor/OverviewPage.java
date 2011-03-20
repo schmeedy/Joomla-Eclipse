@@ -2,8 +2,9 @@ package com.schmeedy.pdt.joomla.manifest.ui.editor;
 
 import org.eclipse.core.databinding.DataBindingContext;
 import org.eclipse.core.databinding.observable.value.IObservableValue;
-import org.eclipse.emf.databinding.EMFObservables;
 import org.eclipse.emf.databinding.EMFUpdateValueStrategy;
+import org.eclipse.emf.databinding.edit.EMFEditObservables;
+import org.eclipse.emf.edit.domain.EditingDomain;
 import org.eclipse.jface.databinding.swt.SWTObservables;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.GridData;
@@ -38,6 +39,8 @@ class OverviewPage extends FormPage {
 	private Text copyrightText;
 	private Text licenseText;
 	
+	private EditingDomain editingDomain;
+	
 	/**
 	 * Create the form page.
 	 * @param editor
@@ -45,6 +48,10 @@ class OverviewPage extends FormPage {
 	 */
 	public OverviewPage(FormEditor editor) {
 		super(editor, ID, "Overview");
+	}
+	
+	void setEditingDomain(EditingDomain editingDomain) {
+		this.editingDomain = editingDomain;		
 	}
 	
 	void setInput(JoomlaExtensionManifest manifest) {
@@ -103,7 +110,7 @@ class OverviewPage extends FormPage {
 		final Label label = managedForm.getToolkit().createLabel(detailsSectionContent, "Description:", SWT.NONE);
 		label.setLayoutData(new GridData(SWT.LEFT, SWT.TOP, false, false, 1, 1));
 		
-		descriptionText = managedForm.getToolkit().createText(detailsSectionContent, "New Text", SWT.MULTI);
+		descriptionText = managedForm.getToolkit().createText(detailsSectionContent, "New Text", SWT.WRAP | SWT.MULTI);
 		descriptionText.setText("");
 		final GridData gd_descriptionText = new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1);
 		gd_descriptionText.heightHint = 83;
@@ -122,7 +129,7 @@ class OverviewPage extends FormPage {
 		final Label copyrightLabel = managedForm.getToolkit().createLabel(composite, "Copyright:", SWT.NONE);
 		copyrightLabel.setLayoutData(new GridData(SWT.LEFT, SWT.TOP, false, false, 1, 1));
 		
-		copyrightText = managedForm.getToolkit().createText(composite, "New Text", SWT.MULTI);
+		copyrightText = managedForm.getToolkit().createText(composite, "New Text", SWT.WRAP | SWT.MULTI);
 		copyrightText.setText("");
 		final GridData gd_copyrightText = new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1);
 		gd_copyrightText.heightHint = 120;
@@ -131,7 +138,7 @@ class OverviewPage extends FormPage {
 		final Label lblLicense = managedForm.getToolkit().createLabel(composite, "License:", SWT.NONE);
 		lblLicense.setLayoutData(new GridData(SWT.LEFT, SWT.TOP, false, false, 1, 1));
 		
-		licenseText = managedForm.getToolkit().createText(composite, "New Text", SWT.NONE);
+		licenseText = managedForm.getToolkit().createText(composite, "New Text", SWT.WRAP | SWT.MULTI);
 		licenseText.setText("");
 		final GridData gd_licenseText = new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1);
 		gd_licenseText.heightHint = 120;
@@ -180,35 +187,35 @@ class OverviewPage extends FormPage {
 		final DataBindingContext bindingContext = new DataBindingContext();
 		//
 		final IObservableValue nameTextObserveTextObserveWidget = SWTObservables.observeDelayedValue(300, SWTObservables.observeText(nameText, SWT.Modify));
-		final IObservableValue currentInputNameObserveValue = EMFObservables.observeValue(currentInput, Literals.JOOMLA_EXTENSION_MANIFEST__NAME);
+		final IObservableValue currentInputNameObserveValue = EMFEditObservables.observeValue(editingDomain, currentInput, Literals.JOOMLA_EXTENSION_MANIFEST__NAME);
 		bindingContext.bindValue(nameTextObserveTextObserveWidget, currentInputNameObserveValue, null, new EMFUpdateValueStrategy());
 		//
 		final IObservableValue versionTextObserveTextObserveWidget = SWTObservables.observeDelayedValue(300, SWTObservables.observeText(versionText, SWT.Modify));
-		final IObservableValue currentInputVersionObserveValue = EMFObservables.observeValue(currentInput, Literals.JOOMLA_EXTENSION_MANIFEST__VERSION);
+		final IObservableValue currentInputVersionObserveValue = EMFEditObservables.observeValue(editingDomain, currentInput, Literals.JOOMLA_EXTENSION_MANIFEST__VERSION);
 		bindingContext.bindValue(versionTextObserveTextObserveWidget, currentInputVersionObserveValue, null, new EMFUpdateValueStrategy());
 		//
 		final IObservableValue descriptionTextObserveTextObserveWidget = SWTObservables.observeDelayedValue(300, SWTObservables.observeText(descriptionText, SWT.Modify));
-		final IObservableValue currentInputDescriptionObserveValue = EMFObservables.observeValue(currentInput, Literals.JOOMLA_EXTENSION_MANIFEST__DESCRIPTION);
+		final IObservableValue currentInputDescriptionObserveValue = EMFEditObservables.observeValue(editingDomain, currentInput, Literals.JOOMLA_EXTENSION_MANIFEST__DESCRIPTION);
 		bindingContext.bindValue(descriptionTextObserveTextObserveWidget, currentInputDescriptionObserveValue, null, new EMFUpdateValueStrategy());
 		//
 		final IObservableValue authorNameTextObserveTextObserveWidget = SWTObservables.observeDelayedValue(300, SWTObservables.observeText(authorNameText, SWT.Modify));
-		final IObservableValue currentInputAuthorObserveValue = EMFObservables.observeValue(currentInput, Literals.JOOMLA_EXTENSION_MANIFEST__AUTHOR);
+		final IObservableValue currentInputAuthorObserveValue = EMFEditObservables.observeValue(editingDomain, currentInput, Literals.JOOMLA_EXTENSION_MANIFEST__AUTHOR);
 		bindingContext.bindValue(authorNameTextObserveTextObserveWidget, currentInputAuthorObserveValue, null, new EMFUpdateValueStrategy());
 		//
 		final IObservableValue authorEmailTextObserveTextObserveWidget = SWTObservables.observeDelayedValue(300, SWTObservables.observeText(authorEmailText, SWT.Modify));
-		final IObservableValue currentInputAuthorEmailObserveValue = EMFObservables.observeValue(currentInput, Literals.JOOMLA_EXTENSION_MANIFEST__AUTHOR_EMAIL);
+		final IObservableValue currentInputAuthorEmailObserveValue = EMFEditObservables.observeValue(editingDomain, currentInput, Literals.JOOMLA_EXTENSION_MANIFEST__AUTHOR_EMAIL);
 		bindingContext.bindValue(authorEmailTextObserveTextObserveWidget, currentInputAuthorEmailObserveValue, null, new EMFUpdateValueStrategy());
 		//
 		final IObservableValue authorUrlTextObserveTextObserveWidget = SWTObservables.observeDelayedValue(300, SWTObservables.observeText(authorUrlText, SWT.Modify));
-		final IObservableValue currentInputAuthorUrlObserveValue = EMFObservables.observeValue(currentInput, Literals.JOOMLA_EXTENSION_MANIFEST__AUTHOR_URL);
+		final IObservableValue currentInputAuthorUrlObserveValue = EMFEditObservables.observeValue(editingDomain, currentInput, Literals.JOOMLA_EXTENSION_MANIFEST__AUTHOR_URL);
 		bindingContext.bindValue(authorUrlTextObserveTextObserveWidget, currentInputAuthorUrlObserveValue, null, new EMFUpdateValueStrategy());
 		//
 		final IObservableValue copyrightTextObserveTextObserveWidget = SWTObservables.observeDelayedValue(300, SWTObservables.observeText(copyrightText, SWT.Modify));
-		final IObservableValue currentInputCopyrightObserveValue = EMFObservables.observeValue(currentInput, Literals.JOOMLA_EXTENSION_MANIFEST__COPYRIGHT);
+		final IObservableValue currentInputCopyrightObserveValue = EMFEditObservables.observeValue(editingDomain, currentInput, Literals.JOOMLA_EXTENSION_MANIFEST__COPYRIGHT);
 		bindingContext.bindValue(copyrightTextObserveTextObserveWidget, currentInputCopyrightObserveValue, null, new EMFUpdateValueStrategy());
 		//
 		final IObservableValue licenseTextObserveTextObserveWidget = SWTObservables.observeDelayedValue(300, SWTObservables.observeText(licenseText, SWT.Modify));
-		final IObservableValue currentInputLicenseObserveValue = EMFObservables.observeValue(currentInput, Literals.JOOMLA_EXTENSION_MANIFEST__LICENSE);
+		final IObservableValue currentInputLicenseObserveValue = EMFEditObservables.observeValue(editingDomain, currentInput, Literals.JOOMLA_EXTENSION_MANIFEST__LICENSE);
 		bindingContext.bindValue(licenseTextObserveTextObserveWidget, currentInputLicenseObserveValue, null, new EMFUpdateValueStrategy());
 		//
 		return bindingContext;
