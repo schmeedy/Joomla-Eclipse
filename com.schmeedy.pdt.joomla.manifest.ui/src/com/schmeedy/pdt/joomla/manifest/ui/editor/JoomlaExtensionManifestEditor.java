@@ -31,6 +31,7 @@ import org.eclipse.emf.workspace.util.WorkspaceSynchronizer;
 import org.eclipse.jface.action.IMenuListener;
 import org.eclipse.jface.action.IMenuManager;
 import org.eclipse.jface.dialogs.ProgressMonitorDialog;
+import org.eclipse.jface.resource.ImageRegistry;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.IFileEditorInput;
@@ -56,6 +57,8 @@ public class JoomlaExtensionManifestEditor extends FormEditor implements IEditin
 	private final WorkspaceSynchronizer workspaceSynchronizer;
 	private Resource inputResource;
 	private Diagnostic inputResourceDiagnostic;
+	
+	private final ImageRegistry imageRegistry = new ImageRegistry();
 	
 	private final AtomicBoolean savingModelState = new AtomicBoolean(false);
 
@@ -123,10 +126,10 @@ public class JoomlaExtensionManifestEditor extends FormEditor implements IEditin
 		overviewPage = new OverviewPage(this);
 		overviewPage.setEditingDomain(editingDomain);
 		
-		resourcePage = new MultiResourceContainerPage(this, "resources", "Resources");
+		resourcePage = new MultiResourceContainerPage(this, "resources", "Resources", imageRegistry);
 		resourcePage.setEditingDomain(editingDomain);
 		
-		adminResourcePage = new MultiResourceContainerPage(this, "admin.resources", "Admin Resources");
+		adminResourcePage = new MultiResourceContainerPage(this, "admin.resources", "Admin Resources", imageRegistry);
 		adminResourcePage.setEditingDomain(editingDomain);
 
 		try {
@@ -284,6 +287,7 @@ public class JoomlaExtensionManifestEditor extends FormEditor implements IEditin
 		xmlSourceEditor.dispose();
 		workspaceSynchronizer.dispose();
 		editingDomain.dispose();
+		imageRegistry.dispose();
 	}
 
 }

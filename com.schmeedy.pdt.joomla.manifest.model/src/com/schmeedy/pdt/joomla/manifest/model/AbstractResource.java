@@ -23,9 +23,9 @@ import org.eclipse.emf.ecore.EObject;
  * @see com.schmeedy.pdt.joomla.manifest.model.JoomlaExtensionManifestPackage#getAbstractResource()
  * @model abstract="true"
  *        extendedMetaData="kind='simple'"
- * @generated
+ * @generated NOT
  */
-public interface AbstractResource extends EObject {
+public interface AbstractResource extends EObject, Comparable<AbstractResource> {
 	/**
 	 * Returns the value of the '<em><b>Path</b></em>' attribute.
 	 * <!-- begin-user-doc -->

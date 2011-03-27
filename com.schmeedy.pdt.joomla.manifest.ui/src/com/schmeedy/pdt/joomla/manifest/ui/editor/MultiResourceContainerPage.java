@@ -1,10 +1,14 @@
 package com.schmeedy.pdt.joomla.manifest.ui.editor;
 
+import java.io.File;
+
 import org.eclipse.core.databinding.DataBindingContext;
 import org.eclipse.core.databinding.observable.Realm;
 import org.eclipse.core.databinding.observable.list.IObservableList;
 import org.eclipse.core.databinding.observable.map.IObservableMap;
 import org.eclipse.core.databinding.observable.value.IObservableValue;
+import org.eclipse.core.runtime.Platform;
+import org.eclipse.core.runtime.content.IContentType;
 import org.eclipse.emf.databinding.EMFObservables;
 import org.eclipse.emf.databinding.edit.EMFEditObservables;
 import org.eclipse.emf.ecore.EStructuralFeature;
@@ -13,6 +17,8 @@ import org.eclipse.jface.databinding.viewers.ObservableListContentProvider;
 import org.eclipse.jface.databinding.viewers.ObservableMapLabelProvider;
 import org.eclipse.jface.databinding.viewers.ViewersObservables;
 import org.eclipse.jface.layout.TableColumnLayout;
+import org.eclipse.jface.resource.ImageDescriptor;
+import org.eclipse.jface.resource.ImageRegistry;
 import org.eclipse.jface.viewers.ColumnWeightData;
 import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.swt.SWT;
@@ -44,6 +50,8 @@ class MultiResourceContainerPage extends FormPage {
 
 	public static final String ID_BASE = "com.schmeedy.pdt.joomla.manifest.ui.editor.OverviewPage.MultiResourceContainerPage.";
 	
+	private final ImageRegistry imageRegistry;
+	
 	private AbstractMultiResourceContainer currentInput;
 	private DataBindingContext dataBindingContext;
 	private EditingDomain editingDomain;
@@ -51,14 +59,15 @@ class MultiResourceContainerPage extends FormPage {
 	
 	private TableViewer resourceSetViewer;
 	private TableViewer resourceViewer;
-		
+	
 	/**
 	 * Create the form page.
 	 * @param editor
 	 * @wbp.parser.constructor
 	 */
-	public MultiResourceContainerPage(FormEditor editor, String id, String pageTitle) {
+	public MultiResourceContainerPage(FormEditor editor, String id, String pageTitle, ImageRegistry imageRegistry) {
 		super(editor, ID_BASE + id, pageTitle);
+		this.imageRegistry = imageRegistry;
 	}
 	
 	void setEditingDomain(EditingDomain editingDomain) {
@@ -163,10 +172,10 @@ class MultiResourceContainerPage extends FormPage {
 		}
 		
 		{ // resource list (from resource set selection) binding
-			final ObservableListContentProvider setContentProvider = new ObservableListContentProvider();
-			resourceViewer.setContentProvider(setContentProvider);
+			final ObservableListContentProvider listContentProvider = new ObservableListContentProvider();
+			resourceViewer.setContentProvider(listContentProvider);
 
-			final IObservableMap[] observeMaps = EMFEditObservables.observeMaps(editingDomain, setContentProvider.getKnownElements(), new EStructuralFeature[] { Literals.ABSTRACT_RESOURCE__PATH });
+			final IObservableMap[] observeMaps = EMFEditObservables.observeMaps(editingDomain, listContentProvider.getKnownElements(), new EStructuralFeature[] { Literals.ABSTRACT_RESOURCE__PATH });
 			resourceViewer.setLabelProvider(new AbstractResourceLabelProvider(observeMaps));
 
 			final IObservableValue selectedResourceSetObservable = ViewersObservables.observeSingleSelection(resourceSetViewer);
@@ -213,7 +222,7 @@ class MultiResourceContainerPage extends FormPage {
 		
 	}
 	
-	private static class AbstractResourceLabelProvider extends ObservableMapLabelProvider {
+	private class AbstractResourceLabelProvider extends ObservableMapLabelProvider {
 
 		public AbstractResourceLabelProvider(IObservableMap[] attributeMaps) {
 			super(attributeMaps);
@@ -221,8 +230,22 @@ class MultiResourceContainerPage extends FormPage {
 		
 		@Override
 		public Image getColumnImage(Object element, int columnIndex) {
-			if (element instanceof FolderResource) {
+			if (element == null) {
+				return null;
+			} else if (element instanceof FolderResource) {
 				return PlatformUI.getWorkbench().getSharedImages().getImage(ISharedImages.IMG_OBJ_FOLDER);
+			}
+			final String path = ((AbstractResource) element).getPath().trim();
+			if (path != null && !path.isEmpty()) {
+				final String fileName = path.contains(File.separator) ? path.substring(path.indexOf(File.separator) + 1, path.length()) : path;
+				final IContentType contentType = Platform.getContentTypeManager().findContentTypeFor(fileName);
+				if (contentType != null) {
+					if (imageRegistry.get(contentType.getId()) == null) {
+						final ImageDescriptor imageDescriptor = PlatformUI.getWorkbench().getEditorRegistry().getImageDescriptor(fileName, contentType);
+						imageRegistry.put(contentType.getId(), imageDescriptor.createImage());
+					}
+					return imageRegistry.get(contentType.getId());
+				}
 			}
 			return PlatformUI.getWorkbench().getSharedImages().getImage(ISharedImages.IMG_OBJ_FILE);
 		}
