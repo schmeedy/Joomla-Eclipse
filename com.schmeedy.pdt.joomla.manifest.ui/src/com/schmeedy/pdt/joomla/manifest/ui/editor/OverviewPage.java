@@ -26,20 +26,20 @@ class OverviewPage extends FormPage {
 
 	public static final String ID = "com.schmeedy.pdt.joomla.manifest.ui.editor.OverviewPage";
 	
-	private boolean uiInitialized = false;
 	private Text nameText;
 	private Text versionText;
 	private Text descriptionText;
 	
-	private JoomlaExtensionManifest currentInput;
-	private DataBindingContext dataBindingContext;
 	private Text authorNameText;
 	private Text authorEmailText;
 	private Text authorUrlText;
 	private Text copyrightText;
 	private Text licenseText;
 	
+	private JoomlaExtensionManifest currentInput;
+	private DataBindingContext dataBindingContext;
 	private EditingDomain editingDomain;
+	private boolean uiInitialized = false;
 	
 	/**
 	 * Create the form page.

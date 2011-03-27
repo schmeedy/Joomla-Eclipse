@@ -25,6 +25,8 @@
         <details key="kind" value="element"/>
       </eAnnotations>
     </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="allResourceSets" upperBound="-1"
+        eType="#//AbstractResourceContainer" transient="true" derived="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="JoomlaExtensionManifest" eSuperTypes="#//AbstractMultiResourceContainer">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="manifestType" eType="#//ManifestType">
@@ -160,6 +162,8 @@
         <details key="kind" value="attribute"/>
       </eAnnotations>
     </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="allResources" upperBound="-1"
+        eType="#//AbstractResource" transient="true" derived="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="SqlFileSet">
     <eStructuralFeatures xsi:type="ecore:EReference" name="files" upperBound="-1"
@@ -237,8 +241,9 @@
       </eAnnotations>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="files" upperBound="-1"
-        eType="#//FileResource">
+        eType="#//FileResource" containment="true">
       <eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
+        <details key="name" value="filename"/>
         <details key="kind" value="element"/>
       </eAnnotations>
     </eStructuralFeatures>

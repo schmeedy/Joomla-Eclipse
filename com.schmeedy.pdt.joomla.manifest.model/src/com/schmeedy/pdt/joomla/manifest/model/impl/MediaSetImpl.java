@@ -6,14 +6,22 @@
  */
 package com.schmeedy.pdt.joomla.manifest.model.impl;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
+import java.util.Set;
 
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.util.EObjectResolvingEList;
+import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.InternalEList;
 
+import com.schmeedy.pdt.joomla.manifest.model.AbstractResource;
 import com.schmeedy.pdt.joomla.manifest.model.FileResource;
 import com.schmeedy.pdt.joomla.manifest.model.JoomlaExtensionManifestPackage;
 import com.schmeedy.pdt.joomla.manifest.model.MediaSet;
@@ -54,7 +62,7 @@ public class MediaSetImpl extends AbstractResourceContainerImpl implements Media
 	protected String destination = DESTINATION_EDEFAULT;
 
 	/**
-	 * The cached value of the '{@link #getFiles() <em>Files</em>}' reference list.
+	 * The cached value of the '{@link #getFiles() <em>Files</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getFiles()
@@ -87,6 +95,7 @@ public class MediaSetImpl extends AbstractResourceContainerImpl implements Media
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getDestination() {
 		return destination;
 	}
@@ -96,6 +105,7 @@ public class MediaSetImpl extends AbstractResourceContainerImpl implements Media
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setDestination(String newDestination) {
 		String oldDestination = destination;
 		destination = newDestination;
@@ -108,13 +118,44 @@ public class MediaSetImpl extends AbstractResourceContainerImpl implements Media
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<FileResource> getFiles() {
 		if (files == null) {
-			files = new EObjectResolvingEList<FileResource>(FileResource.class, this, JoomlaExtensionManifestPackage.MEDIA_SET__FILES);
+			files = new EObjectContainmentEList<FileResource>(FileResource.class, this, JoomlaExtensionManifestPackage.MEDIA_SET__FILES);
 		}
 		return files;
 	}
+	
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case JoomlaExtensionManifestPackage.MEDIA_SET__FILES:
+				return ((InternalEList<?>)getFiles()).basicRemove(otherEnd, msgs);
+		}
+		return super.eInverseRemove(otherEnd, featureID, msgs);
+	}
 
+	/**
+	 * @generated NOT
+	 */
+	@Override
+	protected List<AbstractResource> doGetAllResources() {
+		return new ArrayList<AbstractResource>(getFiles());
+	}
+	
+	/**
+	 * @generated NOT
+	 */
+	@Override
+	protected Set<Integer> getBaseFeatureIdsForAllResources() {
+		return Collections.singleton(JoomlaExtensionManifestPackage.MEDIA_SET__FILES);
+	}
+	
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

@@ -6,7 +6,11 @@
  */
 package com.schmeedy.pdt.joomla.manifest.model.impl;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
+import java.util.Set;
 
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EList;
@@ -15,6 +19,7 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
+import com.schmeedy.pdt.joomla.manifest.model.AbstractResource;
 import com.schmeedy.pdt.joomla.manifest.model.JoomlaExtensionManifestPackage;
 import com.schmeedy.pdt.joomla.manifest.model.LanguageResource;
 import com.schmeedy.pdt.joomla.manifest.model.LanguageSet;
@@ -67,6 +72,7 @@ public class LanguageSetImpl extends AbstractResourceContainerImpl implements La
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<LanguageResource> getResources() {
 		if (resources == null) {
 			resources = new EObjectContainmentEList<LanguageResource>(LanguageResource.class, this, JoomlaExtensionManifestPackage.LANGUAGE_SET__RESOURCES);
@@ -74,6 +80,22 @@ public class LanguageSetImpl extends AbstractResourceContainerImpl implements La
 		return resources;
 	}
 
+	/**
+	 * @generated NOT
+	 */
+	@Override
+	protected List<AbstractResource> doGetAllResources() {
+		return new ArrayList<AbstractResource>(getResources());
+	}
+	
+	/**
+	 * @generated NOT
+	 */
+	@Override
+	protected Set<Integer> getBaseFeatureIdsForAllResources() {
+		return Collections.singleton(JoomlaExtensionManifestPackage.LANGUAGE_SET__RESOURCES);
+	}
+	
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

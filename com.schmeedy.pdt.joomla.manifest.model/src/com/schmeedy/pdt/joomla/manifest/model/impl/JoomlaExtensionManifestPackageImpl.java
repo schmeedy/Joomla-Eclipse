@@ -276,6 +276,15 @@ public class JoomlaExtensionManifestPackageImpl extends EPackageImpl implements 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EReference getAbstractMultiResourceContainer_AllResourceSets() {
+		return (EReference)abstractMultiResourceContainerEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getJoomlaExtensionManifest() {
 		return joomlaExtensionManifestEClass;
 	}
@@ -494,6 +503,15 @@ public class JoomlaExtensionManifestPackageImpl extends EPackageImpl implements 
 	 */
 	public EAttribute getAbstractResourceContainer_BaseFolder() {
 		return (EAttribute)abstractResourceContainerEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getAbstractResourceContainer_AllResources() {
+		return (EReference)abstractResourceContainerEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -834,6 +852,7 @@ public class JoomlaExtensionManifestPackageImpl extends EPackageImpl implements 
 		createEReference(abstractMultiResourceContainerEClass, ABSTRACT_MULTI_RESOURCE_CONTAINER__FILE_SETS);
 		createEReference(abstractMultiResourceContainerEClass, ABSTRACT_MULTI_RESOURCE_CONTAINER__LANGUAGE_SETS);
 		createEReference(abstractMultiResourceContainerEClass, ABSTRACT_MULTI_RESOURCE_CONTAINER__MEDIA_SETS);
+		createEReference(abstractMultiResourceContainerEClass, ABSTRACT_MULTI_RESOURCE_CONTAINER__ALL_RESOURCE_SETS);
 
 		joomlaExtensionManifestEClass = createEClass(JOOMLA_EXTENSION_MANIFEST);
 		createEAttribute(joomlaExtensionManifestEClass, JOOMLA_EXTENSION_MANIFEST__MANIFEST_TYPE);
@@ -864,6 +883,7 @@ public class JoomlaExtensionManifestPackageImpl extends EPackageImpl implements 
 
 		abstractResourceContainerEClass = createEClass(ABSTRACT_RESOURCE_CONTAINER);
 		createEAttribute(abstractResourceContainerEClass, ABSTRACT_RESOURCE_CONTAINER__BASE_FOLDER);
+		createEReference(abstractResourceContainerEClass, ABSTRACT_RESOURCE_CONTAINER__ALL_RESOURCES);
 
 		sqlFileSetEClass = createEClass(SQL_FILE_SET);
 		createEReference(sqlFileSetEClass, SQL_FILE_SET__FILES);
@@ -956,6 +976,7 @@ public class JoomlaExtensionManifestPackageImpl extends EPackageImpl implements 
 		initEReference(getAbstractMultiResourceContainer_FileSets(), this.getFileSet(), null, "fileSets", null, 0, -1, AbstractMultiResourceContainer.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getAbstractMultiResourceContainer_LanguageSets(), this.getLanguageSet(), null, "languageSets", null, 0, -1, AbstractMultiResourceContainer.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getAbstractMultiResourceContainer_MediaSets(), this.getMediaSet(), null, "mediaSets", null, 0, -1, AbstractMultiResourceContainer.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getAbstractMultiResourceContainer_AllResourceSets(), this.getAbstractResourceContainer(), null, "allResourceSets", null, 0, -1, AbstractMultiResourceContainer.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 
 		initEClass(joomlaExtensionManifestEClass, JoomlaExtensionManifest.class, "JoomlaExtensionManifest", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getJoomlaExtensionManifest_ManifestType(), this.getManifestType(), "manifestType", null, 0, 1, JoomlaExtensionManifest.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -986,6 +1007,7 @@ public class JoomlaExtensionManifestPackageImpl extends EPackageImpl implements 
 
 		initEClass(abstractResourceContainerEClass, AbstractResourceContainer.class, "AbstractResourceContainer", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getAbstractResourceContainer_BaseFolder(), ecorePackage.getEString(), "baseFolder", null, 0, 1, AbstractResourceContainer.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getAbstractResourceContainer_AllResources(), this.getAbstractResource(), null, "allResources", null, 0, -1, AbstractResourceContainer.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 
 		initEClass(sqlFileSetEClass, SqlFileSet.class, "SqlFileSet", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getSqlFileSet_Files(), this.getSqlResource(), null, "files", null, 0, -1, SqlFileSet.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1010,7 +1032,7 @@ public class JoomlaExtensionManifestPackageImpl extends EPackageImpl implements 
 
 		initEClass(mediaSetEClass, MediaSet.class, "MediaSet", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getMediaSet_Destination(), ecorePackage.getEString(), "destination", null, 0, 1, MediaSet.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getMediaSet_Files(), this.getFileResource(), null, "files", null, 0, -1, MediaSet.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getMediaSet_Files(), this.getFileResource(), null, "files", null, 0, -1, MediaSet.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(administrationEClass, Administration.class, "Administration", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getAdministration_Menu(), this.getMenuItem(), null, "menu", null, 0, 1, Administration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1291,6 +1313,7 @@ public class JoomlaExtensionManifestPackageImpl extends EPackageImpl implements 
 		  (getMediaSet_Files(), 
 		   source, 
 		   new String[] {
+			 "name", "filename",
 			 "kind", "element"
 		   });		
 		addAnnotation

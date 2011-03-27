@@ -106,13 +106,22 @@ public interface JoomlaExtensionManifestPackage extends EPackage {
 	int ABSTRACT_MULTI_RESOURCE_CONTAINER__MEDIA_SETS = 2;
 
 	/**
+	 * The feature id for the '<em><b>All Resource Sets</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ABSTRACT_MULTI_RESOURCE_CONTAINER__ALL_RESOURCE_SETS = 3;
+
+	/**
 	 * The number of structural features of the '<em>Abstract Multi Resource Container</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ABSTRACT_MULTI_RESOURCE_CONTAINER_FEATURE_COUNT = 3;
+	int ABSTRACT_MULTI_RESOURCE_CONTAINER_FEATURE_COUNT = 4;
 
 	/**
 	 * The meta object id for the '{@link com.schmeedy.pdt.joomla.manifest.model.impl.JoomlaExtensionManifestImpl <em>Joomla Extension Manifest</em>}' class.
@@ -150,6 +159,15 @@ public interface JoomlaExtensionManifestPackage extends EPackage {
 	 * @ordered
 	 */
 	int JOOMLA_EXTENSION_MANIFEST__MEDIA_SETS = ABSTRACT_MULTI_RESOURCE_CONTAINER__MEDIA_SETS;
+
+	/**
+	 * The feature id for the '<em><b>All Resource Sets</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int JOOMLA_EXTENSION_MANIFEST__ALL_RESOURCE_SETS = ABSTRACT_MULTI_RESOURCE_CONTAINER__ALL_RESOURCE_SETS;
 
 	/**
 	 * The feature id for the '<em><b>Manifest Type</b></em>' attribute.
@@ -409,13 +427,22 @@ public interface JoomlaExtensionManifestPackage extends EPackage {
 	int ABSTRACT_RESOURCE_CONTAINER__BASE_FOLDER = 0;
 
 	/**
+	 * The feature id for the '<em><b>All Resources</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ABSTRACT_RESOURCE_CONTAINER__ALL_RESOURCES = 1;
+
+	/**
 	 * The number of structural features of the '<em>Abstract Resource Container</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ABSTRACT_RESOURCE_CONTAINER_FEATURE_COUNT = 1;
+	int ABSTRACT_RESOURCE_CONTAINER_FEATURE_COUNT = 2;
 
 	/**
 	 * The meta object id for the '{@link com.schmeedy.pdt.joomla.manifest.model.impl.SqlFileSetImpl <em>Sql File Set</em>}' class.
@@ -509,6 +536,15 @@ public interface JoomlaExtensionManifestPackage extends EPackage {
 	 * @ordered
 	 */
 	int FILE_SET__BASE_FOLDER = ABSTRACT_RESOURCE_CONTAINER__BASE_FOLDER;
+
+	/**
+	 * The feature id for the '<em><b>All Resources</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FILE_SET__ALL_RESOURCES = ABSTRACT_RESOURCE_CONTAINER__ALL_RESOURCES;
 
 	/**
 	 * The feature id for the '<em><b>Files</b></em>' containment reference list.
@@ -613,6 +649,15 @@ public interface JoomlaExtensionManifestPackage extends EPackage {
 	int LANGUAGE_SET__BASE_FOLDER = ABSTRACT_RESOURCE_CONTAINER__BASE_FOLDER;
 
 	/**
+	 * The feature id for the '<em><b>All Resources</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LANGUAGE_SET__ALL_RESOURCES = ABSTRACT_RESOURCE_CONTAINER__ALL_RESOURCES;
+
+	/**
 	 * The feature id for the '<em><b>Resources</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -687,6 +732,15 @@ public interface JoomlaExtensionManifestPackage extends EPackage {
 	int MEDIA_SET__BASE_FOLDER = ABSTRACT_RESOURCE_CONTAINER__BASE_FOLDER;
 
 	/**
+	 * The feature id for the '<em><b>All Resources</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MEDIA_SET__ALL_RESOURCES = ABSTRACT_RESOURCE_CONTAINER__ALL_RESOURCES;
+
+	/**
 	 * The feature id for the '<em><b>Destination</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -696,7 +750,7 @@ public interface JoomlaExtensionManifestPackage extends EPackage {
 	int MEDIA_SET__DESTINATION = ABSTRACT_RESOURCE_CONTAINER_FEATURE_COUNT + 0;
 
 	/**
-	 * The feature id for the '<em><b>Files</b></em>' reference list.
+	 * The feature id for the '<em><b>Files</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -749,6 +803,15 @@ public interface JoomlaExtensionManifestPackage extends EPackage {
 	 * @ordered
 	 */
 	int ADMINISTRATION__MEDIA_SETS = ABSTRACT_MULTI_RESOURCE_CONTAINER__MEDIA_SETS;
+
+	/**
+	 * The feature id for the '<em><b>All Resource Sets</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ADMINISTRATION__ALL_RESOURCE_SETS = ABSTRACT_MULTI_RESOURCE_CONTAINER__ALL_RESOURCE_SETS;
 
 	/**
 	 * The feature id for the '<em><b>Menu</b></em>' containment reference.
@@ -968,6 +1031,17 @@ public interface JoomlaExtensionManifestPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getAbstractMultiResourceContainer_MediaSets();
+
+	/**
+	 * Returns the meta object for the reference list '{@link com.schmeedy.pdt.joomla.manifest.model.AbstractMultiResourceContainer#getAllResourceSets <em>All Resource Sets</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>All Resource Sets</em>'.
+	 * @see com.schmeedy.pdt.joomla.manifest.model.AbstractMultiResourceContainer#getAllResourceSets()
+	 * @see #getAbstractMultiResourceContainer()
+	 * @generated
+	 */
+	EReference getAbstractMultiResourceContainer_AllResourceSets();
 
 	/**
 	 * Returns the meta object for class '{@link com.schmeedy.pdt.joomla.manifest.model.JoomlaExtensionManifest <em>Joomla Extension Manifest</em>}'.
@@ -1240,6 +1314,17 @@ public interface JoomlaExtensionManifestPackage extends EPackage {
 	EAttribute getAbstractResourceContainer_BaseFolder();
 
 	/**
+	 * Returns the meta object for the reference list '{@link com.schmeedy.pdt.joomla.manifest.model.AbstractResourceContainer#getAllResources <em>All Resources</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>All Resources</em>'.
+	 * @see com.schmeedy.pdt.joomla.manifest.model.AbstractResourceContainer#getAllResources()
+	 * @see #getAbstractResourceContainer()
+	 * @generated
+	 */
+	EReference getAbstractResourceContainer_AllResources();
+
+	/**
 	 * Returns the meta object for class '{@link com.schmeedy.pdt.joomla.manifest.model.SqlFileSet <em>Sql File Set</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1408,10 +1493,10 @@ public interface JoomlaExtensionManifestPackage extends EPackage {
 	EAttribute getMediaSet_Destination();
 
 	/**
-	 * Returns the meta object for the reference list '{@link com.schmeedy.pdt.joomla.manifest.model.MediaSet#getFiles <em>Files</em>}'.
+	 * Returns the meta object for the containment reference list '{@link com.schmeedy.pdt.joomla.manifest.model.MediaSet#getFiles <em>Files</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>Files</em>'.
+	 * @return the meta object for the containment reference list '<em>Files</em>'.
 	 * @see com.schmeedy.pdt.joomla.manifest.model.MediaSet#getFiles()
 	 * @see #getMediaSet()
 	 * @generated
@@ -1657,6 +1742,14 @@ public interface JoomlaExtensionManifestPackage extends EPackage {
 		EReference ABSTRACT_MULTI_RESOURCE_CONTAINER__MEDIA_SETS = eINSTANCE.getAbstractMultiResourceContainer_MediaSets();
 
 		/**
+		 * The meta object literal for the '<em><b>All Resource Sets</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference ABSTRACT_MULTI_RESOURCE_CONTAINER__ALL_RESOURCE_SETS = eINSTANCE.getAbstractMultiResourceContainer_AllResourceSets();
+
+		/**
 		 * The meta object literal for the '{@link com.schmeedy.pdt.joomla.manifest.model.impl.JoomlaExtensionManifestImpl <em>Joomla Extension Manifest</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -1867,6 +1960,14 @@ public interface JoomlaExtensionManifestPackage extends EPackage {
 		EAttribute ABSTRACT_RESOURCE_CONTAINER__BASE_FOLDER = eINSTANCE.getAbstractResourceContainer_BaseFolder();
 
 		/**
+		 * The meta object literal for the '<em><b>All Resources</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference ABSTRACT_RESOURCE_CONTAINER__ALL_RESOURCES = eINSTANCE.getAbstractResourceContainer_AllResources();
+
+		/**
 		 * The meta object literal for the '{@link com.schmeedy.pdt.joomla.manifest.model.impl.SqlFileSetImpl <em>Sql File Set</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -2011,7 +2112,7 @@ public interface JoomlaExtensionManifestPackage extends EPackage {
 		EAttribute MEDIA_SET__DESTINATION = eINSTANCE.getMediaSet_Destination();
 
 		/**
-		 * The meta object literal for the '<em><b>Files</b></em>' reference list feature.
+		 * The meta object literal for the '<em><b>Files</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated

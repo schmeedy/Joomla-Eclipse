@@ -7,6 +7,10 @@
 package com.schmeedy.pdt.joomla.manifest.model.impl;
 
 import java.util.Collection;
+import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Set;
 
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EList;
@@ -15,6 +19,7 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
+import com.schmeedy.pdt.joomla.manifest.model.AbstractResource;
 import com.schmeedy.pdt.joomla.manifest.model.FileResource;
 import com.schmeedy.pdt.joomla.manifest.model.FileSet;
 import com.schmeedy.pdt.joomla.manifest.model.FolderResource;
@@ -79,6 +84,7 @@ public class FileSetImpl extends AbstractResourceContainerImpl implements FileSe
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<FileResource> getFiles() {
 		if (files == null) {
 			files = new EObjectContainmentEList<FileResource>(FileResource.class, this, JoomlaExtensionManifestPackage.FILE_SET__FILES);
@@ -91,13 +97,36 @@ public class FileSetImpl extends AbstractResourceContainerImpl implements FileSe
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<FolderResource> getFolders() {
 		if (folders == null) {
 			folders = new EObjectContainmentEList<FolderResource>(FolderResource.class, this, JoomlaExtensionManifestPackage.FILE_SET__FOLDERS);
 		}
 		return folders;
 	}
-
+	
+	/**
+	 * @generated NOT
+	 */
+	@Override
+	protected List<AbstractResource> doGetAllResources() {
+		final List<AbstractResource> resources = new LinkedList<AbstractResource>();
+		resources.addAll(getFolders());
+		resources.addAll(getFiles());
+		return resources;
+	}
+	
+	/**
+	 * @generated NOT
+	 */
+	@Override
+	protected Set<Integer> getBaseFeatureIdsForAllResources() {
+		final Set<Integer> featureIds = new HashSet<Integer>();
+		featureIds.add(JoomlaExtensionManifestPackage.FILE_SET__FOLDERS);
+		featureIds.add(JoomlaExtensionManifestPackage.FILE_SET__FILES);
+		return featureIds;
+	}
+	
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

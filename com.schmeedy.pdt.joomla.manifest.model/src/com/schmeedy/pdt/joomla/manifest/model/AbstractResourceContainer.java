@@ -6,6 +6,7 @@
  */
 package com.schmeedy.pdt.joomla.manifest.model;
 
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 
 /**
@@ -17,6 +18,7 @@ import org.eclipse.emf.ecore.EObject;
  * The following features are supported:
  * <ul>
  *   <li>{@link com.schmeedy.pdt.joomla.manifest.model.AbstractResourceContainer#getBaseFolder <em>Base Folder</em>}</li>
+ *   <li>{@link com.schmeedy.pdt.joomla.manifest.model.AbstractResourceContainer#getAllResources <em>All Resources</em>}</li>
  * </ul>
  * </p>
  *
@@ -50,5 +52,21 @@ public interface AbstractResourceContainer extends EObject {
 	 * @generated
 	 */
 	void setBaseFolder(String value);
+
+	/**
+	 * Returns the value of the '<em><b>All Resources</b></em>' reference list.
+	 * The list contents are of type {@link com.schmeedy.pdt.joomla.manifest.model.AbstractResource}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>All Resources</em>' reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>All Resources</em>' reference list.
+	 * @see com.schmeedy.pdt.joomla.manifest.model.JoomlaExtensionManifestPackage#getAbstractResourceContainer_AllResources()
+	 * @model transient="true" derived="true"
+	 * @generated
+	 */
+	EList<AbstractResource> getAllResources();
 
 } // AbstractResourceContainer

@@ -6,23 +6,19 @@
  */
 package com.schmeedy.pdt.joomla.manifest.model.impl;
 
-import com.schmeedy.pdt.joomla.manifest.model.JoomlaExtensionManifestPackage;
-import com.schmeedy.pdt.joomla.manifest.model.MenuItem;
-import com.schmeedy.pdt.joomla.manifest.model.SubMenu;
-
 import java.util.Collection;
 
 import org.eclipse.emf.common.notify.NotificationChain;
-
 import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
-
 import org.eclipse.emf.ecore.impl.EObjectImpl;
-
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
+
+import com.schmeedy.pdt.joomla.manifest.model.JoomlaExtensionManifestPackage;
+import com.schmeedy.pdt.joomla.manifest.model.MenuItem;
+import com.schmeedy.pdt.joomla.manifest.model.SubMenu;
 
 /**
  * <!-- begin-user-doc -->

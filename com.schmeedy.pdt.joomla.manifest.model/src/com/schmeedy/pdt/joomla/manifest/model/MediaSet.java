@@ -53,7 +53,7 @@ public interface MediaSet extends AbstractResourceContainer {
 	void setDestination(String value);
 
 	/**
-	 * Returns the value of the '<em><b>Files</b></em>' reference list.
+	 * Returns the value of the '<em><b>Files</b></em>' containment reference list.
 	 * The list contents are of type {@link com.schmeedy.pdt.joomla.manifest.model.FileResource}.
 	 * <!-- begin-user-doc -->
 	 * <p>
@@ -61,9 +61,10 @@ public interface MediaSet extends AbstractResourceContainer {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Files</em>' reference list.
+	 * @return the value of the '<em>Files</em>' containment reference list.
 	 * @see com.schmeedy.pdt.joomla.manifest.model.JoomlaExtensionManifestPackage#getMediaSet_Files()
-	 * @model extendedMetaData="kind='element'"
+	 * @model containment="true"
+	 *        extendedMetaData="name='filename' kind='element'"
 	 * @generated
 	 */
 	EList<FileResource> getFiles();

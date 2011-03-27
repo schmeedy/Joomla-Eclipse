@@ -6,15 +6,13 @@
  */
 package com.schmeedy.pdt.joomla.manifest.model.impl;
 
-import com.schmeedy.pdt.joomla.manifest.model.JoomlaExtensionManifestPackage;
-import com.schmeedy.pdt.joomla.manifest.model.MenuItem;
-
 import org.eclipse.emf.common.notify.Notification;
-
 import org.eclipse.emf.ecore.EClass;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
+
+import com.schmeedy.pdt.joomla.manifest.model.JoomlaExtensionManifestPackage;
+import com.schmeedy.pdt.joomla.manifest.model.MenuItem;
 
 /**
  * <!-- begin-user-doc -->

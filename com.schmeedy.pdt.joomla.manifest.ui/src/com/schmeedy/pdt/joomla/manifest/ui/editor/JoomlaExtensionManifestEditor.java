@@ -47,9 +47,10 @@ public class JoomlaExtensionManifestEditor extends FormEditor implements IEditin
 
 	private final MarkerHelper markerHelper = new EditUIMarkerHelper();
 
-	private final StructuredTextEditor xmlSourceEditor = new StructuredTextEditor();
-	private Integer xmlSourceEditorIndex;
 	private OverviewPage overviewPage;
+	private MultiResourceContainerPage resourcePage;
+	private MultiResourceContainerPage adminResourcePage;
+	private final StructuredTextEditor xmlSourceEditor = new StructuredTextEditor();
 
 	private final TransactionalEditingDomain editingDomain;
 	private final WorkspaceSynchronizer workspaceSynchronizer;
@@ -98,7 +99,7 @@ public class JoomlaExtensionManifestEditor extends FormEditor implements IEditin
 								}
 							});
 						} catch (final IOException e) {
-							JoomlaExtensionManifestUiPlugin.INSTANCE.log(e);
+							JoomlaExtensionManifestUiPlugin.getInstance().logError("Failed to reload changed resource " + resource.getURI(), e);
 						}
 					}
 					return true;
@@ -112,25 +113,40 @@ public class JoomlaExtensionManifestEditor extends FormEditor implements IEditin
 			}
 		});
 	}
+	
+	private int getXmlSourceEditorIndex() {
+		return getPageCount() - 1;
+	}
 
 	@Override
 	protected void addPages() {
 		overviewPage = new OverviewPage(this);
 		overviewPage.setEditingDomain(editingDomain);
+		
+		resourcePage = new MultiResourceContainerPage(this, "resources", "Resources");
+		resourcePage.setEditingDomain(editingDomain);
+		
+		adminResourcePage = new MultiResourceContainerPage(this, "admin.resources", "Admin Resources");
+		adminResourcePage.setEditingDomain(editingDomain);
 
 		try {
 			addPage(overviewPage);
+			addPage(resourcePage);
+			addPage(adminResourcePage);
+			
+			final int xmlSourcePageIdx = addPage(xmlSourceEditor, getEditorInput());
+			setPageText(xmlSourcePageIdx, "XML");
 		} catch (final PartInitException e) {
-			JoomlaExtensionManifestUiPlugin.INSTANCE.log(e);
+			JoomlaExtensionManifestUiPlugin.getInstance().logError("Failed to initialize Joomla! extension manifest editor.", e);
 		}
 
-		reloadInput();
+		reloadModelInput();
 	}
 	
 	@Override
 	protected void setActivePage(int newPageIndex) {
 		final int oldPageIndex = getActivePage();
-		if (oldPageIndex == xmlSourceEditorIndex && newPageIndex != xmlSourceEditorIndex && xmlSourceEditor.isDirty()) {
+		if (oldPageIndex == getXmlSourceEditorIndex() && newPageIndex != getXmlSourceEditorIndex() && xmlSourceEditor.isDirty()) {
 			inputResource.unload();
 			// TODO: reload model from changed XML source
 		}
@@ -143,48 +159,21 @@ public class JoomlaExtensionManifestEditor extends FormEditor implements IEditin
 			setPartName(manifest.getName());
 		}
 		overviewPage.setInput(manifest);
-	}
-
-	private void setInputForSourcePage(IFileEditorInput fileEditorInput) {
-		if (xmlSourceEditorIndex == null) {
-			try {
-				xmlSourceEditorIndex = addPage(xmlSourceEditor, fileEditorInput);
-				setPageText(xmlSourceEditorIndex, "XML");
-			} catch (final PartInitException e) {
-				JoomlaExtensionManifestUiPlugin.INSTANCE.log(e);
-			}
-		} else {
-			xmlSourceEditor.setInput(fileEditorInput);
+		resourcePage.setInput(manifest);
+		if (manifest.getAdministration() != null) {
+			adminResourcePage.setInput(manifest.getAdministration());
 		}
 	}
 
-	private void reloadInput() {
+	private void reloadModelInput() {
 		final IEditorInput input = getEditorInput();
 		if (input instanceof IFileEditorInput) {
 			final IFileEditorInput fileEditorInput = (IFileEditorInput) input;
 			final IPath filePath = fileEditorInput.getFile().getFullPath();
-			loadInput(URI.createPlatformResourceURI(filePath.toString(), true), fileEditorInput);
-		} else if (input == null) {
-			unloadCurrentInput();
+			inputResource = editingDomain.getResourceSet().getResource(URI.createPlatformResourceURI(filePath.toString(), true), true);
+			reloadStructuredPageInputFromInputResource();
 		} else {
 			throw new IllegalArgumentException("Unsupported editor input type: " + input.getClass());
-		}
-	}
-
-	private void loadInput(URI uri, IFileEditorInput fileEditorInput) {
-		unloadCurrentInput();
-
-		inputResource = editingDomain.getResourceSet().getResource(uri, true);
-		reloadStructuredPageInputFromInputResource();
-		setInputForSourcePage(fileEditorInput);
-	}
-
-	private void unloadCurrentInput() {
-		if (inputResource != null) {
-			inputResource.unload();
-		}
-		if (xmlSourceEditorIndex != null) {
-			removePage(xmlSourceEditorIndex);
 		}
 	}
 
@@ -199,7 +188,7 @@ public class JoomlaExtensionManifestEditor extends FormEditor implements IEditin
 
 	@Override
 	public void doSave(IProgressMonitor monitor) {
-		if (getCurrentPage() == xmlSourceEditorIndex) {
+		if (getCurrentPage() == getXmlSourceEditorIndex()) {
 			saveXmlSourceAndReloadResource(monitor);
 		} else {
 			saveResourceAndReloadXmlEditorInput(monitor);
@@ -231,7 +220,7 @@ public class JoomlaExtensionManifestEditor extends FormEditor implements IEditin
 			((BasicCommandStack) editingDomain.getCommandStack()).saveIsDone();
 			firePropertyChange(IEditorPart.PROP_DIRTY);
 		} catch (final Exception e) {
-			JoomlaExtensionManifestUiPlugin.INSTANCE.log(e);
+			JoomlaExtensionManifestUiPlugin.getInstance().logError("Saving failed.", e);
 		}
 		updateProblemIndication();
 	}
@@ -265,7 +254,7 @@ public class JoomlaExtensionManifestEditor extends FormEditor implements IEditin
 				try {
 					markerHelper.createMarkers(diagnostic);
 				} catch (final CoreException exception) {
-					JoomlaExtensionManifestUiPlugin.INSTANCE.log(exception);
+					JoomlaExtensionManifestUiPlugin.getInstance().logError("Failed to create problem markers.", exception);
 				}
 			}
 		}

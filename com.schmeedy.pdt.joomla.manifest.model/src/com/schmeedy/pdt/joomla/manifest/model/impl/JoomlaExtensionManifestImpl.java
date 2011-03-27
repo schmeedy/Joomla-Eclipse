@@ -6,13 +6,13 @@
  */
 package com.schmeedy.pdt.joomla.manifest.model.impl;
 
-import com.schmeedy.pdt.joomla.manifest.model.Administration;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
+import com.schmeedy.pdt.joomla.manifest.model.Administration;
 import com.schmeedy.pdt.joomla.manifest.model.InstallDb;
 import com.schmeedy.pdt.joomla.manifest.model.JoomlaExtensionManifest;
 import com.schmeedy.pdt.joomla.manifest.model.JoomlaExtensionManifestPackage;

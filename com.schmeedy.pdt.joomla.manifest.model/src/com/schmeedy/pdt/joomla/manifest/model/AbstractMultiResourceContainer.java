@@ -20,6 +20,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link com.schmeedy.pdt.joomla.manifest.model.AbstractMultiResourceContainer#getFileSets <em>File Sets</em>}</li>
  *   <li>{@link com.schmeedy.pdt.joomla.manifest.model.AbstractMultiResourceContainer#getLanguageSets <em>Language Sets</em>}</li>
  *   <li>{@link com.schmeedy.pdt.joomla.manifest.model.AbstractMultiResourceContainer#getMediaSets <em>Media Sets</em>}</li>
+ *   <li>{@link com.schmeedy.pdt.joomla.manifest.model.AbstractMultiResourceContainer#getAllResourceSets <em>All Resource Sets</em>}</li>
  * </ul>
  * </p>
  *
@@ -78,5 +79,21 @@ public interface AbstractMultiResourceContainer extends EObject {
 	 * @generated
 	 */
 	EList<MediaSet> getMediaSets();
+
+	/**
+	 * Returns the value of the '<em><b>All Resource Sets</b></em>' reference list.
+	 * The list contents are of type {@link com.schmeedy.pdt.joomla.manifest.model.AbstractResourceContainer}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>All Resource Sets</em>' reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>All Resource Sets</em>' reference list.
+	 * @see com.schmeedy.pdt.joomla.manifest.model.JoomlaExtensionManifestPackage#getAbstractMultiResourceContainer_AllResourceSets()
+	 * @model transient="true" derived="true"
+	 * @generated
+	 */
+	EList<AbstractResourceContainer> getAllResourceSets();
 
 } // AbstractMultiResourceContainer

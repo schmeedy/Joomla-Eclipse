@@ -6,17 +6,26 @@
  */
 package com.schmeedy.pdt.joomla.manifest.model.impl;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
+import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
+import org.eclipse.emf.common.notify.impl.AdapterImpl;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
 import com.schmeedy.pdt.joomla.manifest.model.AbstractMultiResourceContainer;
+import com.schmeedy.pdt.joomla.manifest.model.AbstractResourceContainer;
 import com.schmeedy.pdt.joomla.manifest.model.FileSet;
 import com.schmeedy.pdt.joomla.manifest.model.JoomlaExtensionManifestPackage;
 import com.schmeedy.pdt.joomla.manifest.model.LanguageSet;
@@ -32,6 +41,7 @@ import com.schmeedy.pdt.joomla.manifest.model.MediaSet;
  *   <li>{@link com.schmeedy.pdt.joomla.manifest.model.impl.AbstractMultiResourceContainerImpl#getFileSets <em>File Sets</em>}</li>
  *   <li>{@link com.schmeedy.pdt.joomla.manifest.model.impl.AbstractMultiResourceContainerImpl#getLanguageSets <em>Language Sets</em>}</li>
  *   <li>{@link com.schmeedy.pdt.joomla.manifest.model.impl.AbstractMultiResourceContainerImpl#getMediaSets <em>Media Sets</em>}</li>
+ *   <li>{@link com.schmeedy.pdt.joomla.manifest.model.impl.AbstractMultiResourceContainerImpl#getAllResourceSets <em>All Resource Sets</em>}</li>
  * </ul>
  * </p>
  *
@@ -69,12 +79,36 @@ public abstract class AbstractMultiResourceContainerImpl extends EObjectImpl imp
 	protected EList<MediaSet> mediaSets;
 
 	/**
+	 * The cached value of the '{@link #getAllResourceSets() <em>All Resource Sets</em>}' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @see #getAllResourceSets()
 	 * @generated
+	 * @ordered
+	 */
+	protected EList<AbstractResourceContainer> allResourceSets;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
 	 */
 	protected AbstractMultiResourceContainerImpl() {
-		super();
+		eAdapters().add(new AdapterImpl() {
+			@Override
+			public void notifyChanged(Notification msg) {
+				if (msg.isTouch()) {
+					return;
+				}
+				final int featureId = msg.getFeatureID(AbstractMultiResourceContainer.class);
+				if (featureId == JoomlaExtensionManifestPackage.ABSTRACT_MULTI_RESOURCE_CONTAINER__FILE_SETS || 
+					featureId == JoomlaExtensionManifestPackage.ABSTRACT_MULTI_RESOURCE_CONTAINER__MEDIA_SETS || 
+					featureId == JoomlaExtensionManifestPackage.ABSTRACT_MULTI_RESOURCE_CONTAINER__LANGUAGE_SETS) {
+					
+					updateAllResourceSetList();
+				}
+			}
+		});
 	}
 
 	/**
@@ -92,6 +126,7 @@ public abstract class AbstractMultiResourceContainerImpl extends EObjectImpl imp
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<FileSet> getFileSets() {
 		if (fileSets == null) {
 			fileSets = new EObjectContainmentEList<FileSet>(FileSet.class, this, JoomlaExtensionManifestPackage.ABSTRACT_MULTI_RESOURCE_CONTAINER__FILE_SETS);
@@ -104,6 +139,7 @@ public abstract class AbstractMultiResourceContainerImpl extends EObjectImpl imp
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<LanguageSet> getLanguageSets() {
 		if (languageSets == null) {
 			languageSets = new EObjectContainmentEList<LanguageSet>(LanguageSet.class, this, JoomlaExtensionManifestPackage.ABSTRACT_MULTI_RESOURCE_CONTAINER__LANGUAGE_SETS);
@@ -116,11 +152,82 @@ public abstract class AbstractMultiResourceContainerImpl extends EObjectImpl imp
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<MediaSet> getMediaSets() {
 		if (mediaSets == null) {
 			mediaSets = new EObjectContainmentEList<MediaSet>(MediaSet.class, this, JoomlaExtensionManifestPackage.ABSTRACT_MULTI_RESOURCE_CONTAINER__MEDIA_SETS);
 		}
 		return mediaSets;
+	}
+	
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EList<AbstractResourceContainer> getAllResourceSets() {
+		if (allResourceSets == null) {
+			allResourceSets = new EObjectResolvingEList<AbstractResourceContainer>(AbstractResourceContainer.class, this, JoomlaExtensionManifestPackage.ABSTRACT_MULTI_RESOURCE_CONTAINER__ALL_RESOURCE_SETS);
+		}
+		return allResourceSets;
+	}
+
+	/**
+	 * @generated NOT
+	 */
+	private void updateAllResourceSetList() {
+		final List<AbstractResourceContainer> newListContents = new ArrayList<AbstractResourceContainer>();
+		newListContents.addAll(getFileSets());
+		newListContents.addAll(getMediaSets());
+		newListContents.addAll(getLanguageSets());
+		
+		final List<AbstractResourceContainer> currentListContents = getAllResourceSets();
+
+		if (newListContents.isEmpty()) {
+			if (!currentListContents.isEmpty()) {
+				currentListContents.clear();
+			}
+			return;
+		} else if (currentListContents.isEmpty()) {
+			currentListContents.addAll(newListContents);
+			return;
+		}
+
+		final List<? extends AbstractResourceContainer> additions = new ArrayList<AbstractResourceContainer>(newListContents);
+		additions.removeAll(currentListContents);
+		final List<AbstractResourceContainer> subtractions = new ArrayList<AbstractResourceContainer>(currentListContents);
+		subtractions.removeAll(newListContents);
+
+		if (!subtractions.isEmpty()) {
+			if (subtractions.size() == currentListContents.size()) {
+				currentListContents.clear();
+			} else {
+				currentListContents.removeAll(subtractions);
+			}
+		}
+
+		if (!additions.isEmpty()) {
+			boolean additionsToTheEnd = true;
+			final Map<Integer, AbstractResourceContainer> positionMap = new HashMap<Integer, AbstractResourceContainer>();
+			for (final AbstractResourceContainer eObject : additions) {
+				final int additionIndex = newListContents.indexOf(eObject);
+				positionMap.put(additionIndex, eObject);
+				if (additionIndex < currentListContents.size()) {
+					additionsToTheEnd = false;
+				}
+			}
+
+			if (additionsToTheEnd) {
+				currentListContents.addAll(additions);
+			} else {
+				final List<Integer> indexes = new ArrayList<Integer>(positionMap.keySet());
+				Collections.sort(indexes);
+				for (final Integer idx : indexes) {
+					currentListContents.add(idx, positionMap.get(idx));
+				}
+			}
+		}
 	}
 
 	/**
@@ -155,6 +262,8 @@ public abstract class AbstractMultiResourceContainerImpl extends EObjectImpl imp
 				return getLanguageSets();
 			case JoomlaExtensionManifestPackage.ABSTRACT_MULTI_RESOURCE_CONTAINER__MEDIA_SETS:
 				return getMediaSets();
+			case JoomlaExtensionManifestPackage.ABSTRACT_MULTI_RESOURCE_CONTAINER__ALL_RESOURCE_SETS:
+				return getAllResourceSets();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -180,6 +289,10 @@ public abstract class AbstractMultiResourceContainerImpl extends EObjectImpl imp
 				getMediaSets().clear();
 				getMediaSets().addAll((Collection<? extends MediaSet>)newValue);
 				return;
+			case JoomlaExtensionManifestPackage.ABSTRACT_MULTI_RESOURCE_CONTAINER__ALL_RESOURCE_SETS:
+				getAllResourceSets().clear();
+				getAllResourceSets().addAll((Collection<? extends AbstractResourceContainer>)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -201,6 +314,9 @@ public abstract class AbstractMultiResourceContainerImpl extends EObjectImpl imp
 			case JoomlaExtensionManifestPackage.ABSTRACT_MULTI_RESOURCE_CONTAINER__MEDIA_SETS:
 				getMediaSets().clear();
 				return;
+			case JoomlaExtensionManifestPackage.ABSTRACT_MULTI_RESOURCE_CONTAINER__ALL_RESOURCE_SETS:
+				getAllResourceSets().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -219,6 +335,8 @@ public abstract class AbstractMultiResourceContainerImpl extends EObjectImpl imp
 				return languageSets != null && !languageSets.isEmpty();
 			case JoomlaExtensionManifestPackage.ABSTRACT_MULTI_RESOURCE_CONTAINER__MEDIA_SETS:
 				return mediaSets != null && !mediaSets.isEmpty();
+			case JoomlaExtensionManifestPackage.ABSTRACT_MULTI_RESOURCE_CONTAINER__ALL_RESOURCE_SETS:
+				return allResourceSets != null && !allResourceSets.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

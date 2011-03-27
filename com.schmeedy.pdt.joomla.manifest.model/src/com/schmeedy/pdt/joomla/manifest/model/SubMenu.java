@@ -7,7 +7,6 @@
 package com.schmeedy.pdt.joomla.manifest.model;
 
 import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EObject;
 
 /**

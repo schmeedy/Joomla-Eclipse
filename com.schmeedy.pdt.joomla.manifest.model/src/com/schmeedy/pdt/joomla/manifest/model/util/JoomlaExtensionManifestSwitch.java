@@ -6,7 +6,6 @@
  */
 package com.schmeedy.pdt.joomla.manifest.model.util;
 
-import com.schmeedy.pdt.joomla.manifest.model.*;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EClass;
@@ -15,6 +14,7 @@ import org.eclipse.emf.ecore.EObject;
 import com.schmeedy.pdt.joomla.manifest.model.AbstractMultiResourceContainer;
 import com.schmeedy.pdt.joomla.manifest.model.AbstractResource;
 import com.schmeedy.pdt.joomla.manifest.model.AbstractResourceContainer;
+import com.schmeedy.pdt.joomla.manifest.model.Administration;
 import com.schmeedy.pdt.joomla.manifest.model.FileResource;
 import com.schmeedy.pdt.joomla.manifest.model.FileSet;
 import com.schmeedy.pdt.joomla.manifest.model.FolderResource;
@@ -24,8 +24,10 @@ import com.schmeedy.pdt.joomla.manifest.model.JoomlaExtensionManifestPackage;
 import com.schmeedy.pdt.joomla.manifest.model.LanguageResource;
 import com.schmeedy.pdt.joomla.manifest.model.LanguageSet;
 import com.schmeedy.pdt.joomla.manifest.model.MediaSet;
+import com.schmeedy.pdt.joomla.manifest.model.MenuItem;
 import com.schmeedy.pdt.joomla.manifest.model.SqlFileSet;
 import com.schmeedy.pdt.joomla.manifest.model.SqlResource;
+import com.schmeedy.pdt.joomla.manifest.model.SubMenu;
 import com.schmeedy.pdt.joomla.manifest.model.UninstallDb;
 
 /**
