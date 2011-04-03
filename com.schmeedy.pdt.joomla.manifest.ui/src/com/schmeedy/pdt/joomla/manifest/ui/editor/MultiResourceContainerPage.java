@@ -255,6 +255,6 @@ class MultiResourceContainerPage extends FormPage {
 			return element == null ? null : ((AbstractResource) element).getPath();
 		}
 		
-	} 
+	}
 
 }

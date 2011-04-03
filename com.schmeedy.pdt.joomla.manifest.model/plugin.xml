@@ -27,14 +27,15 @@
          point="org.eclipse.core.contenttype.contentTypes">
       <content-type
             base-type="org.eclipse.core.runtime.xml"
+            file-extensions="xml"
             id="com.schmeedy.pdt.joomla.manifest.model.ExtensionManifest"
             name="Joomla! Extension Manifest"
-            priority="normal">
+            priority="low">
       </content-type>
       <content-type
             base-type="com.schmeedy.pdt.joomla.manifest.model.ExtensionManifest"
             id="com.schmeedy.pdt.joomla.manifest.model.ComponentExtensionManifest"
-            name="Joomla! Component Extension Manifest"
+            name="Joomla! Component Manifest"
             priority="normal">
          <describer
                class="org.eclipse.core.runtime.content.XMLRootElementContentDescriber2">

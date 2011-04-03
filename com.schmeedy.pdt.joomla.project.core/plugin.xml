@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         id="joomla.extension"
+         point="org.eclipse.core.resources.natures">
+      <runtime>
+         <run
+               class="com.schmeedy.pdt.joomla.project.core.nature.JoomlaExtensionProjectNature">
+         </run>
+      </runtime>
+   </extension>
+   
+</plugin>
