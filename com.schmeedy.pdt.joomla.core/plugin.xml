@@ -12,7 +12,7 @@
 
    <extension point="org.eclipse.emf.ecore.generated_package">
       <package
-            uri="http://schmeedy.com/pdt/joomla/server-configuration"
+            uri="http://schmeedy.com/pdt/joomla/server"
             class="com.schmeedy.pdt.joomla.core.server.cfg.JoomlaServerConfigurationPackage"
             genModel="model/server-configuration.genmodel"/>
    </extension>

@@ -48,12 +48,15 @@ import com.schmeedy.pdt.service.registry.ServiceRegistry;
 
 public class JoomlaServersPreferencePage extends PreferencePage implements IWorkbenchPreferencePage {
 
+	private IJoomlaServerManager serverManager;
+
 	private DataBindingContext dataBindingContext;
 	private AvailableServers availableServers;
 	private TableViewer serversTableViewer;
 	private Button newButton;
 	private Button removeButton;
 	private Button editButton;
+	private boolean modelModified;
 	
 	public JoomlaServersPreferencePage() {
 		setDescription("Joomla! Servers Management");
@@ -63,8 +66,9 @@ public class JoomlaServersPreferencePage extends PreferencePage implements IWork
 	
 	@Override
 	public void init(IWorkbench workbench) {
-		final IJoomlaServerManager serverManager = ServiceRegistry.getInstance().getService(IJoomlaServerManager.class);
+		serverManager = ServiceRegistry.getInstance().getService(IJoomlaServerManager.class);
 		availableServers = serverManager.getAvailableServers();
+		modelModified = false;
 	}
 	
 	@Override
@@ -108,7 +112,7 @@ public class JoomlaServersPreferencePage extends PreferencePage implements IWork
 		newButton.setText("New");
 		newButton.addSelectionListener(new SelectionAdapter() {
 			@Override
-			public void widgetSelected(SelectionEvent arg0) {
+			public void widgetSelected(SelectionEvent event) {
 				final LocalJoomlaServer server = JoomlaServerConfigurationFactory.eINSTANCE.createLocalJoomlaServer();
 				server.setName(getNewJoomlaServerDefaultName());
 				server.setBaseUrl("http://localhost/joomla");
@@ -118,6 +122,8 @@ public class JoomlaServersPreferencePage extends PreferencePage implements IWork
 				final int result = dialog.open();
 				if (result == Window.CANCEL) {
 					availableServers.getServers().remove(server);
+				} else {
+					modelModified = true;
 				}
 			}
 		});
@@ -131,16 +137,18 @@ public class JoomlaServersPreferencePage extends PreferencePage implements IWork
 			public void widgetSelected(SelectionEvent e) {
 				if (!serversTableViewer.getSelection().isEmpty()) {
 					final StructuredSelection selection = (StructuredSelection) serversTableViewer.getSelection();
-					final LocalJoomlaServer toEdit = (LocalJoomlaServer) selection.getFirstElement();
-					final LocalJoomlaServer original = EcoreUtil.copy(toEdit);
+					final LocalJoomlaServer edited = (LocalJoomlaServer) selection.getFirstElement();
+					final LocalJoomlaServer original = EcoreUtil.copy(edited);
 					
-					final EditLocalJoomlaServerDialog dialog = new EditLocalJoomlaServerDialog(getShell(), toEdit, true);
+					final EditLocalJoomlaServerDialog dialog = new EditLocalJoomlaServerDialog(getShell(), edited, true);
 					final int result = dialog.open();
 					if (result == Window.CANCEL) {
 						final EList<LocalJoomlaServer> servers = availableServers.getServers();
-						final int idx = servers.indexOf(toEdit);
+						final int idx = servers.indexOf(edited);
 						servers.add(idx, original);
-						servers.remove(toEdit);
+						servers.remove(edited);
+					} else {
+						modelModified = modelModified || !EcoreUtil.equals(edited, original);
 					}
 				}
 			}
@@ -157,6 +165,7 @@ public class JoomlaServersPreferencePage extends PreferencePage implements IWork
 					final StructuredSelection selection = (StructuredSelection) serversTableViewer.getSelection();
 					final LocalJoomlaServer toRemove = (LocalJoomlaServer) selection.getFirstElement();
 					availableServers.getServers().remove(toRemove);
+					modelModified = true;
 				}
 			}
 		});
@@ -179,6 +188,14 @@ public class JoomlaServersPreferencePage extends PreferencePage implements IWork
 			candidate = baseName + " (" + (i++) + ")"; 
 		}
 		return candidate;
+	}
+	
+	@Override
+	public boolean performOk() {
+		if (modelModified) {
+			serverManager.updateAvailableServers(availableServers);
+		}
+		return true;
 	}
 	
 	@Override

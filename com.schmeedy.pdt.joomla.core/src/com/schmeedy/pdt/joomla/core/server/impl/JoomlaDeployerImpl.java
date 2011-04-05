@@ -38,13 +38,12 @@ public class JoomlaDeployerImpl implements IJoomlaDeployer {
 	public DeploymentDescriptor getDeploymentDescriptor() {
 		if (deploymentDescriptor == null) {
 			final ResourceSet resourceSet = new ResourceSetImpl();
-			final File descriptorFile = new File(descriptorResourceUri.opaquePart());
+			final File descriptorFile = new File(descriptorResourceUri.toFileString());
 			final Resource descriptorResource;
 			descriptorResource = descriptorFile.exists() ? resourceSet.getResource(descriptorResourceUri, true) : resourceSet.createResource(descriptorResourceUri);
 			if (descriptorResource.getContents().isEmpty()) {
 				deploymentDescriptor = JoomlaServerConfigurationFactory.eINSTANCE.createDeploymentDescriptor();
 				descriptorResource.getContents().add(deploymentDescriptor);
-				saveDescriptor();
 			} else {
 				deploymentDescriptor = (DeploymentDescriptor) descriptorResource.getContents().get(0);
 			}
@@ -52,7 +51,7 @@ public class JoomlaDeployerImpl implements IJoomlaDeployer {
 		return deploymentDescriptor;
 	}
 	
-	private void saveDescriptor() {
+	void saveDescriptor() {
 		try {
 			deploymentDescriptor.eResource().save(Collections.singletonMap(XMLResource.OPTION_ENCODING, "UTF-8"));
 		} catch (final IOException e) {
