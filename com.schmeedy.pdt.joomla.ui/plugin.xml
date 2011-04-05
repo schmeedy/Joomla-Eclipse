@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="org.eclipse.ui.newWizards">
+      <category
+            id="com.schmeedy.pdt.joomla.ui"
+            name="Joomla!">
+      </category>
+      <wizard
+            category="com.schmeedy.pdt.joomla.ui"
+            class="com.schmeedy.pdt.joomla.ui.project.wizard.NewExtensionProjectWizard"
+            id="com.schmeedy.pdt.joomla.ui.NewExtensionProject"
+            name="Joomla! Extension Project"
+            project="true">
+      </wizard>
+   </extension> 
+   <extension
+         point="org.eclipse.ui.preferencePages">
+      <page
+            category="org.eclipse.php.ui.preferences.PHPBasePreferencePage"
+            class="com.schmeedy.pdt.joomla.ui.preferences.JoomlaServersPreferencePage"
+            id="com.schmeedy.pdt.joomla.server.ui.preferences.JoomlaServersPreferencePage"
+            name="Joomla! Servers">
+      </page>
+   </extension>
+ </plugin>

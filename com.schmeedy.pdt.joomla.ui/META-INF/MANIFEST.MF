@@ -1,0 +1,26 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Joomla! Server UI
+Bundle-SymbolicName: com.schmeedy.pdt.joomla.ui;singleton:=true
+Bundle-Version: 0.1.0.qualifier
+Bundle-Vendor: schmeedy.com
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Require-Bundle: com.schmeedy.pdt.joomla.core;bundle-version="0.1.0",
+ com.schmeedy.pdt.joomla.manifest.model;bundle-version="0.1.0",
+ com.schmeedy.pdt.joomla.common.ui;bundle-version="0.1.0",
+ com.schmeedy.pdt.service.registry;bundle-version="0.1.0",
+ org.eclipse.core.runtime;bundle-version="3.6.0",
+ org.eclipse.core.resources;bundle-version="3.6.0",
+ org.eclipse.ui;bundle-version="3.6.1",
+ org.eclipse.php.ui;bundle-version="2.2.1",
+ org.eclipse.dltk.core;bundle-version="2.0.1",
+ org.eclipse.dltk.ui;bundle-version="2.0.0",
+ org.eclipse.core.databinding,
+ org.eclipse.core.databinding.beans,
+ org.eclipse.core.databinding.observable,
+ org.eclipse.core.databinding.property,
+ org.eclipse.jface.databinding,
+ com.ibm.icu,
+ org.eclipse.emf.databinding
+Bundle-ActivationPolicy: lazy
+Bundle-Activator: com.schmeedy.pdt.joomla.ui.JoomlaUiPlugin

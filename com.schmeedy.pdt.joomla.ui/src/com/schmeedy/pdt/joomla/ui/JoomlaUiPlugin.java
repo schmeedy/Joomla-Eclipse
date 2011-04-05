@@ -1,24 +1,18 @@
-package com.schmeedy.pdt.joomla.manifest.ui;
+package com.schmeedy.pdt.joomla.ui;
 
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
-import org.eclipse.jface.resource.ImageDescriptor;
-import org.eclipse.jface.resource.ImageRegistry;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
 
-public class JoomlaExtensionManifestUiPlugin extends AbstractUIPlugin {
+public class JoomlaUiPlugin extends AbstractUIPlugin {
+
+	public static final String BUNDLE_ID = "com.schmeedy.pdt.joomla.ui";
 	
-	public static final String BUNDLE_ID = "com.schmeedy.pdt.joomla.manifest.ui";
+	private static JoomlaUiPlugin INSTANCE;
 	
-	public static final String IMG_FILE_SET = BUNDLE_ID + ".fileSet";
-	public static final String IMG_MEDIA_SET = BUNDLE_ID + ".mediaSet";
-	public static final String IMG_LANGUAGE_SET = BUNDLE_ID + ".languageSet";
-	
-	private static JoomlaExtensionManifestUiPlugin INSTANCE;
-	
-	public static JoomlaExtensionManifestUiPlugin getInstance() {
+	public static JoomlaUiPlugin getInstance() {
 		return INSTANCE;
 	}
 	
@@ -34,13 +28,6 @@ public class JoomlaExtensionManifestUiPlugin extends AbstractUIPlugin {
 	
 	public Image getImage(String symbolicName) {
 		return getImageRegistry().get(symbolicName);
-	}
-	
-	@Override
-	protected void initializeImageRegistry(ImageRegistry reg) {
-		reg.put(IMG_FILE_SET, ImageDescriptor.createFromFile(JoomlaExtensionManifestUiPlugin.class, "/icons/documents.png").createImage());
-		reg.put(IMG_MEDIA_SET, ImageDescriptor.createFromFile(JoomlaExtensionManifestUiPlugin.class, "/icons/image.png").createImage());
-		reg.put(IMG_LANGUAGE_SET, ImageDescriptor.createFromFile(JoomlaExtensionManifestUiPlugin.class, "/icons/language.png").createImage());
 	}
 	
 	public void logError(String message, Throwable throwable) {

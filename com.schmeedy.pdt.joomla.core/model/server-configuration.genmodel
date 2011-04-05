@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/com.schmeedy.pdt.joomla.core/src"
+    modelPluginID="com.schmeedy.pdt.joomla.core" modelName="Server-configuration"
+    importerID="org.eclipse.emf.importer.ecore" complianceLevel="6.0" copyrightFields="false">
+  <foreignModel>server-configuration.ecore</foreignModel>
+  <genPackages prefix="JoomlaServerConfiguration" basePackage="com.schmeedy.pdt.joomla.core.server"
+      disposableProviderFactory="true" ecorePackage="server-configuration.ecore#/">
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="server-configuration.ecore#//MajorJoomlaVersion">
+      <genEnumLiterals ecoreEnumLiteral="server-configuration.ecore#//MajorJoomlaVersion/ONE_FIVE"/>
+      <genEnumLiterals ecoreEnumLiteral="server-configuration.ecore#//MajorJoomlaVersion/ONE_SIX"/>
+    </genEnums>
+    <genClasses ecoreClass="server-configuration.ecore#//AvailableServers">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference server-configuration.ecore#//AvailableServers/servers"/>
+    </genClasses>
+    <genClasses ecoreClass="server-configuration.ecore#//LocalJoomlaServer">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute server-configuration.ecore#//LocalJoomlaServer/id"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute server-configuration.ecore#//LocalJoomlaServer/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute server-configuration.ecore#//LocalJoomlaServer/majorVersion"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute server-configuration.ecore#//LocalJoomlaServer/exactVersion"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute server-configuration.ecore#//LocalJoomlaServer/installDir"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute server-configuration.ecore#//LocalJoomlaServer/baseUrl"/>
+    </genClasses>
+    <genClasses ecoreClass="server-configuration.ecore#//DeploymentDescriptor">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference server-configuration.ecore#//DeploymentDescriptor/runtimes"/>
+    </genClasses>
+    <genClasses ecoreClass="server-configuration.ecore#//DeploymentRuntime">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference server-configuration.ecore#//DeploymentRuntime/server"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference server-configuration.ecore#//DeploymentRuntime/deployedExtensions"/>
+    </genClasses>
+    <genClasses ecoreClass="server-configuration.ecore#//JoomlaExtensionDeployment">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference server-configuration.ecore#//JoomlaExtensionDeployment/runtime"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>

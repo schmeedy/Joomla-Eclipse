@@ -1,0 +1,12 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Joomla! Common UI
+Bundle-SymbolicName: com.schmeedy.pdt.joomla.common.ui
+Bundle-Version: 0.1.0.qualifier
+Bundle-Activator: com.schmeedy.pdt.joomla.common.ui.JoomlaCommonUiPlugin
+Bundle-Vendor: SCHMEEDY
+Require-Bundle: org.eclipse.core.runtime,
+ org.eclipse.ui;bundle-version="3.6.1"
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-ActivationPolicy: lazy
+Export-Package: com.schmeedy.pdt.joomla.common.ui

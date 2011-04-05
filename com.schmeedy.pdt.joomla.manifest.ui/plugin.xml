@@ -7,7 +7,7 @@
             class="com.schmeedy.pdt.joomla.manifest.ui.editor.JoomlaExtensionManifestEditor"
             contributorClass="org.eclipse.emf.edit.ui.action.EditingDomainActionBarContributor"
             default="falsee"
-            icon="icons/joomla16.png"
+            icon="platform:/plugin/com.schmeedy.pdt.joomla.common.ui/icons/obj16/joomla.png"
             id="com.schmeedy.pdt.joomla.manifest.ui.ExtensionManifestEditor"
             name="Joomla! Extension Manifest Editor">
          <contentTypeBinding

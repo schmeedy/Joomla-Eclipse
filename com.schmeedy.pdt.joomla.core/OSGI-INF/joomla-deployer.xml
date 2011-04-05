@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0" activate="activate" deactivate="deactivate" name="com.schmeedy.pdt.joomla.core.server.deployer">
+   <implementation class="com.schmeedy.pdt.joomla.core.server.impl.JoomlaDeployerImpl"/>
+   <service>
+      <provide interface="com.schmeedy.pdt.joomla.core.server.IJoomlaDeployer"/>
+   </service>
+</scr:component>
