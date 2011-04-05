@@ -1,5 +1,8 @@
 package com.schmeedy.pdt.joomla.ui.preferences;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import org.eclipse.core.databinding.DataBindingContext;
 import org.eclipse.core.databinding.UpdateValueStrategy;
 import org.eclipse.core.databinding.conversion.Converter;
@@ -7,8 +10,10 @@ import org.eclipse.core.databinding.observable.Realm;
 import org.eclipse.core.databinding.observable.list.IObservableList;
 import org.eclipse.core.databinding.observable.map.IObservableMap;
 import org.eclipse.core.databinding.observable.value.IObservableValue;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.databinding.EMFObservables;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jface.databinding.swt.SWTObservables;
 import org.eclipse.jface.databinding.viewers.ObservableListContentProvider;
 import org.eclipse.jface.databinding.viewers.ObservableMapLabelProvider;
@@ -18,6 +23,7 @@ import org.eclipse.jface.preference.PreferencePage;
 import org.eclipse.jface.viewers.ColumnWeightData;
 import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.jface.viewers.TableViewer;
+import org.eclipse.jface.window.Window;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
@@ -104,9 +110,15 @@ public class JoomlaServersPreferencePage extends PreferencePage implements IWork
 			@Override
 			public void widgetSelected(SelectionEvent arg0) {
 				final LocalJoomlaServer server = JoomlaServerConfigurationFactory.eINSTANCE.createLocalJoomlaServer();
-				server.setName("Joomla! 1.6 server");
+				server.setName(getNewJoomlaServerDefaultName());
 				server.setBaseUrl("http://localhost/joomla");
 				availableServers.getServers().add(server);
+				
+				final EditLocalJoomlaServerDialog dialog = new EditLocalJoomlaServerDialog(getShell(), server, false);
+				final int result = dialog.open();
+				if (result == Window.CANCEL) {
+					availableServers.getServers().remove(server);
+				}
 			}
 		});
 		
@@ -114,6 +126,25 @@ public class JoomlaServersPreferencePage extends PreferencePage implements IWork
 		editButton.setEnabled(false);
 		editButton.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, false, false, 1, 1));
 		editButton.setText("Edit");
+		editButton.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				if (!serversTableViewer.getSelection().isEmpty()) {
+					final StructuredSelection selection = (StructuredSelection) serversTableViewer.getSelection();
+					final LocalJoomlaServer toEdit = (LocalJoomlaServer) selection.getFirstElement();
+					final LocalJoomlaServer original = EcoreUtil.copy(toEdit);
+					
+					final EditLocalJoomlaServerDialog dialog = new EditLocalJoomlaServerDialog(getShell(), toEdit, true);
+					final int result = dialog.open();
+					if (result == Window.CANCEL) {
+						final EList<LocalJoomlaServer> servers = availableServers.getServers();
+						final int idx = servers.indexOf(toEdit);
+						servers.add(idx, original);
+						servers.remove(toEdit);
+					}
+				}
+			}
+		});
 		
 		removeButton = new Button(buttonComposite, SWT.NONE);
 		removeButton.setEnabled(false);
@@ -134,6 +165,20 @@ public class JoomlaServersPreferencePage extends PreferencePage implements IWork
 	
 		applyDialogFont(contentComposite);
 		return contentComposite;
+	}
+	
+	private String getNewJoomlaServerDefaultName() {
+		final String baseName = "Development Joomla! Server";
+		final Set<String> names = new HashSet<String>();
+		for (final LocalJoomlaServer server: availableServers.getServers()) {
+			names.add(server.getName());
+		}
+		String candidate = baseName;
+		int i = 1;
+		while (names.contains(candidate)) {
+			candidate = baseName + " (" + (i++) + ")"; 
+		}
+		return candidate;
 	}
 	
 	@Override
