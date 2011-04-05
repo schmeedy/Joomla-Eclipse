@@ -80,10 +80,10 @@ public class LocalJoomlaServerImpl extends EObjectImpl implements LocalJoomlaSer
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getMajorVersion()
-	 * @generated
+	 * @generated NOT
 	 * @ordered
 	 */
-	protected static final MajorJoomlaVersion MAJOR_VERSION_EDEFAULT = MajorJoomlaVersion.ONE_FIVE;
+	protected static final MajorJoomlaVersion MAJOR_VERSION_EDEFAULT = null;
 
 	/**
 	 * The cached value of the '{@link #getMajorVersion() <em>Major Version</em>}' attribute.
@@ -191,7 +191,7 @@ public class LocalJoomlaServerImpl extends EObjectImpl implements LocalJoomlaSer
 	 */
 	@Override
 	public void setId(String newId) {
-		String oldId = id;
+		final String oldId = id;
 		id = newId;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, JoomlaServerConfigurationPackage.LOCAL_JOOMLA_SERVER__ID, oldId, id));
@@ -214,7 +214,7 @@ public class LocalJoomlaServerImpl extends EObjectImpl implements LocalJoomlaSer
 	 */
 	@Override
 	public void setName(String newName) {
-		String oldName = name;
+		final String oldName = name;
 		name = newName;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, JoomlaServerConfigurationPackage.LOCAL_JOOMLA_SERVER__NAME, oldName, name));
@@ -237,7 +237,7 @@ public class LocalJoomlaServerImpl extends EObjectImpl implements LocalJoomlaSer
 	 */
 	@Override
 	public void setMajorVersion(MajorJoomlaVersion newMajorVersion) {
-		MajorJoomlaVersion oldMajorVersion = majorVersion;
+		final MajorJoomlaVersion oldMajorVersion = majorVersion;
 		majorVersion = newMajorVersion == null ? MAJOR_VERSION_EDEFAULT : newMajorVersion;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, JoomlaServerConfigurationPackage.LOCAL_JOOMLA_SERVER__MAJOR_VERSION, oldMajorVersion, majorVersion));
@@ -260,7 +260,7 @@ public class LocalJoomlaServerImpl extends EObjectImpl implements LocalJoomlaSer
 	 */
 	@Override
 	public void setExactVersion(String newExactVersion) {
-		String oldExactVersion = exactVersion;
+		final String oldExactVersion = exactVersion;
 		exactVersion = newExactVersion;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, JoomlaServerConfigurationPackage.LOCAL_JOOMLA_SERVER__EXACT_VERSION, oldExactVersion, exactVersion));
@@ -283,7 +283,7 @@ public class LocalJoomlaServerImpl extends EObjectImpl implements LocalJoomlaSer
 	 */
 	@Override
 	public void setInstallDir(String newInstallDir) {
-		String oldInstallDir = installDir;
+		final String oldInstallDir = installDir;
 		installDir = newInstallDir;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, JoomlaServerConfigurationPackage.LOCAL_JOOMLA_SERVER__INSTALL_DIR, oldInstallDir, installDir));
@@ -306,7 +306,7 @@ public class LocalJoomlaServerImpl extends EObjectImpl implements LocalJoomlaSer
 	 */
 	@Override
 	public void setBaseUrl(String newBaseUrl) {
-		String oldBaseUrl = baseUrl;
+		final String oldBaseUrl = baseUrl;
 		baseUrl = newBaseUrl;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, JoomlaServerConfigurationPackage.LOCAL_JOOMLA_SERVER__BASE_URL, oldBaseUrl, baseUrl));
@@ -429,7 +429,7 @@ public class LocalJoomlaServerImpl extends EObjectImpl implements LocalJoomlaSer
 	public String toString() {
 		if (eIsProxy()) return super.toString();
 
-		StringBuffer result = new StringBuffer(super.toString());
+		final StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (id: ");
 		result.append(id);
 		result.append(", name: ");
