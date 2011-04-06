@@ -6,26 +6,22 @@
  */
 package com.schmeedy.pdt.joomla.core.server.cfg.impl;
 
-import com.schmeedy.pdt.joomla.core.server.cfg.DeploymentRuntime;
-import com.schmeedy.pdt.joomla.core.server.cfg.JoomlaExtensionDeployment;
-import com.schmeedy.pdt.joomla.core.server.cfg.JoomlaServerConfigurationPackage;
-import com.schmeedy.pdt.joomla.core.server.cfg.LocalJoomlaServer;
-
 import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
-
 import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
-
 import org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
+
+import com.schmeedy.pdt.joomla.core.server.cfg.DeploymentRuntime;
+import com.schmeedy.pdt.joomla.core.server.cfg.JoomlaExtensionDeployment;
+import com.schmeedy.pdt.joomla.core.server.cfg.JoomlaServerConfigurationPackage;
+import com.schmeedy.pdt.joomla.core.server.cfg.LocalJoomlaServer;
 
 /**
  * <!-- begin-user-doc -->
@@ -86,6 +82,7 @@ public class DeploymentRuntimeImpl extends EObjectImpl implements DeploymentRunt
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public LocalJoomlaServer getServer() {
 		return server;
 	}
@@ -96,10 +93,10 @@ public class DeploymentRuntimeImpl extends EObjectImpl implements DeploymentRunt
 	 * @generated
 	 */
 	public NotificationChain basicSetServer(LocalJoomlaServer newServer, NotificationChain msgs) {
-		LocalJoomlaServer oldServer = server;
+		final LocalJoomlaServer oldServer = server;
 		server = newServer;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, JoomlaServerConfigurationPackage.DEPLOYMENT_RUNTIME__SERVER, oldServer, newServer);
+			final ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, JoomlaServerConfigurationPackage.DEPLOYMENT_RUNTIME__SERVER, oldServer, newServer);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -110,6 +107,7 @@ public class DeploymentRuntimeImpl extends EObjectImpl implements DeploymentRunt
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setServer(LocalJoomlaServer newServer) {
 		if (newServer != server) {
 			NotificationChain msgs = null;
@@ -129,6 +127,7 @@ public class DeploymentRuntimeImpl extends EObjectImpl implements DeploymentRunt
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<JoomlaExtensionDeployment> getDeployedExtensions() {
 		if (deployedExtensions == null) {
 			deployedExtensions = new EObjectWithInverseResolvingEList<JoomlaExtensionDeployment>(JoomlaExtensionDeployment.class, this, JoomlaServerConfigurationPackage.DEPLOYMENT_RUNTIME__DEPLOYED_EXTENSIONS, JoomlaServerConfigurationPackage.JOOMLA_EXTENSION_DEPLOYMENT__RUNTIME);

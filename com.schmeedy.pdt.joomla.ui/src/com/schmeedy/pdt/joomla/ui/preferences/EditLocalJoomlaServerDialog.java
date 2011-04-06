@@ -73,8 +73,10 @@ public class EditLocalJoomlaServerDialog extends TitleAreaDialog {
 		
 		if (edit) {
 			setTitle("Edit Joomla! Server Configuration");
+			getShell().setText("Edit Joomla! Server");
 		} else {
 			setTitle("New Joomla! Server Configuration");
+			getShell().setText("New Joomla! Server");
 		}
 		setMessage(initialMessage);
 		

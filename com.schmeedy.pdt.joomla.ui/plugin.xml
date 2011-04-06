@@ -2,6 +2,21 @@
 <?eclipse version="3.4"?>
 <plugin>
    <extension
+         point="org.eclipse.ui.views">
+      <category
+            id="com.schmeedy.pdt.joomla.ui.JoomlaViewCategory"
+            name="Joomla!">
+      </category>
+      <view
+            category="com.schmeedy.pdt.joomla.ui.JoomlaViewCategory"
+            class="com.schmeedy.pdt.joomla.ui.server.view.JoomlaServersView"
+            icon="platform:/plugin/com.schmeedy.pdt.joomla.common.ui/icons/obj16/joomla.png"
+            id="com.schmeedy.pdt.joomla.ui.JoomlaServers"
+            name="Joomla! Servers"
+            restorable="true">
+      </view>
+   </extension>
+   <extension
          point="org.eclipse.ui.newWizards">
       <category
             id="com.schmeedy.pdt.joomla.ui"
@@ -20,8 +35,19 @@
       <page
             category="org.eclipse.php.ui.preferences.PHPBasePreferencePage"
             class="com.schmeedy.pdt.joomla.ui.preferences.JoomlaServersPreferencePage"
-            id="com.schmeedy.pdt.joomla.server.ui.preferences.JoomlaServersPreferencePage"
+            id="com.schmeedy.pdt.joomla.ui.JoomlaServersPreferencePage"
             name="Joomla! Servers">
       </page>
+   </extension>
+   <extension
+         point="org.eclipse.ui.perspectiveExtensions">
+      <perspectiveExtension
+            targetID="org.eclipse.php.perspective">
+         <view
+               id="com.schmeedy.pdt.joomla.ui.JoomlaServers"
+               relationship="stack"
+               relative="org.eclipse.ui.console.ConsoleView">
+         </view>
+      </perspectiveExtension>
    </extension>
  </plugin>
