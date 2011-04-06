@@ -50,4 +50,38 @@
          </view>
       </perspectiveExtension>
    </extension>
+   <extension
+         point="org.eclipse.ui.menus">
+      <menuContribution
+            allPopups="false"
+            locationURI="popup:com.schmeedy.pdt.joomla.ui.JoomlaServers">
+         <command
+               commandId="org.eclipse.ui.edit.delete"
+               label="Delete"
+               style="push">
+         </command>
+      </menuContribution>
+   </extension>
+   <extension
+         point="org.eclipse.ui.handlers">
+      <handler
+            class="com.schmeedy.pdt.joomla.ui.server.handler.DeleteDeploymentRuntimeHandler"
+            commandId="org.eclipse.ui.edit.delete">
+         <activeWhen>
+         	<and>
+         	  <with
+         	  		variable="selection">
+     	  		<count
+                  value="1">
+                </count>
+         	  	<iterate>	
+	              <instanceof
+	                    value="com.schmeedy.pdt.joomla.core.server.cfg.DeploymentRuntime">
+	              </instanceof>
+	            </iterate>
+              </with>
+	      	</and>
+         </activeWhen>        
+      </handler>
+   </extension>
  </plugin>

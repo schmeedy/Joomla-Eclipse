@@ -79,6 +79,8 @@ public class JoomlaServersView extends ViewPart {
 			final IObservableList inputObservable = EMFProperties.list(JoomlaServerConfigurationPackage.Literals.DEPLOYMENT_DESCRIPTOR__RUNTIMES).observe(deploymentDescriptor);
 			deploymentTreeViewer.setInput(inputObservable);
 		}
+		
+		getSite().setSelectionProvider(deploymentTreeViewer);
 	}
 
 	@Override
