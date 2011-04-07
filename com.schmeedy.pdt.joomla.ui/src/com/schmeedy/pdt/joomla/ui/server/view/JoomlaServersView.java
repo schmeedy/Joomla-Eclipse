@@ -133,7 +133,7 @@ public class JoomlaServersView extends ViewPart {
 			if (target instanceof IObservableList) {
 				return (IObservable) target;
 			} else if (target instanceof DeploymentRuntime) {
-				return deployedExtensionsProperty.observe(deployedExtensionsProperty);
+				return deployedExtensionsProperty.observe(target);
 			}
 			return null;
 		}
