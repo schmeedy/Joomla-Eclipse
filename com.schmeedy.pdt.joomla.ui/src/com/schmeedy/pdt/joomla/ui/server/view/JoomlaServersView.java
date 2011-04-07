@@ -12,6 +12,8 @@ import org.eclipse.core.databinding.observable.set.IObservableSet;
 import org.eclipse.emf.databinding.EMFProperties;
 import org.eclipse.emf.databinding.FeaturePath;
 import org.eclipse.emf.databinding.IEMFListProperty;
+import org.eclipse.jface.action.GroupMarker;
+import org.eclipse.jface.action.MenuManager;
 import org.eclipse.jface.databinding.viewers.ObservableListTreeContentProvider;
 import org.eclipse.jface.databinding.viewers.TreeStructureAdvisor;
 import org.eclipse.jface.viewers.LabelProviderChangedEvent;
@@ -24,7 +26,10 @@ import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Control;
+import org.eclipse.swt.widgets.Menu;
 import org.eclipse.swt.widgets.Tree;
+import org.eclipse.ui.IWorkbenchActionConstants;
 import org.eclipse.ui.part.ViewPart;
 
 import com.schmeedy.pdt.joomla.common.ui.JoomlaCommonUiPlugin;
@@ -78,6 +83,16 @@ public class JoomlaServersView extends ViewPart {
 			
 			final IObservableList inputObservable = EMFProperties.list(JoomlaServerConfigurationPackage.Literals.DEPLOYMENT_DESCRIPTOR__RUNTIMES).observe(deploymentDescriptor);
 			deploymentTreeViewer.setInput(inputObservable);
+		}
+		
+		{ // initialize context menu
+			final MenuManager menuManager = new MenuManager();
+			menuManager.add(new GroupMarker(IWorkbenchActionConstants.MB_ADDITIONS));
+			
+			final Control control = deploymentTreeViewer.getControl();
+			final Menu menu = menuManager.createContextMenu(control);
+			control.setMenu(menu);
+			getViewSite().registerContextMenu(menuManager, deploymentTreeViewer);
 		}
 		
 		getSite().setSelectionProvider(deploymentTreeViewer);
