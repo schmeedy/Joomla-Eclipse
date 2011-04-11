@@ -6,6 +6,13 @@
  */
 package com.schmeedy.pdt.joomla.core.server.cfg.impl;
 
+import org.eclipse.emf.ecore.EAttribute;
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EEnum;
+import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.EReference;
+import org.eclipse.emf.ecore.impl.EPackageImpl;
+
 import com.schmeedy.pdt.joomla.core.server.cfg.AvailableServers;
 import com.schmeedy.pdt.joomla.core.server.cfg.DeploymentDescriptor;
 import com.schmeedy.pdt.joomla.core.server.cfg.DeploymentRuntime;
@@ -14,14 +21,6 @@ import com.schmeedy.pdt.joomla.core.server.cfg.JoomlaServerConfigurationFactory;
 import com.schmeedy.pdt.joomla.core.server.cfg.JoomlaServerConfigurationPackage;
 import com.schmeedy.pdt.joomla.core.server.cfg.LocalJoomlaServer;
 import com.schmeedy.pdt.joomla.core.server.cfg.MajorJoomlaVersion;
-
-import org.eclipse.emf.ecore.EAttribute;
-import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EEnum;
-import org.eclipse.emf.ecore.EPackage;
-import org.eclipse.emf.ecore.EReference;
-
-import org.eclipse.emf.ecore.impl.EPackageImpl;
 
 /**
  * <!-- begin-user-doc -->

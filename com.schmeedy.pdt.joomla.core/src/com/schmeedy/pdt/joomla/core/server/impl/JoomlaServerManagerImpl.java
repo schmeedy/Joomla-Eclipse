@@ -5,7 +5,10 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.Charset;
+import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
 
 import org.eclipse.core.runtime.preferences.IEclipsePreferences;
 import org.eclipse.core.runtime.preferences.InstanceScope;
@@ -15,12 +18,18 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.xmi.XMLResource;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceImpl;
 import org.osgi.framework.BundleContext;
+import org.osgi.framework.Version;
 import org.osgi.service.prefs.BackingStoreException;
 
+import com.schmeedy.pdt.joomla.core.project.model.BasicExtensionModel;
+import com.schmeedy.pdt.joomla.core.project.model.JoomlaExtensionProject;
+import com.schmeedy.pdt.joomla.core.project.model.ManifestVersion;
 import com.schmeedy.pdt.joomla.core.server.IJoomlaDeployer;
 import com.schmeedy.pdt.joomla.core.server.IJoomlaServerManager;
 import com.schmeedy.pdt.joomla.core.server.cfg.AvailableServers;
 import com.schmeedy.pdt.joomla.core.server.cfg.JoomlaServerConfigurationFactory;
+import com.schmeedy.pdt.joomla.core.server.cfg.LocalJoomlaServer;
+import com.schmeedy.pdt.joomla.core.server.cfg.MajorJoomlaVersion;
 
 public class JoomlaServerManagerImpl implements IJoomlaServerManager {
 
@@ -96,6 +105,51 @@ public class JoomlaServerManagerImpl implements IJoomlaServerManager {
 		}
 	}
 	
+	@Override
+	public LocalJoomlaServer getDefaultServer(JoomlaExtensionProject projectModel) {
+		final List<LocalJoomlaServer> servers = new ArrayList<LocalJoomlaServer>(getAvailableServers().getServers());
+		if (servers.isEmpty()) {
+			return null;
+		}
+		Collections.sort(servers, new Comparator<LocalJoomlaServer>() {
+			@Override
+			public int compare(LocalJoomlaServer s1, LocalJoomlaServer s2) {
+				final Version s1Version = new Version(s1.getExactVersion());
+				final Version s2Version = new Version(s2.getExactVersion());
+				return s1Version.compareTo(s2Version);
+			}
+		});
+		
+		LocalJoomlaServer preferredServer = null;
+		for (final BasicExtensionModel extension : projectModel.getExtensions()) {
+			final LocalJoomlaServer matchingServer = getMatchingServer(extension, servers);
+			if (preferredServer == null || preferredServer.getMajorVersion().ordinal() <= matchingServer.getMajorVersion().ordinal()) {
+				preferredServer = matchingServer;
+			}
+		}
+		if (preferredServer == null) {
+			preferredServer = servers.get(servers.size() - 1);
+		}
+		return preferredServer;
+	}
+	
+	private LocalJoomlaServer getMatchingServer(BasicExtensionModel extension, List<LocalJoomlaServer> serversInAscendingOrderByVersion) {
+		LocalJoomlaServer matchingServer = null;
+		for (final LocalJoomlaServer server : serversInAscendingOrderByVersion) {
+			if (isMatchingServer(extension, server)) {
+				matchingServer = server;
+			}
+		}
+		return matchingServer;
+	}
+
+	private boolean isMatchingServer(BasicExtensionModel extension, LocalJoomlaServer server) {
+		final ManifestVersion extensionManifestVersion = extension.getManifestVersion();
+		final MajorJoomlaVersion serverMajorVersion = server.getMajorVersion();
+		return (extensionManifestVersion == ManifestVersion.ONE_FIVE && serverMajorVersion == MajorJoomlaVersion.ONE_FIVE) ||
+			(extensionManifestVersion == ManifestVersion.ONE_SIX && serverMajorVersion == MajorJoomlaVersion.ONE_SIX);
+	}
+
 	public void setDeployer(IJoomlaDeployer deployer) {
 		deploymentDescriptorSynchronizer = new DeploymentDescriptorSynchronizer(deployer);
 	}

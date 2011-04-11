@@ -25,6 +25,7 @@
       <wizard
             category="com.schmeedy.pdt.joomla.ui"
             class="com.schmeedy.pdt.joomla.ui.project.wizard.NewExtensionProjectWizard"
+            icon="platform:/plugin/com.schmeedy.pdt.joomla.common.ui/icons/obj16/joomla.png"
             id="com.schmeedy.pdt.joomla.ui.NewExtensionProject"
             name="Joomla! Extension Project"
             project="true">

@@ -6,16 +6,21 @@
  */
 package com.schmeedy.pdt.joomla.core.server.cfg.impl;
 
-import com.schmeedy.pdt.joomla.core.server.cfg.*;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
-
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
-
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
+
+import com.schmeedy.pdt.joomla.core.server.cfg.AvailableServers;
+import com.schmeedy.pdt.joomla.core.server.cfg.DeploymentDescriptor;
+import com.schmeedy.pdt.joomla.core.server.cfg.DeploymentRuntime;
+import com.schmeedy.pdt.joomla.core.server.cfg.JoomlaExtensionDeployment;
+import com.schmeedy.pdt.joomla.core.server.cfg.JoomlaServerConfigurationFactory;
+import com.schmeedy.pdt.joomla.core.server.cfg.JoomlaServerConfigurationPackage;
+import com.schmeedy.pdt.joomla.core.server.cfg.LocalJoomlaServer;
+import com.schmeedy.pdt.joomla.core.server.cfg.MajorJoomlaVersion;
 
 /**
  * <!-- begin-user-doc -->

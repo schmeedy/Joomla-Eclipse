@@ -9,21 +9,33 @@
 -->
 
 <plugin>
-
-   <extension point="org.eclipse.emf.ecore.generated_package">
-      <package
-            uri="http://schmeedy.com/pdt/joomla/server"
-            class="com.schmeedy.pdt.joomla.core.server.cfg.JoomlaServerConfigurationPackage"
-            genModel="model/server-configuration.genmodel"/>
-   </extension>
    <extension
-         id="com.schmeedy.pdt.JoomlaExtensionProject"
+         id="JoomlaExtensionProject"
          point="org.eclipse.core.resources.natures">
       <runtime>
          <run
                class="com.schmeedy.pdt.joomla.core.project.nature.JoomlaExtensionProjectNature">
          </run>
       </runtime>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <package
+            uri="http://schmeedy.com/pdt/joomla/server"
+            class="com.schmeedy.pdt.joomla.core.server.cfg.JoomlaServerConfigurationPackage"
+            genModel="model/server-configuration.genmodel"/>
+      <package
+            class="com.schmeedy.pdt.joomla.core.project.model.JoomlaProjectModelPackage"
+            genModel="model/project-model.genmodel"
+            uri="http://schmeedy.com/pdt/joomla/project/model">
+      </package>
+   </extension>
+   <extension
+         point="org.eclipse.dltk.core.buildpathContainerInitializer">
+      <buildpathContainerInitializer
+            class="com.schmeedy.pdt.joomla.core.project.buildpath.JoomlaBuildpathContainerInitializer"
+            id="com.schmeedy.pdt.JoomlaContainer">
+      </buildpathContainerInitializer>
    </extension>
 
 </plugin>

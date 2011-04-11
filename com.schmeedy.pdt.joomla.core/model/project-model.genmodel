@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/com.schmeedy.pdt.joomla.core/src"
+    modelPluginID="com.schmeedy.pdt.joomla.core" modelName="Project-model" importerID="org.eclipse.emf.importer.ecore"
+    complianceLevel="6.0" copyrightFields="false">
+  <foreignModel>project-model.ecore</foreignModel>
+  <genPackages prefix="JoomlaProjectModel" basePackage="com.schmeedy.pdt.joomla.core.project"
+      disposableProviderFactory="true" ecorePackage="project-model.ecore#/">
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="project-model.ecore#//ExtensionVersion">
+      <genEnumLiterals ecoreEnumLiteral="project-model.ecore#//ExtensionVersion/UNKNOWN"/>
+      <genEnumLiterals ecoreEnumLiteral="project-model.ecore#//ExtensionVersion/ONE_FIVE"/>
+      <genEnumLiterals ecoreEnumLiteral="project-model.ecore#//ExtensionVersion/ONE_SIX"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="project-model.ecore#//ExtensionType">
+      <genEnumLiterals ecoreEnumLiteral="project-model.ecore#//ExtensionType/UNKNOWN"/>
+      <genEnumLiterals ecoreEnumLiteral="project-model.ecore#//ExtensionType/COMPONENT"/>
+      <genEnumLiterals ecoreEnumLiteral="project-model.ecore#//ExtensionType/PLUGIN"/>
+      <genEnumLiterals ecoreEnumLiteral="project-model.ecore#//ExtensionType/MODULE"/>
+      <genEnumLiterals ecoreEnumLiteral="project-model.ecore#//ExtensionType/TEMPLATE"/>
+    </genEnums>
+    <genDataTypes ecoreDataType="project-model.ecore#//IPath"/>
+    <genDataTypes ecoreDataType="project-model.ecore#//IProject"/>
+    <genClasses ecoreClass="project-model.ecore#//JoomlaExtensionProject">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute project-model.ecore#//JoomlaExtensionProject/project"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference project-model.ecore#//JoomlaExtensionProject/extensions"/>
+    </genClasses>
+    <genClasses ecoreClass="project-model.ecore#//BasicExtensionModel">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute project-model.ecore#//BasicExtensionModel/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute project-model.ecore#//BasicExtensionModel/type"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute project-model.ecore#//BasicExtensionModel/version"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute project-model.ecore#//BasicExtensionModel/manifestPath"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>

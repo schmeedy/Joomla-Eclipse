@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0" name="com.schmeedy.pdt.joomla.core.ProjectManager">
+   <implementation class="com.schmeedy.pdt.joomla.core.project.impl.JoomlaProjectManagerImpl"/>
+   <service>
+      <provide interface="com.schmeedy.pdt.joomla.core.project.IJoomlaProjectManager"/>
+   </service>
+</scr:component>

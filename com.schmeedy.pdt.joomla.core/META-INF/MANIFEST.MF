@@ -7,10 +7,15 @@ Bundle-ClassPath: .
 Bundle-Vendor: %providerName
 Bundle-Localization: plugin
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
-Export-Package: com.schmeedy.pdt.joomla.core.server,
+Export-Package: com.schmeedy.pdt.joomla.core.project,
+ com.schmeedy.pdt.joomla.core.project.model,
+ com.schmeedy.pdt.joomla.core.server,
  com.schmeedy.pdt.joomla.core.server.cfg
-Require-Bundle: org.eclipse.core.runtime,
+Require-Bundle: com.schmeedy.pdt.service.registry;bundle-version="0.1.0",
+ org.eclipse.core.runtime,
  org.eclipse.core.resources;bundle-version="3.6.0",
+ org.eclipse.dltk.core;bundle-version="2.0.1",
+ org.eclipse.php.core;bundle-version="2.2.1",
  org.eclipse.emf.ecore;visibility:=reexport,
  org.eclipse.emf.ecore.xmi;bundle-version="2.5.0"
 Bundle-ActivationPolicy: lazy
