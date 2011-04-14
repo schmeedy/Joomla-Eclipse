@@ -108,13 +108,22 @@ public interface JoomlaServerConfigurationPackage extends EPackage {
 	int LOCAL_JOOMLA_SERVER__ID = 0;
 
 	/**
+	 * The feature id for the '<em><b>Team Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LOCAL_JOOMLA_SERVER__TEAM_ID = 1;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int LOCAL_JOOMLA_SERVER__NAME = 1;
+	int LOCAL_JOOMLA_SERVER__NAME = 2;
 
 	/**
 	 * The feature id for the '<em><b>Major Version</b></em>' attribute.
@@ -123,7 +132,7 @@ public interface JoomlaServerConfigurationPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int LOCAL_JOOMLA_SERVER__MAJOR_VERSION = 2;
+	int LOCAL_JOOMLA_SERVER__MAJOR_VERSION = 3;
 
 	/**
 	 * The feature id for the '<em><b>Exact Version</b></em>' attribute.
@@ -132,7 +141,7 @@ public interface JoomlaServerConfigurationPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int LOCAL_JOOMLA_SERVER__EXACT_VERSION = 3;
+	int LOCAL_JOOMLA_SERVER__EXACT_VERSION = 4;
 
 	/**
 	 * The feature id for the '<em><b>Install Dir</b></em>' attribute.
@@ -141,7 +150,7 @@ public interface JoomlaServerConfigurationPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int LOCAL_JOOMLA_SERVER__INSTALL_DIR = 4;
+	int LOCAL_JOOMLA_SERVER__INSTALL_DIR = 5;
 
 	/**
 	 * The feature id for the '<em><b>Base Url</b></em>' attribute.
@@ -150,7 +159,7 @@ public interface JoomlaServerConfigurationPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int LOCAL_JOOMLA_SERVER__BASE_URL = 5;
+	int LOCAL_JOOMLA_SERVER__BASE_URL = 6;
 
 	/**
 	 * The number of structural features of the '<em>Local Joomla Server</em>' class.
@@ -159,7 +168,7 @@ public interface JoomlaServerConfigurationPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int LOCAL_JOOMLA_SERVER_FEATURE_COUNT = 6;
+	int LOCAL_JOOMLA_SERVER_FEATURE_COUNT = 7;
 
 	/**
 	 * The meta object id for the '{@link com.schmeedy.pdt.joomla.core.server.cfg.impl.DeploymentDescriptorImpl <em>Deployment Descriptor</em>}' class.
@@ -306,6 +315,17 @@ public interface JoomlaServerConfigurationPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getLocalJoomlaServer_Id();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.schmeedy.pdt.joomla.core.server.cfg.LocalJoomlaServer#getTeamId <em>Team Id</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Team Id</em>'.
+	 * @see com.schmeedy.pdt.joomla.core.server.cfg.LocalJoomlaServer#getTeamId()
+	 * @see #getLocalJoomlaServer()
+	 * @generated
+	 */
+	EAttribute getLocalJoomlaServer_TeamId();
 
 	/**
 	 * Returns the meta object for the attribute '{@link com.schmeedy.pdt.joomla.core.server.cfg.LocalJoomlaServer#getName <em>Name</em>}'.
@@ -503,6 +523,14 @@ public interface JoomlaServerConfigurationPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute LOCAL_JOOMLA_SERVER__ID = eINSTANCE.getLocalJoomlaServer_Id();
+
+		/**
+		 * The meta object literal for the '<em><b>Team Id</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute LOCAL_JOOMLA_SERVER__TEAM_ID = eINSTANCE.getLocalJoomlaServer_TeamId();
 
 		/**
 		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.

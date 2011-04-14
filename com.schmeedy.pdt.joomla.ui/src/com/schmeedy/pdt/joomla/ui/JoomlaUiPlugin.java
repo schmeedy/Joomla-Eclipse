@@ -31,21 +31,25 @@ public class JoomlaUiPlugin extends AbstractUIPlugin {
 	}
 	
 	public void logError(String message, Throwable throwable) {
-		getLog().log(getErrorStatus(message, throwable));
+		getLog().log(newErrorStatus(message, throwable));
 	}
 
 	public void logWarning(String message) {
-		getLog().log(getWarningStatus(message, null));
+		getLog().log(newWarningStatus(message, null));
 	}
 
-	public Status getErrorStatus(String message, Throwable throwable) {
+	public Status newErrorStatus(String message, Throwable throwable) {
 		return new Status(IStatus.ERROR, BUNDLE_ID, trim(message), throwable);
 	}
 
-	public Status getWarningStatus(String message, Throwable throwable) {
+	public Status newWarningStatus(String message, Throwable throwable) {
 		return new Status(IStatus.WARNING, BUNDLE_ID, trim(message), throwable);
 	}
 
+	public Status newOkStatus(String message) {
+		return new Status(IStatus.OK, BUNDLE_ID, trim(message), null);
+	}
+	
 	private static String trim(String message) {
 		return message == null ? "" : message.trim();
 	}

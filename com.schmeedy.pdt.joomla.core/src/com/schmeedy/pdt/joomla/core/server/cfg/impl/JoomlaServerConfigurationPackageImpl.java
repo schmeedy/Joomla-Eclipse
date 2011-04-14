@@ -173,7 +173,7 @@ public class JoomlaServerConfigurationPackageImpl extends EPackageImpl implement
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getLocalJoomlaServer_Name() {
+	public EAttribute getLocalJoomlaServer_TeamId() {
 		return (EAttribute)localJoomlaServerEClass.getEStructuralFeatures().get(1);
 	}
 
@@ -182,7 +182,7 @@ public class JoomlaServerConfigurationPackageImpl extends EPackageImpl implement
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getLocalJoomlaServer_MajorVersion() {
+	public EAttribute getLocalJoomlaServer_Name() {
 		return (EAttribute)localJoomlaServerEClass.getEStructuralFeatures().get(2);
 	}
 
@@ -191,7 +191,7 @@ public class JoomlaServerConfigurationPackageImpl extends EPackageImpl implement
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getLocalJoomlaServer_ExactVersion() {
+	public EAttribute getLocalJoomlaServer_MajorVersion() {
 		return (EAttribute)localJoomlaServerEClass.getEStructuralFeatures().get(3);
 	}
 
@@ -200,7 +200,7 @@ public class JoomlaServerConfigurationPackageImpl extends EPackageImpl implement
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getLocalJoomlaServer_InstallDir() {
+	public EAttribute getLocalJoomlaServer_ExactVersion() {
 		return (EAttribute)localJoomlaServerEClass.getEStructuralFeatures().get(4);
 	}
 
@@ -209,8 +209,17 @@ public class JoomlaServerConfigurationPackageImpl extends EPackageImpl implement
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getLocalJoomlaServer_BaseUrl() {
+	public EAttribute getLocalJoomlaServer_InstallDir() {
 		return (EAttribute)localJoomlaServerEClass.getEStructuralFeatures().get(5);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getLocalJoomlaServer_BaseUrl() {
+		return (EAttribute)localJoomlaServerEClass.getEStructuralFeatures().get(6);
 	}
 
 	/**
@@ -318,6 +327,7 @@ public class JoomlaServerConfigurationPackageImpl extends EPackageImpl implement
 
 		localJoomlaServerEClass = createEClass(LOCAL_JOOMLA_SERVER);
 		createEAttribute(localJoomlaServerEClass, LOCAL_JOOMLA_SERVER__ID);
+		createEAttribute(localJoomlaServerEClass, LOCAL_JOOMLA_SERVER__TEAM_ID);
 		createEAttribute(localJoomlaServerEClass, LOCAL_JOOMLA_SERVER__NAME);
 		createEAttribute(localJoomlaServerEClass, LOCAL_JOOMLA_SERVER__MAJOR_VERSION);
 		createEAttribute(localJoomlaServerEClass, LOCAL_JOOMLA_SERVER__EXACT_VERSION);
@@ -373,6 +383,7 @@ public class JoomlaServerConfigurationPackageImpl extends EPackageImpl implement
 
 		initEClass(localJoomlaServerEClass, LocalJoomlaServer.class, "LocalJoomlaServer", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getLocalJoomlaServer_Id(), ecorePackage.getEString(), "id", null, 0, 1, LocalJoomlaServer.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getLocalJoomlaServer_TeamId(), ecorePackage.getEString(), "teamId", null, 0, 1, LocalJoomlaServer.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getLocalJoomlaServer_Name(), ecorePackage.getEString(), "name", null, 0, 1, LocalJoomlaServer.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getLocalJoomlaServer_MajorVersion(), this.getMajorJoomlaVersion(), "majorVersion", null, 0, 1, LocalJoomlaServer.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getLocalJoomlaServer_ExactVersion(), ecorePackage.getEString(), "exactVersion", null, 0, 1, LocalJoomlaServer.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

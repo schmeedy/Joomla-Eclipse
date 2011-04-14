@@ -1,4 +1,4 @@
-package com.schmeedy.pdt.joomla.core.project.buildpath;
+package com.schmeedy.pdt.joomla.core.project.buildpath.impl;
 
 import java.io.File;
 
@@ -55,14 +55,9 @@ public class JoomlaBuildpathContainer implements IBuildpathContainer {
 			return EMPTY_BUILDPATH;
 		}
 		final File installDir = new File(defaultServer.getInstallDir());
-		final IBuildpathEntry entry = DLTKCore.newLibraryEntry(new FileAsFileHandle(installDir).getFullPath(), EMPTY_ACCESS_RULES, JOOMLA_CONTAINER_BUILDPATH_ATTRIBUTES, false, true);
+		final IBuildpathEntry entry = DLTKCore.newLibraryEntry(new FileAsFileHandle(installDir).getFullPath().append("libraries"), EMPTY_ACCESS_RULES, JOOMLA_CONTAINER_BUILDPATH_ATTRIBUTES, false, true);
 		final IBuildpathEntry[] buildpath = new IBuildpathEntry[1];
 		buildpath[0] = entry;
-		
-//		if (IncludePathManager.isInIncludePath(project, entry.getPath()) == null) {
-//			IncludePathManager.getInstance().appendEntriesToIncludePath(project, Collections.singletonList(entry));
-//		}
-		
 		return buildpath;
 	}
 

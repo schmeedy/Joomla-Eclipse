@@ -1,4 +1,4 @@
-package com.schmeedy.pdt.joomla.core.project.buildpath;
+package com.schmeedy.pdt.joomla.core.project.buildpath.impl;
 
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
@@ -8,6 +8,7 @@ import org.eclipse.dltk.core.IBuildpathContainer;
 import org.eclipse.dltk.core.IScriptProject;
 
 import com.schmeedy.pdt.joomla.core.project.IJoomlaProjectManager;
+import com.schmeedy.pdt.joomla.core.project.buildpath.JoomlaBuildpathUtils;
 import com.schmeedy.pdt.joomla.core.server.IJoomlaServerManager;
 import com.schmeedy.pdt.service.registry.ServiceRegistry;
 
@@ -18,8 +19,7 @@ public class JoomlaBuildpathContainerInitializer extends BuildpathContainerIniti
 	
 	@Override
 	public void initialize(IPath containerPath, IScriptProject project) throws CoreException {
-		final String containerId = containerPath.segment(0);
-		if (JoomlaBuildpathContainer.ID.equals(containerId)) {
+		if (JoomlaBuildpathUtils.isJoomlaContainerPath(containerPath)) {
 			final IScriptProject[] affectedProjects = new IScriptProject[1];
 			affectedProjects[0] = project;
 			final IBuildpathContainer[] containers = new IBuildpathContainer[1];

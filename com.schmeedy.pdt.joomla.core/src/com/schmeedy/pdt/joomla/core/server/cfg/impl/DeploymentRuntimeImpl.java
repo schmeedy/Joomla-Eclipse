@@ -93,10 +93,10 @@ public class DeploymentRuntimeImpl extends EObjectImpl implements DeploymentRunt
 	 * @generated
 	 */
 	public NotificationChain basicSetServer(LocalJoomlaServer newServer, NotificationChain msgs) {
-		final LocalJoomlaServer oldServer = server;
+		LocalJoomlaServer oldServer = server;
 		server = newServer;
 		if (eNotificationRequired()) {
-			final ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, JoomlaServerConfigurationPackage.DEPLOYMENT_RUNTIME__SERVER, oldServer, newServer);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, JoomlaServerConfigurationPackage.DEPLOYMENT_RUNTIME__SERVER, oldServer, newServer);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;

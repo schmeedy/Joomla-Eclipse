@@ -17,6 +17,7 @@ import org.eclipse.emf.ecore.EObject;
  * The following features are supported:
  * <ul>
  *   <li>{@link com.schmeedy.pdt.joomla.core.server.cfg.LocalJoomlaServer#getId <em>Id</em>}</li>
+ *   <li>{@link com.schmeedy.pdt.joomla.core.server.cfg.LocalJoomlaServer#getTeamId <em>Team Id</em>}</li>
  *   <li>{@link com.schmeedy.pdt.joomla.core.server.cfg.LocalJoomlaServer#getName <em>Name</em>}</li>
  *   <li>{@link com.schmeedy.pdt.joomla.core.server.cfg.LocalJoomlaServer#getMajorVersion <em>Major Version</em>}</li>
  *   <li>{@link com.schmeedy.pdt.joomla.core.server.cfg.LocalJoomlaServer#getExactVersion <em>Exact Version</em>}</li>
@@ -55,6 +56,32 @@ public interface LocalJoomlaServer extends EObject {
 	 * @generated
 	 */
 	void setId(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Team Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Team Id</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Team Id</em>' attribute.
+	 * @see #setTeamId(String)
+	 * @see com.schmeedy.pdt.joomla.core.server.cfg.JoomlaServerConfigurationPackage#getLocalJoomlaServer_TeamId()
+	 * @model
+	 * @generated
+	 */
+	String getTeamId();
+
+	/**
+	 * Sets the value of the '{@link com.schmeedy.pdt.joomla.core.server.cfg.LocalJoomlaServer#getTeamId <em>Team Id</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Team Id</em>' attribute.
+	 * @see #getTeamId()
+	 * @generated
+	 */
+	void setTeamId(String value);
 
 	/**
 	 * Returns the value of the '<em><b>Name</b></em>' attribute.

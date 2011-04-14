@@ -109,4 +109,13 @@
          </activeWhen>
       </handler>
    </extension>
+   <extension
+         point="org.eclipse.dltk.ui.buildpathContainerPage">
+      <buildpathContainerPage
+            class="com.schmeedy.pdt.joomla.ui.buildpath.JoomlaContainerWizardPage"
+            id="com.schmeedy.pdt.joomla.ui.JoomlaBuildpathContainerPage"
+            name="Joomla! API"
+            nature="com.schmeedy.pdt.joomla.core.JoomlaExtensionProject">
+      </buildpathContainerPage>
+   </extension>
  </plugin>

@@ -11,7 +11,7 @@ import org.eclipse.dltk.core.IBuildpathEntry;
 import org.eclipse.dltk.core.IScriptProject;
 import org.eclipse.dltk.core.ModelException;
 
-import com.schmeedy.pdt.joomla.core.project.buildpath.JoomlaBuildpathContainer;
+import com.schmeedy.pdt.joomla.core.project.buildpath.impl.JoomlaBuildpathContainer;
 
 public class JoomlaExtensionProjectNature implements IProjectNature {
 
@@ -26,7 +26,7 @@ public class JoomlaExtensionProjectNature implements IProjectNature {
 			return;
 		}
 		
-		addJoomlaBuildpathContainer(scriptProject);
+//		addJoomlaBuildpathContainer(scriptProject);
 	}
 
 	@Override
@@ -36,7 +36,7 @@ public class JoomlaExtensionProjectNature implements IProjectNature {
 			return;
 		}
 		
-		removeJoomlaBuildpathContainer(scriptProject);
+//		removeJoomlaBuildpathContainer(scriptProject);
 	}
 	
 	private void addJoomlaBuildpathContainer(final IScriptProject scriptProject) throws ModelException {

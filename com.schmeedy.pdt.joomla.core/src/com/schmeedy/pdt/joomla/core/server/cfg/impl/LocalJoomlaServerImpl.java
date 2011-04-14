@@ -24,6 +24,7 @@ import com.schmeedy.pdt.joomla.core.server.cfg.MajorJoomlaVersion;
  * The following features are implemented:
  * <ul>
  *   <li>{@link com.schmeedy.pdt.joomla.core.server.cfg.impl.LocalJoomlaServerImpl#getId <em>Id</em>}</li>
+ *   <li>{@link com.schmeedy.pdt.joomla.core.server.cfg.impl.LocalJoomlaServerImpl#getTeamId <em>Team Id</em>}</li>
  *   <li>{@link com.schmeedy.pdt.joomla.core.server.cfg.impl.LocalJoomlaServerImpl#getName <em>Name</em>}</li>
  *   <li>{@link com.schmeedy.pdt.joomla.core.server.cfg.impl.LocalJoomlaServerImpl#getMajorVersion <em>Major Version</em>}</li>
  *   <li>{@link com.schmeedy.pdt.joomla.core.server.cfg.impl.LocalJoomlaServerImpl#getExactVersion <em>Exact Version</em>}</li>
@@ -54,6 +55,26 @@ public class LocalJoomlaServerImpl extends EObjectImpl implements LocalJoomlaSer
 	 * @ordered
 	 */
 	protected String id = EcoreUtil.generateUUID();
+
+	/**
+	 * The default value of the '{@link #getTeamId() <em>Team Id</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getTeamId()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String TEAM_ID_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getTeamId() <em>Team Id</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getTeamId()
+	 * @generated
+	 * @ordered
+	 */
+	protected String teamId = TEAM_ID_EDEFAULT;
 
 	/**
 	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
@@ -202,6 +223,27 @@ public class LocalJoomlaServerImpl extends EObjectImpl implements LocalJoomlaSer
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public String getTeamId() {
+		return teamId;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setTeamId(String newTeamId) {
+		String oldTeamId = teamId;
+		teamId = newTeamId;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, JoomlaServerConfigurationPackage.LOCAL_JOOMLA_SERVER__TEAM_ID, oldTeamId, teamId));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public String getName() {
 		return name;
@@ -322,6 +364,8 @@ public class LocalJoomlaServerImpl extends EObjectImpl implements LocalJoomlaSer
 		switch (featureID) {
 			case JoomlaServerConfigurationPackage.LOCAL_JOOMLA_SERVER__ID:
 				return getId();
+			case JoomlaServerConfigurationPackage.LOCAL_JOOMLA_SERVER__TEAM_ID:
+				return getTeamId();
 			case JoomlaServerConfigurationPackage.LOCAL_JOOMLA_SERVER__NAME:
 				return getName();
 			case JoomlaServerConfigurationPackage.LOCAL_JOOMLA_SERVER__MAJOR_VERSION:
@@ -346,6 +390,9 @@ public class LocalJoomlaServerImpl extends EObjectImpl implements LocalJoomlaSer
 		switch (featureID) {
 			case JoomlaServerConfigurationPackage.LOCAL_JOOMLA_SERVER__ID:
 				setId((String)newValue);
+				return;
+			case JoomlaServerConfigurationPackage.LOCAL_JOOMLA_SERVER__TEAM_ID:
+				setTeamId((String)newValue);
 				return;
 			case JoomlaServerConfigurationPackage.LOCAL_JOOMLA_SERVER__NAME:
 				setName((String)newValue);
@@ -377,6 +424,9 @@ public class LocalJoomlaServerImpl extends EObjectImpl implements LocalJoomlaSer
 			case JoomlaServerConfigurationPackage.LOCAL_JOOMLA_SERVER__ID:
 				setId(ID_EDEFAULT);
 				return;
+			case JoomlaServerConfigurationPackage.LOCAL_JOOMLA_SERVER__TEAM_ID:
+				setTeamId(TEAM_ID_EDEFAULT);
+				return;
 			case JoomlaServerConfigurationPackage.LOCAL_JOOMLA_SERVER__NAME:
 				setName(NAME_EDEFAULT);
 				return;
@@ -406,6 +456,8 @@ public class LocalJoomlaServerImpl extends EObjectImpl implements LocalJoomlaSer
 		switch (featureID) {
 			case JoomlaServerConfigurationPackage.LOCAL_JOOMLA_SERVER__ID:
 				return ID_EDEFAULT == null ? id != null : !ID_EDEFAULT.equals(id);
+			case JoomlaServerConfigurationPackage.LOCAL_JOOMLA_SERVER__TEAM_ID:
+				return TEAM_ID_EDEFAULT == null ? teamId != null : !TEAM_ID_EDEFAULT.equals(teamId);
 			case JoomlaServerConfigurationPackage.LOCAL_JOOMLA_SERVER__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 			case JoomlaServerConfigurationPackage.LOCAL_JOOMLA_SERVER__MAJOR_VERSION:
@@ -432,6 +484,8 @@ public class LocalJoomlaServerImpl extends EObjectImpl implements LocalJoomlaSer
 		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (id: ");
 		result.append(id);
+		result.append(", teamId: ");
+		result.append(teamId);
 		result.append(", name: ");
 		result.append(name);
 		result.append(", majorVersion: ");
