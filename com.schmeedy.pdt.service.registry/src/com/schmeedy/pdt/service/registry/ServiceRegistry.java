@@ -1,5 +1,6 @@
 package com.schmeedy.pdt.service.registry;
 
+import org.osgi.framework.Bundle;
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
 
@@ -26,6 +27,11 @@ public class ServiceRegistry implements IServiceRegistry, BundleActivator {
 	public void start(BundleContext bundleContext) throws Exception {
 		if (serviceProxyFactory == null) {
 			serviceProxyFactory = new ServiceProxyFactory(bundleContext, new BasicServiceInvoker());
+		}
+		for (final Bundle bundle : bundleContext.getBundles()) {
+			if ("org.eclipse.equinox.ds".equals(bundle.getSymbolicName()) && bundle.getState() != Bundle.ACTIVE) {
+				bundle.start();
+			}
 		}
 		instance = this;
 	}

@@ -22,7 +22,7 @@ import com.schmeedy.pdt.joomla.core.server.cfg.LocalJoomlaServer;
 public class JoomlaBuildpathContainer implements IBuildpathContainer {
 
 
-	public static final String ID = "com.schmeedy.pdt.JoomlaContainer"; 
+	public static final String ID = "com.schmeedy.pdt.JoomlaAPI"; 
 	
 	private static final IAccessRule[] EMPTY_ACCESS_RULES = new IAccessRule[0];
 	private static final IBuildpathEntry[] EMPTY_BUILDPATH = new IBuildpathEntry[0];
@@ -43,17 +43,21 @@ public class JoomlaBuildpathContainer implements IBuildpathContainer {
 		this.serverManager = serverManager;
 	}
 
-	@Override
-	public IBuildpathEntry[] getBuildpathEntries() {
+	private LocalJoomlaServer getProjectApiServer() {
 		final JoomlaExtensionProject projectModel = projectManager.getExtensionProjectModel(project);
 		if (projectModel == null) {
-			return EMPTY_BUILDPATH;
+			return null;
 		}
-		
-		final LocalJoomlaServer defaultServer = serverManager.getDefaultServer(projectModel);
+		return serverManager.getDefaultServer(projectModel);
+	}
+	
+	@Override
+	public IBuildpathEntry[] getBuildpathEntries() {
+		final LocalJoomlaServer defaultServer = getProjectApiServer();		
 		if (defaultServer == null) {
 			return EMPTY_BUILDPATH;
 		}
+		
 		final File installDir = new File(defaultServer.getInstallDir());
 		final IBuildpathEntry entry = DLTKCore.newLibraryEntry(new FileAsFileHandle(installDir).getFullPath().append("libraries"), EMPTY_ACCESS_RULES, JOOMLA_CONTAINER_BUILDPATH_ATTRIBUTES, false, true);
 		final IBuildpathEntry[] buildpath = new IBuildpathEntry[1];
@@ -63,7 +67,13 @@ public class JoomlaBuildpathContainer implements IBuildpathContainer {
 
 	@Override
 	public String getDescription() {
-		return "Joomla!";
+		final String label = "Joomla! API";
+		final LocalJoomlaServer server = getProjectApiServer();
+		if (server == null) {
+			return label;
+		} else {
+			return label + " [" + server.getInstallDir() + File.separator + "libraries]";
+		}
 	}
 
 	@Override

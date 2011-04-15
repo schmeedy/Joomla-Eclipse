@@ -34,7 +34,7 @@
          point="org.eclipse.dltk.core.buildpathContainerInitializer">
       <buildpathContainerInitializer
             class="com.schmeedy.pdt.joomla.core.project.buildpath.impl.JoomlaBuildpathContainerInitializer"
-            id="com.schmeedy.pdt.JoomlaContainer">
+            id="com.schmeedy.pdt.JoomlaAPI">
       </buildpathContainerInitializer>
    </extension>
 

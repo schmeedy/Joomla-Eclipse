@@ -201,6 +201,7 @@ public class JoomlaContainerWizardPage extends NewElementWizardPage implements I
 			newEntry = null;
 			updateStatus(ValidationStatus.error("No Joomla! installation selected."));
 		} else if (alreadyPresentJoomlaEntry == null) {
+			newEntry = entry;
 			updateStatus(OK_STATUS);
 		} else if (alreadyPresentJoomlaEntry.getPath().equals(entry.getPath())) {
 			newEntry = null;
