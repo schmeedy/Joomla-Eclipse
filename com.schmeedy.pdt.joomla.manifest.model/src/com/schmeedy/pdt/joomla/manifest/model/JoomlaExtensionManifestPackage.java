@@ -58,7 +58,7 @@ public interface JoomlaExtensionManifestPackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	String eCONTENT_TYPE = "com.schmeedy.pdt.joomla.manifest.model.ExtensionManifest";
+	String eCONTENT_TYPE = "com.schmeedy.pdt.joomla.core.ExtensionManifest";
 
 	/**
 	 * The singleton instance of the package.

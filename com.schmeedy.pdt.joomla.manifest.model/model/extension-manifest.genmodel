@@ -6,21 +6,29 @@
     importerID="org.eclipse.emf.importer.ecore" complianceLevel="6.0" copyrightFields="false">
   <foreignModel>extension-manifest.ecore</foreignModel>
   <genPackages prefix="JoomlaExtensionManifest" basePackage="com.schmeedy.pdt.joomla.manifest"
-      resource="XML" disposableProviderFactory="true" contentTypeIdentifier="com.schmeedy.pdt.joomla.manifest.model.ExtensionManifest"
+      resource="XML" disposableProviderFactory="true" contentTypeIdentifier="com.schmeedy.pdt.joomla.core.ExtensionManifest"
       fileExtensions="xml" ecorePackage="extension-manifest.ecore#/">
     <genEnums typeSafeEnumCompatible="false" ecoreEnum="extension-manifest.ecore#//ManifestVersion">
+      <genEnumLiterals ecoreEnumLiteral="extension-manifest.ecore#//ManifestVersion/UNKNOWN"/>
       <genEnumLiterals ecoreEnumLiteral="extension-manifest.ecore#//ManifestVersion/ONE_FIVE"/>
       <genEnumLiterals ecoreEnumLiteral="extension-manifest.ecore#//ManifestVersion/ONE_SIX"/>
     </genEnums>
     <genEnums typeSafeEnumCompatible="false" ecoreEnum="extension-manifest.ecore#//ManifestType">
+      <genEnumLiterals ecoreEnumLiteral="extension-manifest.ecore#//ManifestType/UNKNOWN"/>
       <genEnumLiterals ecoreEnumLiteral="extension-manifest.ecore#//ManifestType/COMPONENT"/>
       <genEnumLiterals ecoreEnumLiteral="extension-manifest.ecore#//ManifestType/PLUGIN"/>
       <genEnumLiterals ecoreEnumLiteral="extension-manifest.ecore#//ManifestType/MODULE"/>
       <genEnumLiterals ecoreEnumLiteral="extension-manifest.ecore#//ManifestType/TEMPLATE"/>
     </genEnums>
+    <genClasses image="false" ecoreClass="extension-manifest.ecore#//AbstractMultiResourceContainer">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference extension-manifest.ecore#//AbstractMultiResourceContainer/fileSets"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference extension-manifest.ecore#//AbstractMultiResourceContainer/languageSets"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference extension-manifest.ecore#//AbstractMultiResourceContainer/mediaSets"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference extension-manifest.ecore#//AbstractMultiResourceContainer/allResourceSets"/>
+    </genClasses>
     <genClasses ecoreClass="extension-manifest.ecore#//JoomlaExtensionManifest">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute extension-manifest.ecore#//JoomlaExtensionManifest/manifestVersion"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute extension-manifest.ecore#//JoomlaExtensionManifest/manifestType"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute extension-manifest.ecore#//JoomlaExtensionManifest/manifestVersion"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute extension-manifest.ecore#//JoomlaExtensionManifest/name"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute extension-manifest.ecore#//JoomlaExtensionManifest/creationDate"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute extension-manifest.ecore#//JoomlaExtensionManifest/author"/>
@@ -32,6 +40,63 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute extension-manifest.ecore#//JoomlaExtensionManifest/description"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute extension-manifest.ecore#//JoomlaExtensionManifest/installFile"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute extension-manifest.ecore#//JoomlaExtensionManifest/uninstallFile"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference extension-manifest.ecore#//JoomlaExtensionManifest/install"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference extension-manifest.ecore#//JoomlaExtensionManifest/uninstall"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference extension-manifest.ecore#//JoomlaExtensionManifest/administration"/>
+    </genClasses>
+    <genClasses ecoreClass="extension-manifest.ecore#//InstallDb">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference extension-manifest.ecore#//InstallDb/sql"/>
+    </genClasses>
+    <genClasses ecoreClass="extension-manifest.ecore#//UninstallDb">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference extension-manifest.ecore#//UninstallDb/sql"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="extension-manifest.ecore#//AbstractResource">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute extension-manifest.ecore#//AbstractResource/path"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="extension-manifest.ecore#//AbstractResourceContainer">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute extension-manifest.ecore#//AbstractResourceContainer/baseFolder"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference extension-manifest.ecore#//AbstractResourceContainer/allResources"/>
+    </genClasses>
+    <genClasses ecoreClass="extension-manifest.ecore#//SqlFileSet">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference extension-manifest.ecore#//SqlFileSet/files"/>
+    </genClasses>
+    <genClasses ecoreClass="extension-manifest.ecore#//SqlResource">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute extension-manifest.ecore#//SqlResource/driver"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute extension-manifest.ecore#//SqlResource/charset"/>
+    </genClasses>
+    <genClasses ecoreClass="extension-manifest.ecore#//FileSet">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference extension-manifest.ecore#//FileSet/files"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference extension-manifest.ecore#//FileSet/folders"/>
+    </genClasses>
+    <genClasses ecoreClass="extension-manifest.ecore#//FileResource"/>
+    <genClasses ecoreClass="extension-manifest.ecore#//FolderResource"/>
+    <genClasses ecoreClass="extension-manifest.ecore#//LanguageSet">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference extension-manifest.ecore#//LanguageSet/resources"/>
+    </genClasses>
+    <genClasses ecoreClass="extension-manifest.ecore#//LanguageResource">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute extension-manifest.ecore#//LanguageResource/tag"/>
+    </genClasses>
+    <genClasses ecoreClass="extension-manifest.ecore#//MediaSet">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute extension-manifest.ecore#//MediaSet/destination"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference extension-manifest.ecore#//MediaSet/files"/>
+    </genClasses>
+    <genClasses ecoreClass="extension-manifest.ecore#//Administration">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference extension-manifest.ecore#//Administration/menu"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference extension-manifest.ecore#//Administration/subMenu"/>
+    </genClasses>
+    <genClasses ecoreClass="extension-manifest.ecore#//MenuItem">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute extension-manifest.ecore#//MenuItem/label"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute extension-manifest.ecore#//MenuItem/act"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute extension-manifest.ecore#//MenuItem/task"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute extension-manifest.ecore#//MenuItem/controller"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute extension-manifest.ecore#//MenuItem/view"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute extension-manifest.ecore#//MenuItem/layout"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute extension-manifest.ecore#//MenuItem/sub"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute extension-manifest.ecore#//MenuItem/img"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute extension-manifest.ecore#//MenuItem/link"/>
+    </genClasses>
+    <genClasses ecoreClass="extension-manifest.ecore#//SubMenu">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference extension-manifest.ecore#//SubMenu/menuItems"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

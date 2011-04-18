@@ -1,4 +1,4 @@
-package com.schmeedy.pdt.joomla.core.project.nature;
+package com.schmeedy.pdt.joomla.core.project.impl;
 
 import java.util.Arrays;
 
@@ -15,7 +15,7 @@ import com.schmeedy.pdt.joomla.core.project.buildpath.impl.JoomlaBuildpathContai
 
 public class JoomlaExtensionProjectNature implements IProjectNature {
 
-	public static final String ID = "com.schmeedy.pdt.joomla.core.JoomlaExtensionProject";
+	public static final String ID = "com.schmeedy.pdt.joomla.core.JoomlaExtensionNature";
 	
 	private IProject project;
 	

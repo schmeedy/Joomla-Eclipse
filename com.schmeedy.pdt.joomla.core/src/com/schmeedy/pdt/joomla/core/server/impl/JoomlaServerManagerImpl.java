@@ -123,7 +123,7 @@ public class JoomlaServerManagerImpl implements IJoomlaServerManager {
 		LocalJoomlaServer preferredServer = null;
 		for (final BasicExtensionModel extension : projectModel.getExtensions()) {
 			final LocalJoomlaServer matchingServer = getMatchingServer(extension, servers);
-			if (preferredServer == null || preferredServer.getMajorVersion().ordinal() <= matchingServer.getMajorVersion().ordinal()) {
+			if (matchingServer != null && (preferredServer == null || preferredServer.getMajorVersion().ordinal() <= matchingServer.getMajorVersion().ordinal())) {
 				preferredServer = matchingServer;
 			}
 		}

@@ -24,11 +24,10 @@ import com.schmeedy.pdt.joomla.core.project.impl.BasicExtensionModelParser.Parsi
 import com.schmeedy.pdt.joomla.core.project.model.BasicExtensionModel;
 import com.schmeedy.pdt.joomla.core.project.model.JoomlaExtensionProject;
 import com.schmeedy.pdt.joomla.core.project.model.JoomlaProjectModelFactory;
-import com.schmeedy.pdt.joomla.core.project.nature.JoomlaExtensionProjectNature;
 
 public class JoomlaProjectManagerImpl implements IJoomlaProjectManager {
 
-	private static final String JOOMLA_MANIFEST_CONTENT_TYPE_ID = "com.schmeedy.pdt.joomla.manifest.model.ExtensionManifest";
+	private static final String JOOMLA_MANIFEST_CONTENT_TYPE_ID = "com.schmeedy.pdt.joomla.core.ExtensionManifest";
 	
 	private final BasicExtensionModelParser extensionModelParser = new BasicExtensionModelParser();
 	

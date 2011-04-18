@@ -6,7 +6,6 @@ import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.dltk.core.DLTKCore;
-import org.eclipse.dltk.core.IAccessRule;
 import org.eclipse.dltk.core.IBuildpathAttribute;
 import org.eclipse.dltk.core.IBuildpathContainer;
 import org.eclipse.dltk.core.IBuildpathEntry;
@@ -24,7 +23,6 @@ public class JoomlaBuildpathContainer implements IBuildpathContainer {
 
 	public static final String ID = "com.schmeedy.pdt.JoomlaAPI"; 
 	
-	private static final IAccessRule[] EMPTY_ACCESS_RULES = new IAccessRule[0];
 	private static final IBuildpathEntry[] EMPTY_BUILDPATH = new IBuildpathEntry[0];
 	private static final IBuildpathAttribute[] JOOMLA_CONTAINER_BUILDPATH_ATTRIBUTES;
 	
@@ -59,7 +57,7 @@ public class JoomlaBuildpathContainer implements IBuildpathContainer {
 		}
 		
 		final File installDir = new File(defaultServer.getInstallDir());
-		final IBuildpathEntry entry = DLTKCore.newLibraryEntry(new FileAsFileHandle(installDir).getFullPath().append("libraries"), EMPTY_ACCESS_RULES, JOOMLA_CONTAINER_BUILDPATH_ATTRIBUTES, false, true);
+		final IBuildpathEntry entry = DLTKCore.newLibraryEntry(new FileAsFileHandle(installDir).getFullPath().append("libraries"), false, true);
 		final IBuildpathEntry[] buildpath = new IBuildpathEntry[1];
 		buildpath[0] = entry;
 		return buildpath;

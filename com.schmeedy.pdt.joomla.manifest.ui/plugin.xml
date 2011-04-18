@@ -11,7 +11,7 @@
             id="com.schmeedy.pdt.joomla.manifest.ui.ExtensionManifestEditor"
             name="Joomla! Extension Manifest Editor">
          <contentTypeBinding
-               contentTypeId="com.schmeedy.pdt.joomla.manifest.model.ComponentExtensionManifest">
+               contentTypeId="com.schmeedy.pdt.joomla.core.ComponentExtensionManifest">
          </contentTypeBinding>
       </editor>
    </extension>

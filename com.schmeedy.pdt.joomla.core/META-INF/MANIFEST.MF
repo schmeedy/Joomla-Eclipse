@@ -7,7 +7,8 @@ Bundle-ClassPath: .
 Bundle-Vendor: %providerName
 Bundle-Localization: plugin
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
-Export-Package: com.schmeedy.pdt.joomla.core.project,
+Export-Package: com.schmeedy.pdt.joomla.core,
+ com.schmeedy.pdt.joomla.core.project,
  com.schmeedy.pdt.joomla.core.project.buildpath,
  com.schmeedy.pdt.joomla.core.project.model,
  com.schmeedy.pdt.joomla.core.server,

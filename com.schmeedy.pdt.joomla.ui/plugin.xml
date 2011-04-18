@@ -115,7 +115,7 @@
             class="com.schmeedy.pdt.joomla.ui.buildpath.JoomlaContainerWizardPage"
             id="com.schmeedy.pdt.joomla.ui.JoomlaBuildpathContainerPage"
             name="Joomla! API"
-            nature="com.schmeedy.pdt.joomla.core.JoomlaExtensionProject">
+            nature="com.schmeedy.pdt.joomla.core.JoomlaExtensionNature">
       </buildpathContainerPage>
    </extension>
  </plugin>
