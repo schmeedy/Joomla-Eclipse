@@ -23,6 +23,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link com.schmeedy.pdt.joomla.core.server.cfg.LocalJoomlaServer#getExactVersion <em>Exact Version</em>}</li>
  *   <li>{@link com.schmeedy.pdt.joomla.core.server.cfg.LocalJoomlaServer#getInstallDir <em>Install Dir</em>}</li>
  *   <li>{@link com.schmeedy.pdt.joomla.core.server.cfg.LocalJoomlaServer#getBaseUrl <em>Base Url</em>}</li>
+ *   <li>{@link com.schmeedy.pdt.joomla.core.server.cfg.LocalJoomlaServer#getAdminUserCredentials <em>Admin User Credentials</em>}</li>
  * </ul>
  * </p>
  *
@@ -215,5 +216,31 @@ public interface LocalJoomlaServer extends EObject {
 	 * @generated
 	 */
 	void setBaseUrl(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Admin User Credentials</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Admin User Credentials</em>' containment reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Admin User Credentials</em>' containment reference.
+	 * @see #setAdminUserCredentials(UserCredentials)
+	 * @see com.schmeedy.pdt.joomla.core.server.cfg.JoomlaServerConfigurationPackage#getLocalJoomlaServer_AdminUserCredentials()
+	 * @model containment="true"
+	 * @generated
+	 */
+	UserCredentials getAdminUserCredentials();
+
+	/**
+	 * Sets the value of the '{@link com.schmeedy.pdt.joomla.core.server.cfg.LocalJoomlaServer#getAdminUserCredentials <em>Admin User Credentials</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Admin User Credentials</em>' containment reference.
+	 * @see #getAdminUserCredentials()
+	 * @generated
+	 */
+	void setAdminUserCredentials(UserCredentials value);
 
 } // LocalJoomlaServer

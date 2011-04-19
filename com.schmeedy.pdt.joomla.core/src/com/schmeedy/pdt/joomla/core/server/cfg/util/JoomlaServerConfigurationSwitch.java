@@ -17,6 +17,7 @@ import com.schmeedy.pdt.joomla.core.server.cfg.DeploymentRuntime;
 import com.schmeedy.pdt.joomla.core.server.cfg.JoomlaExtensionDeployment;
 import com.schmeedy.pdt.joomla.core.server.cfg.JoomlaServerConfigurationPackage;
 import com.schmeedy.pdt.joomla.core.server.cfg.LocalJoomlaServer;
+import com.schmeedy.pdt.joomla.core.server.cfg.UserCredentials;
 
 /**
  * <!-- begin-user-doc -->
@@ -104,6 +105,12 @@ public class JoomlaServerConfigurationSwitch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case JoomlaServerConfigurationPackage.USER_CREDENTIALS: {
+				UserCredentials userCredentials = (UserCredentials)theEObject;
+				T result = caseUserCredentials(userCredentials);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			case JoomlaServerConfigurationPackage.DEPLOYMENT_DESCRIPTOR: {
 				DeploymentDescriptor deploymentDescriptor = (DeploymentDescriptor)theEObject;
 				T result = caseDeploymentDescriptor(deploymentDescriptor);
@@ -153,6 +160,21 @@ public class JoomlaServerConfigurationSwitch<T> {
 	 * @generated
 	 */
 	public T caseLocalJoomlaServer(LocalJoomlaServer object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>User Credentials</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>User Credentials</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseUserCredentials(UserCredentials object) {
 		return null;
 	}
 

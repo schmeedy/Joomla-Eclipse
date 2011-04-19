@@ -16,10 +16,16 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="exactVersion" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="installDir" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="baseUrl" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="adminUserCredentials" eType="#//UserCredentials"
+        containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="MajorJoomlaVersion">
     <eLiterals name="ONE_FIVE" literal="1.5.x"/>
     <eLiterals name="ONE_SIX" value="1" literal="1.6.x"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="UserCredentials">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="username" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="password" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="DeploymentDescriptor">
     <eStructuralFeatures xsi:type="ecore:EReference" name="runtimes" lowerBound="1"

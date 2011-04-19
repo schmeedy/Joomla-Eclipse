@@ -21,6 +21,7 @@ import com.schmeedy.pdt.joomla.core.server.cfg.JoomlaServerConfigurationFactory;
 import com.schmeedy.pdt.joomla.core.server.cfg.JoomlaServerConfigurationPackage;
 import com.schmeedy.pdt.joomla.core.server.cfg.LocalJoomlaServer;
 import com.schmeedy.pdt.joomla.core.server.cfg.MajorJoomlaVersion;
+import com.schmeedy.pdt.joomla.core.server.cfg.UserCredentials;
 
 /**
  * <!-- begin-user-doc -->
@@ -42,6 +43,13 @@ public class JoomlaServerConfigurationPackageImpl extends EPackageImpl implement
 	 * @generated
 	 */
 	private EClass localJoomlaServerEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass userCredentialsEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -227,6 +235,42 @@ public class JoomlaServerConfigurationPackageImpl extends EPackageImpl implement
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EReference getLocalJoomlaServer_AdminUserCredentials() {
+		return (EReference)localJoomlaServerEClass.getEStructuralFeatures().get(7);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getUserCredentials() {
+		return userCredentialsEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getUserCredentials_Username() {
+		return (EAttribute)userCredentialsEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getUserCredentials_Password() {
+		return (EAttribute)userCredentialsEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getDeploymentDescriptor() {
 		return deploymentDescriptorEClass;
 	}
@@ -333,6 +377,11 @@ public class JoomlaServerConfigurationPackageImpl extends EPackageImpl implement
 		createEAttribute(localJoomlaServerEClass, LOCAL_JOOMLA_SERVER__EXACT_VERSION);
 		createEAttribute(localJoomlaServerEClass, LOCAL_JOOMLA_SERVER__INSTALL_DIR);
 		createEAttribute(localJoomlaServerEClass, LOCAL_JOOMLA_SERVER__BASE_URL);
+		createEReference(localJoomlaServerEClass, LOCAL_JOOMLA_SERVER__ADMIN_USER_CREDENTIALS);
+
+		userCredentialsEClass = createEClass(USER_CREDENTIALS);
+		createEAttribute(userCredentialsEClass, USER_CREDENTIALS__USERNAME);
+		createEAttribute(userCredentialsEClass, USER_CREDENTIALS__PASSWORD);
 
 		deploymentDescriptorEClass = createEClass(DEPLOYMENT_DESCRIPTOR);
 		createEReference(deploymentDescriptorEClass, DEPLOYMENT_DESCRIPTOR__RUNTIMES);
@@ -389,6 +438,11 @@ public class JoomlaServerConfigurationPackageImpl extends EPackageImpl implement
 		initEAttribute(getLocalJoomlaServer_ExactVersion(), ecorePackage.getEString(), "exactVersion", null, 0, 1, LocalJoomlaServer.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getLocalJoomlaServer_InstallDir(), ecorePackage.getEString(), "installDir", null, 0, 1, LocalJoomlaServer.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getLocalJoomlaServer_BaseUrl(), ecorePackage.getEString(), "baseUrl", null, 0, 1, LocalJoomlaServer.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getLocalJoomlaServer_AdminUserCredentials(), this.getUserCredentials(), null, "adminUserCredentials", null, 0, 1, LocalJoomlaServer.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(userCredentialsEClass, UserCredentials.class, "UserCredentials", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getUserCredentials_Username(), ecorePackage.getEString(), "username", null, 0, 1, UserCredentials.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getUserCredentials_Password(), ecorePackage.getEString(), "password", null, 0, 1, UserCredentials.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(deploymentDescriptorEClass, DeploymentDescriptor.class, "DeploymentDescriptor", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getDeploymentDescriptor_Runtimes(), this.getDeploymentRuntime(), null, "runtimes", null, 1, -1, DeploymentDescriptor.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

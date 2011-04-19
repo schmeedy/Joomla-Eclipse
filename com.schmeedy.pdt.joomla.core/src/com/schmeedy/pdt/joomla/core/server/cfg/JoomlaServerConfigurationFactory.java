@@ -44,6 +44,15 @@ public interface JoomlaServerConfigurationFactory extends EFactory {
 	LocalJoomlaServer createLocalJoomlaServer();
 
 	/**
+	 * Returns a new object of class '<em>User Credentials</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>User Credentials</em>'.
+	 * @generated
+	 */
+	UserCredentials createUserCredentials();
+
+	/**
 	 * Returns a new object of class '<em>Deployment Descriptor</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

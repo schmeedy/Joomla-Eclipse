@@ -21,6 +21,7 @@ import com.schmeedy.pdt.joomla.core.server.cfg.JoomlaServerConfigurationFactory;
 import com.schmeedy.pdt.joomla.core.server.cfg.JoomlaServerConfigurationPackage;
 import com.schmeedy.pdt.joomla.core.server.cfg.LocalJoomlaServer;
 import com.schmeedy.pdt.joomla.core.server.cfg.MajorJoomlaVersion;
+import com.schmeedy.pdt.joomla.core.server.cfg.UserCredentials;
 
 /**
  * <!-- begin-user-doc -->
@@ -68,6 +69,7 @@ public class JoomlaServerConfigurationFactoryImpl extends EFactoryImpl implement
 		switch (eClass.getClassifierID()) {
 			case JoomlaServerConfigurationPackage.AVAILABLE_SERVERS: return createAvailableServers();
 			case JoomlaServerConfigurationPackage.LOCAL_JOOMLA_SERVER: return createLocalJoomlaServer();
+			case JoomlaServerConfigurationPackage.USER_CREDENTIALS: return createUserCredentials();
 			case JoomlaServerConfigurationPackage.DEPLOYMENT_DESCRIPTOR: return createDeploymentDescriptor();
 			case JoomlaServerConfigurationPackage.DEPLOYMENT_RUNTIME: return createDeploymentRuntime();
 			case JoomlaServerConfigurationPackage.JOOMLA_EXTENSION_DEPLOYMENT: return createJoomlaExtensionDeployment();
@@ -124,6 +126,16 @@ public class JoomlaServerConfigurationFactoryImpl extends EFactoryImpl implement
 	public LocalJoomlaServer createLocalJoomlaServer() {
 		LocalJoomlaServerImpl localJoomlaServer = new LocalJoomlaServerImpl();
 		return localJoomlaServer;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public UserCredentials createUserCredentials() {
+		UserCredentialsImpl userCredentials = new UserCredentialsImpl();
+		return userCredentials;
 	}
 
 	/**

@@ -44,6 +44,7 @@ import com.schmeedy.pdt.joomla.core.server.cfg.AvailableServers;
 import com.schmeedy.pdt.joomla.core.server.cfg.JoomlaServerConfigurationFactory;
 import com.schmeedy.pdt.joomla.core.server.cfg.JoomlaServerConfigurationPackage.Literals;
 import com.schmeedy.pdt.joomla.core.server.cfg.LocalJoomlaServer;
+import com.schmeedy.pdt.joomla.core.server.cfg.UserCredentials;
 import com.schmeedy.pdt.service.registry.ServiceRegistry;
 
 public class JoomlaServersPreferencePage extends PreferencePage implements IWorkbenchPreferencePage {
@@ -115,7 +116,11 @@ public class JoomlaServersPreferencePage extends PreferencePage implements IWork
 			public void widgetSelected(SelectionEvent event) {
 				final LocalJoomlaServer server = JoomlaServerConfigurationFactory.eINSTANCE.createLocalJoomlaServer();
 				server.setName(getNewJoomlaServerDefaultName());
+				server.setTeamId(getNewJoomlaServerTeamId());
 				server.setBaseUrl("http://localhost/joomla");
+				final UserCredentials adminCredentials = JoomlaServerConfigurationFactory.eINSTANCE.createUserCredentials();
+				adminCredentials.setUsername("admin");
+				server.setAdminUserCredentials(adminCredentials);
 				availableServers.getServers().add(server);
 				
 				final EditLocalJoomlaServerDialog dialog = new EditLocalJoomlaServerDialog(getShell(), server, false);
@@ -139,6 +144,11 @@ public class JoomlaServersPreferencePage extends PreferencePage implements IWork
 					final StructuredSelection selection = (StructuredSelection) serversTableViewer.getSelection();
 					final LocalJoomlaServer edited = (LocalJoomlaServer) selection.getFirstElement();
 					final LocalJoomlaServer original = EcoreUtil.copy(edited);
+					if (edited.getAdminUserCredentials() == null) {
+						final UserCredentials adminCredentials = JoomlaServerConfigurationFactory.eINSTANCE.createUserCredentials();
+						adminCredentials.setUsername("admin");
+						edited.setAdminUserCredentials(adminCredentials);
+					}
 					
 					final EditLocalJoomlaServerDialog dialog = new EditLocalJoomlaServerDialog(getShell(), edited, true);
 					final int result = dialog.open();
@@ -190,6 +200,22 @@ public class JoomlaServersPreferencePage extends PreferencePage implements IWork
 		return candidate;
 	}
 	
+	private String getNewJoomlaServerTeamId() {
+		final String baseName = "development";
+		final Set<String> names = new HashSet<String>();
+		for (final LocalJoomlaServer server: availableServers.getServers()) {
+			if (server.getTeamId() != null) {
+				names.add(server.getTeamId());
+			}
+		}
+		String candidate = baseName;
+		int i = 1;
+		while (names.contains(candidate)) {
+			candidate = baseName + "-" + (i++); 
+		}
+		return candidate;
+	}
+	
 	@Override
 	public boolean performOk() {
 		if (modelModified) {
@@ -226,6 +252,7 @@ public class JoomlaServersPreferencePage extends PreferencePage implements IWork
 			return Boolean.valueOf(selection != null);
 		}
 	}
+	
 	protected DataBindingContext initDataBindings() {
 		final DataBindingContext bindingContext = new DataBindingContext();
 		//

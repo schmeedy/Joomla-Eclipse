@@ -17,6 +17,7 @@ import com.schmeedy.pdt.joomla.core.server.cfg.DeploymentRuntime;
 import com.schmeedy.pdt.joomla.core.server.cfg.JoomlaExtensionDeployment;
 import com.schmeedy.pdt.joomla.core.server.cfg.JoomlaServerConfigurationPackage;
 import com.schmeedy.pdt.joomla.core.server.cfg.LocalJoomlaServer;
+import com.schmeedy.pdt.joomla.core.server.cfg.UserCredentials;
 
 /**
  * <!-- begin-user-doc -->
@@ -83,6 +84,10 @@ public class JoomlaServerConfigurationAdapterFactory extends AdapterFactoryImpl 
 				return createLocalJoomlaServerAdapter();
 			}
 			@Override
+			public Adapter caseUserCredentials(UserCredentials object) {
+				return createUserCredentialsAdapter();
+			}
+			@Override
 			public Adapter caseDeploymentDescriptor(DeploymentDescriptor object) {
 				return createDeploymentDescriptorAdapter();
 			}
@@ -139,6 +144,20 @@ public class JoomlaServerConfigurationAdapterFactory extends AdapterFactoryImpl 
 	 * @generated
 	 */
 	public Adapter createLocalJoomlaServerAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link com.schmeedy.pdt.joomla.core.server.cfg.UserCredentials <em>User Credentials</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see com.schmeedy.pdt.joomla.core.server.cfg.UserCredentials
+	 * @generated
+	 */
+	public Adapter createUserCredentialsAdapter() {
 		return null;
 	}
 

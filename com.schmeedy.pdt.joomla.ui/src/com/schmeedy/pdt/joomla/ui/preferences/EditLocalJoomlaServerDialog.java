@@ -15,6 +15,8 @@ import org.eclipse.core.databinding.validation.ValidationStatus;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.databinding.EMFObservables;
+import org.eclipse.emf.databinding.EMFProperties;
+import org.eclipse.emf.databinding.FeaturePath;
 import org.eclipse.jface.databinding.swt.SWTObservables;
 import org.eclipse.jface.dialogs.IDialogConstants;
 import org.eclipse.jface.dialogs.IMessageProvider;
@@ -52,6 +54,9 @@ public class EditLocalJoomlaServerDialog extends TitleAreaDialog {
 	private Text exactVersionText;
 	
 	private DataBindingContext dataBindingContext;
+	private Text adminUsernameText;
+	private Text adminPasswordText;
+	private Text teamIdText;
 
 	public EditLocalJoomlaServerDialog(Shell parent, LocalJoomlaServer serverConfiguration, boolean edit) {
 		super(parent);
@@ -107,13 +112,13 @@ public class EditLocalJoomlaServerDialog extends TitleAreaDialog {
 			}
 		});
 		
-		final Composite serverPropertiesGroupComposite = new Composite(dialogComposite, SWT.NONE);
-		serverPropertiesGroupComposite.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
-		final GridLayout gl_serverPropertiesGroupComposite = new GridLayout(1, false);
-		gl_serverPropertiesGroupComposite.marginHeight = 0;
-		serverPropertiesGroupComposite.setLayout(gl_serverPropertiesGroupComposite);
+		final Composite basicPropertiesGroupComposite = new Composite(dialogComposite, SWT.NONE);
+		basicPropertiesGroupComposite.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
+		final GridLayout gl_basicPropertiesGroupComposite = new GridLayout(1, false);
+		gl_basicPropertiesGroupComposite.marginHeight = 0;
+		basicPropertiesGroupComposite.setLayout(gl_basicPropertiesGroupComposite);
 		
-		final Group serverPropertiesGroup = new Group(serverPropertiesGroupComposite, SWT.NONE);
+		final Group serverPropertiesGroup = new Group(basicPropertiesGroupComposite, SWT.NONE);
 		serverPropertiesGroup.setText("Properties");
 		final GridLayout gl_serverPropertiesGroup = new GridLayout(2, false);
 		serverPropertiesGroup.setLayout(gl_serverPropertiesGroup);
@@ -131,8 +136,25 @@ public class EditLocalJoomlaServerDialog extends TitleAreaDialog {
 		baseUrlText = new Text(serverPropertiesGroup, SWT.BORDER);
 		baseUrlText.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
 		
+		final Label lblAdminUsername_1 = new Label(serverPropertiesGroup, SWT.NONE);
+		lblAdminUsername_1.setText("Admin Username:");
+		
+		adminUsernameText = new Text(serverPropertiesGroup, SWT.BORDER);
+		adminUsernameText.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
+		
+		final Label lblAdminUsername = new Label(serverPropertiesGroup, SWT.NONE);
+		lblAdminUsername.setText("Admin Password:");
+		
+		adminPasswordText = new Text(serverPropertiesGroup, SWT.BORDER | SWT.PASSWORD);
+		adminPasswordText.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
+		
+		final Label lblTeamId = new Label(serverPropertiesGroup, SWT.NONE);
+		lblTeamId.setText("Team ID:");
+		
+		teamIdText = new Text(serverPropertiesGroup, SWT.BORDER);
+		teamIdText.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
+		
 		final Label lblVersionFamily = new Label(serverPropertiesGroup, SWT.NONE);
-		lblVersionFamily.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
 		lblVersionFamily.setText("Version Family:");
 		
 		versionFamilyText = new Text(serverPropertiesGroup, SWT.BORDER);
@@ -267,22 +289,23 @@ public class EditLocalJoomlaServerDialog extends TitleAreaDialog {
 			}
 		}
 	}
+	
 	protected DataBindingContext initDataBindings() {
 		final DataBindingContext bindingContext = new DataBindingContext();
 		//
-		final IObservableValue installRootTextObserveTextObserveWidget = SWTObservables.observeDelayedValue(300, SWTObservables.observeText(installRootText, SWT.Modify));
+		final IObservableValue installRootTextObserveTextObserveWidget = SWTObservables.observeText(installRootText, SWT.Modify);
 		final IObservableValue serverConfigurationInstallDirObserveValue = EMFObservables.observeValue(serverConfiguration, Literals.LOCAL_JOOMLA_SERVER__INSTALL_DIR);
 		final UpdateValueStrategy strategy_1 = new UpdateValueStrategy();
 		strategy_1.setAfterConvertValidator(new JoomlaInstallDirValidator());
 		bindingContext.bindValue(installRootTextObserveTextObserveWidget, serverConfigurationInstallDirObserveValue, strategy_1, null);
 		//
-		final IObservableValue nameTextObserveTextObserveWidget = SWTObservables.observeDelayedValue(300, SWTObservables.observeText(nameText, SWT.Modify));
+		final IObservableValue nameTextObserveTextObserveWidget = SWTObservables.observeText(nameText, SWT.Modify);
 		final IObservableValue serverConfigurationNameObserveValue = EMFObservables.observeValue(serverConfiguration, Literals.LOCAL_JOOMLA_SERVER__NAME);
 		final UpdateValueStrategy strategy = new UpdateValueStrategy();
 		strategy.setAfterConvertValidator(new NonEmptyStringValidator("Server name cannot be empty."));
 		bindingContext.bindValue(nameTextObserveTextObserveWidget, serverConfigurationNameObserveValue, strategy, null);
 		//
-		final IObservableValue baseUrlTextObserveTextObserveWidget = SWTObservables.observeDelayedValue(300, SWTObservables.observeText(baseUrlText, SWT.Modify));
+		final IObservableValue baseUrlTextObserveTextObserveWidget = SWTObservables.observeText(baseUrlText, SWT.Modify);
 		final IObservableValue serverConfigurationBaseUrlObserveValue = EMFObservables.observeValue(serverConfiguration, Literals.LOCAL_JOOMLA_SERVER__BASE_URL);
 		final UpdateValueStrategy strategy_2 = new UpdateValueStrategy();
 		strategy_2.setAfterConvertValidator(new NonEmptyStringValidator("Server base URL cannot be empty."));
@@ -297,6 +320,24 @@ public class EditLocalJoomlaServerDialog extends TitleAreaDialog {
 		final IObservableValue exactVersionTextObserveTextObserveWidget = SWTObservables.observeText(exactVersionText, SWT.Modify);
 		final IObservableValue serverConfigurationExactVersionObserveValue = EMFObservables.observeValue(serverConfiguration, Literals.LOCAL_JOOMLA_SERVER__EXACT_VERSION);
 		bindingContext.bindValue(exactVersionTextObserveTextObserveWidget, serverConfigurationExactVersionObserveValue, new UpdateValueStrategy(UpdateValueStrategy.POLICY_NEVER), null);
+		//
+		final IObservableValue adminUsernameTextObserveTextObserveWidget = SWTObservables.observeText(adminUsernameText, SWT.Modify);
+		final IObservableValue serverConfigurationUsernameObserveValue = EMFProperties.value(FeaturePath.fromList(Literals.LOCAL_JOOMLA_SERVER__ADMIN_USER_CREDENTIALS, Literals.USER_CREDENTIALS__USERNAME)).observe(serverConfiguration);
+		final UpdateValueStrategy strategy_4 = new UpdateValueStrategy();
+		strategy_4.setAfterConvertValidator(new NonEmptyStringValidator("Admin username cannot be empty."));
+		bindingContext.bindValue(adminUsernameTextObserveTextObserveWidget, serverConfigurationUsernameObserveValue, strategy_4, null);
+		//
+		final IObservableValue adminPasswordTextObserveTextObserveWidget = SWTObservables.observeText(adminPasswordText, SWT.Modify);
+		final IObservableValue serverConfigurationPasswordObserveValue = EMFProperties.value(FeaturePath.fromList(Literals.LOCAL_JOOMLA_SERVER__ADMIN_USER_CREDENTIALS, Literals.USER_CREDENTIALS__PASSWORD)).observe(serverConfiguration);
+		final UpdateValueStrategy strategy_5 = new UpdateValueStrategy();
+		strategy_5.setAfterConvertValidator(new NonEmptyStringValidator("Admin password cannot be empty."));
+		bindingContext.bindValue(adminPasswordTextObserveTextObserveWidget, serverConfigurationPasswordObserveValue, strategy_5, null);
+		//
+		final IObservableValue teamIdTextObserveTextObserveWidget = SWTObservables.observeText(teamIdText, SWT.Modify);
+		final IObservableValue serverConfigurationTeamIdObserveValue = EMFObservables.observeValue(serverConfiguration, Literals.LOCAL_JOOMLA_SERVER__TEAM_ID);
+		final UpdateValueStrategy strategy_6 = new UpdateValueStrategy();
+		strategy_6.setAfterConvertValidator(new NonEmptyStringValidator("Team ID cannot be empty."));
+		bindingContext.bindValue(teamIdTextObserveTextObserveWidget, serverConfigurationTeamIdObserveValue, strategy_6, null);
 		//
 		return bindingContext;
 	}

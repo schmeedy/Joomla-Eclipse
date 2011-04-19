@@ -7,7 +7,9 @@
 package com.schmeedy.pdt.joomla.core.server.cfg.impl;
 
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
@@ -15,6 +17,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import com.schmeedy.pdt.joomla.core.server.cfg.JoomlaServerConfigurationPackage;
 import com.schmeedy.pdt.joomla.core.server.cfg.LocalJoomlaServer;
 import com.schmeedy.pdt.joomla.core.server.cfg.MajorJoomlaVersion;
+import com.schmeedy.pdt.joomla.core.server.cfg.UserCredentials;
 
 /**
  * <!-- begin-user-doc -->
@@ -30,6 +33,7 @@ import com.schmeedy.pdt.joomla.core.server.cfg.MajorJoomlaVersion;
  *   <li>{@link com.schmeedy.pdt.joomla.core.server.cfg.impl.LocalJoomlaServerImpl#getExactVersion <em>Exact Version</em>}</li>
  *   <li>{@link com.schmeedy.pdt.joomla.core.server.cfg.impl.LocalJoomlaServerImpl#getInstallDir <em>Install Dir</em>}</li>
  *   <li>{@link com.schmeedy.pdt.joomla.core.server.cfg.impl.LocalJoomlaServerImpl#getBaseUrl <em>Base Url</em>}</li>
+ *   <li>{@link com.schmeedy.pdt.joomla.core.server.cfg.impl.LocalJoomlaServerImpl#getAdminUserCredentials <em>Admin User Credentials</em>}</li>
  * </ul>
  * </p>
  *
@@ -175,6 +179,16 @@ public class LocalJoomlaServerImpl extends EObjectImpl implements LocalJoomlaSer
 	 * @ordered
 	 */
 	protected String baseUrl = BASE_URL_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getAdminUserCredentials() <em>Admin User Credentials</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getAdminUserCredentials()
+	 * @generated
+	 * @ordered
+	 */
+	protected UserCredentials adminUserCredentials;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -359,6 +373,63 @@ public class LocalJoomlaServerImpl extends EObjectImpl implements LocalJoomlaSer
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public UserCredentials getAdminUserCredentials() {
+		return adminUserCredentials;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetAdminUserCredentials(UserCredentials newAdminUserCredentials, NotificationChain msgs) {
+		UserCredentials oldAdminUserCredentials = adminUserCredentials;
+		adminUserCredentials = newAdminUserCredentials;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, JoomlaServerConfigurationPackage.LOCAL_JOOMLA_SERVER__ADMIN_USER_CREDENTIALS, oldAdminUserCredentials, newAdminUserCredentials);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setAdminUserCredentials(UserCredentials newAdminUserCredentials) {
+		if (newAdminUserCredentials != adminUserCredentials) {
+			NotificationChain msgs = null;
+			if (adminUserCredentials != null)
+				msgs = ((InternalEObject)adminUserCredentials).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - JoomlaServerConfigurationPackage.LOCAL_JOOMLA_SERVER__ADMIN_USER_CREDENTIALS, null, msgs);
+			if (newAdminUserCredentials != null)
+				msgs = ((InternalEObject)newAdminUserCredentials).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - JoomlaServerConfigurationPackage.LOCAL_JOOMLA_SERVER__ADMIN_USER_CREDENTIALS, null, msgs);
+			msgs = basicSetAdminUserCredentials(newAdminUserCredentials, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, JoomlaServerConfigurationPackage.LOCAL_JOOMLA_SERVER__ADMIN_USER_CREDENTIALS, newAdminUserCredentials, newAdminUserCredentials));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case JoomlaServerConfigurationPackage.LOCAL_JOOMLA_SERVER__ADMIN_USER_CREDENTIALS:
+				return basicSetAdminUserCredentials(null, msgs);
+		}
+		return super.eInverseRemove(otherEnd, featureID, msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
@@ -376,6 +447,8 @@ public class LocalJoomlaServerImpl extends EObjectImpl implements LocalJoomlaSer
 				return getInstallDir();
 			case JoomlaServerConfigurationPackage.LOCAL_JOOMLA_SERVER__BASE_URL:
 				return getBaseUrl();
+			case JoomlaServerConfigurationPackage.LOCAL_JOOMLA_SERVER__ADMIN_USER_CREDENTIALS:
+				return getAdminUserCredentials();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -408,6 +481,9 @@ public class LocalJoomlaServerImpl extends EObjectImpl implements LocalJoomlaSer
 				return;
 			case JoomlaServerConfigurationPackage.LOCAL_JOOMLA_SERVER__BASE_URL:
 				setBaseUrl((String)newValue);
+				return;
+			case JoomlaServerConfigurationPackage.LOCAL_JOOMLA_SERVER__ADMIN_USER_CREDENTIALS:
+				setAdminUserCredentials((UserCredentials)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -442,6 +518,9 @@ public class LocalJoomlaServerImpl extends EObjectImpl implements LocalJoomlaSer
 			case JoomlaServerConfigurationPackage.LOCAL_JOOMLA_SERVER__BASE_URL:
 				setBaseUrl(BASE_URL_EDEFAULT);
 				return;
+			case JoomlaServerConfigurationPackage.LOCAL_JOOMLA_SERVER__ADMIN_USER_CREDENTIALS:
+				setAdminUserCredentials((UserCredentials)null);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -468,6 +547,8 @@ public class LocalJoomlaServerImpl extends EObjectImpl implements LocalJoomlaSer
 				return INSTALL_DIR_EDEFAULT == null ? installDir != null : !INSTALL_DIR_EDEFAULT.equals(installDir);
 			case JoomlaServerConfigurationPackage.LOCAL_JOOMLA_SERVER__BASE_URL:
 				return BASE_URL_EDEFAULT == null ? baseUrl != null : !BASE_URL_EDEFAULT.equals(baseUrl);
+			case JoomlaServerConfigurationPackage.LOCAL_JOOMLA_SERVER__ADMIN_USER_CREDENTIALS:
+				return adminUserCredentials != null;
 		}
 		return super.eIsSet(featureID);
 	}

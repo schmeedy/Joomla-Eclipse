@@ -162,13 +162,59 @@ public interface JoomlaServerConfigurationPackage extends EPackage {
 	int LOCAL_JOOMLA_SERVER__BASE_URL = 6;
 
 	/**
+	 * The feature id for the '<em><b>Admin User Credentials</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LOCAL_JOOMLA_SERVER__ADMIN_USER_CREDENTIALS = 7;
+
+	/**
 	 * The number of structural features of the '<em>Local Joomla Server</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int LOCAL_JOOMLA_SERVER_FEATURE_COUNT = 7;
+	int LOCAL_JOOMLA_SERVER_FEATURE_COUNT = 8;
+
+	/**
+	 * The meta object id for the '{@link com.schmeedy.pdt.joomla.core.server.cfg.impl.UserCredentialsImpl <em>User Credentials</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see com.schmeedy.pdt.joomla.core.server.cfg.impl.UserCredentialsImpl
+	 * @see com.schmeedy.pdt.joomla.core.server.cfg.impl.JoomlaServerConfigurationPackageImpl#getUserCredentials()
+	 * @generated
+	 */
+	int USER_CREDENTIALS = 2;
+
+	/**
+	 * The feature id for the '<em><b>Username</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int USER_CREDENTIALS__USERNAME = 0;
+
+	/**
+	 * The feature id for the '<em><b>Password</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int USER_CREDENTIALS__PASSWORD = 1;
+
+	/**
+	 * The number of structural features of the '<em>User Credentials</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int USER_CREDENTIALS_FEATURE_COUNT = 2;
 
 	/**
 	 * The meta object id for the '{@link com.schmeedy.pdt.joomla.core.server.cfg.impl.DeploymentDescriptorImpl <em>Deployment Descriptor</em>}' class.
@@ -178,7 +224,7 @@ public interface JoomlaServerConfigurationPackage extends EPackage {
 	 * @see com.schmeedy.pdt.joomla.core.server.cfg.impl.JoomlaServerConfigurationPackageImpl#getDeploymentDescriptor()
 	 * @generated
 	 */
-	int DEPLOYMENT_DESCRIPTOR = 2;
+	int DEPLOYMENT_DESCRIPTOR = 3;
 
 	/**
 	 * The feature id for the '<em><b>Runtimes</b></em>' containment reference list.
@@ -206,7 +252,7 @@ public interface JoomlaServerConfigurationPackage extends EPackage {
 	 * @see com.schmeedy.pdt.joomla.core.server.cfg.impl.JoomlaServerConfigurationPackageImpl#getDeploymentRuntime()
 	 * @generated
 	 */
-	int DEPLOYMENT_RUNTIME = 3;
+	int DEPLOYMENT_RUNTIME = 4;
 
 	/**
 	 * The feature id for the '<em><b>Server</b></em>' containment reference.
@@ -243,7 +289,7 @@ public interface JoomlaServerConfigurationPackage extends EPackage {
 	 * @see com.schmeedy.pdt.joomla.core.server.cfg.impl.JoomlaServerConfigurationPackageImpl#getJoomlaExtensionDeployment()
 	 * @generated
 	 */
-	int JOOMLA_EXTENSION_DEPLOYMENT = 4;
+	int JOOMLA_EXTENSION_DEPLOYMENT = 5;
 
 	/**
 	 * The feature id for the '<em><b>Runtime</b></em>' reference.
@@ -271,7 +317,7 @@ public interface JoomlaServerConfigurationPackage extends EPackage {
 	 * @see com.schmeedy.pdt.joomla.core.server.cfg.impl.JoomlaServerConfigurationPackageImpl#getMajorJoomlaVersion()
 	 * @generated
 	 */
-	int MAJOR_JOOMLA_VERSION = 5;
+	int MAJOR_JOOMLA_VERSION = 6;
 
 
 	/**
@@ -381,6 +427,49 @@ public interface JoomlaServerConfigurationPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getLocalJoomlaServer_BaseUrl();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link com.schmeedy.pdt.joomla.core.server.cfg.LocalJoomlaServer#getAdminUserCredentials <em>Admin User Credentials</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Admin User Credentials</em>'.
+	 * @see com.schmeedy.pdt.joomla.core.server.cfg.LocalJoomlaServer#getAdminUserCredentials()
+	 * @see #getLocalJoomlaServer()
+	 * @generated
+	 */
+	EReference getLocalJoomlaServer_AdminUserCredentials();
+
+	/**
+	 * Returns the meta object for class '{@link com.schmeedy.pdt.joomla.core.server.cfg.UserCredentials <em>User Credentials</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>User Credentials</em>'.
+	 * @see com.schmeedy.pdt.joomla.core.server.cfg.UserCredentials
+	 * @generated
+	 */
+	EClass getUserCredentials();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.schmeedy.pdt.joomla.core.server.cfg.UserCredentials#getUsername <em>Username</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Username</em>'.
+	 * @see com.schmeedy.pdt.joomla.core.server.cfg.UserCredentials#getUsername()
+	 * @see #getUserCredentials()
+	 * @generated
+	 */
+	EAttribute getUserCredentials_Username();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.schmeedy.pdt.joomla.core.server.cfg.UserCredentials#getPassword <em>Password</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Password</em>'.
+	 * @see com.schmeedy.pdt.joomla.core.server.cfg.UserCredentials#getPassword()
+	 * @see #getUserCredentials()
+	 * @generated
+	 */
+	EAttribute getUserCredentials_Password();
 
 	/**
 	 * Returns the meta object for class '{@link com.schmeedy.pdt.joomla.core.server.cfg.DeploymentDescriptor <em>Deployment Descriptor</em>}'.
@@ -571,6 +660,40 @@ public interface JoomlaServerConfigurationPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute LOCAL_JOOMLA_SERVER__BASE_URL = eINSTANCE.getLocalJoomlaServer_BaseUrl();
+
+		/**
+		 * The meta object literal for the '<em><b>Admin User Credentials</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference LOCAL_JOOMLA_SERVER__ADMIN_USER_CREDENTIALS = eINSTANCE.getLocalJoomlaServer_AdminUserCredentials();
+
+		/**
+		 * The meta object literal for the '{@link com.schmeedy.pdt.joomla.core.server.cfg.impl.UserCredentialsImpl <em>User Credentials</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see com.schmeedy.pdt.joomla.core.server.cfg.impl.UserCredentialsImpl
+		 * @see com.schmeedy.pdt.joomla.core.server.cfg.impl.JoomlaServerConfigurationPackageImpl#getUserCredentials()
+		 * @generated
+		 */
+		EClass USER_CREDENTIALS = eINSTANCE.getUserCredentials();
+
+		/**
+		 * The meta object literal for the '<em><b>Username</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute USER_CREDENTIALS__USERNAME = eINSTANCE.getUserCredentials_Username();
+
+		/**
+		 * The meta object literal for the '<em><b>Password</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute USER_CREDENTIALS__PASSWORD = eINSTANCE.getUserCredentials_Password();
 
 		/**
 		 * The meta object literal for the '{@link com.schmeedy.pdt.joomla.core.server.cfg.impl.DeploymentDescriptorImpl <em>Deployment Descriptor</em>}' class.
