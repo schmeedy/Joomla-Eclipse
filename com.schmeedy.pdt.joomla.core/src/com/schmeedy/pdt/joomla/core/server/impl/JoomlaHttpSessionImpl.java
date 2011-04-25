@@ -18,6 +18,7 @@ import com.schmeedy.pdt.joomla.core.server.IJoomlaHttpSession;
 import com.schmeedy.pdt.joomla.core.server.InvalidCredentialsException;
 import com.schmeedy.pdt.joomla.core.server.cfg.DeploymentRuntime;
 import com.schmeedy.pdt.joomla.core.server.cfg.UserCredentials;
+import com.schmeedy.pdt.joomla.core.server.impl.JoomlaSystemMessage.MessageSeverity;
 
 public class JoomlaHttpSessionImpl implements IJoomlaHttpSession {
 
@@ -48,10 +49,11 @@ public class JoomlaHttpSessionImpl implements IJoomlaHttpSession {
 		final PostMethod loginRequest = new PostMethod(loginUrl);
 		loginRequest.setRequestBody(loginRequestParams.toArray(new NameValuePair[loginRequestParams.size()]));
 		final TagNode pageNode = doExecuteAndParse(loginRequest, 0);
-		if (isLoginPage(pageNode)) { // FIXME: more bulletproof logic here
-			final String joomlaError = ServerUtils.extractErrorMessage(pageNode);
-			final String msg = joomlaError == null ? "Failed to extract Joomla! error message." : joomlaError;
-			throw new InvalidCredentialsException("Failed to log in using admin user credentials. " + msg);
+		if (isLoginPage(pageNode)) {
+			final JoomlaSystemMessage message = ServerUtils.extractFirstSystemMessage(pageNode);
+			if (message != null && message.getSeverity() == MessageSeverity.ERROR) {
+				throw new InvalidCredentialsException("Failed to log in using admin user credentials: " + message.getMessage());
+			}
 		}
 		return doExecuteAndParse(request, followRedirects ? MAX_REDIRECTS : 0);
 	}

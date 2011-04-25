@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Collections;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 
 import org.apache.commons.httpclient.HttpMethod;
@@ -84,10 +85,55 @@ public class JoomlaDeployerImpl implements IJoomlaDeployer {
 		installParams.add(new NameValuePair("installtype", "folder"));
 		installParams.add(new NameValuePair("install_directory", extensionDir));
 		
-		final TagNode result = session.executeAndParseResponseBody(new InstallRequest(runtime, installParams), true);
-		System.out.println(ServerUtils.serialize(result)); // TODO: verify result
+		final TagNode result = session.executeAndParseResponseBody(new GenericPostRequest("administrator/index.php?option=com_installer&amp;view=install", runtime, installParams), true);
+		final JoomlaSystemMessage systemMessage = ServerUtils.extractFirstSystemMessage(result);
+		if (systemMessage != null) {
+			System.out.println(systemMessage);
+		}
 	}
 	
+	// TEMPORARY
+	public void uninstall(DeploymentRuntime runtime, String extensionName) {
+		final IJoomlaHttpSession session = runtime.getHttpSession();
+		final TagNode extensionManagementPage = session.executeAndParseResponseBody(new PrepareRemovalRequest(runtime, extensionName), true);
+		final String extensionId = getExtensionId(extensionName, extensionManagementPage);
+		if (extensionId == null) {
+			System.out.println("Extension not found on server.");
+			return; // Possible causes: extension not installed, bad logic, different markup...
+		}
+		
+		final List<NameValuePair> uninstallRequestParams = new LinkedList<NameValuePair>();
+		uninstallRequestParams.add(new NameValuePair("task", "manage.remove"));
+		uninstallRequestParams.add(new NameValuePair("cid[]", extensionId));
+		uninstallRequestParams.add(ServerUtils.extractSessionTokenParam(extensionManagementPage));
+		final TagNode result = session.executeAndParseResponseBody(new GenericPostRequest("administrator/index.php?option=com_installer&view=manage", runtime, uninstallRequestParams), true);
+		final JoomlaSystemMessage systemMessage = ServerUtils.extractFirstSystemMessage(result);
+		if (systemMessage != null) {
+			System.out.println(systemMessage);
+		}
+	}
+
+	private String getExtensionId(String extensionName, TagNode extensionManagementPage) {
+		final TagNode adminTableBody = ServerUtils.evaluateXPathForSingleTag("//table[@class='adminlist']//tbody", extensionManagementPage);;
+		if (adminTableBody == null) {
+			return null;
+		}
+		
+		for (final TagNode rowNode : adminTableBody.getElementsByName("tr", true)) {
+			final TagNode inputNode = ServerUtils.evaluateXPathForSingleTag("//input[@name='cid[]']", rowNode);
+			if (inputNode == null) {
+				continue;
+			}
+			final String extensionId = inputNode.getAttributeByName("value");
+			for (final TagNode columnNode : rowNode.getElementsByName("td", false)) {
+				if (extensionName.equalsIgnoreCase(columnNode.getText().toString().trim())) {
+					return extensionId;
+				}
+			}
+		}
+		return null;
+	}
+
 	private static class PrepareInstallationRequest implements IMethodFactory {
 		private final DeploymentRuntime runtime;
 		
@@ -103,21 +149,42 @@ public class JoomlaDeployerImpl implements IJoomlaDeployer {
 		}
 	}
 	
-	private static class InstallRequest implements IMethodFactory {
+	private static class GenericPostRequest implements IMethodFactory {
+		private final String pageUrl;
 		private final DeploymentRuntime runtime;
 		private final List<NameValuePair> requestParams;
 		
-		public InstallRequest(DeploymentRuntime runtime, List<NameValuePair> requestParams) {
+		public GenericPostRequest(String pageUrl, DeploymentRuntime runtime, List<NameValuePair> requestParams) {
 			super();
+			this.pageUrl = pageUrl;
 			this.runtime = runtime;
 			this.requestParams = requestParams;
 		}
 		
 		@Override
 		public HttpMethod createMethod() {
-			final String url = ServerUtils.getUrl(runtime, "administrator/index.php?option=com_installer&amp;view=install");
+			final String url = ServerUtils.getUrl(runtime, pageUrl);
 			final PostMethod request = new PostMethod(url);
 			request.setRequestBody(requestParams.toArray(new NameValuePair[requestParams.size()]));
+			return request;
+		}
+	}
+	
+	private static class PrepareRemovalRequest implements IMethodFactory {
+		private final DeploymentRuntime runtime;
+		private final String extensionName;
+
+		public PrepareRemovalRequest(DeploymentRuntime runtime, String extensionName) {
+			super();
+			this.runtime = runtime;
+			this.extensionName = extensionName;
+		}
+		
+		@Override
+		public HttpMethod createMethod() {
+			final String url = ServerUtils.getUrl(runtime, "administrator/index.php?option=com_installer&view=manage");
+			final PostMethod request = new PostMethod(url);
+			request.setRequestBody(new NameValuePair[] { new NameValuePair("filters[search]", extensionName) });
 			return request;
 		}
 	}

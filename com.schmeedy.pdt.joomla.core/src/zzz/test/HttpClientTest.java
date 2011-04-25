@@ -40,7 +40,8 @@ public class HttpClientTest {
 		credentials.setPassword("admin");
 		server.setAdminUserCredentials(credentials);
 		
-		new JoomlaDeployerImpl().install(runtime, "C:\\Users\\schmeedy\\temp\\joomla-extensions\\com_helloworld");
+//		new JoomlaDeployerImpl().install(runtime, "C:\\Users\\schmeedy\\temp\\joomla-extensions\\com_helloworld");
+		new JoomlaDeployerImpl().uninstall(runtime, "helloworld");
 	}
 
 	private static void executeTestScenario() throws Exception {

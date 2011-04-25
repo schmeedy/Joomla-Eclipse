@@ -12,21 +12,43 @@ import org.htmlcleaner.TagNode;
 import org.htmlcleaner.XPatherException;
 
 import com.schmeedy.pdt.joomla.core.server.cfg.DeploymentRuntime;
+import com.schmeedy.pdt.joomla.core.server.impl.JoomlaSystemMessage.MessageSeverity;
 
 class ServerUtils {
 
 	private ServerUtils() {}
 	
-	public static String extractErrorMessage(TagNode pageNode) {
-		final List<TagNode> messageItems = evaluateXPathForTags("//dl[@id='system-message']//dd[@class='error message']//li", pageNode);
-		String message = "";
-		for (final TagNode messageItem : messageItems) {
-			if (message != "") {
-				message += ". ";
-			}
-			message += messageItem.getText();
+	public static JoomlaSystemMessage extractFirstSystemMessage(TagNode pageNode) {
+		final List<TagNode> messageNodeCandidates = evaluateXPathForTags("//dl[@id='system-message']", pageNode);
+		final TagNode messageNode = messageNodeCandidates.isEmpty() ? null : messageNodeCandidates.get(0);
+		if (messageNode == null) {
+			return null;
 		}
-		return message.length() == 0 ? null : message;
+		
+		final TagNode[] termNodes = messageNode.getElementsByName("dt", true);
+		if (termNodes.length == 0) {
+			return null;
+		}
+		
+		final TagNode[] messageTextNodes = messageNode.getElementsByName("li", true);
+		if (messageTextNodes.length == 0) {
+			return null;
+		}
+		
+		final String termNodeClass = termNodes[0].getAttributeByName("class");
+		final MessageSeverity severity = termNodeClass != null && termNodeClass.toLowerCase().contains("error") ? MessageSeverity.ERROR : MessageSeverity.INFO;
+		final String messageText = messageTextNodes[0].getText().toString();
+		return new JoomlaSystemMessage(messageText, severity);		
+	}
+	
+	public static NameValuePair extractSessionTokenParam(TagNode pageNode) {
+		final List<NameValuePair> hiddenFieldParams = extractInputNameValuePairs("//input[@type='hidden']", pageNode);
+		for (final NameValuePair param : hiddenFieldParams) {
+			if (param.getName().length() == 32 && "1".equals(param.getValue())) {
+				return param;
+			}
+		}
+		throw new IllegalArgumentException("No session token present in the supplied page.");
 	}
 	
 	public static List<NameValuePair> extractInputNameValuePairs(String xPath, TagNode context) {
@@ -37,6 +59,11 @@ class ServerUtils {
 			pairs.add(param);
 		}
 		return pairs;
+	}
+	
+	public static TagNode evaluateXPathForSingleTag(String tagXPath, TagNode context) {
+		final List<TagNode> tags = evaluateXPathForTags(tagXPath, context);
+		return tags.isEmpty() ? null : tags.get(0);
 	}
 	
 	public static List<TagNode> evaluateXPathForTags(String tagXPath, TagNode context) {
