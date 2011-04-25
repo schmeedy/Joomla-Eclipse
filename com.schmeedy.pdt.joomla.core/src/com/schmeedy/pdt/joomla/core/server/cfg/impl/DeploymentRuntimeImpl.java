@@ -18,10 +18,12 @@ import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
+import com.schmeedy.pdt.joomla.core.server.IJoomlaHttpSession;
 import com.schmeedy.pdt.joomla.core.server.cfg.DeploymentRuntime;
 import com.schmeedy.pdt.joomla.core.server.cfg.JoomlaExtensionDeployment;
 import com.schmeedy.pdt.joomla.core.server.cfg.JoomlaServerConfigurationPackage;
 import com.schmeedy.pdt.joomla.core.server.cfg.LocalJoomlaServer;
+import com.schmeedy.pdt.joomla.core.server.impl.JoomlaHttpSessionImpl;
 
 /**
  * <!-- begin-user-doc -->
@@ -32,6 +34,7 @@ import com.schmeedy.pdt.joomla.core.server.cfg.LocalJoomlaServer;
  * <ul>
  *   <li>{@link com.schmeedy.pdt.joomla.core.server.cfg.impl.DeploymentRuntimeImpl#getServer <em>Server</em>}</li>
  *   <li>{@link com.schmeedy.pdt.joomla.core.server.cfg.impl.DeploymentRuntimeImpl#getDeployedExtensions <em>Deployed Extensions</em>}</li>
+ *   <li>{@link com.schmeedy.pdt.joomla.core.server.cfg.impl.DeploymentRuntimeImpl#getHttpSession <em>Http Session</em>}</li>
  * </ul>
  * </p>
  *
@@ -57,6 +60,26 @@ public class DeploymentRuntimeImpl extends EObjectImpl implements DeploymentRunt
 	 * @ordered
 	 */
 	protected EList<JoomlaExtensionDeployment> deployedExtensions;
+
+	/**
+	 * The default value of the '{@link #getHttpSession() <em>Http Session</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getHttpSession()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final IJoomlaHttpSession HTTP_SESSION_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getHttpSession() <em>Http Session</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getHttpSession()
+	 * @generated NOT
+	 * @ordered
+	 */
+	protected IJoomlaHttpSession httpSession = new JoomlaHttpSessionImpl(this);
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -93,10 +116,10 @@ public class DeploymentRuntimeImpl extends EObjectImpl implements DeploymentRunt
 	 * @generated
 	 */
 	public NotificationChain basicSetServer(LocalJoomlaServer newServer, NotificationChain msgs) {
-		LocalJoomlaServer oldServer = server;
+		final LocalJoomlaServer oldServer = server;
 		server = newServer;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, JoomlaServerConfigurationPackage.DEPLOYMENT_RUNTIME__SERVER, oldServer, newServer);
+			final ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, JoomlaServerConfigurationPackage.DEPLOYMENT_RUNTIME__SERVER, oldServer, newServer);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -133,6 +156,16 @@ public class DeploymentRuntimeImpl extends EObjectImpl implements DeploymentRunt
 			deployedExtensions = new EObjectWithInverseResolvingEList<JoomlaExtensionDeployment>(JoomlaExtensionDeployment.class, this, JoomlaServerConfigurationPackage.DEPLOYMENT_RUNTIME__DEPLOYED_EXTENSIONS, JoomlaServerConfigurationPackage.JOOMLA_EXTENSION_DEPLOYMENT__RUNTIME);
 		}
 		return deployedExtensions;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public IJoomlaHttpSession getHttpSession() {
+		return httpSession;
 	}
 
 	/**
@@ -178,6 +211,8 @@ public class DeploymentRuntimeImpl extends EObjectImpl implements DeploymentRunt
 				return getServer();
 			case JoomlaServerConfigurationPackage.DEPLOYMENT_RUNTIME__DEPLOYED_EXTENSIONS:
 				return getDeployedExtensions();
+			case JoomlaServerConfigurationPackage.DEPLOYMENT_RUNTIME__HTTP_SESSION:
+				return getHttpSession();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -232,8 +267,26 @@ public class DeploymentRuntimeImpl extends EObjectImpl implements DeploymentRunt
 				return server != null;
 			case JoomlaServerConfigurationPackage.DEPLOYMENT_RUNTIME__DEPLOYED_EXTENSIONS:
 				return deployedExtensions != null && !deployedExtensions.isEmpty();
+			case JoomlaServerConfigurationPackage.DEPLOYMENT_RUNTIME__HTTP_SESSION:
+				return HTTP_SESSION_EDEFAULT == null ? httpSession != null : !HTTP_SESSION_EDEFAULT.equals(httpSession);
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String toString() {
+		if (eIsProxy()) return super.toString();
+
+		final StringBuffer result = new StringBuffer(super.toString());
+		result.append(" (httpSession: ");
+		result.append(httpSession);
+		result.append(')');
+		return result.toString();
 	}
 
 } //DeploymentRuntimeImpl

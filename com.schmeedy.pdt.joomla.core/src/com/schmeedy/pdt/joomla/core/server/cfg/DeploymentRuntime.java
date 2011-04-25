@@ -9,6 +9,8 @@ package com.schmeedy.pdt.joomla.core.server.cfg;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 
+import com.schmeedy.pdt.joomla.core.server.IJoomlaHttpSession;
+
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Deployment Runtime</b></em>'.
@@ -19,6 +21,7 @@ import org.eclipse.emf.ecore.EObject;
  * <ul>
  *   <li>{@link com.schmeedy.pdt.joomla.core.server.cfg.DeploymentRuntime#getServer <em>Server</em>}</li>
  *   <li>{@link com.schmeedy.pdt.joomla.core.server.cfg.DeploymentRuntime#getDeployedExtensions <em>Deployed Extensions</em>}</li>
+ *   <li>{@link com.schmeedy.pdt.joomla.core.server.cfg.DeploymentRuntime#getHttpSession <em>Http Session</em>}</li>
  * </ul>
  * </p>
  *
@@ -70,5 +73,20 @@ public interface DeploymentRuntime extends EObject {
 	 * @generated
 	 */
 	EList<JoomlaExtensionDeployment> getDeployedExtensions();
+
+	/**
+	 * Returns the value of the '<em><b>Http Session</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Http Session</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Http Session</em>' attribute.
+	 * @see com.schmeedy.pdt.joomla.core.server.cfg.JoomlaServerConfigurationPackage#getDeploymentRuntime_HttpSession()
+	 * @model dataType="com.schmeedy.pdt.joomla.core.server.cfg.IJoomlaHttpSession" required="true" transient="true" changeable="false"
+	 * @generated
+	 */
+	IJoomlaHttpSession getHttpSession();
 
 } // DeploymentRuntime

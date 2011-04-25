@@ -36,9 +36,13 @@
         eType="#//LocalJoomlaServer" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="deployedExtensions" upperBound="-1"
         eType="#//JoomlaExtensionDeployment" eOpposite="#//JoomlaExtensionDeployment/runtime"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="httpSession" lowerBound="1"
+        eType="#//IJoomlaHttpSession" changeable="false" transient="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="JoomlaExtensionDeployment">
     <eStructuralFeatures xsi:type="ecore:EReference" name="runtime" lowerBound="1"
         eType="#//DeploymentRuntime" eOpposite="#//DeploymentRuntime/deployedExtensions"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EDataType" name="IJoomlaHttpSession" instanceClassName="com.schmeedy.pdt.joomla.core.server.IJoomlaHttpSession"
+      serializable="false"/>
 </ecore:EPackage>

@@ -8,11 +8,13 @@ package com.schmeedy.pdt.joomla.core.server.cfg.impl;
 
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 
+import com.schmeedy.pdt.joomla.core.server.IJoomlaHttpSession;
 import com.schmeedy.pdt.joomla.core.server.cfg.AvailableServers;
 import com.schmeedy.pdt.joomla.core.server.cfg.DeploymentDescriptor;
 import com.schmeedy.pdt.joomla.core.server.cfg.DeploymentRuntime;
@@ -78,6 +80,13 @@ public class JoomlaServerConfigurationPackageImpl extends EPackageImpl implement
 	 * @generated
 	 */
 	private EEnum majorJoomlaVersionEEnum = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EDataType iJoomlaHttpSessionEDataType = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -316,6 +325,15 @@ public class JoomlaServerConfigurationPackageImpl extends EPackageImpl implement
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getDeploymentRuntime_HttpSession() {
+		return (EAttribute)deploymentRuntimeEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getJoomlaExtensionDeployment() {
 		return joomlaExtensionDeploymentEClass;
 	}
@@ -336,6 +354,15 @@ public class JoomlaServerConfigurationPackageImpl extends EPackageImpl implement
 	 */
 	public EEnum getMajorJoomlaVersion() {
 		return majorJoomlaVersionEEnum;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EDataType getIJoomlaHttpSession() {
+		return iJoomlaHttpSessionEDataType;
 	}
 
 	/**
@@ -389,12 +416,16 @@ public class JoomlaServerConfigurationPackageImpl extends EPackageImpl implement
 		deploymentRuntimeEClass = createEClass(DEPLOYMENT_RUNTIME);
 		createEReference(deploymentRuntimeEClass, DEPLOYMENT_RUNTIME__SERVER);
 		createEReference(deploymentRuntimeEClass, DEPLOYMENT_RUNTIME__DEPLOYED_EXTENSIONS);
+		createEAttribute(deploymentRuntimeEClass, DEPLOYMENT_RUNTIME__HTTP_SESSION);
 
 		joomlaExtensionDeploymentEClass = createEClass(JOOMLA_EXTENSION_DEPLOYMENT);
 		createEReference(joomlaExtensionDeploymentEClass, JOOMLA_EXTENSION_DEPLOYMENT__RUNTIME);
 
 		// Create enums
 		majorJoomlaVersionEEnum = createEEnum(MAJOR_JOOMLA_VERSION);
+
+		// Create data types
+		iJoomlaHttpSessionEDataType = createEDataType(IJOOMLA_HTTP_SESSION);
 	}
 
 	/**
@@ -450,6 +481,7 @@ public class JoomlaServerConfigurationPackageImpl extends EPackageImpl implement
 		initEClass(deploymentRuntimeEClass, DeploymentRuntime.class, "DeploymentRuntime", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getDeploymentRuntime_Server(), this.getLocalJoomlaServer(), null, "server", null, 1, 1, DeploymentRuntime.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getDeploymentRuntime_DeployedExtensions(), this.getJoomlaExtensionDeployment(), this.getJoomlaExtensionDeployment_Runtime(), "deployedExtensions", null, 0, -1, DeploymentRuntime.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getDeploymentRuntime_HttpSession(), this.getIJoomlaHttpSession(), "httpSession", null, 1, 1, DeploymentRuntime.class, IS_TRANSIENT, !IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(joomlaExtensionDeploymentEClass, JoomlaExtensionDeployment.class, "JoomlaExtensionDeployment", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getJoomlaExtensionDeployment_Runtime(), this.getDeploymentRuntime(), this.getDeploymentRuntime_DeployedExtensions(), "runtime", null, 1, 1, JoomlaExtensionDeployment.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -458,6 +490,9 @@ public class JoomlaServerConfigurationPackageImpl extends EPackageImpl implement
 		initEEnum(majorJoomlaVersionEEnum, MajorJoomlaVersion.class, "MajorJoomlaVersion");
 		addEEnumLiteral(majorJoomlaVersionEEnum, MajorJoomlaVersion.ONE_FIVE);
 		addEEnumLiteral(majorJoomlaVersionEEnum, MajorJoomlaVersion.ONE_SIX);
+
+		// Initialize data types
+		initEDataType(iJoomlaHttpSessionEDataType, IJoomlaHttpSession.class, "IJoomlaHttpSession", !IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 
 		// Create resource
 		createResource(eNS_URI);

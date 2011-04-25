@@ -8,6 +8,7 @@ package com.schmeedy.pdt.joomla.core.server.cfg;
 
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
@@ -273,13 +274,22 @@ public interface JoomlaServerConfigurationPackage extends EPackage {
 	int DEPLOYMENT_RUNTIME__DEPLOYED_EXTENSIONS = 1;
 
 	/**
+	 * The feature id for the '<em><b>Http Session</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DEPLOYMENT_RUNTIME__HTTP_SESSION = 2;
+
+	/**
 	 * The number of structural features of the '<em>Deployment Runtime</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DEPLOYMENT_RUNTIME_FEATURE_COUNT = 2;
+	int DEPLOYMENT_RUNTIME_FEATURE_COUNT = 3;
 
 	/**
 	 * The meta object id for the '{@link com.schmeedy.pdt.joomla.core.server.cfg.impl.JoomlaExtensionDeploymentImpl <em>Joomla Extension Deployment</em>}' class.
@@ -318,6 +328,17 @@ public interface JoomlaServerConfigurationPackage extends EPackage {
 	 * @generated
 	 */
 	int MAJOR_JOOMLA_VERSION = 6;
+
+
+	/**
+	 * The meta object id for the '<em>IJoomla Http Session</em>' data type.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see com.schmeedy.pdt.joomla.core.server.IJoomlaHttpSession
+	 * @see com.schmeedy.pdt.joomla.core.server.cfg.impl.JoomlaServerConfigurationPackageImpl#getIJoomlaHttpSession()
+	 * @generated
+	 */
+	int IJOOMLA_HTTP_SESSION = 7;
 
 
 	/**
@@ -525,6 +546,17 @@ public interface JoomlaServerConfigurationPackage extends EPackage {
 	EReference getDeploymentRuntime_DeployedExtensions();
 
 	/**
+	 * Returns the meta object for the attribute '{@link com.schmeedy.pdt.joomla.core.server.cfg.DeploymentRuntime#getHttpSession <em>Http Session</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Http Session</em>'.
+	 * @see com.schmeedy.pdt.joomla.core.server.cfg.DeploymentRuntime#getHttpSession()
+	 * @see #getDeploymentRuntime()
+	 * @generated
+	 */
+	EAttribute getDeploymentRuntime_HttpSession();
+
+	/**
 	 * Returns the meta object for class '{@link com.schmeedy.pdt.joomla.core.server.cfg.JoomlaExtensionDeployment <em>Joomla Extension Deployment</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -554,6 +586,17 @@ public interface JoomlaServerConfigurationPackage extends EPackage {
 	 * @generated
 	 */
 	EEnum getMajorJoomlaVersion();
+
+	/**
+	 * Returns the meta object for data type '{@link com.schmeedy.pdt.joomla.core.server.IJoomlaHttpSession <em>IJoomla Http Session</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for data type '<em>IJoomla Http Session</em>'.
+	 * @see com.schmeedy.pdt.joomla.core.server.IJoomlaHttpSession
+	 * @model instanceClass="com.schmeedy.pdt.joomla.core.server.IJoomlaHttpSession" serializeable="false"
+	 * @generated
+	 */
+	EDataType getIJoomlaHttpSession();
 
 	/**
 	 * Returns the factory that creates the instances of the model.
@@ -740,6 +783,14 @@ public interface JoomlaServerConfigurationPackage extends EPackage {
 		EReference DEPLOYMENT_RUNTIME__DEPLOYED_EXTENSIONS = eINSTANCE.getDeploymentRuntime_DeployedExtensions();
 
 		/**
+		 * The meta object literal for the '<em><b>Http Session</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute DEPLOYMENT_RUNTIME__HTTP_SESSION = eINSTANCE.getDeploymentRuntime_HttpSession();
+
+		/**
 		 * The meta object literal for the '{@link com.schmeedy.pdt.joomla.core.server.cfg.impl.JoomlaExtensionDeploymentImpl <em>Joomla Extension Deployment</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -766,6 +817,16 @@ public interface JoomlaServerConfigurationPackage extends EPackage {
 		 * @generated
 		 */
 		EEnum MAJOR_JOOMLA_VERSION = eINSTANCE.getMajorJoomlaVersion();
+
+		/**
+		 * The meta object literal for the '<em>IJoomla Http Session</em>' data type.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see com.schmeedy.pdt.joomla.core.server.IJoomlaHttpSession
+		 * @see com.schmeedy.pdt.joomla.core.server.cfg.impl.JoomlaServerConfigurationPackageImpl#getIJoomlaHttpSession()
+		 * @generated
+		 */
+		EDataType IJOOMLA_HTTP_SESSION = eINSTANCE.getIJoomlaHttpSession();
 
 	}
 

@@ -10,6 +10,12 @@ import org.apache.commons.httpclient.methods.PostMethod;
 import org.htmlcleaner.HtmlCleaner;
 import org.htmlcleaner.TagNode;
 
+import com.schmeedy.pdt.joomla.core.server.cfg.DeploymentRuntime;
+import com.schmeedy.pdt.joomla.core.server.cfg.JoomlaServerConfigurationFactory;
+import com.schmeedy.pdt.joomla.core.server.cfg.LocalJoomlaServer;
+import com.schmeedy.pdt.joomla.core.server.cfg.UserCredentials;
+import com.schmeedy.pdt.joomla.core.server.impl.JoomlaDeployerImpl;
+
 public class HttpClientTest {
 
 	/**
@@ -17,10 +23,24 @@ public class HttpClientTest {
 	 */
 	public static void main(String[] args) {
 		try {
-			executeTestScenario();
+//			executeTestScenario();
+			executeTestUsingHttpSession();
 		} catch (final Exception e) {
 			e.printStackTrace();
 		}
+	}
+
+	private static void executeTestUsingHttpSession() {
+		final DeploymentRuntime runtime = JoomlaServerConfigurationFactory.eINSTANCE.createDeploymentRuntime();
+		final LocalJoomlaServer server = JoomlaServerConfigurationFactory.eINSTANCE.createLocalJoomlaServer();
+		runtime.setServer(server);
+		server.setBaseUrl("http://localhost/joomla");
+		final UserCredentials credentials = JoomlaServerConfigurationFactory.eINSTANCE.createUserCredentials();
+		credentials.setUsername("admin");
+		credentials.setPassword("admin");
+		server.setAdminUserCredentials(credentials);
+		
+		new JoomlaDeployerImpl().install(runtime, "C:\\Users\\schmeedy\\temp\\joomla-extensions\\com_helloworld");
 	}
 
 	private static void executeTestScenario() throws Exception {
@@ -102,6 +122,8 @@ public class HttpClientTest {
 				final int reportResponse = httpClient.executeMethod(fetchInstallReport);
 				System.out.println("GET install report: " + reportResponse);
 				System.out.println(fetchInstallReport.getResponseBodyAsString());
+			} else if (response == 200) {
+				System.out.println(installRequest.getResponseBodyAsString());
 			}
 		}
 	}
