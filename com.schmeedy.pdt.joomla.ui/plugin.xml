@@ -57,6 +57,11 @@
             allPopups="false"
             locationURI="popup:com.schmeedy.pdt.joomla.ui.JoomlaServers">
          <command
+               commandId="com.schmeedy.pdt.joomla.ui.addOrRemoveExtensions"
+               label="Add or Remove Extensions ..."
+               style="push">
+         </command>
+         <command
                commandId="org.eclipse.ui.edit.delete"
                label="Delete"
                style="push">
@@ -88,6 +93,13 @@
       </definition>
    </extension>
    <extension
+         point="org.eclipse.ui.commands">
+      <command
+            id="com.schmeedy.pdt.joomla.ui.addOrRemoveExtensions"
+            name="Add or Remove Extensions">
+      </command>
+   </extension>
+   <extension
          point="org.eclipse.ui.handlers">
       <handler
             class="com.schmeedy.pdt.joomla.ui.server.handler.DeleteDeploymentRuntimeHandler"
@@ -102,6 +114,15 @@
       <handler
             class="com.schmeedy.pdt.joomla.ui.server.handler.RenameDeploymentRuntimeHandler"
             commandId="org.eclipse.ui.edit.rename">
+         <activeWhen>
+            <reference
+                  definitionId="com.schmeedy.pdt.joomla.ui.expressions.DeploymentRuntimeSelection">
+            </reference>
+         </activeWhen>
+      </handler>
+      <handler
+            class="com.schmeedy.pdt.joomla.ui.server.handler.AddOrRemoveExtensionsHandler"
+            commandId="com.schmeedy.pdt.joomla.ui.addOrRemoveExtensions">
          <activeWhen>
             <reference
                   definitionId="com.schmeedy.pdt.joomla.ui.expressions.DeploymentRuntimeSelection">

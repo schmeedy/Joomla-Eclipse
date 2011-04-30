@@ -145,13 +145,22 @@ public interface JoomlaProjectModelPackage extends EPackage {
 	int BASIC_EXTENSION_MODEL__MANIFEST_PATH = 3;
 
 	/**
+	 * The feature id for the '<em><b>Project</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BASIC_EXTENSION_MODEL__PROJECT = 4;
+
+	/**
 	 * The number of structural features of the '<em>Basic Extension Model</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int BASIC_EXTENSION_MODEL_FEATURE_COUNT = 4;
+	int BASIC_EXTENSION_MODEL_FEATURE_COUNT = 5;
 
 	/**
 	 * The meta object id for the '{@link com.schmeedy.pdt.joomla.core.project.model.ManifestVersion <em>Manifest Version</em>}' enum.
@@ -279,6 +288,17 @@ public interface JoomlaProjectModelPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getBasicExtensionModel_ManifestPath();
+
+	/**
+	 * Returns the meta object for the reference '{@link com.schmeedy.pdt.joomla.core.project.model.BasicExtensionModel#getProject <em>Project</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Project</em>'.
+	 * @see com.schmeedy.pdt.joomla.core.project.model.BasicExtensionModel#getProject()
+	 * @see #getBasicExtensionModel()
+	 * @generated
+	 */
+	EReference getBasicExtensionModel_Project();
 
 	/**
 	 * Returns the meta object for enum '{@link com.schmeedy.pdt.joomla.core.project.model.ManifestVersion <em>Manifest Version</em>}'.
@@ -411,6 +431,14 @@ public interface JoomlaProjectModelPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute BASIC_EXTENSION_MODEL__MANIFEST_PATH = eINSTANCE.getBasicExtensionModel_ManifestPath();
+
+		/**
+		 * The meta object literal for the '<em><b>Project</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference BASIC_EXTENSION_MODEL__PROJECT = eINSTANCE.getBasicExtensionModel_Project();
 
 		/**
 		 * The meta object literal for the '{@link com.schmeedy.pdt.joomla.core.project.model.ManifestVersion <em>Manifest Version</em>}' enum.

@@ -6,13 +6,15 @@
   <eClassifiers xsi:type="ecore:EClass" name="JoomlaExtensionProject">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="project" eType="#//IProject"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="extensions" upperBound="-1"
-        eType="#//BasicExtensionModel"/>
+        eType="#//BasicExtensionModel" eOpposite="#//BasicExtensionModel/project"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="BasicExtensionModel">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" eType="#//ExtensionType"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="manifestVersion" eType="#//ManifestVersion"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="manifestPath" eType="#//IPath"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="project" eType="#//JoomlaExtensionProject"
+        eOpposite="#//JoomlaExtensionProject/extensions"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EDataType" name="IPath" instanceClassName="org.eclipse.core.runtime.IPath"/>
   <eClassifiers xsi:type="ecore:EDataType" name="IProject" instanceClassName="org.eclipse.core.resources.IProject"/>

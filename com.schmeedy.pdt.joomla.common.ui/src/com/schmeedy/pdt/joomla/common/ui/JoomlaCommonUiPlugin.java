@@ -11,6 +11,11 @@ public class JoomlaCommonUiPlugin extends AbstractUIPlugin {
 	public static final String BUNDLE_ID = "com.schmeedy.pdt.joomla.common.ui";
 	
 	public static final String IMG_OBJ_JOOMLA = BUNDLE_ID + ".obj16.joomla";
+	
+	public static final String IMG_OBJ_EXT_COMPONENT = BUNDLE_ID + ".obj16.ext.com";
+	public static final String IMG_OBJ_EXT_PLUGIN = BUNDLE_ID + ".obj16.ext.plugin";
+	public static final String IMG_OBJ_EXT_MODULE = BUNDLE_ID + ".obj16.ext.mod";
+	public static final String IMG_OBJ_EXT_LANGUAGE = BUNDLE_ID + ".obj16.ext.lang";
 
 	private static JoomlaCommonUiPlugin INSTANCE;
 
@@ -19,12 +24,16 @@ public class JoomlaCommonUiPlugin extends AbstractUIPlugin {
 	}
 
 	public Image getImage(String symbolicName) {
-		return getImageRegistry().get(IMG_OBJ_JOOMLA);
+		return getImageRegistry().get(symbolicName);
 	}
 	
 	@Override
 	protected void initializeImageRegistry(ImageRegistry reg) {
 		reg.put(IMG_OBJ_JOOMLA, loadImage("/icons/obj16/joomla.png"));
+		reg.put(IMG_OBJ_EXT_COMPONENT, loadImage("/icons/obj16/ext_com.png"));
+		reg.put(IMG_OBJ_EXT_PLUGIN, loadImage("/icons/obj16/ext_plugin.png"));
+		reg.put(IMG_OBJ_EXT_MODULE, loadImage("/icons/obj16/ext_mod.png"));
+		reg.put(IMG_OBJ_EXT_LANGUAGE, loadImage("/icons/obj16/ext_lang.png"));
 	}
 	
 	private Image loadImage(String path) {

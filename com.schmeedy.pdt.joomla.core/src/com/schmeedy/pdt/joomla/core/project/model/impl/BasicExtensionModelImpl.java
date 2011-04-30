@@ -8,12 +8,15 @@ package com.schmeedy.pdt.joomla.core.project.model.impl;
 
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 
 import com.schmeedy.pdt.joomla.core.project.model.BasicExtensionModel;
 import com.schmeedy.pdt.joomla.core.project.model.ExtensionType;
+import com.schmeedy.pdt.joomla.core.project.model.JoomlaExtensionProject;
 import com.schmeedy.pdt.joomla.core.project.model.JoomlaProjectModelPackage;
 import com.schmeedy.pdt.joomla.core.project.model.ManifestVersion;
 
@@ -28,6 +31,7 @@ import com.schmeedy.pdt.joomla.core.project.model.ManifestVersion;
  *   <li>{@link com.schmeedy.pdt.joomla.core.project.model.impl.BasicExtensionModelImpl#getType <em>Type</em>}</li>
  *   <li>{@link com.schmeedy.pdt.joomla.core.project.model.impl.BasicExtensionModelImpl#getManifestVersion <em>Manifest Version</em>}</li>
  *   <li>{@link com.schmeedy.pdt.joomla.core.project.model.impl.BasicExtensionModelImpl#getManifestPath <em>Manifest Path</em>}</li>
+ *   <li>{@link com.schmeedy.pdt.joomla.core.project.model.impl.BasicExtensionModelImpl#getProject <em>Project</em>}</li>
  * </ul>
  * </p>
  *
@@ -113,6 +117,16 @@ public class BasicExtensionModelImpl extends EObjectImpl implements BasicExtensi
 	 * @ordered
 	 */
 	protected IPath manifestPath = MANIFEST_PATH_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getProject() <em>Project</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getProject()
+	 * @generated
+	 * @ordered
+	 */
+	protected JoomlaExtensionProject project;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -222,6 +236,96 @@ public class BasicExtensionModelImpl extends EObjectImpl implements BasicExtensi
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public JoomlaExtensionProject getProject() {
+		if (project != null && project.eIsProxy()) {
+			InternalEObject oldProject = (InternalEObject)project;
+			project = (JoomlaExtensionProject)eResolveProxy(oldProject);
+			if (project != oldProject) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, JoomlaProjectModelPackage.BASIC_EXTENSION_MODEL__PROJECT, oldProject, project));
+			}
+		}
+		return project;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public JoomlaExtensionProject basicGetProject() {
+		return project;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetProject(JoomlaExtensionProject newProject, NotificationChain msgs) {
+		JoomlaExtensionProject oldProject = project;
+		project = newProject;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, JoomlaProjectModelPackage.BASIC_EXTENSION_MODEL__PROJECT, oldProject, newProject);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setProject(JoomlaExtensionProject newProject) {
+		if (newProject != project) {
+			NotificationChain msgs = null;
+			if (project != null)
+				msgs = ((InternalEObject)project).eInverseRemove(this, JoomlaProjectModelPackage.JOOMLA_EXTENSION_PROJECT__EXTENSIONS, JoomlaExtensionProject.class, msgs);
+			if (newProject != null)
+				msgs = ((InternalEObject)newProject).eInverseAdd(this, JoomlaProjectModelPackage.JOOMLA_EXTENSION_PROJECT__EXTENSIONS, JoomlaExtensionProject.class, msgs);
+			msgs = basicSetProject(newProject, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, JoomlaProjectModelPackage.BASIC_EXTENSION_MODEL__PROJECT, newProject, newProject));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case JoomlaProjectModelPackage.BASIC_EXTENSION_MODEL__PROJECT:
+				if (project != null)
+					msgs = ((InternalEObject)project).eInverseRemove(this, JoomlaProjectModelPackage.JOOMLA_EXTENSION_PROJECT__EXTENSIONS, JoomlaExtensionProject.class, msgs);
+				return basicSetProject((JoomlaExtensionProject)otherEnd, msgs);
+		}
+		return super.eInverseAdd(otherEnd, featureID, msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case JoomlaProjectModelPackage.BASIC_EXTENSION_MODEL__PROJECT:
+				return basicSetProject(null, msgs);
+		}
+		return super.eInverseRemove(otherEnd, featureID, msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
@@ -233,6 +337,9 @@ public class BasicExtensionModelImpl extends EObjectImpl implements BasicExtensi
 				return getManifestVersion();
 			case JoomlaProjectModelPackage.BASIC_EXTENSION_MODEL__MANIFEST_PATH:
 				return getManifestPath();
+			case JoomlaProjectModelPackage.BASIC_EXTENSION_MODEL__PROJECT:
+				if (resolve) return getProject();
+				return basicGetProject();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -256,6 +363,9 @@ public class BasicExtensionModelImpl extends EObjectImpl implements BasicExtensi
 				return;
 			case JoomlaProjectModelPackage.BASIC_EXTENSION_MODEL__MANIFEST_PATH:
 				setManifestPath((IPath)newValue);
+				return;
+			case JoomlaProjectModelPackage.BASIC_EXTENSION_MODEL__PROJECT:
+				setProject((JoomlaExtensionProject)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -281,6 +391,9 @@ public class BasicExtensionModelImpl extends EObjectImpl implements BasicExtensi
 			case JoomlaProjectModelPackage.BASIC_EXTENSION_MODEL__MANIFEST_PATH:
 				setManifestPath(MANIFEST_PATH_EDEFAULT);
 				return;
+			case JoomlaProjectModelPackage.BASIC_EXTENSION_MODEL__PROJECT:
+				setProject((JoomlaExtensionProject)null);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -301,6 +414,8 @@ public class BasicExtensionModelImpl extends EObjectImpl implements BasicExtensi
 				return manifestVersion != MANIFEST_VERSION_EDEFAULT;
 			case JoomlaProjectModelPackage.BASIC_EXTENSION_MODEL__MANIFEST_PATH:
 				return MANIFEST_PATH_EDEFAULT == null ? manifestPath != null : !MANIFEST_PATH_EDEFAULT.equals(manifestPath);
+			case JoomlaProjectModelPackage.BASIC_EXTENSION_MODEL__PROJECT:
+				return project != null;
 		}
 		return super.eIsSet(featureID);
 	}

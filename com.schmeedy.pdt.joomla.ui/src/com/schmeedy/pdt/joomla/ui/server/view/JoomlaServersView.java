@@ -48,6 +48,7 @@ public class JoomlaServersView extends ViewPart {
 	private final IJoomlaDeployer deployer = ServiceRegistry.getInstance().getService(IJoomlaDeployer.class);
 	private final DeploymentDescriptor deploymentDescriptor = deployer.getDeploymentDescriptor();
 	private TreeViewer deploymentTreeViewer;
+	private IObservableList inputObservable;
 	
 	public JoomlaServersView() {}
 
@@ -81,7 +82,7 @@ public class JoomlaServersView extends ViewPart {
 			
 			deploymentTreeViewer.setLabelProvider(new DeploymentTreeLabelProvider(lpMaps));
 			
-			final IObservableList inputObservable = EMFProperties.list(JoomlaServerConfigurationPackage.Literals.DEPLOYMENT_DESCRIPTOR__RUNTIMES).observe(deploymentDescriptor);
+			inputObservable = EMFProperties.list(JoomlaServerConfigurationPackage.Literals.DEPLOYMENT_DESCRIPTOR__RUNTIMES).observe(deploymentDescriptor);
 			deploymentTreeViewer.setInput(inputObservable);
 		}
 		
@@ -137,6 +138,14 @@ public class JoomlaServersView extends ViewPart {
 			} else if (cell.getElement() instanceof JoomlaExtensionDeployment) {
 				cell.setText("TODO: implement label providers for deployed extensions");
 			}
+		}
+	}
+	
+	@Override
+	public void dispose() {
+		super.dispose();
+		if (inputObservable != null) {
+			inputObservable.dispose();		
 		}
 	}
 	

@@ -21,6 +21,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link com.schmeedy.pdt.joomla.core.project.model.BasicExtensionModel#getType <em>Type</em>}</li>
  *   <li>{@link com.schmeedy.pdt.joomla.core.project.model.BasicExtensionModel#getManifestVersion <em>Manifest Version</em>}</li>
  *   <li>{@link com.schmeedy.pdt.joomla.core.project.model.BasicExtensionModel#getManifestPath <em>Manifest Path</em>}</li>
+ *   <li>{@link com.schmeedy.pdt.joomla.core.project.model.BasicExtensionModel#getProject <em>Project</em>}</li>
  * </ul>
  * </p>
  *
@@ -138,5 +139,33 @@ public interface BasicExtensionModel extends EObject {
 	 * @generated
 	 */
 	void setManifestPath(IPath value);
+
+	/**
+	 * Returns the value of the '<em><b>Project</b></em>' reference.
+	 * It is bidirectional and its opposite is '{@link com.schmeedy.pdt.joomla.core.project.model.JoomlaExtensionProject#getExtensions <em>Extensions</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Project</em>' reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Project</em>' reference.
+	 * @see #setProject(JoomlaExtensionProject)
+	 * @see com.schmeedy.pdt.joomla.core.project.model.JoomlaProjectModelPackage#getBasicExtensionModel_Project()
+	 * @see com.schmeedy.pdt.joomla.core.project.model.JoomlaExtensionProject#getExtensions
+	 * @model opposite="extensions"
+	 * @generated
+	 */
+	JoomlaExtensionProject getProject();
+
+	/**
+	 * Sets the value of the '{@link com.schmeedy.pdt.joomla.core.project.model.BasicExtensionModel#getProject <em>Project</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Project</em>' reference.
+	 * @see #getProject()
+	 * @generated
+	 */
+	void setProject(JoomlaExtensionProject value);
 
 } // BasicExtensionModel
