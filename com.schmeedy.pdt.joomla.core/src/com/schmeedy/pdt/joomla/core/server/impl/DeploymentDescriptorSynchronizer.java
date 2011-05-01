@@ -38,6 +38,14 @@ class DeploymentDescriptorSynchronizer {
 			final String serverId = runtime.getServer().getId();
 			if (serverIdToConfigurationMap.containsKey(serverId)) {
 				final LocalJoomlaServer currentServerConfiguration = serverIdToConfigurationMap.get(serverId);
+				if (currentServerConfiguration.getAdminUserCredentials() == null) {
+					runtime.getServer().setAdminUserCredentials(null);
+				} else {
+					if (runtime.getServer().getAdminUserCredentials() == null) {
+						runtime.getServer().setAdminUserCredentials(JoomlaServerConfigurationFactory.eINSTANCE.createUserCredentials());
+					}
+					copyAttributes(currentServerConfiguration.getAdminUserCredentials(), runtime.getServer().getAdminUserCredentials());
+				}
 				copyAttributes(currentServerConfiguration, runtime.getServer());
 				serverIdToConfigurationMap.remove(serverId); // remove to leave only unmatched servers in the map
 			} else {

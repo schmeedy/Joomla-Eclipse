@@ -13,6 +13,7 @@ import org.apache.commons.httpclient.methods.GetMethod;
 import org.apache.commons.httpclient.methods.PostMethod;
 import org.eclipse.core.internal.runtime.InternalPlatform;
 import org.eclipse.core.runtime.IPath;
+import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
@@ -73,7 +74,7 @@ public class JoomlaDeployerImpl implements IJoomlaDeployer {
 	// TEMPORARY
 	public void install(DeploymentRuntime runtime, String extensionDir) {
 		final IJoomlaHttpSession session = runtime.getHttpSession();
-		final TagNode installPage = session.executeAndParseResponseBody(new PrepareInstallationRequest(runtime), true);
+		final TagNode installPage = session.executeAndParseResponseBody(new PrepareInstallationRequest(runtime), true, new NullProgressMonitor());
 		final List<NameValuePair> installParams = ServerUtils.extractInputNameValuePairs("//form[@id='adminForm']//input[@type='hidden']", installPage);
 		final Iterator<NameValuePair> i = installParams.iterator();
 		while (i.hasNext()) {
@@ -85,7 +86,7 @@ public class JoomlaDeployerImpl implements IJoomlaDeployer {
 		installParams.add(new NameValuePair("installtype", "folder"));
 		installParams.add(new NameValuePair("install_directory", extensionDir));
 		
-		final TagNode result = session.executeAndParseResponseBody(new GenericPostRequest("administrator/index.php?option=com_installer&amp;view=install", runtime, installParams), true);
+		final TagNode result = session.executeAndParseResponseBody(new GenericPostRequest("administrator/index.php?option=com_installer&amp;view=install", runtime, installParams), true, new NullProgressMonitor());
 		final JoomlaSystemMessage systemMessage = ServerUtils.extractFirstSystemMessage(result);
 		if (systemMessage != null) {
 			System.out.println(systemMessage);
@@ -95,7 +96,7 @@ public class JoomlaDeployerImpl implements IJoomlaDeployer {
 	// TEMPORARY
 	public void uninstall(DeploymentRuntime runtime, String extensionName) {
 		final IJoomlaHttpSession session = runtime.getHttpSession();
-		final TagNode extensionManagementPage = session.executeAndParseResponseBody(new PrepareRemovalRequest(runtime, extensionName), true);
+		final TagNode extensionManagementPage = session.executeAndParseResponseBody(new PrepareRemovalRequest(runtime, extensionName), true, new NullProgressMonitor());
 		final String extensionId = getExtensionId(extensionName, extensionManagementPage);
 		if (extensionId == null) {
 			System.out.println("Extension not found on server.");
@@ -106,7 +107,7 @@ public class JoomlaDeployerImpl implements IJoomlaDeployer {
 		uninstallRequestParams.add(new NameValuePair("task", "manage.remove"));
 		uninstallRequestParams.add(new NameValuePair("cid[]", extensionId));
 		uninstallRequestParams.add(ServerUtils.extractSessionTokenParam(extensionManagementPage));
-		final TagNode result = session.executeAndParseResponseBody(new GenericPostRequest("administrator/index.php?option=com_installer&view=manage", runtime, uninstallRequestParams), true);
+		final TagNode result = session.executeAndParseResponseBody(new GenericPostRequest("administrator/index.php?option=com_installer&view=manage", runtime, uninstallRequestParams), true, new NullProgressMonitor());
 		final JoomlaSystemMessage systemMessage = ServerUtils.extractFirstSystemMessage(result);
 		if (systemMessage != null) {
 			System.out.println(systemMessage);
