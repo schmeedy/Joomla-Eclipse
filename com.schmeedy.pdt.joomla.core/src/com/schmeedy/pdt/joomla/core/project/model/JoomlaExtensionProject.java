@@ -55,7 +55,7 @@ public interface JoomlaExtensionProject extends EObject {
 	void setProject(IProject value);
 
 	/**
-	 * Returns the value of the '<em><b>Extensions</b></em>' reference list.
+	 * Returns the value of the '<em><b>Extensions</b></em>' containment reference list.
 	 * The list contents are of type {@link com.schmeedy.pdt.joomla.core.project.model.BasicExtensionModel}.
 	 * It is bidirectional and its opposite is '{@link com.schmeedy.pdt.joomla.core.project.model.BasicExtensionModel#getProject <em>Project</em>}'.
 	 * <!-- begin-user-doc -->
@@ -64,10 +64,10 @@ public interface JoomlaExtensionProject extends EObject {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Extensions</em>' reference list.
+	 * @return the value of the '<em>Extensions</em>' containment reference list.
 	 * @see com.schmeedy.pdt.joomla.core.project.model.JoomlaProjectModelPackage#getJoomlaExtensionProject_Extensions()
 	 * @see com.schmeedy.pdt.joomla.core.project.model.BasicExtensionModel#getProject
-	 * @model opposite="project"
+	 * @model opposite="project" containment="true"
 	 * @generated
 	 */
 	EList<BasicExtensionModel> getExtensions();

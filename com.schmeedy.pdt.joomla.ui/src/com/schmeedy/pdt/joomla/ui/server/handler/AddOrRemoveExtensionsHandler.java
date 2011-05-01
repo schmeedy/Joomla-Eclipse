@@ -37,6 +37,7 @@ public class AddOrRemoveExtensionsHandler extends AbstractHandler {
 		} else {
 			final AddOrRemoveExtensionsWizard wizard = new AddOrRemoveExtensionsWizard(extensionProjects, runtime);
 			final WizardDialog dialog = new WizardDialog(shell, wizard);
+			dialog.setTitle("Add or Remove Extensions");
 			dialog.open();
 		}
 		

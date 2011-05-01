@@ -14,6 +14,7 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 
+import com.schmeedy.pdt.joomla.core.project.model.JoomlaProjectModelPackage;
 import com.schmeedy.pdt.joomla.core.server.IJoomlaHttpSession;
 import com.schmeedy.pdt.joomla.core.server.cfg.AvailableServers;
 import com.schmeedy.pdt.joomla.core.server.cfg.DeploymentDescriptor;
@@ -133,6 +134,9 @@ public class JoomlaServerConfigurationPackageImpl extends EPackageImpl implement
 		JoomlaServerConfigurationPackageImpl theJoomlaServerConfigurationPackage = (JoomlaServerConfigurationPackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof JoomlaServerConfigurationPackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new JoomlaServerConfigurationPackageImpl());
 
 		isInited = true;
+
+		// Initialize simple dependencies
+		JoomlaProjectModelPackage.eINSTANCE.eClass();
 
 		// Create package meta-data objects
 		theJoomlaServerConfigurationPackage.createPackageContents();
@@ -352,6 +356,15 @@ public class JoomlaServerConfigurationPackageImpl extends EPackageImpl implement
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EReference getJoomlaExtensionDeployment_Extension() {
+		return (EReference)joomlaExtensionDeploymentEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EEnum getMajorJoomlaVersion() {
 		return majorJoomlaVersionEEnum;
 	}
@@ -420,6 +433,7 @@ public class JoomlaServerConfigurationPackageImpl extends EPackageImpl implement
 
 		joomlaExtensionDeploymentEClass = createEClass(JOOMLA_EXTENSION_DEPLOYMENT);
 		createEReference(joomlaExtensionDeploymentEClass, JOOMLA_EXTENSION_DEPLOYMENT__RUNTIME);
+		createEReference(joomlaExtensionDeploymentEClass, JOOMLA_EXTENSION_DEPLOYMENT__EXTENSION);
 
 		// Create enums
 		majorJoomlaVersionEEnum = createEEnum(MAJOR_JOOMLA_VERSION);
@@ -450,6 +464,9 @@ public class JoomlaServerConfigurationPackageImpl extends EPackageImpl implement
 		setName(eNAME);
 		setNsPrefix(eNS_PREFIX);
 		setNsURI(eNS_URI);
+
+		// Obtain other dependent packages
+		JoomlaProjectModelPackage theJoomlaProjectModelPackage = (JoomlaProjectModelPackage)EPackage.Registry.INSTANCE.getEPackage(JoomlaProjectModelPackage.eNS_URI);
 
 		// Create type parameters
 
@@ -485,6 +502,7 @@ public class JoomlaServerConfigurationPackageImpl extends EPackageImpl implement
 
 		initEClass(joomlaExtensionDeploymentEClass, JoomlaExtensionDeployment.class, "JoomlaExtensionDeployment", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getJoomlaExtensionDeployment_Runtime(), this.getDeploymentRuntime(), this.getDeploymentRuntime_DeployedExtensions(), "runtime", null, 1, 1, JoomlaExtensionDeployment.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getJoomlaExtensionDeployment_Extension(), theJoomlaProjectModelPackage.getBasicExtensionModel(), null, "extension", null, 1, 1, JoomlaExtensionDeployment.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Initialize enums and add enum literals
 		initEEnum(majorJoomlaVersionEEnum, MajorJoomlaVersion.class, "MajorJoomlaVersion");

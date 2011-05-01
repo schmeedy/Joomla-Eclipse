@@ -9,19 +9,22 @@ import com.schmeedy.pdt.joomla.core.server.cfg.DeploymentRuntime;
 
 public class AddOrRemoveExtensionsWizard extends Wizard {
 
-	private final AddOrRemoveExtensionsWizardSetupPage firstPage;
+	private final AddOrRemoveExtensionsWizardSetupPage setupPage;
+	private final AddOrRemoveExtensionsWizardResultPage resultPage;
 	private final List<JoomlaExtensionProject> extensionProjects;
 	private final DeploymentRuntime targetRuntime;
 	
 	public AddOrRemoveExtensionsWizard(List<JoomlaExtensionProject> extensionProjects, DeploymentRuntime targetRuntime) {
 		this.extensionProjects = extensionProjects;
 		this.targetRuntime = targetRuntime;
-		this.firstPage = new AddOrRemoveExtensionsWizardSetupPage(extensionProjects, targetRuntime);
+		this.setupPage = new AddOrRemoveExtensionsWizardSetupPage(extensionProjects, targetRuntime);
+		this.resultPage = new AddOrRemoveExtensionsWizardResultPage();
 	}
 
 	@Override
 	public void addPages() {
-		addPage(firstPage);
+		addPage(setupPage);
+		addPage(resultPage);
 	}
 	
 	@Override

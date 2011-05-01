@@ -16,7 +16,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
-import org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList;
+import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
 import com.schmeedy.pdt.joomla.core.project.model.BasicExtensionModel;
@@ -59,7 +59,7 @@ public class JoomlaExtensionProjectImpl extends EObjectImpl implements JoomlaExt
 	protected IProject project = PROJECT_EDEFAULT;
 
 	/**
-	 * The cached value of the '{@link #getExtensions() <em>Extensions</em>}' reference list.
+	 * The cached value of the '{@link #getExtensions() <em>Extensions</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getExtensions()
@@ -115,7 +115,7 @@ public class JoomlaExtensionProjectImpl extends EObjectImpl implements JoomlaExt
 	 */
 	public EList<BasicExtensionModel> getExtensions() {
 		if (extensions == null) {
-			extensions = new EObjectWithInverseResolvingEList<BasicExtensionModel>(BasicExtensionModel.class, this, JoomlaProjectModelPackage.JOOMLA_EXTENSION_PROJECT__EXTENSIONS, JoomlaProjectModelPackage.BASIC_EXTENSION_MODEL__PROJECT);
+			extensions = new EObjectContainmentWithInverseEList<BasicExtensionModel>(BasicExtensionModel.class, this, JoomlaProjectModelPackage.JOOMLA_EXTENSION_PROJECT__EXTENSIONS, JoomlaProjectModelPackage.BASIC_EXTENSION_MODEL__PROJECT);
 		}
 		return extensions;
 	}

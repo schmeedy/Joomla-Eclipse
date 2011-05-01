@@ -42,6 +42,8 @@
   <eClassifiers xsi:type="ecore:EClass" name="JoomlaExtensionDeployment">
     <eStructuralFeatures xsi:type="ecore:EReference" name="runtime" lowerBound="1"
         eType="#//DeploymentRuntime" eOpposite="#//DeploymentRuntime/deployedExtensions"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="extension" lowerBound="1"
+        eType="ecore:EClass project-model.ecore#//BasicExtensionModel" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EDataType" name="IJoomlaHttpSession" instanceClassName="com.schmeedy.pdt.joomla.core.server.IJoomlaHttpSession"
       serializable="false"/>

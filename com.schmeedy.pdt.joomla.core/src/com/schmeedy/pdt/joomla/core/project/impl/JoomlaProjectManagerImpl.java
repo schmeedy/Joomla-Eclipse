@@ -107,6 +107,7 @@ public class JoomlaProjectManagerImpl implements IJoomlaProjectManager {
 			final InputStream inputStream = file.getContents();
 			try {
 				final BasicExtensionModel parsedModel = extensionModelParser.parse(inputStream);
+				parsedModel.setManifestPath(file.getFullPath());
 				if (parsedModel != null) {
 					final ExtensionModelWithModificationStamp modelWithStamp = new ExtensionModelWithModificationStamp(parsedModel, file.getModificationStamp());
 					extensionModelCache.put(cacheKey, new SoftReference<ExtensionModelWithModificationStamp>(modelWithStamp));

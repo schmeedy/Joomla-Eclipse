@@ -6,7 +6,7 @@
   <eClassifiers xsi:type="ecore:EClass" name="JoomlaExtensionProject">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="project" eType="#//IProject"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="extensions" upperBound="-1"
-        eType="#//BasicExtensionModel" eOpposite="#//BasicExtensionModel/project"/>
+        eType="#//BasicExtensionModel" containment="true" eOpposite="#//BasicExtensionModel/project"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="BasicExtensionModel">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>

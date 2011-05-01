@@ -330,14 +330,14 @@ public class JoomlaProjectModelPackageImpl extends EPackageImpl implements Jooml
 		// Initialize classes and features; add operations and parameters
 		initEClass(joomlaExtensionProjectEClass, JoomlaExtensionProject.class, "JoomlaExtensionProject", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getJoomlaExtensionProject_Project(), this.getIProject(), "project", null, 0, 1, JoomlaExtensionProject.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getJoomlaExtensionProject_Extensions(), this.getBasicExtensionModel(), this.getBasicExtensionModel_Project(), "extensions", null, 0, -1, JoomlaExtensionProject.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getJoomlaExtensionProject_Extensions(), this.getBasicExtensionModel(), this.getBasicExtensionModel_Project(), "extensions", null, 0, -1, JoomlaExtensionProject.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(basicExtensionModelEClass, BasicExtensionModel.class, "BasicExtensionModel", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getBasicExtensionModel_Name(), ecorePackage.getEString(), "name", null, 0, 1, BasicExtensionModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getBasicExtensionModel_Type(), this.getExtensionType(), "type", null, 0, 1, BasicExtensionModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getBasicExtensionModel_ManifestVersion(), this.getManifestVersion(), "manifestVersion", null, 0, 1, BasicExtensionModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getBasicExtensionModel_ManifestPath(), this.getIPath(), "manifestPath", null, 0, 1, BasicExtensionModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getBasicExtensionModel_Project(), this.getJoomlaExtensionProject(), this.getJoomlaExtensionProject_Extensions(), "project", null, 0, 1, BasicExtensionModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getBasicExtensionModel_Project(), this.getJoomlaExtensionProject(), this.getJoomlaExtensionProject_Extensions(), "project", null, 0, 1, BasicExtensionModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Initialize enums and add enum literals
 		initEEnum(manifestVersionEEnum, ManifestVersion.class, "ManifestVersion");

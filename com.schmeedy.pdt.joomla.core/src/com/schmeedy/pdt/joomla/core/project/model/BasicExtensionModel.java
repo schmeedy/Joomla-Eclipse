@@ -141,7 +141,7 @@ public interface BasicExtensionModel extends EObject {
 	void setManifestPath(IPath value);
 
 	/**
-	 * Returns the value of the '<em><b>Project</b></em>' reference.
+	 * Returns the value of the '<em><b>Project</b></em>' container reference.
 	 * It is bidirectional and its opposite is '{@link com.schmeedy.pdt.joomla.core.project.model.JoomlaExtensionProject#getExtensions <em>Extensions</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
@@ -149,20 +149,20 @@ public interface BasicExtensionModel extends EObject {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Project</em>' reference.
+	 * @return the value of the '<em>Project</em>' container reference.
 	 * @see #setProject(JoomlaExtensionProject)
 	 * @see com.schmeedy.pdt.joomla.core.project.model.JoomlaProjectModelPackage#getBasicExtensionModel_Project()
 	 * @see com.schmeedy.pdt.joomla.core.project.model.JoomlaExtensionProject#getExtensions
-	 * @model opposite="extensions"
+	 * @model opposite="extensions" transient="false"
 	 * @generated
 	 */
 	JoomlaExtensionProject getProject();
 
 	/**
-	 * Sets the value of the '{@link com.schmeedy.pdt.joomla.core.project.model.BasicExtensionModel#getProject <em>Project</em>}' reference.
+	 * Sets the value of the '{@link com.schmeedy.pdt.joomla.core.project.model.BasicExtensionModel#getProject <em>Project</em>}' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Project</em>' reference.
+	 * @param value the new value of the '<em>Project</em>' container reference.
 	 * @see #getProject()
 	 * @generated
 	 */

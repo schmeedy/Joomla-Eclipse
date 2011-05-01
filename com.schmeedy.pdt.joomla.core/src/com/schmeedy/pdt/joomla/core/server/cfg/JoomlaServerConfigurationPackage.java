@@ -311,13 +311,22 @@ public interface JoomlaServerConfigurationPackage extends EPackage {
 	int JOOMLA_EXTENSION_DEPLOYMENT__RUNTIME = 0;
 
 	/**
+	 * The feature id for the '<em><b>Extension</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int JOOMLA_EXTENSION_DEPLOYMENT__EXTENSION = 1;
+
+	/**
 	 * The number of structural features of the '<em>Joomla Extension Deployment</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int JOOMLA_EXTENSION_DEPLOYMENT_FEATURE_COUNT = 1;
+	int JOOMLA_EXTENSION_DEPLOYMENT_FEATURE_COUNT = 2;
 
 	/**
 	 * The meta object id for the '{@link com.schmeedy.pdt.joomla.core.server.cfg.MajorJoomlaVersion <em>Major Joomla Version</em>}' enum.
@@ -578,6 +587,17 @@ public interface JoomlaServerConfigurationPackage extends EPackage {
 	EReference getJoomlaExtensionDeployment_Runtime();
 
 	/**
+	 * Returns the meta object for the containment reference '{@link com.schmeedy.pdt.joomla.core.server.cfg.JoomlaExtensionDeployment#getExtension <em>Extension</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Extension</em>'.
+	 * @see com.schmeedy.pdt.joomla.core.server.cfg.JoomlaExtensionDeployment#getExtension()
+	 * @see #getJoomlaExtensionDeployment()
+	 * @generated
+	 */
+	EReference getJoomlaExtensionDeployment_Extension();
+
+	/**
 	 * Returns the meta object for enum '{@link com.schmeedy.pdt.joomla.core.server.cfg.MajorJoomlaVersion <em>Major Joomla Version</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -807,6 +827,14 @@ public interface JoomlaServerConfigurationPackage extends EPackage {
 		 * @generated
 		 */
 		EReference JOOMLA_EXTENSION_DEPLOYMENT__RUNTIME = eINSTANCE.getJoomlaExtensionDeployment_Runtime();
+
+		/**
+		 * The meta object literal for the '<em><b>Extension</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference JOOMLA_EXTENSION_DEPLOYMENT__EXTENSION = eINSTANCE.getJoomlaExtensionDeployment_Extension();
 
 		/**
 		 * The meta object literal for the '{@link com.schmeedy.pdt.joomla.core.server.cfg.MajorJoomlaVersion <em>Major Joomla Version</em>}' enum.

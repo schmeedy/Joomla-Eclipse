@@ -116,10 +116,10 @@ public class DeploymentRuntimeImpl extends EObjectImpl implements DeploymentRunt
 	 * @generated
 	 */
 	public NotificationChain basicSetServer(LocalJoomlaServer newServer, NotificationChain msgs) {
-		final LocalJoomlaServer oldServer = server;
+		LocalJoomlaServer oldServer = server;
 		server = newServer;
 		if (eNotificationRequired()) {
-			final ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, JoomlaServerConfigurationPackage.DEPLOYMENT_RUNTIME__SERVER, oldServer, newServer);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, JoomlaServerConfigurationPackage.DEPLOYMENT_RUNTIME__SERVER, oldServer, newServer);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -282,7 +282,7 @@ public class DeploymentRuntimeImpl extends EObjectImpl implements DeploymentRunt
 	public String toString() {
 		if (eIsProxy()) return super.toString();
 
-		final StringBuffer result = new StringBuffer(super.toString());
+		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (httpSession: ");
 		result.append(httpSession);
 		result.append(')');

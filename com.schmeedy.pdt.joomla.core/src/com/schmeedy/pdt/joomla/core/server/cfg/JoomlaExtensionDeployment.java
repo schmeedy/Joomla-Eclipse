@@ -8,6 +8,8 @@ package com.schmeedy.pdt.joomla.core.server.cfg;
 
 import org.eclipse.emf.ecore.EObject;
 
+import com.schmeedy.pdt.joomla.core.project.model.BasicExtensionModel;
+
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Joomla Extension Deployment</b></em>'.
@@ -17,6 +19,7 @@ import org.eclipse.emf.ecore.EObject;
  * The following features are supported:
  * <ul>
  *   <li>{@link com.schmeedy.pdt.joomla.core.server.cfg.JoomlaExtensionDeployment#getRuntime <em>Runtime</em>}</li>
+ *   <li>{@link com.schmeedy.pdt.joomla.core.server.cfg.JoomlaExtensionDeployment#getExtension <em>Extension</em>}</li>
  * </ul>
  * </p>
  *
@@ -52,5 +55,31 @@ public interface JoomlaExtensionDeployment extends EObject {
 	 * @generated
 	 */
 	void setRuntime(DeploymentRuntime value);
+
+	/**
+	 * Returns the value of the '<em><b>Extension</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Extension</em>' containment reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Extension</em>' containment reference.
+	 * @see #setExtension(BasicExtensionModel)
+	 * @see com.schmeedy.pdt.joomla.core.server.cfg.JoomlaServerConfigurationPackage#getJoomlaExtensionDeployment_Extension()
+	 * @model containment="true" required="true"
+	 * @generated
+	 */
+	BasicExtensionModel getExtension();
+
+	/**
+	 * Sets the value of the '{@link com.schmeedy.pdt.joomla.core.server.cfg.JoomlaExtensionDeployment#getExtension <em>Extension</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Extension</em>' containment reference.
+	 * @see #getExtension()
+	 * @generated
+	 */
+	void setExtension(BasicExtensionModel value);
 
 } // JoomlaExtensionDeployment

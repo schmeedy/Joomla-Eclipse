@@ -81,7 +81,7 @@ public interface JoomlaProjectModelPackage extends EPackage {
 	int JOOMLA_EXTENSION_PROJECT__PROJECT = 0;
 
 	/**
-	 * The feature id for the '<em><b>Extensions</b></em>' reference list.
+	 * The feature id for the '<em><b>Extensions</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -145,7 +145,7 @@ public interface JoomlaProjectModelPackage extends EPackage {
 	int BASIC_EXTENSION_MODEL__MANIFEST_PATH = 3;
 
 	/**
-	 * The feature id for the '<em><b>Project</b></em>' reference.
+	 * The feature id for the '<em><b>Project</b></em>' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -225,10 +225,10 @@ public interface JoomlaProjectModelPackage extends EPackage {
 	EAttribute getJoomlaExtensionProject_Project();
 
 	/**
-	 * Returns the meta object for the reference list '{@link com.schmeedy.pdt.joomla.core.project.model.JoomlaExtensionProject#getExtensions <em>Extensions</em>}'.
+	 * Returns the meta object for the containment reference list '{@link com.schmeedy.pdt.joomla.core.project.model.JoomlaExtensionProject#getExtensions <em>Extensions</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>Extensions</em>'.
+	 * @return the meta object for the containment reference list '<em>Extensions</em>'.
 	 * @see com.schmeedy.pdt.joomla.core.project.model.JoomlaExtensionProject#getExtensions()
 	 * @see #getJoomlaExtensionProject()
 	 * @generated
@@ -290,10 +290,10 @@ public interface JoomlaProjectModelPackage extends EPackage {
 	EAttribute getBasicExtensionModel_ManifestPath();
 
 	/**
-	 * Returns the meta object for the reference '{@link com.schmeedy.pdt.joomla.core.project.model.BasicExtensionModel#getProject <em>Project</em>}'.
+	 * Returns the meta object for the container reference '{@link com.schmeedy.pdt.joomla.core.project.model.BasicExtensionModel#getProject <em>Project</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Project</em>'.
+	 * @return the meta object for the container reference '<em>Project</em>'.
 	 * @see com.schmeedy.pdt.joomla.core.project.model.BasicExtensionModel#getProject()
 	 * @see #getBasicExtensionModel()
 	 * @generated
@@ -383,7 +383,7 @@ public interface JoomlaProjectModelPackage extends EPackage {
 		EAttribute JOOMLA_EXTENSION_PROJECT__PROJECT = eINSTANCE.getJoomlaExtensionProject_Project();
 
 		/**
-		 * The meta object literal for the '<em><b>Extensions</b></em>' reference list feature.
+		 * The meta object literal for the '<em><b>Extensions</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
@@ -433,7 +433,7 @@ public interface JoomlaProjectModelPackage extends EPackage {
 		EAttribute BASIC_EXTENSION_MODEL__MANIFEST_PATH = eINSTANCE.getBasicExtensionModel_ManifestPath();
 
 		/**
-		 * The meta object literal for the '<em><b>Project</b></em>' reference feature.
+		 * The meta object literal for the '<em><b>Project</b></em>' container reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
