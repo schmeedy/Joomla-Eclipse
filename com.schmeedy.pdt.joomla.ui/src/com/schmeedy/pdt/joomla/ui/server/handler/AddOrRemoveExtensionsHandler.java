@@ -19,6 +19,7 @@ import org.eclipse.ui.handlers.HandlerUtil;
 
 import com.schmeedy.pdt.joomla.core.project.IJoomlaProjectManager;
 import com.schmeedy.pdt.joomla.core.project.model.JoomlaExtensionProject;
+import com.schmeedy.pdt.joomla.core.server.IJoomlaDeployer;
 import com.schmeedy.pdt.joomla.core.server.cfg.DeploymentRuntime;
 import com.schmeedy.pdt.joomla.ui.JoomlaUiPlugin;
 import com.schmeedy.pdt.joomla.ui.server.wizard.AddOrRemoveExtensionsWizard;
@@ -27,6 +28,7 @@ import com.schmeedy.pdt.service.registry.ServiceRegistry;
 public class AddOrRemoveExtensionsHandler extends AbstractHandler {
 
 	private final IJoomlaProjectManager projectManager = ServiceRegistry.getInstance().getService(IJoomlaProjectManager.class);
+	private final IJoomlaDeployer deployer = ServiceRegistry.getInstance().getService(IJoomlaDeployer.class);
 	
 	@Override
 	public Object execute(ExecutionEvent event) throws ExecutionException {
@@ -51,7 +53,7 @@ public class AddOrRemoveExtensionsHandler extends AbstractHandler {
 							@Override
 							public void run() {
 								if (sessionStatus.getSeverity() < IStatus.ERROR) {
-									openWizard(runtime, shell, extensionProjects);
+									openWizard(extensionProjects, runtime, deployer, shell);
 								} else {
 									final MessageBox errorDialog = new MessageBox(shell, SWT.ICON_ERROR| SWT.OK);
 									errorDialog.setMessage(sessionStatus.getMessage());
@@ -73,8 +75,8 @@ public class AddOrRemoveExtensionsHandler extends AbstractHandler {
 		return null;
 	}
 
-	private void openWizard(final DeploymentRuntime runtime, final Shell shell, final List<JoomlaExtensionProject> extensionProjects) {
-		final AddOrRemoveExtensionsWizard wizard = new AddOrRemoveExtensionsWizard(extensionProjects, runtime);
+	private void openWizard(List<JoomlaExtensionProject> extensionProjects, DeploymentRuntime runtime, IJoomlaDeployer deployer, Shell shell) {
+		final AddOrRemoveExtensionsWizard wizard = new AddOrRemoveExtensionsWizard(extensionProjects, runtime, deployer);
 		final WizardDialog dialog = new WizardDialog(shell, wizard);
 		dialog.setTitle("Add or Remove Extensions");
 		dialog.open();

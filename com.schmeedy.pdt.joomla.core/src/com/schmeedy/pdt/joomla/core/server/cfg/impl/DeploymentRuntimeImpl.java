@@ -15,7 +15,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
-import org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList;
+import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
 import com.schmeedy.pdt.joomla.core.server.IJoomlaHttpSession;
@@ -52,7 +52,7 @@ public class DeploymentRuntimeImpl extends EObjectImpl implements DeploymentRunt
 	protected LocalJoomlaServer server;
 
 	/**
-	 * The cached value of the '{@link #getDeployedExtensions() <em>Deployed Extensions</em>}' reference list.
+	 * The cached value of the '{@link #getDeployedExtensions() <em>Deployed Extensions</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getDeployedExtensions()
@@ -153,7 +153,7 @@ public class DeploymentRuntimeImpl extends EObjectImpl implements DeploymentRunt
 	@Override
 	public EList<JoomlaExtensionDeployment> getDeployedExtensions() {
 		if (deployedExtensions == null) {
-			deployedExtensions = new EObjectWithInverseResolvingEList<JoomlaExtensionDeployment>(JoomlaExtensionDeployment.class, this, JoomlaServerConfigurationPackage.DEPLOYMENT_RUNTIME__DEPLOYED_EXTENSIONS, JoomlaServerConfigurationPackage.JOOMLA_EXTENSION_DEPLOYMENT__RUNTIME);
+			deployedExtensions = new EObjectContainmentWithInverseEList<JoomlaExtensionDeployment>(JoomlaExtensionDeployment.class, this, JoomlaServerConfigurationPackage.DEPLOYMENT_RUNTIME__DEPLOYED_EXTENSIONS, JoomlaServerConfigurationPackage.JOOMLA_EXTENSION_DEPLOYMENT__RUNTIME);
 		}
 		return deployedExtensions;
 	}

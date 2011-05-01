@@ -35,7 +35,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="server" lowerBound="1"
         eType="#//LocalJoomlaServer" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="deployedExtensions" upperBound="-1"
-        eType="#//JoomlaExtensionDeployment" eOpposite="#//JoomlaExtensionDeployment/runtime"/>
+        eType="#//JoomlaExtensionDeployment" containment="true" eOpposite="#//JoomlaExtensionDeployment/runtime"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="httpSession" lowerBound="1"
         eType="#//IJoomlaHttpSession" changeable="false" transient="true"/>
   </eClassifiers>

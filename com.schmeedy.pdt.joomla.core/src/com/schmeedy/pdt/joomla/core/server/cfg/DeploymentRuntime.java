@@ -57,7 +57,7 @@ public interface DeploymentRuntime extends EObject {
 	void setServer(LocalJoomlaServer value);
 
 	/**
-	 * Returns the value of the '<em><b>Deployed Extensions</b></em>' reference list.
+	 * Returns the value of the '<em><b>Deployed Extensions</b></em>' containment reference list.
 	 * The list contents are of type {@link com.schmeedy.pdt.joomla.core.server.cfg.JoomlaExtensionDeployment}.
 	 * It is bidirectional and its opposite is '{@link com.schmeedy.pdt.joomla.core.server.cfg.JoomlaExtensionDeployment#getRuntime <em>Runtime</em>}'.
 	 * <!-- begin-user-doc -->
@@ -66,10 +66,10 @@ public interface DeploymentRuntime extends EObject {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Deployed Extensions</em>' reference list.
+	 * @return the value of the '<em>Deployed Extensions</em>' containment reference list.
 	 * @see com.schmeedy.pdt.joomla.core.server.cfg.JoomlaServerConfigurationPackage#getDeploymentRuntime_DeployedExtensions()
 	 * @see com.schmeedy.pdt.joomla.core.server.cfg.JoomlaExtensionDeployment#getRuntime
-	 * @model opposite="runtime"
+	 * @model opposite="runtime" containment="true"
 	 * @generated
 	 */
 	EList<JoomlaExtensionDeployment> getDeployedExtensions();

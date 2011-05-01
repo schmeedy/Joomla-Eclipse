@@ -12,6 +12,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 
 import com.schmeedy.pdt.joomla.core.project.model.BasicExtensionModel;
 import com.schmeedy.pdt.joomla.core.server.cfg.DeploymentRuntime;
@@ -33,16 +34,6 @@ import com.schmeedy.pdt.joomla.core.server.cfg.JoomlaServerConfigurationPackage;
  * @generated
  */
 public class JoomlaExtensionDeploymentImpl extends EObjectImpl implements JoomlaExtensionDeployment {
-	/**
-	 * The cached value of the '{@link #getRuntime() <em>Runtime</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getRuntime()
-	 * @generated
-	 * @ordered
-	 */
-	protected DeploymentRuntime runtime;
-
 	/**
 	 * The cached value of the '{@link #getExtension() <em>Extension</em>}' containment reference.
 	 * <!-- begin-user-doc -->
@@ -78,24 +69,8 @@ public class JoomlaExtensionDeploymentImpl extends EObjectImpl implements Joomla
 	 * @generated
 	 */
 	public DeploymentRuntime getRuntime() {
-		if (runtime != null && runtime.eIsProxy()) {
-			InternalEObject oldRuntime = (InternalEObject)runtime;
-			runtime = (DeploymentRuntime)eResolveProxy(oldRuntime);
-			if (runtime != oldRuntime) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, JoomlaServerConfigurationPackage.JOOMLA_EXTENSION_DEPLOYMENT__RUNTIME, oldRuntime, runtime));
-			}
-		}
-		return runtime;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public DeploymentRuntime basicGetRuntime() {
-		return runtime;
+		if (eContainerFeatureID() != JoomlaServerConfigurationPackage.JOOMLA_EXTENSION_DEPLOYMENT__RUNTIME) return null;
+		return (DeploymentRuntime)eContainer();
 	}
 
 	/**
@@ -104,12 +79,7 @@ public class JoomlaExtensionDeploymentImpl extends EObjectImpl implements Joomla
 	 * @generated
 	 */
 	public NotificationChain basicSetRuntime(DeploymentRuntime newRuntime, NotificationChain msgs) {
-		DeploymentRuntime oldRuntime = runtime;
-		runtime = newRuntime;
-		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, JoomlaServerConfigurationPackage.JOOMLA_EXTENSION_DEPLOYMENT__RUNTIME, oldRuntime, newRuntime);
-			if (msgs == null) msgs = notification; else msgs.add(notification);
-		}
+		msgs = eBasicSetContainer((InternalEObject)newRuntime, JoomlaServerConfigurationPackage.JOOMLA_EXTENSION_DEPLOYMENT__RUNTIME, msgs);
 		return msgs;
 	}
 
@@ -119,10 +89,12 @@ public class JoomlaExtensionDeploymentImpl extends EObjectImpl implements Joomla
 	 * @generated
 	 */
 	public void setRuntime(DeploymentRuntime newRuntime) {
-		if (newRuntime != runtime) {
+		if (newRuntime != eInternalContainer() || (eContainerFeatureID() != JoomlaServerConfigurationPackage.JOOMLA_EXTENSION_DEPLOYMENT__RUNTIME && newRuntime != null)) {
+			if (EcoreUtil.isAncestor(this, newRuntime))
+				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
 			NotificationChain msgs = null;
-			if (runtime != null)
-				msgs = ((InternalEObject)runtime).eInverseRemove(this, JoomlaServerConfigurationPackage.DEPLOYMENT_RUNTIME__DEPLOYED_EXTENSIONS, DeploymentRuntime.class, msgs);
+			if (eInternalContainer() != null)
+				msgs = eBasicRemoveFromContainer(msgs);
 			if (newRuntime != null)
 				msgs = ((InternalEObject)newRuntime).eInverseAdd(this, JoomlaServerConfigurationPackage.DEPLOYMENT_RUNTIME__DEPLOYED_EXTENSIONS, DeploymentRuntime.class, msgs);
 			msgs = basicSetRuntime(newRuntime, msgs);
@@ -184,8 +156,8 @@ public class JoomlaExtensionDeploymentImpl extends EObjectImpl implements Joomla
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case JoomlaServerConfigurationPackage.JOOMLA_EXTENSION_DEPLOYMENT__RUNTIME:
-				if (runtime != null)
-					msgs = ((InternalEObject)runtime).eInverseRemove(this, JoomlaServerConfigurationPackage.DEPLOYMENT_RUNTIME__DEPLOYED_EXTENSIONS, DeploymentRuntime.class, msgs);
+				if (eInternalContainer() != null)
+					msgs = eBasicRemoveFromContainer(msgs);
 				return basicSetRuntime((DeploymentRuntime)otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
@@ -213,11 +185,24 @@ public class JoomlaExtensionDeploymentImpl extends EObjectImpl implements Joomla
 	 * @generated
 	 */
 	@Override
+	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
+		switch (eContainerFeatureID()) {
+			case JoomlaServerConfigurationPackage.JOOMLA_EXTENSION_DEPLOYMENT__RUNTIME:
+				return eInternalContainer().eInverseRemove(this, JoomlaServerConfigurationPackage.DEPLOYMENT_RUNTIME__DEPLOYED_EXTENSIONS, DeploymentRuntime.class, msgs);
+		}
+		return super.eBasicRemoveFromContainerFeature(msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case JoomlaServerConfigurationPackage.JOOMLA_EXTENSION_DEPLOYMENT__RUNTIME:
-				if (resolve) return getRuntime();
-				return basicGetRuntime();
+				return getRuntime();
 			case JoomlaServerConfigurationPackage.JOOMLA_EXTENSION_DEPLOYMENT__EXTENSION:
 				return getExtension();
 		}
@@ -269,7 +254,7 @@ public class JoomlaExtensionDeploymentImpl extends EObjectImpl implements Joomla
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 			case JoomlaServerConfigurationPackage.JOOMLA_EXTENSION_DEPLOYMENT__RUNTIME:
-				return runtime != null;
+				return getRuntime() != null;
 			case JoomlaServerConfigurationPackage.JOOMLA_EXTENSION_DEPLOYMENT__EXTENSION:
 				return extension != null;
 		}

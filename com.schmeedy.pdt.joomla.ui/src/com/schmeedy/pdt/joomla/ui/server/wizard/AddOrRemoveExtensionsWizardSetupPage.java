@@ -3,6 +3,7 @@ package com.schmeedy.pdt.joomla.ui.server.wizard;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.LinkedList;
 import java.util.List;
@@ -37,14 +38,17 @@ import org.eclipse.swt.widgets.Tree;
 import com.schmeedy.pdt.joomla.core.project.model.BasicExtensionModel;
 import com.schmeedy.pdt.joomla.core.project.model.JoomlaExtensionProject;
 import com.schmeedy.pdt.joomla.core.project.model.JoomlaProjectModelPackage;
+import com.schmeedy.pdt.joomla.core.server.IJoomlaDeployer;
+import com.schmeedy.pdt.joomla.core.server.ServerUtils;
 import com.schmeedy.pdt.joomla.core.server.cfg.DeploymentRuntime;
 import com.schmeedy.pdt.joomla.core.server.cfg.JoomlaExtensionDeployment;
 import com.schmeedy.pdt.joomla.core.server.cfg.JoomlaServerConfigurationFactory;
 import com.schmeedy.pdt.joomla.ui.server.DeploymentTreeContentProvider;
 import com.schmeedy.pdt.joomla.ui.server.DeploymentTreeLabelProvider;
 import com.schmeedy.pdt.joomla.ui.server.view.ExtensionModelLabelProvider;
+import com.schmeedy.pdt.joomla.ui.server.wizard.DeploymentChangeRequest.RequestType;
 
-public class AddOrRemoveExtensionsWizardSetupPage extends WizardPage {
+public class AddOrRemoveExtensionsWizardSetupPage extends WizardPage implements IDeploymentChangeRequestProvider {
 
 	private final List<JoomlaExtensionProject> extensionProjects;
 	private final DeploymentRuntime targetRuntime;
@@ -60,18 +64,33 @@ public class AddOrRemoveExtensionsWizardSetupPage extends WizardPage {
 	private Button addButton;
 	private Button removeButton;
 	
-	public AddOrRemoveExtensionsWizardSetupPage(List<JoomlaExtensionProject> extensionProjects, DeploymentRuntime targetRuntime) {
+	public AddOrRemoveExtensionsWizardSetupPage(List<JoomlaExtensionProject> extensionProjects, DeploymentRuntime targetRuntime, IJoomlaDeployer deployer) {
 		super("Add or remove extensions - setup");
+		this.targetRuntime = EcoreUtil.copy(targetRuntime); // we do not want to modify persistent state directly
+		this.extensionProjects = new ArrayList<JoomlaExtensionProject>(EcoreUtil.copyAll(extensionProjects));
+		removeDeployedExtensions(this.extensionProjects);
+		initExtensionToProjectMap(this.extensionProjects);
 		setPageComplete(false);
-		this.extensionProjects = extensionProjects;
-		this.targetRuntime = EcoreUtil.copy(targetRuntime);
 		setDescription("Select extensions to be synchronized with server");
 		setTitle("Add or remove extensions");
-		initExtensionToProjectMap();
 	}
 
-	private void initExtensionToProjectMap() {
-		for (final JoomlaExtensionProject project : extensionProjects) {
+	private void removeDeployedExtensions(List<JoomlaExtensionProject> projects) {
+		for (final JoomlaExtensionProject project : projects) {
+			final Iterator<BasicExtensionModel> i = project.getExtensions().iterator();
+			while (i.hasNext()) {
+				final BasicExtensionModel extension = i.next();
+				final JoomlaExtensionDeployment deployment = ServerUtils.getExtensionDeployment(extension, targetRuntime);
+				if (deployment != null) {
+					i.remove();
+					extensionToProjectMap.put(deployment.getExtension(), project);
+				}
+			}
+		}
+	}
+
+	private void initExtensionToProjectMap(List<JoomlaExtensionProject> projects) {
+		for (final JoomlaExtensionProject project : projects) {
 			for (final BasicExtensionModel extension : project.getExtensions()) {
 				extensionToProjectMap.put(extension, project);
 			}
@@ -158,7 +177,10 @@ public class AddOrRemoveExtensionsWizardSetupPage extends WizardPage {
 				}
 				for (final JoomlaExtensionDeployment deployment : deployments) {
 					final BasicExtensionModel extension = deployment.getExtension();
-					extensionToProjectMap.get(extension).getExtensions().add(extension);
+					final JoomlaExtensionProject containingProject = extensionToProjectMap.get(extension);
+					if (containingProject != null) { // null value possible for stale entries in deployment descriptor
+						containingProject.getExtensions().add(extension);
+					}
 					deployment.getRuntime().getDeployedExtensions().remove(deployment);
 					if (toInstall.contains(extension)) {
 						toInstall.remove(extension);
@@ -166,6 +188,7 @@ public class AddOrRemoveExtensionsWizardSetupPage extends WizardPage {
 						toUninstall.add(extension);
 					}
 				}
+				availableTreeViewer.expandAll();
 				onScheduledOperationsChanged();
 			}
 		});
@@ -192,9 +215,21 @@ public class AddOrRemoveExtensionsWizardSetupPage extends WizardPage {
 		
 		initViewers();
 	}
+	
+	@Override
+	public List<DeploymentChangeRequest> getDeploymentChangeRequests() {
+		final List<DeploymentChangeRequest> changeRequests = new ArrayList<DeploymentChangeRequest>();
+		for (final BasicExtensionModel extension : toInstall) {
+			changeRequests.add(new DeploymentChangeRequest(extension, RequestType.INSTALL));
+		}
+		for (final BasicExtensionModel extension : toUninstall) {
+			changeRequests.add(new DeploymentChangeRequest(extension, RequestType.UNINSTALL));
+		}
+		return changeRequests;
+	}
 
 	private void onScheduledOperationsChanged() {
-		setPageComplete(!toInstall.isEmpty() || !toInstall.isEmpty());
+		setPageComplete(!toInstall.isEmpty() || !toUninstall.isEmpty());
 	}
 	
 	private List<BasicExtensionModel> getSelectedAvailableExtensions() {

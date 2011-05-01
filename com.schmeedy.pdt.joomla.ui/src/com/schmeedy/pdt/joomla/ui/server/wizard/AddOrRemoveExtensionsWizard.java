@@ -5,20 +5,18 @@ import java.util.List;
 import org.eclipse.jface.wizard.Wizard;
 
 import com.schmeedy.pdt.joomla.core.project.model.JoomlaExtensionProject;
+import com.schmeedy.pdt.joomla.core.server.IJoomlaDeployer;
 import com.schmeedy.pdt.joomla.core.server.cfg.DeploymentRuntime;
 
 public class AddOrRemoveExtensionsWizard extends Wizard {
 
 	private final AddOrRemoveExtensionsWizardSetupPage setupPage;
-	private final AddOrRemoveExtensionsWizardResultPage resultPage;
-	private final List<JoomlaExtensionProject> extensionProjects;
-	private final DeploymentRuntime targetRuntime;
+	private final AddOrRemoveExtensionsWizardPerformReviewPage resultPage;
 	
-	public AddOrRemoveExtensionsWizard(List<JoomlaExtensionProject> extensionProjects, DeploymentRuntime targetRuntime) {
-		this.extensionProjects = extensionProjects;
-		this.targetRuntime = targetRuntime;
-		this.setupPage = new AddOrRemoveExtensionsWizardSetupPage(extensionProjects, targetRuntime);
-		this.resultPage = new AddOrRemoveExtensionsWizardResultPage();
+	public AddOrRemoveExtensionsWizard(List<JoomlaExtensionProject> extensionProjects, DeploymentRuntime targetRuntime, IJoomlaDeployer deployer) {
+		this.setupPage = new AddOrRemoveExtensionsWizardSetupPage(extensionProjects, targetRuntime, deployer);
+		this.resultPage = new AddOrRemoveExtensionsWizardPerformReviewPage(setupPage, targetRuntime, deployer);
+		setNeedsProgressMonitor(true);
 	}
 
 	@Override

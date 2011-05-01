@@ -265,7 +265,7 @@ public interface JoomlaServerConfigurationPackage extends EPackage {
 	int DEPLOYMENT_RUNTIME__SERVER = 0;
 
 	/**
-	 * The feature id for the '<em><b>Deployed Extensions</b></em>' reference list.
+	 * The feature id for the '<em><b>Deployed Extensions</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -302,7 +302,7 @@ public interface JoomlaServerConfigurationPackage extends EPackage {
 	int JOOMLA_EXTENSION_DEPLOYMENT = 5;
 
 	/**
-	 * The feature id for the '<em><b>Runtime</b></em>' reference.
+	 * The feature id for the '<em><b>Runtime</b></em>' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -544,10 +544,10 @@ public interface JoomlaServerConfigurationPackage extends EPackage {
 	EReference getDeploymentRuntime_Server();
 
 	/**
-	 * Returns the meta object for the reference list '{@link com.schmeedy.pdt.joomla.core.server.cfg.DeploymentRuntime#getDeployedExtensions <em>Deployed Extensions</em>}'.
+	 * Returns the meta object for the containment reference list '{@link com.schmeedy.pdt.joomla.core.server.cfg.DeploymentRuntime#getDeployedExtensions <em>Deployed Extensions</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>Deployed Extensions</em>'.
+	 * @return the meta object for the containment reference list '<em>Deployed Extensions</em>'.
 	 * @see com.schmeedy.pdt.joomla.core.server.cfg.DeploymentRuntime#getDeployedExtensions()
 	 * @see #getDeploymentRuntime()
 	 * @generated
@@ -576,10 +576,10 @@ public interface JoomlaServerConfigurationPackage extends EPackage {
 	EClass getJoomlaExtensionDeployment();
 
 	/**
-	 * Returns the meta object for the reference '{@link com.schmeedy.pdt.joomla.core.server.cfg.JoomlaExtensionDeployment#getRuntime <em>Runtime</em>}'.
+	 * Returns the meta object for the container reference '{@link com.schmeedy.pdt.joomla.core.server.cfg.JoomlaExtensionDeployment#getRuntime <em>Runtime</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Runtime</em>'.
+	 * @return the meta object for the container reference '<em>Runtime</em>'.
 	 * @see com.schmeedy.pdt.joomla.core.server.cfg.JoomlaExtensionDeployment#getRuntime()
 	 * @see #getJoomlaExtensionDeployment()
 	 * @generated
@@ -795,7 +795,7 @@ public interface JoomlaServerConfigurationPackage extends EPackage {
 		EReference DEPLOYMENT_RUNTIME__SERVER = eINSTANCE.getDeploymentRuntime_Server();
 
 		/**
-		 * The meta object literal for the '<em><b>Deployed Extensions</b></em>' reference list feature.
+		 * The meta object literal for the '<em><b>Deployed Extensions</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
@@ -821,7 +821,7 @@ public interface JoomlaServerConfigurationPackage extends EPackage {
 		EClass JOOMLA_EXTENSION_DEPLOYMENT = eINSTANCE.getJoomlaExtensionDeployment();
 
 		/**
-		 * The meta object literal for the '<em><b>Runtime</b></em>' reference feature.
+		 * The meta object literal for the '<em><b>Runtime</b></em>' container reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated

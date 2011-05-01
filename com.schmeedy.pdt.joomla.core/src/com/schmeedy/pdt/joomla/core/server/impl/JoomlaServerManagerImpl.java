@@ -41,7 +41,6 @@ public class JoomlaServerManagerImpl implements IJoomlaServerManager {
 	private IEclipsePreferences preferences;
 	
 	private AvailableServers availableServers;
-
 		
 	public void activate(BundleContext bundleContext) {
 		this.preferences = new InstanceScope().getNode(bundleContext.getBundle().getSymbolicName());

@@ -12,22 +12,31 @@ import org.apache.commons.httpclient.NameValuePair;
 import org.apache.commons.httpclient.methods.GetMethod;
 import org.apache.commons.httpclient.methods.PostMethod;
 import org.eclipse.core.internal.runtime.InternalPlatform;
+import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.IPath;
-import org.eclipse.core.runtime.NullProgressMonitor;
+import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.SubProgressMonitor;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.xmi.XMLResource;
 import org.htmlcleaner.TagNode;
 import org.osgi.framework.BundleContext;
 
+import com.schmeedy.pdt.joomla.core.JoomlaCorePlugin;
+import com.schmeedy.pdt.joomla.core.project.model.BasicExtensionModel;
 import com.schmeedy.pdt.joomla.core.server.IJoomlaDeployer;
 import com.schmeedy.pdt.joomla.core.server.IJoomlaHttpSession;
 import com.schmeedy.pdt.joomla.core.server.IJoomlaHttpSession.IMethodFactory;
+import com.schmeedy.pdt.joomla.core.server.ServerUtils;
 import com.schmeedy.pdt.joomla.core.server.cfg.DeploymentDescriptor;
 import com.schmeedy.pdt.joomla.core.server.cfg.DeploymentRuntime;
+import com.schmeedy.pdt.joomla.core.server.cfg.JoomlaExtensionDeployment;
 import com.schmeedy.pdt.joomla.core.server.cfg.JoomlaServerConfigurationFactory;
+import com.schmeedy.pdt.joomla.core.server.impl.JoomlaSystemMessage.MessageSeverity;
 
 @SuppressWarnings("restriction")
 public class JoomlaDeployerImpl implements IJoomlaDeployer {
@@ -71,46 +80,120 @@ public class JoomlaDeployerImpl implements IJoomlaDeployer {
 		}
 	}
 
-	// TEMPORARY
-	public void install(DeploymentRuntime runtime, String extensionDir) {
-		final IJoomlaHttpSession session = runtime.getHttpSession();
-		final TagNode installPage = session.executeAndParseResponseBody(new PrepareInstallationRequest(runtime), true, new NullProgressMonitor());
-		final List<NameValuePair> installParams = ServerUtils.extractInputNameValuePairs("//form[@id='adminForm']//input[@type='hidden']", installPage);
-		final Iterator<NameValuePair> i = installParams.iterator();
-		while (i.hasNext()) {
-			final NameValuePair param = i.next();
-			if ("installtype".equals(param.getName())) {
-				i.remove();
+	@Override
+	public IStatus install(BasicExtensionModel extension, DeploymentRuntime transientRuntime, IProgressMonitor progressMonitor) {
+		try {
+			progressMonitor.beginTask("Install " + extension.getName(), 2000);
+			final DeploymentRuntime persistentRuntime = ServerUtils.getPersistentDeploymentRuntime(transientRuntime, getDeploymentDescriptor());
+			final IJoomlaHttpSession session = persistentRuntime.getHttpSession();
+			final String extensionDir = ResourcesPlugin.getWorkspace().getRoot().getFile(extension.getManifestPath()).getLocation().toFile().getParent();
+			
+			final TagNode installPage = session.executeAndParseResponseBody(new PrepareInstallationRequest(persistentRuntime), true, new SubProgressMonitor(progressMonitor, 1000));
+			final List<NameValuePair> installParams = ServerUtils.extractInputNameValuePairs("//form[@id='adminForm']//input[@type='hidden']", installPage);
+			final Iterator<NameValuePair> i = installParams.iterator();
+			while (i.hasNext()) {
+				final NameValuePair param = i.next();
+				if ("installtype".equals(param.getName())) {
+					i.remove();
+				}
 			}
-		}
-		installParams.add(new NameValuePair("installtype", "folder"));
-		installParams.add(new NameValuePair("install_directory", extensionDir));
-		
-		final TagNode result = session.executeAndParseResponseBody(new GenericPostRequest("administrator/index.php?option=com_installer&amp;view=install", runtime, installParams), true, new NullProgressMonitor());
-		final JoomlaSystemMessage systemMessage = ServerUtils.extractFirstSystemMessage(result);
-		if (systemMessage != null) {
-			System.out.println(systemMessage);
+			installParams.add(new NameValuePair("installtype", "folder"));
+			installParams.add(new NameValuePair("install_directory", extensionDir));
+			
+			final TagNode result = session.executeAndParseResponseBody(new GenericPostRequest("administrator/index.php?option=com_installer&amp;view=install", persistentRuntime, installParams), true, new SubProgressMonitor(progressMonitor, 1000));
+			final JoomlaSystemMessage systemMessage = ServerUtils.extractFirstSystemMessage(result);
+			if (systemMessage == null || systemMessage.getSeverity() == MessageSeverity.INFO) {
+				newDeployment(extension, persistentRuntime);
+				return JoomlaCorePlugin.newStatus(IStatus.OK, systemMessage == null ? "Extension successfully installed." : systemMessage.getMessage());
+			} else {
+				// really a warning, because it might be "extension already installed" type of message
+				// TODO: possibly try to distinguish between failure & "already installed" - fetch list of extensions
+				newDeployment(extension, persistentRuntime);
+				return JoomlaCorePlugin.newStatus(IStatus.WARNING, systemMessage.getMessage());
+			}
+		} catch (final RuntimeException e) {
+			// TODO: log?
+			return JoomlaCorePlugin.newStatus(IStatus.ERROR, "Unexpected exception while installing extension " + extension.getName(), e);
+		} finally {
+			progressMonitor.done();
 		}
 	}
 	
-	// TEMPORARY
-	public void uninstall(DeploymentRuntime runtime, String extensionName) {
-		final IJoomlaHttpSession session = runtime.getHttpSession();
-		final TagNode extensionManagementPage = session.executeAndParseResponseBody(new PrepareRemovalRequest(runtime, extensionName), true, new NullProgressMonitor());
-		final String extensionId = getExtensionId(extensionName, extensionManagementPage);
-		if (extensionId == null) {
-			System.out.println("Extension not found on server.");
-			return; // Possible causes: extension not installed, bad logic, different markup...
+	private void newDeployment(BasicExtensionModel extension, DeploymentRuntime persistentRuntime) {
+		final BasicExtensionModel copy = EcoreUtil.copy(extension); // safety copy
+		final JoomlaExtensionDeployment deployment = JoomlaServerConfigurationFactory.eINSTANCE.createJoomlaExtensionDeployment();
+		deployment.setExtension(copy);
+		boolean alreadyDeployed = false;
+		for (final JoomlaExtensionDeployment currentDeployment : persistentRuntime.getDeployedExtensions()) {
+			if (ServerUtils.equals(extension, currentDeployment.getExtension())) {
+				alreadyDeployed = true;
+			}
 		}
+		if (!alreadyDeployed) {
+			persistentRuntime.getDeployedExtensions().add(deployment);
+			boolean success = false;
+			try {
+				saveDescriptor();
+				success = true;
+			} finally {
+				if (!success) { // rollback to persistent state
+					persistentRuntime.getDeployedExtensions().remove(deployment);
+				}
+			}
+		}
+	}
+
+	@Override
+	public IStatus uninstall(JoomlaExtensionDeployment transientDeployment, IProgressMonitor progressMonitor) {
+		try {
+			progressMonitor.beginTask("Uninstall " + transientDeployment.getExtension().getName(), 2000);			
+			final JoomlaExtensionDeployment persistentDeployment = ServerUtils.getPersistentExtensionDeployment(transientDeployment, getDeploymentDescriptor());
+			final DeploymentRuntime runtime = persistentDeployment.getRuntime();
+			final IJoomlaHttpSession session = runtime.getHttpSession();
+			final String extensionName = persistentDeployment.getExtension().getName();
+			
+			final TagNode extensionManagementPage = session.executeAndParseResponseBody(new PrepareRemovalRequest(runtime, extensionName), true, new SubProgressMonitor(progressMonitor, 1000));
+			final String extensionId = getExtensionId(extensionName, extensionManagementPage);
+			if (extensionId == null) {
+				removeDeployment(persistentDeployment);
+				return JoomlaCorePlugin.newStatus(IStatus.WARNING, "Extension " + extensionName + " has not been found on server. It's possible it's already been uninstalled.");
+			}
+			
+			final List<NameValuePair> uninstallRequestParams = new LinkedList<NameValuePair>();
+			uninstallRequestParams.add(new NameValuePair("task", "manage.remove"));
+			uninstallRequestParams.add(new NameValuePair("cid[]", extensionId));
+			uninstallRequestParams.add(ServerUtils.extractSessionTokenParam(extensionManagementPage));
+			final TagNode result = session.executeAndParseResponseBody(new GenericPostRequest("administrator/index.php?option=com_installer&view=manage", runtime, uninstallRequestParams), true, new SubProgressMonitor(progressMonitor, 1000));
+			final JoomlaSystemMessage systemMessage = ServerUtils.extractFirstSystemMessage(result);
+			if (systemMessage == null || systemMessage.getSeverity() == MessageSeverity.INFO) {
+				removeDeployment(persistentDeployment);
+				return JoomlaCorePlugin.newStatus(IStatus.OK, systemMessage == null ? "Extension successfully uninstalled." : systemMessage.getMessage());
+			} else {
+				// warning as it might be "already uninstalled" type of message
+				// TODO: same as with install - try to verify it's uninstalled
+				removeDeployment(persistentDeployment);
+				return JoomlaCorePlugin.newStatus(IStatus.WARNING, systemMessage.getMessage());
+			}
+		} catch (final RuntimeException e) {
+			// TODO: log?
+			return JoomlaCorePlugin.newStatus(IStatus.ERROR, "Unexpected exception while installing extension " + transientDeployment.getExtension().getName(), e);
+		} finally  {
+			progressMonitor.done();
+		}
+	}
 		
-		final List<NameValuePair> uninstallRequestParams = new LinkedList<NameValuePair>();
-		uninstallRequestParams.add(new NameValuePair("task", "manage.remove"));
-		uninstallRequestParams.add(new NameValuePair("cid[]", extensionId));
-		uninstallRequestParams.add(ServerUtils.extractSessionTokenParam(extensionManagementPage));
-		final TagNode result = session.executeAndParseResponseBody(new GenericPostRequest("administrator/index.php?option=com_installer&view=manage", runtime, uninstallRequestParams), true, new NullProgressMonitor());
-		final JoomlaSystemMessage systemMessage = ServerUtils.extractFirstSystemMessage(result);
-		if (systemMessage != null) {
-			System.out.println(systemMessage);
+	private void removeDeployment(JoomlaExtensionDeployment extensionDeployment) {
+		if (extensionDeployment.getRuntime() != null) {
+			extensionDeployment.getRuntime().getDeployedExtensions().remove(extensionDeployment);
+			boolean success = false;
+			try {
+				saveDescriptor();
+				success = true;
+			} finally {
+				if (!success) { // rollback to persistent state (not respecting original index, but should be good enough :)
+					extensionDeployment.getRuntime().getDeployedExtensions().add(extensionDeployment);
+				}
+			}
 		}
 	}
 
@@ -134,7 +217,7 @@ public class JoomlaDeployerImpl implements IJoomlaDeployer {
 		}
 		return null;
 	}
-
+	
 	private static class PrepareInstallationRequest implements IMethodFactory {
 		private final DeploymentRuntime runtime;
 		

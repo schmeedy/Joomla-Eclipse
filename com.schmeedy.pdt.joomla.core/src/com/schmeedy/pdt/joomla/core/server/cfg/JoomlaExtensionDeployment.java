@@ -29,7 +29,7 @@ import com.schmeedy.pdt.joomla.core.project.model.BasicExtensionModel;
  */
 public interface JoomlaExtensionDeployment extends EObject {
 	/**
-	 * Returns the value of the '<em><b>Runtime</b></em>' reference.
+	 * Returns the value of the '<em><b>Runtime</b></em>' container reference.
 	 * It is bidirectional and its opposite is '{@link com.schmeedy.pdt.joomla.core.server.cfg.DeploymentRuntime#getDeployedExtensions <em>Deployed Extensions</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
@@ -37,20 +37,20 @@ public interface JoomlaExtensionDeployment extends EObject {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Runtime</em>' reference.
+	 * @return the value of the '<em>Runtime</em>' container reference.
 	 * @see #setRuntime(DeploymentRuntime)
 	 * @see com.schmeedy.pdt.joomla.core.server.cfg.JoomlaServerConfigurationPackage#getJoomlaExtensionDeployment_Runtime()
 	 * @see com.schmeedy.pdt.joomla.core.server.cfg.DeploymentRuntime#getDeployedExtensions
-	 * @model opposite="deployedExtensions" required="true"
+	 * @model opposite="deployedExtensions" required="true" transient="false"
 	 * @generated
 	 */
 	DeploymentRuntime getRuntime();
 
 	/**
-	 * Sets the value of the '{@link com.schmeedy.pdt.joomla.core.server.cfg.JoomlaExtensionDeployment#getRuntime <em>Runtime</em>}' reference.
+	 * Sets the value of the '{@link com.schmeedy.pdt.joomla.core.server.cfg.JoomlaExtensionDeployment#getRuntime <em>Runtime</em>}' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Runtime</em>' reference.
+	 * @param value the new value of the '<em>Runtime</em>' container reference.
 	 * @see #getRuntime()
 	 * @generated
 	 */

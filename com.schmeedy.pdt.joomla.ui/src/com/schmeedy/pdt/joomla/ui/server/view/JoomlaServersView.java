@@ -54,6 +54,7 @@ public class JoomlaServersView extends ViewPart {
 			
 			inputObservable = EMFProperties.list(JoomlaServerConfigurationPackage.Literals.DEPLOYMENT_DESCRIPTOR__RUNTIMES).observe(deploymentDescriptor);
 			deploymentTreeViewer.setInput(inputObservable);
+			deploymentTreeViewer.expandAll();
 		}
 		
 		{ // initialize context menu

@@ -8,6 +8,7 @@ package com.schmeedy.pdt.joomla.core.project.model.impl;
 
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.IPath;
+import org.eclipse.core.runtime.Path;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
@@ -37,12 +38,12 @@ public class JoomlaProjectModelFactoryImpl extends EFactoryImpl implements Jooml
 	 */
 	public static JoomlaProjectModelFactory init() {
 		try {
-			JoomlaProjectModelFactory theJoomlaProjectModelFactory = (JoomlaProjectModelFactory)EPackage.Registry.INSTANCE.getEFactory("http://schmeedy.com/pdt/joomla/project/model"); 
+			final JoomlaProjectModelFactory theJoomlaProjectModelFactory = (JoomlaProjectModelFactory)EPackage.Registry.INSTANCE.getEFactory("http://schmeedy.com/pdt/joomla/project/model"); 
 			if (theJoomlaProjectModelFactory != null) {
 				return theJoomlaProjectModelFactory;
 			}
 		}
-		catch (Exception exception) {
+		catch (final Exception exception) {
 			EcorePlugin.INSTANCE.log(exception);
 		}
 		return new JoomlaProjectModelFactoryImpl();
@@ -120,8 +121,9 @@ public class JoomlaProjectModelFactoryImpl extends EFactoryImpl implements Jooml
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public JoomlaExtensionProject createJoomlaExtensionProject() {
-		JoomlaExtensionProjectImpl joomlaExtensionProject = new JoomlaExtensionProjectImpl();
+		final JoomlaExtensionProjectImpl joomlaExtensionProject = new JoomlaExtensionProjectImpl();
 		return joomlaExtensionProject;
 	}
 
@@ -130,8 +132,9 @@ public class JoomlaProjectModelFactoryImpl extends EFactoryImpl implements Jooml
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public BasicExtensionModel createBasicExtensionModel() {
-		BasicExtensionModelImpl basicExtensionModel = new BasicExtensionModelImpl();
+		final BasicExtensionModelImpl basicExtensionModel = new BasicExtensionModelImpl();
 		return basicExtensionModel;
 	}
 
@@ -141,7 +144,7 @@ public class JoomlaProjectModelFactoryImpl extends EFactoryImpl implements Jooml
 	 * @generated
 	 */
 	public ManifestVersion createManifestVersionFromString(EDataType eDataType, String initialValue) {
-		ManifestVersion result = ManifestVersion.get(initialValue);
+		final ManifestVersion result = ManifestVersion.get(initialValue);
 		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
 		return result;
 	}
@@ -161,7 +164,7 @@ public class JoomlaProjectModelFactoryImpl extends EFactoryImpl implements Jooml
 	 * @generated
 	 */
 	public ExtensionType createExtensionTypeFromString(EDataType eDataType, String initialValue) {
-		ExtensionType result = ExtensionType.get(initialValue);
+		final ExtensionType result = ExtensionType.get(initialValue);
 		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
 		return result;
 	}
@@ -178,10 +181,10 @@ public class JoomlaProjectModelFactoryImpl extends EFactoryImpl implements Jooml
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	public IPath createIPathFromString(EDataType eDataType, String initialValue) {
-		return (IPath)super.createFromString(eDataType, initialValue);
+		return new Path(initialValue);
 	}
 
 	/**
@@ -216,6 +219,7 @@ public class JoomlaProjectModelFactoryImpl extends EFactoryImpl implements Jooml
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public JoomlaProjectModelPackage getJoomlaProjectModelPackage() {
 		return (JoomlaProjectModelPackage)getEPackage();
 	}
