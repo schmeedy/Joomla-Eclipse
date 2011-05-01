@@ -10,7 +10,11 @@ import org.eclipse.jface.operation.IRunnableWithProgress;
 import org.eclipse.jface.wizard.IWizardPage;
 import org.eclipse.jface.wizard.WizardPage;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.custom.ScrolledComposite;
+import org.eclipse.swt.layout.GridData;
+import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Text;
 
 import com.schmeedy.pdt.joomla.core.project.model.BasicExtensionModel;
 import com.schmeedy.pdt.joomla.core.server.IJoomlaDeployer;
@@ -26,6 +30,7 @@ public class AddOrRemoveExtensionsWizardPerformReviewPage extends WizardPage {
 	private final IJoomlaDeployer deployer;
 	
 	private boolean visible = false;
+	private Text resultText;
 	
 	public AddOrRemoveExtensionsWizardPerformReviewPage(IDeploymentChangeRequestProvider changeRequestProvider, DeploymentRuntime targetRuntime, IJoomlaDeployer deployer) {
 		super("Add or remove extensions - results");
@@ -40,7 +45,88 @@ public class AddOrRemoveExtensionsWizardPerformReviewPage extends WizardPage {
 	@Override
 	public void createControl(Composite parent) {
 		final Composite container = new Composite(parent, SWT.NULL);
-		setControl(container); 
+		setControl(container);
+		container.setLayout(new GridLayout(1, false));
+		
+		final ScrolledComposite scrolledComposite = new ScrolledComposite(container, SWT.BORDER | SWT.H_SCROLL | SWT.V_SCROLL);
+		scrolledComposite.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
+		scrolledComposite.setExpandHorizontal(true);
+		scrolledComposite.setExpandVertical(true);
+		
+		resultText = new Text(scrolledComposite, SWT.BORDER | SWT.READ_ONLY | SWT.MULTI);
+		scrolledComposite.setContent(resultText);
+		scrolledComposite.setMinSize(200, 200);
+	}
+	
+	private void appendRequestProcessingStarted(final DeploymentChangeRequest request) {
+		getContainer().getShell().getDisplay().asyncExec(new Runnable() {
+			@Override
+			public void run() {
+				final StringBuilder sb = new StringBuilder();
+				sb.append(resultText.getText());
+				switch (request.getType()) {
+					case INSTALL:
+						sb.append("Installing ");
+						break;
+					case UNINSTALL:
+						sb.append("Uninstalling ");
+						break;
+				}
+				switch (request.getExtension().getType()) {
+					case COMPONENT:
+						sb.append("component ");
+						break;
+					case PLUGIN:
+						sb.append("plugin ");
+						break;
+					case MODULE:
+						sb.append("module ");
+						break;
+					case TEMPLATE:
+						sb.append("template ");
+						break;
+				}
+				sb.append(request.getExtension().getName());
+				sb.append(" ");
+				sb.append(request.getExtension().getManifestVersion());
+				sb.append("\n");
+				resultText.setText(sb.toString());
+			}
+		});
+	}
+	
+	private void appendRequestProcessingEnded(final DeploymentChangeRequest request, final IStatus status) {
+		getContainer().getShell().getDisplay().asyncExec(new Runnable() {
+			@Override
+			public void run() {
+				final StringBuilder sb = new StringBuilder();
+				sb.append(resultText.getText());
+				switch (request.getType()) {
+					case INSTALL:
+						sb.append("Installation ");
+						break;
+					case UNINSTALL:
+						sb.append("Uninstallation ");
+						break;
+				}
+				switch (status.getSeverity()) {
+					case IStatus.ERROR:
+						sb.append(" FAILED: ");
+						break;
+					case IStatus.WARNING:
+						sb.append(" FINISHED WITH WARNING: ");
+						break;
+					default:
+						sb.append("SUCCESSFUL");
+						sb.append(status.getMessage() == null || status.getMessage().isEmpty() ? "." : ": ");
+				}
+				if (status.getMessage() != null) {
+					sb.append(status.getMessage());
+				}
+				sb.append("\n\n");
+				resultText.setText(sb.toString());
+			}
+		});
 	}
 	
 	@Override
@@ -48,8 +134,13 @@ public class AddOrRemoveExtensionsWizardPerformReviewPage extends WizardPage {
 		final boolean madeVisible = !this.visible && visible;
 		super.setVisible(visible);
 		if (madeVisible) {
-			processChangeRequestsAndShowResult();
-			setPageComplete(true);
+			getContainer().getShell().getDisplay().asyncExec(new Runnable() {
+				@Override
+				public void run() {
+					processChangeRequestsAndShowResult();
+					setPageComplete(true);
+				}
+			});
 		}
 		this.visible = visible;
 	}
@@ -63,6 +154,7 @@ public class AddOrRemoveExtensionsWizardPerformReviewPage extends WizardPage {
 						final List<DeploymentChangeRequest> changeRequests = changeRequestProvider.getDeploymentChangeRequests();
 						progressMonitor.beginTask("Processing requested changes to deployment.", changeRequests.size() * 1000);
 						for (final DeploymentChangeRequest changeRequest : changeRequests) {
+							appendRequestProcessingStarted(changeRequest);
 							final IStatus processingResult;
 							switch (changeRequest.getType()) {
 								case INSTALL:
@@ -74,7 +166,7 @@ public class AddOrRemoveExtensionsWizardPerformReviewPage extends WizardPage {
 								default:
 									continue; // illegal change request
 							}
-							System.out.println(processingResult);
+							appendRequestProcessingEnded(changeRequest, processingResult);
 						}
 					} finally {
 						progressMonitor.done();
