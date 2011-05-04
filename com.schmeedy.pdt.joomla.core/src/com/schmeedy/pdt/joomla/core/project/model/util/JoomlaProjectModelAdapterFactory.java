@@ -12,6 +12,7 @@ import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
 import org.eclipse.emf.ecore.EObject;
 
 import com.schmeedy.pdt.joomla.core.project.model.BasicExtensionModel;
+import com.schmeedy.pdt.joomla.core.project.model.ExtensionResource;
 import com.schmeedy.pdt.joomla.core.project.model.JoomlaExtensionProject;
 import com.schmeedy.pdt.joomla.core.project.model.JoomlaProjectModelPackage;
 
@@ -80,6 +81,10 @@ public class JoomlaProjectModelAdapterFactory extends AdapterFactoryImpl {
 				return createBasicExtensionModelAdapter();
 			}
 			@Override
+			public Adapter caseExtensionResource(ExtensionResource object) {
+				return createExtensionResourceAdapter();
+			}
+			@Override
 			public Adapter defaultCase(EObject object) {
 				return createEObjectAdapter();
 			}
@@ -124,6 +129,20 @@ public class JoomlaProjectModelAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createBasicExtensionModelAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link com.schmeedy.pdt.joomla.core.project.model.ExtensionResource <em>Extension Resource</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see com.schmeedy.pdt.joomla.core.project.model.ExtensionResource
+	 * @generated
+	 */
+	public Adapter createExtensionResourceAdapter() {
 		return null;
 	}
 

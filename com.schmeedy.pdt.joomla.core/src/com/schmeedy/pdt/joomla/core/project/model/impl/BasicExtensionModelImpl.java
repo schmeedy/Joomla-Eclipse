@@ -6,16 +6,22 @@
  */
 package com.schmeedy.pdt.joomla.core.project.model.impl;
 
+import java.util.Collection;
+
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
+import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.emf.ecore.util.InternalEList;
 
 import com.schmeedy.pdt.joomla.core.project.model.BasicExtensionModel;
+import com.schmeedy.pdt.joomla.core.project.model.ExtensionResource;
 import com.schmeedy.pdt.joomla.core.project.model.ExtensionType;
 import com.schmeedy.pdt.joomla.core.project.model.JoomlaExtensionProject;
 import com.schmeedy.pdt.joomla.core.project.model.JoomlaProjectModelPackage;
@@ -33,6 +39,7 @@ import com.schmeedy.pdt.joomla.core.project.model.ManifestVersion;
  *   <li>{@link com.schmeedy.pdt.joomla.core.project.model.impl.BasicExtensionModelImpl#getManifestVersion <em>Manifest Version</em>}</li>
  *   <li>{@link com.schmeedy.pdt.joomla.core.project.model.impl.BasicExtensionModelImpl#getManifestPath <em>Manifest Path</em>}</li>
  *   <li>{@link com.schmeedy.pdt.joomla.core.project.model.impl.BasicExtensionModelImpl#getProject <em>Project</em>}</li>
+ *   <li>{@link com.schmeedy.pdt.joomla.core.project.model.impl.BasicExtensionModelImpl#getResources <em>Resources</em>}</li>
  * </ul>
  * </p>
  *
@@ -118,6 +125,16 @@ public class BasicExtensionModelImpl extends EObjectImpl implements BasicExtensi
 	 * @ordered
 	 */
 	protected IPath manifestPath = MANIFEST_PATH_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getResources() <em>Resources</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getResources()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<ExtensionResource> resources;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -268,6 +285,18 @@ public class BasicExtensionModelImpl extends EObjectImpl implements BasicExtensi
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<ExtensionResource> getResources() {
+		if (resources == null) {
+			resources = new EObjectContainmentEList<ExtensionResource>(ExtensionResource.class, this, JoomlaProjectModelPackage.BASIC_EXTENSION_MODEL__RESOURCES);
+		}
+		return resources;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
@@ -289,6 +318,8 @@ public class BasicExtensionModelImpl extends EObjectImpl implements BasicExtensi
 		switch (featureID) {
 			case JoomlaProjectModelPackage.BASIC_EXTENSION_MODEL__PROJECT:
 				return basicSetProject(null, msgs);
+			case JoomlaProjectModelPackage.BASIC_EXTENSION_MODEL__RESOURCES:
+				return ((InternalEList<?>)getResources()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -325,6 +356,8 @@ public class BasicExtensionModelImpl extends EObjectImpl implements BasicExtensi
 				return getManifestPath();
 			case JoomlaProjectModelPackage.BASIC_EXTENSION_MODEL__PROJECT:
 				return getProject();
+			case JoomlaProjectModelPackage.BASIC_EXTENSION_MODEL__RESOURCES:
+				return getResources();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -334,6 +367,7 @@ public class BasicExtensionModelImpl extends EObjectImpl implements BasicExtensi
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
@@ -351,6 +385,10 @@ public class BasicExtensionModelImpl extends EObjectImpl implements BasicExtensi
 				return;
 			case JoomlaProjectModelPackage.BASIC_EXTENSION_MODEL__PROJECT:
 				setProject((JoomlaExtensionProject)newValue);
+				return;
+			case JoomlaProjectModelPackage.BASIC_EXTENSION_MODEL__RESOURCES:
+				getResources().clear();
+				getResources().addAll((Collection<? extends ExtensionResource>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -379,6 +417,9 @@ public class BasicExtensionModelImpl extends EObjectImpl implements BasicExtensi
 			case JoomlaProjectModelPackage.BASIC_EXTENSION_MODEL__PROJECT:
 				setProject((JoomlaExtensionProject)null);
 				return;
+			case JoomlaProjectModelPackage.BASIC_EXTENSION_MODEL__RESOURCES:
+				getResources().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -401,6 +442,8 @@ public class BasicExtensionModelImpl extends EObjectImpl implements BasicExtensi
 				return MANIFEST_PATH_EDEFAULT == null ? manifestPath != null : !MANIFEST_PATH_EDEFAULT.equals(manifestPath);
 			case JoomlaProjectModelPackage.BASIC_EXTENSION_MODEL__PROJECT:
 				return getProject() != null;
+			case JoomlaProjectModelPackage.BASIC_EXTENSION_MODEL__RESOURCES:
+				return resources != null && !resources.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

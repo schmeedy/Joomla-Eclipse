@@ -7,6 +7,7 @@
 package com.schmeedy.pdt.joomla.core.project.model;
 
 import org.eclipse.core.runtime.IPath;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 
 /**
@@ -22,6 +23,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link com.schmeedy.pdt.joomla.core.project.model.BasicExtensionModel#getManifestVersion <em>Manifest Version</em>}</li>
  *   <li>{@link com.schmeedy.pdt.joomla.core.project.model.BasicExtensionModel#getManifestPath <em>Manifest Path</em>}</li>
  *   <li>{@link com.schmeedy.pdt.joomla.core.project.model.BasicExtensionModel#getProject <em>Project</em>}</li>
+ *   <li>{@link com.schmeedy.pdt.joomla.core.project.model.BasicExtensionModel#getResources <em>Resources</em>}</li>
  * </ul>
  * </p>
  *
@@ -167,5 +169,21 @@ public interface BasicExtensionModel extends EObject {
 	 * @generated
 	 */
 	void setProject(JoomlaExtensionProject value);
+
+	/**
+	 * Returns the value of the '<em><b>Resources</b></em>' containment reference list.
+	 * The list contents are of type {@link com.schmeedy.pdt.joomla.core.project.model.ExtensionResource}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Resources</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Resources</em>' containment reference list.
+	 * @see com.schmeedy.pdt.joomla.core.project.model.JoomlaProjectModelPackage#getBasicExtensionModel_Resources()
+	 * @model containment="true" transient="true"
+	 * @generated
+	 */
+	EList<ExtensionResource> getResources();
 
 } // BasicExtensionModel

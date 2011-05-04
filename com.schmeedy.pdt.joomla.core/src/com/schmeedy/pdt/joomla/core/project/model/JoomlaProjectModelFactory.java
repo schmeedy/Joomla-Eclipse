@@ -44,6 +44,15 @@ public interface JoomlaProjectModelFactory extends EFactory {
 	BasicExtensionModel createBasicExtensionModel();
 
 	/**
+	 * Returns a new object of class '<em>Extension Resource</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Extension Resource</em>'.
+	 * @generated
+	 */
+	ExtensionResource createExtensionResource();
+
+	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

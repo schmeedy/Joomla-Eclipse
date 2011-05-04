@@ -27,6 +27,7 @@ import org.htmlcleaner.TagNode;
 import org.osgi.framework.BundleContext;
 
 import com.schmeedy.pdt.joomla.core.JoomlaCorePlugin;
+import com.schmeedy.pdt.joomla.core.project.IExtensionModelChangeListener;
 import com.schmeedy.pdt.joomla.core.project.model.BasicExtensionModel;
 import com.schmeedy.pdt.joomla.core.server.IJoomlaDeployer;
 import com.schmeedy.pdt.joomla.core.server.IJoomlaHttpSession;
@@ -39,7 +40,7 @@ import com.schmeedy.pdt.joomla.core.server.cfg.JoomlaServerConfigurationFactory;
 import com.schmeedy.pdt.joomla.core.server.impl.JoomlaSystemMessage.MessageSeverity;
 
 @SuppressWarnings("restriction")
-public class JoomlaDeployerImpl implements IJoomlaDeployer {
+public class JoomlaDeployerImpl implements IJoomlaDeployer, IExtensionModelChangeListener {
 
 	private static final String DESCRIPTOR_FILENAME = "deployment.xmi";
 	
@@ -53,6 +54,15 @@ public class JoomlaDeployerImpl implements IJoomlaDeployer {
 	
 	public void deactivate() {
 		deploymentDescriptor = null;
+	}
+	
+	@Override
+	public void onExtensionModelChange(BasicExtensionModel extensionModel) {
+		final JoomlaExtensionDeployment deployment = ServerUtils.getExtensionDeployment(extensionModel, getDeploymentDescriptor());
+		if (deployment != null) {
+			ServerUtils.copyAttributes(extensionModel, deployment.getExtension());
+			saveDescriptor();
+		}
 	}
 	
 	@Override

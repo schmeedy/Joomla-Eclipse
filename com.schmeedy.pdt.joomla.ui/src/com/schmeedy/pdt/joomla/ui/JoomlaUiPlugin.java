@@ -12,18 +12,26 @@ public class JoomlaUiPlugin extends AbstractUIPlugin {
 	
 	private static JoomlaUiPlugin INSTANCE;
 	
+	private BundleContext bundleContext;
+	
 	public static JoomlaUiPlugin getInstance() {
 		return INSTANCE;
+	}
+
+	public BundleContext getBundleContext() {
+		return bundleContext;
 	}
 	
 	@Override
 	public void start(BundleContext context) throws Exception {
 		INSTANCE = this;
+		this.bundleContext = context;
 	}
 	
 	@Override
 	public void stop(BundleContext context) throws Exception {
 		INSTANCE = null;
+		this.bundleContext = null;
 	}
 	
 	public Image getImage(String symbolicName) {

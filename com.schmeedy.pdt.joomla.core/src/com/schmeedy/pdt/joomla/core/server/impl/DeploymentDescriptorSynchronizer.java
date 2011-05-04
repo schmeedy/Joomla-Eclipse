@@ -5,11 +5,10 @@ import java.util.Iterator;
 import java.util.Map;
 
 import org.eclipse.core.runtime.Assert;
-import org.eclipse.emf.ecore.EAttribute;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 
 import com.schmeedy.pdt.joomla.core.server.IJoomlaDeployer;
+import com.schmeedy.pdt.joomla.core.server.ServerUtils;
 import com.schmeedy.pdt.joomla.core.server.cfg.AvailableServers;
 import com.schmeedy.pdt.joomla.core.server.cfg.DeploymentDescriptor;
 import com.schmeedy.pdt.joomla.core.server.cfg.DeploymentRuntime;
@@ -44,9 +43,9 @@ class DeploymentDescriptorSynchronizer {
 					if (runtime.getServer().getAdminUserCredentials() == null) {
 						runtime.getServer().setAdminUserCredentials(JoomlaServerConfigurationFactory.eINSTANCE.createUserCredentials());
 					}
-					copyAttributes(currentServerConfiguration.getAdminUserCredentials(), runtime.getServer().getAdminUserCredentials());
+					ServerUtils.copyAttributes(currentServerConfiguration.getAdminUserCredentials(), runtime.getServer().getAdminUserCredentials());
 				}
-				copyAttributes(currentServerConfiguration, runtime.getServer());
+				ServerUtils.copyAttributes(currentServerConfiguration, runtime.getServer());
 				serverIdToConfigurationMap.remove(serverId); // remove to leave only unmatched servers in the map
 			} else {
 				i.remove();
@@ -60,21 +59,6 @@ class DeploymentDescriptorSynchronizer {
 		}
 		
 		((JoomlaDeployerImpl) deployer).saveDescriptor();
-	}
-
-	private void copyAttributes(EObject source, EObject target) {
-		Assert.isTrue(source.eClass() == target.eClass(), "Cannot copy attributes between instances of two distinct EClasses.");
-		for (final EAttribute attribute : source.eClass().getEAllAttributes()) {
-			final Object sourceValue = source.eGet(attribute);
-			final Object targetValue = target.eGet(attribute);
-			if (!areEqual(sourceValue, targetValue)) {
-				target.eSet(attribute, sourceValue);
-			}
-		}
-	}
-	
-	private boolean areEqual(Object o1, Object o2) {
-		return o1 == null ? o2 == null : o1.equals(o2);
-	}
+	}	
 	
 }

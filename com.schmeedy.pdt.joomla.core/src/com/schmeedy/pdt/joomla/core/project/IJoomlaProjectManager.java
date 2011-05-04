@@ -3,9 +3,7 @@ package com.schmeedy.pdt.joomla.core.project;
 import java.util.List;
 
 import org.eclipse.core.resources.IProject;
-import org.eclipse.core.runtime.IPath;
 
-import com.schmeedy.pdt.joomla.core.project.model.BasicExtensionModel;
 import com.schmeedy.pdt.joomla.core.project.model.JoomlaExtensionProject;
 
 public interface IJoomlaProjectManager {
@@ -13,7 +11,5 @@ public interface IJoomlaProjectManager {
 	JoomlaExtensionProject getExtensionProjectModel(IProject project);
 	
 	List<JoomlaExtensionProject> getExtensionProjects();
-	
-	BasicExtensionModel getBasicExtensionModel(IProject project, IPath manifestPath);
 	
 }

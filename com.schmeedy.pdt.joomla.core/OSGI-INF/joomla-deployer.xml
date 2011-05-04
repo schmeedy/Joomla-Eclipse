@@ -3,5 +3,6 @@
    <implementation class="com.schmeedy.pdt.joomla.core.server.impl.JoomlaDeployerImpl"/>
    <service>
       <provide interface="com.schmeedy.pdt.joomla.core.server.IJoomlaDeployer"/>
+      <provide interface="com.schmeedy.pdt.joomla.core.project.IExtensionModelChangeListener"/>
    </service>
 </scr:component>

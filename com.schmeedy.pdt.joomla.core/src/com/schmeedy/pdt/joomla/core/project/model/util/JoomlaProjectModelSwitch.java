@@ -12,6 +12,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 
 import com.schmeedy.pdt.joomla.core.project.model.BasicExtensionModel;
+import com.schmeedy.pdt.joomla.core.project.model.ExtensionResource;
 import com.schmeedy.pdt.joomla.core.project.model.JoomlaExtensionProject;
 import com.schmeedy.pdt.joomla.core.project.model.JoomlaProjectModelPackage;
 
@@ -101,6 +102,12 @@ public class JoomlaProjectModelSwitch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case JoomlaProjectModelPackage.EXTENSION_RESOURCE: {
+				ExtensionResource extensionResource = (ExtensionResource)theEObject;
+				T result = caseExtensionResource(extensionResource);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			default: return defaultCase(theEObject);
 		}
 	}
@@ -132,6 +139,21 @@ public class JoomlaProjectModelSwitch<T> {
 	 * @generated
 	 */
 	public T caseBasicExtensionModel(BasicExtensionModel object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Extension Resource</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Extension Resource</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseExtensionResource(ExtensionResource object) {
 		return null;
 	}
 

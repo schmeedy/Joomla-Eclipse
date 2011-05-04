@@ -6,6 +6,8 @@
  */
 package com.schmeedy.pdt.joomla.core.project.model.impl;
 
+import java.io.File;
+
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.Path;
@@ -17,11 +19,13 @@ import org.eclipse.emf.ecore.impl.EFactoryImpl;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
 
 import com.schmeedy.pdt.joomla.core.project.model.BasicExtensionModel;
+import com.schmeedy.pdt.joomla.core.project.model.ExtensionResource;
 import com.schmeedy.pdt.joomla.core.project.model.ExtensionType;
 import com.schmeedy.pdt.joomla.core.project.model.JoomlaExtensionProject;
 import com.schmeedy.pdt.joomla.core.project.model.JoomlaProjectModelFactory;
 import com.schmeedy.pdt.joomla.core.project.model.JoomlaProjectModelPackage;
 import com.schmeedy.pdt.joomla.core.project.model.ManifestVersion;
+import com.schmeedy.pdt.joomla.core.project.model.ResourceType;
 
 /**
  * <!-- begin-user-doc -->
@@ -38,12 +42,12 @@ public class JoomlaProjectModelFactoryImpl extends EFactoryImpl implements Jooml
 	 */
 	public static JoomlaProjectModelFactory init() {
 		try {
-			final JoomlaProjectModelFactory theJoomlaProjectModelFactory = (JoomlaProjectModelFactory)EPackage.Registry.INSTANCE.getEFactory("http://schmeedy.com/pdt/joomla/project/model"); 
+			JoomlaProjectModelFactory theJoomlaProjectModelFactory = (JoomlaProjectModelFactory)EPackage.Registry.INSTANCE.getEFactory("http://schmeedy.com/pdt/joomla/project/model"); 
 			if (theJoomlaProjectModelFactory != null) {
 				return theJoomlaProjectModelFactory;
 			}
 		}
-		catch (final Exception exception) {
+		catch (Exception exception) {
 			EcorePlugin.INSTANCE.log(exception);
 		}
 		return new JoomlaProjectModelFactoryImpl();
@@ -69,6 +73,7 @@ public class JoomlaProjectModelFactoryImpl extends EFactoryImpl implements Jooml
 		switch (eClass.getClassifierID()) {
 			case JoomlaProjectModelPackage.JOOMLA_EXTENSION_PROJECT: return createJoomlaExtensionProject();
 			case JoomlaProjectModelPackage.BASIC_EXTENSION_MODEL: return createBasicExtensionModel();
+			case JoomlaProjectModelPackage.EXTENSION_RESOURCE: return createExtensionResource();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -86,10 +91,14 @@ public class JoomlaProjectModelFactoryImpl extends EFactoryImpl implements Jooml
 				return createManifestVersionFromString(eDataType, initialValue);
 			case JoomlaProjectModelPackage.EXTENSION_TYPE:
 				return createExtensionTypeFromString(eDataType, initialValue);
+			case JoomlaProjectModelPackage.RESOURCE_TYPE:
+				return createResourceTypeFromString(eDataType, initialValue);
 			case JoomlaProjectModelPackage.IPATH:
 				return createIPathFromString(eDataType, initialValue);
 			case JoomlaProjectModelPackage.IPROJECT:
 				return createIProjectFromString(eDataType, initialValue);
+			case JoomlaProjectModelPackage.FILE:
+				return createFileFromString(eDataType, initialValue);
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
@@ -107,10 +116,14 @@ public class JoomlaProjectModelFactoryImpl extends EFactoryImpl implements Jooml
 				return convertManifestVersionToString(eDataType, instanceValue);
 			case JoomlaProjectModelPackage.EXTENSION_TYPE:
 				return convertExtensionTypeToString(eDataType, instanceValue);
+			case JoomlaProjectModelPackage.RESOURCE_TYPE:
+				return convertResourceTypeToString(eDataType, instanceValue);
 			case JoomlaProjectModelPackage.IPATH:
 				return convertIPathToString(eDataType, instanceValue);
 			case JoomlaProjectModelPackage.IPROJECT:
 				return convertIProjectToString(eDataType, instanceValue);
+			case JoomlaProjectModelPackage.FILE:
+				return convertFileToString(eDataType, instanceValue);
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
@@ -123,7 +136,7 @@ public class JoomlaProjectModelFactoryImpl extends EFactoryImpl implements Jooml
 	 */
 	@Override
 	public JoomlaExtensionProject createJoomlaExtensionProject() {
-		final JoomlaExtensionProjectImpl joomlaExtensionProject = new JoomlaExtensionProjectImpl();
+		JoomlaExtensionProjectImpl joomlaExtensionProject = new JoomlaExtensionProjectImpl();
 		return joomlaExtensionProject;
 	}
 
@@ -134,7 +147,7 @@ public class JoomlaProjectModelFactoryImpl extends EFactoryImpl implements Jooml
 	 */
 	@Override
 	public BasicExtensionModel createBasicExtensionModel() {
-		final BasicExtensionModelImpl basicExtensionModel = new BasicExtensionModelImpl();
+		BasicExtensionModelImpl basicExtensionModel = new BasicExtensionModelImpl();
 		return basicExtensionModel;
 	}
 
@@ -143,8 +156,18 @@ public class JoomlaProjectModelFactoryImpl extends EFactoryImpl implements Jooml
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public ExtensionResource createExtensionResource() {
+		ExtensionResourceImpl extensionResource = new ExtensionResourceImpl();
+		return extensionResource;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public ManifestVersion createManifestVersionFromString(EDataType eDataType, String initialValue) {
-		final ManifestVersion result = ManifestVersion.get(initialValue);
+		ManifestVersion result = ManifestVersion.get(initialValue);
 		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
 		return result;
 	}
@@ -164,7 +187,7 @@ public class JoomlaProjectModelFactoryImpl extends EFactoryImpl implements Jooml
 	 * @generated
 	 */
 	public ExtensionType createExtensionTypeFromString(EDataType eDataType, String initialValue) {
-		final ExtensionType result = ExtensionType.get(initialValue);
+		ExtensionType result = ExtensionType.get(initialValue);
 		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
 		return result;
 	}
@@ -175,6 +198,26 @@ public class JoomlaProjectModelFactoryImpl extends EFactoryImpl implements Jooml
 	 * @generated
 	 */
 	public String convertExtensionTypeToString(EDataType eDataType, Object instanceValue) {
+		return instanceValue == null ? null : instanceValue.toString();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public ResourceType createResourceTypeFromString(EDataType eDataType, String initialValue) {
+		ResourceType result = ResourceType.get(initialValue);
+		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
+		return result;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String convertResourceTypeToString(EDataType eDataType, Object instanceValue) {
 		return instanceValue == null ? null : instanceValue.toString();
 	}
 
@@ -211,6 +254,24 @@ public class JoomlaProjectModelFactoryImpl extends EFactoryImpl implements Jooml
 	 * @generated
 	 */
 	public String convertIProjectToString(EDataType eDataType, Object instanceValue) {
+		return super.convertToString(eDataType, instanceValue);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public File createFileFromString(EDataType eDataType, String initialValue) {
+		return (File)super.createFromString(eDataType, initialValue);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String convertFileToString(EDataType eDataType, Object instanceValue) {
 		return super.convertToString(eDataType, instanceValue);
 	}
 

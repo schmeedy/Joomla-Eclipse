@@ -5,6 +5,9 @@ import java.util.LinkedList;
 import java.util.List;
 
 import org.apache.commons.httpclient.NameValuePair;
+import org.eclipse.core.runtime.Assert;
+import org.eclipse.emf.ecore.EAttribute;
+import org.eclipse.emf.ecore.EObject;
 import org.htmlcleaner.CleanerProperties;
 import org.htmlcleaner.HtmlCleaner;
 import org.htmlcleaner.PrettyHtmlSerializer;
@@ -134,6 +137,20 @@ public class ServerUtils {
 		return null;
 	}
 	
+	public static JoomlaExtensionDeployment getExtensionDeployment(BasicExtensionModel extension, DeploymentDescriptor descriptor) {
+		if (extension == null) {
+			return null;
+		}
+		for (final DeploymentRuntime runtime : descriptor.getRuntimes()) {
+			for (final JoomlaExtensionDeployment deployment : runtime.getDeployedExtensions()) {
+				if (equals(extension, deployment.getExtension())) {
+					return deployment;
+				}
+			}
+		}
+		return null;
+	}
+	
 	public static JoomlaExtensionDeployment getPersistentExtensionDeployment(JoomlaExtensionDeployment transientDeployment, DeploymentDescriptor deploymentDescriptor) {
 		if (transientDeployment == null) {
 			return null;
@@ -167,5 +184,16 @@ public class ServerUtils {
 		}
 		return null;
 	}
-		
+	
+	public static void copyAttributes(EObject source, EObject target) {
+		Assert.isTrue(source.eClass() == target.eClass(), "Cannot copy attributes between instances of two distinct EClasses.");
+		for (final EAttribute attribute : source.eClass().getEAllAttributes()) {
+			final Object sourceValue = source.eGet(attribute);
+			final Object targetValue = target.eGet(attribute);
+			if (!equals(sourceValue, targetValue)) {
+				target.eSet(attribute, sourceValue);
+			}
+		}
+	}
+	
 }

@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0" name="com.schmeedy.pdt.joomla.core.ProjectManager">
+<scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0" activate="activate" deactivate="deactivate" name="com.schmeedy.pdt.joomla.core.ProjectManager">
    <implementation class="com.schmeedy.pdt.joomla.core.project.impl.JoomlaProjectManagerImpl"/>
    <service>
       <provide interface="com.schmeedy.pdt.joomla.core.project.IJoomlaProjectManager"/>
    </service>
+   <reference bind="addExtensionModelChangeListener" cardinality="0..n" interface="com.schmeedy.pdt.joomla.core.project.IExtensionModelChangeListener" name="IExtensionModelChangeListener" policy="dynamic" unbind="removeExtensionModelChangeListener"/>
 </scr:component>
