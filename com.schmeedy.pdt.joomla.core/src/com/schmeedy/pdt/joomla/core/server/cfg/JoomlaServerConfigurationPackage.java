@@ -351,6 +351,17 @@ public interface JoomlaServerConfigurationPackage extends EPackage {
 
 
 	/**
+	 * The meta object id for the '<em>File</em>' data type.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see java.io.File
+	 * @see com.schmeedy.pdt.joomla.core.server.cfg.impl.JoomlaServerConfigurationPackageImpl#getFile()
+	 * @generated
+	 */
+	int FILE = 8;
+
+
+	/**
 	 * Returns the meta object for class '{@link com.schmeedy.pdt.joomla.core.server.cfg.AvailableServers <em>Available Servers</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -619,6 +630,17 @@ public interface JoomlaServerConfigurationPackage extends EPackage {
 	EDataType getIJoomlaHttpSession();
 
 	/**
+	 * Returns the meta object for data type '{@link java.io.File <em>File</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for data type '<em>File</em>'.
+	 * @see java.io.File
+	 * @model instanceClass="java.io.File"
+	 * @generated
+	 */
+	EDataType getFile();
+
+	/**
 	 * Returns the factory that creates the instances of the model.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -855,6 +877,16 @@ public interface JoomlaServerConfigurationPackage extends EPackage {
 		 * @generated
 		 */
 		EDataType IJOOMLA_HTTP_SESSION = eINSTANCE.getIJoomlaHttpSession();
+
+		/**
+		 * The meta object literal for the '<em>File</em>' data type.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see java.io.File
+		 * @see com.schmeedy.pdt.joomla.core.server.cfg.impl.JoomlaServerConfigurationPackageImpl#getFile()
+		 * @generated
+		 */
+		EDataType FILE = eINSTANCE.getFile();
 
 	}
 

@@ -6,6 +6,7 @@
  */
 package com.schmeedy.pdt.joomla.core.server.cfg.impl;
 
+import java.io.File;
 import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Notification;
@@ -18,6 +19,8 @@ import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
+import com.schmeedy.pdt.joomla.core.project.model.BasicExtensionModel;
+import com.schmeedy.pdt.joomla.core.project.model.ExtensionResource;
 import com.schmeedy.pdt.joomla.core.server.IJoomlaHttpSession;
 import com.schmeedy.pdt.joomla.core.server.cfg.DeploymentRuntime;
 import com.schmeedy.pdt.joomla.core.server.cfg.JoomlaExtensionDeployment;
@@ -116,10 +119,10 @@ public class DeploymentRuntimeImpl extends EObjectImpl implements DeploymentRunt
 	 * @generated
 	 */
 	public NotificationChain basicSetServer(LocalJoomlaServer newServer, NotificationChain msgs) {
-		LocalJoomlaServer oldServer = server;
+		final LocalJoomlaServer oldServer = server;
 		server = newServer;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, JoomlaServerConfigurationPackage.DEPLOYMENT_RUNTIME__SERVER, oldServer, newServer);
+			final ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, JoomlaServerConfigurationPackage.DEPLOYMENT_RUNTIME__SERVER, oldServer, newServer);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -166,6 +169,42 @@ public class DeploymentRuntimeImpl extends EObjectImpl implements DeploymentRunt
 	@Override
 	public IJoomlaHttpSession getHttpSession() {
 		return httpSession;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	@Override
+	public File getDestination(ExtensionResource resource) {
+		File baseDir = new File(getServer().getInstallDir());
+		if (resource.isInAdministration()) {
+			baseDir = new File(baseDir, "administrator");
+		}
+		final BasicExtensionModel extension = resource.getExtensionModel();
+		switch (extension.getType()) {
+			case COMPONENT:
+				baseDir = new File(baseDir, "components");
+				break;
+			case MODULE:
+				baseDir = new File(baseDir, "modules");
+				break;
+			case PLUGIN:
+				final String group = extension.getGroup();
+				if (group == null) {
+					return null; // group is mandatory for plug-ins - cannot determine target path
+				}
+				baseDir = new File(new File(baseDir, "plugins"), group);
+				break;
+			case TEMPLATE:
+				baseDir = new File(baseDir, "templates");
+				break;
+			case UNKNOWN:
+				return null; // cannot reliably determine target path
+		}
+		baseDir = new File(baseDir, extension.getSymbolicName());
+		return new File(baseDir, resource.getManifestRelativePath().toString());
 	}
 
 	/**
@@ -282,7 +321,7 @@ public class DeploymentRuntimeImpl extends EObjectImpl implements DeploymentRunt
 	public String toString() {
 		if (eIsProxy()) return super.toString();
 
-		StringBuffer result = new StringBuffer(super.toString());
+		final StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (httpSession: ");
 		result.append(httpSession);
 		result.append(')');

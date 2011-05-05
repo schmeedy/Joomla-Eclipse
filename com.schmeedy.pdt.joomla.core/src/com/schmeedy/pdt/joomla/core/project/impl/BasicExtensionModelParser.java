@@ -26,7 +26,7 @@ class BasicExtensionModelParser {
 
 	private final JoomlaProjectModelFactory factory = JoomlaProjectModelFactory.eINSTANCE;
 	
-	public BasicExtensionModel parse(InputStream inputStream) throws ParsingException {
+	public BasicExtensionModel parse(InputStream inputStream, String manifestName) throws ParsingException {
 		final XMLEventReader eventReader;
 		try {
 			eventReader = XMLInputFactory.newInstance().createXMLEventReader(inputStream);
@@ -34,14 +34,15 @@ class BasicExtensionModelParser {
 			throw new ParsingException("Failed to create STAX reader.", e);
 		}
 		try {
-			return doParse(eventReader);
+			return doParse(eventReader, manifestName);
 		} catch (final XMLStreamException e) {
 			throw new ParsingException("Exception while parsing extension model.", e);
 		}
 	}
 	
-	private BasicExtensionModel doParse(XMLEventReader eventReader) throws XMLStreamException {
+	private BasicExtensionModel doParse(XMLEventReader eventReader, String manifestName) throws XMLStreamException {
 		final BasicExtensionModel extensionModel = factory.createBasicExtensionModel();
+		extensionModel.setSymbolicName(manifestName.substring(0, manifestName.length() - 4));
 		int elementDepth = 0;
 		boolean inAdministration = false;
 		ResourceType resourceType = null;
@@ -69,6 +70,10 @@ class BasicExtensionModelParser {
 							if (extensionType != null) {
 								extensionModel.setType(extensionType);
 							}
+						}
+						final String group = getAttributeValue(startElement, "group");
+						if (group != null) {
+							extensionModel.setGroup(group);
 						}
 					} else if (elementDepth == 2) {
 						if ("name".equals(startElementName)) {
@@ -99,11 +104,11 @@ class BasicExtensionModelParser {
 							((MediaResource) resource).setDestination(mediaDestination);
 						} else {
 							resource = JoomlaProjectModelFactory.eINSTANCE.createExtensionResource();
-							resource.setResourceType(resourceType);
-							resource.setFolder("folder".equals(startElementName));
-							resource.setInAdministration(inAdministration);
-							resource.setManifestRelativePath(manifestRelativePath);
 						}
+						resource.setResourceType(resourceType);
+						resource.setFolder("folder".equals(startElementName));
+						resource.setInAdministration(inAdministration);
+						resource.setManifestRelativePath(manifestRelativePath);
 						extensionModel.getResources().add(resource);
 					}
 					break;

@@ -118,13 +118,22 @@ public interface JoomlaProjectModelPackage extends EPackage {
 	int BASIC_EXTENSION_MODEL__NAME = 0;
 
 	/**
+	 * The feature id for the '<em><b>Symbolic Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BASIC_EXTENSION_MODEL__SYMBOLIC_NAME = 1;
+
+	/**
 	 * The feature id for the '<em><b>Type</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int BASIC_EXTENSION_MODEL__TYPE = 1;
+	int BASIC_EXTENSION_MODEL__TYPE = 2;
 
 	/**
 	 * The feature id for the '<em><b>Manifest Version</b></em>' attribute.
@@ -133,7 +142,7 @@ public interface JoomlaProjectModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BASIC_EXTENSION_MODEL__MANIFEST_VERSION = 2;
+	int BASIC_EXTENSION_MODEL__MANIFEST_VERSION = 3;
 
 	/**
 	 * The feature id for the '<em><b>Manifest Path</b></em>' attribute.
@@ -142,7 +151,16 @@ public interface JoomlaProjectModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BASIC_EXTENSION_MODEL__MANIFEST_PATH = 3;
+	int BASIC_EXTENSION_MODEL__MANIFEST_PATH = 4;
+
+	/**
+	 * The feature id for the '<em><b>Group</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BASIC_EXTENSION_MODEL__GROUP = 5;
 
 	/**
 	 * The feature id for the '<em><b>Project</b></em>' container reference.
@@ -151,7 +169,7 @@ public interface JoomlaProjectModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BASIC_EXTENSION_MODEL__PROJECT = 4;
+	int BASIC_EXTENSION_MODEL__PROJECT = 6;
 
 	/**
 	 * The feature id for the '<em><b>Resources</b></em>' containment reference list.
@@ -160,7 +178,7 @@ public interface JoomlaProjectModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BASIC_EXTENSION_MODEL__RESOURCES = 5;
+	int BASIC_EXTENSION_MODEL__RESOURCES = 7;
 
 	/**
 	 * The number of structural features of the '<em>Basic Extension Model</em>' class.
@@ -169,7 +187,7 @@ public interface JoomlaProjectModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BASIC_EXTENSION_MODEL_FEATURE_COUNT = 6;
+	int BASIC_EXTENSION_MODEL_FEATURE_COUNT = 8;
 
 	/**
 	 * The meta object id for the '{@link com.schmeedy.pdt.joomla.core.project.model.impl.ExtensionResourceImpl <em>Extension Resource</em>}' class.
@@ -431,6 +449,17 @@ public interface JoomlaProjectModelPackage extends EPackage {
 	EAttribute getBasicExtensionModel_Name();
 
 	/**
+	 * Returns the meta object for the attribute '{@link com.schmeedy.pdt.joomla.core.project.model.BasicExtensionModel#getSymbolicName <em>Symbolic Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Symbolic Name</em>'.
+	 * @see com.schmeedy.pdt.joomla.core.project.model.BasicExtensionModel#getSymbolicName()
+	 * @see #getBasicExtensionModel()
+	 * @generated
+	 */
+	EAttribute getBasicExtensionModel_SymbolicName();
+
+	/**
 	 * Returns the meta object for the attribute '{@link com.schmeedy.pdt.joomla.core.project.model.BasicExtensionModel#getType <em>Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -462,6 +491,17 @@ public interface JoomlaProjectModelPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getBasicExtensionModel_ManifestPath();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.schmeedy.pdt.joomla.core.project.model.BasicExtensionModel#getGroup <em>Group</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Group</em>'.
+	 * @see com.schmeedy.pdt.joomla.core.project.model.BasicExtensionModel#getGroup()
+	 * @see #getBasicExtensionModel()
+	 * @generated
+	 */
+	EAttribute getBasicExtensionModel_Group();
 
 	/**
 	 * Returns the meta object for the container reference '{@link com.schmeedy.pdt.joomla.core.project.model.BasicExtensionModel#getProject <em>Project</em>}'.
@@ -701,6 +741,14 @@ public interface JoomlaProjectModelPackage extends EPackage {
 		EAttribute BASIC_EXTENSION_MODEL__NAME = eINSTANCE.getBasicExtensionModel_Name();
 
 		/**
+		 * The meta object literal for the '<em><b>Symbolic Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute BASIC_EXTENSION_MODEL__SYMBOLIC_NAME = eINSTANCE.getBasicExtensionModel_SymbolicName();
+
+		/**
 		 * The meta object literal for the '<em><b>Type</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -723,6 +771,14 @@ public interface JoomlaProjectModelPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute BASIC_EXTENSION_MODEL__MANIFEST_PATH = eINSTANCE.getBasicExtensionModel_ManifestPath();
+
+		/**
+		 * The meta object literal for the '<em><b>Group</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute BASIC_EXTENSION_MODEL__GROUP = eINSTANCE.getBasicExtensionModel_Group();
 
 		/**
 		 * The meta object literal for the '<em><b>Project</b></em>' container reference feature.

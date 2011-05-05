@@ -101,7 +101,7 @@ public class JoomlaProjectManagerImpl implements IJoomlaProjectManager {
 				}
 			}, IResource.DEPTH_INFINITE, IContainer.EXCLUDE_DERIVED);
 		} catch (final CoreException e) {
-			throw new RuntimeException("Failed to find Joomla! manifest files within " + project.getName());
+			throw new RuntimeException("Failed to find Joomla! manifest files within " + project.getName(), e);
 		}
 		
 		for (final IFile manifestFile : manifestFiles) {
@@ -115,7 +115,7 @@ public class JoomlaProjectManagerImpl implements IJoomlaProjectManager {
 	}
 
 	private boolean isJoomlaManifest(final IFile file) throws CoreException {
-		if (file.getContentDescription() != null && file.getContentDescription().getContentType() != null) {
+		if (file.isSynchronized(IResource.DEPTH_ZERO) && file.getContentDescription() != null && file.getContentDescription().getContentType() != null) {
 			IContentType contentType = file.getContentDescription().getContentType();
 			while (contentType != null) {
 				if (JOOMLA_MANIFEST_CONTENT_TYPE_ID.equals(contentType.getId())) {
@@ -127,7 +127,8 @@ public class JoomlaProjectManagerImpl implements IJoomlaProjectManager {
 		return false;
 	}
 	
-	private BasicExtensionModel getBasicExtensionModel(IFile manifestFile) {
+	@Override
+	public BasicExtensionModel getBasicExtensionModel(IFile manifestFile) {
 		final SoftReference<ExtensionModelWithModificationStamp> extensionModel = extensionModelCache.get(manifestFile);
 		if (extensionModel != null) {
 			final ExtensionModelWithModificationStamp modelWithStamp = extensionModel.get();
@@ -143,7 +144,7 @@ public class JoomlaProjectManagerImpl implements IJoomlaProjectManager {
 		try {
 			final InputStream inputStream = manifestFile.getContents();
 			try {
-				final BasicExtensionModel parsedModel = extensionModelParser.parse(inputStream);
+				final BasicExtensionModel parsedModel = extensionModelParser.parse(inputStream, manifestFile.getName());
 				parsedModel.setManifestPath(manifestFile.getFullPath());
 				if (parsedModel != null) {
 					final ExtensionModelWithModificationStamp modelWithStamp = new ExtensionModelWithModificationStamp(parsedModel, manifestFile.getModificationStamp());

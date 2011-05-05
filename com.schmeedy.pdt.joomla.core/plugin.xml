@@ -20,6 +20,9 @@
       <requires-nature
             id="org.eclipse.php.core.PHPNature">
       </requires-nature>
+      <builder
+            id="com.schmeedy.pdt.joomla.core.extensionbuilder">
+      </builder>
    </extension>
    <extension
          point="org.eclipse.core.contenttype.contentTypes">
@@ -102,6 +105,15 @@
             class="com.schmeedy.pdt.joomla.core.project.buildpath.impl.JoomlaBuildpathContainerInitializer"
             id="com.schmeedy.pdt.JoomlaAPI">
       </buildpathContainerInitializer>
+   </extension>
+   <extension
+         id="extensionbuilder"
+         name="Joomla! Extension Project Builder"
+         point="org.eclipse.core.resources.builders">
+      <builder>
+         <run
+               class="com.schmeedy.pdt.joomla.core.project.builder.JoomlaExtensionProjectBuilder">
+         </run></builder>
    </extension>
 
 </plugin>

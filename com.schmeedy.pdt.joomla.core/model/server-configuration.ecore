@@ -32,6 +32,9 @@
         upperBound="-1" eType="#//DeploymentRuntime" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="DeploymentRuntime">
+    <eOperations name="getDestination" eType="#//File">
+      <eParameters name="resource" eType="ecore:EClass project-model.ecore#//ExtensionResource"/>
+    </eOperations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="server" lowerBound="1"
         eType="#//LocalJoomlaServer" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="deployedExtensions" upperBound="-1"
@@ -47,4 +50,5 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EDataType" name="IJoomlaHttpSession" instanceClassName="com.schmeedy.pdt.joomla.core.server.IJoomlaHttpSession"
       serializable="false"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="File" instanceClassName="java.io.File"/>
 </ecore:EPackage>

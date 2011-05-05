@@ -6,10 +6,13 @@
  */
 package com.schmeedy.pdt.joomla.core.server.cfg.impl;
 
+import java.io.File;
+
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EEnum;
+import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
@@ -88,6 +91,13 @@ public class JoomlaServerConfigurationPackageImpl extends EPackageImpl implement
 	 * @generated
 	 */
 	private EDataType iJoomlaHttpSessionEDataType = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EDataType fileEDataType = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -383,6 +393,15 @@ public class JoomlaServerConfigurationPackageImpl extends EPackageImpl implement
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EDataType getFile() {
+		return fileEDataType;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public JoomlaServerConfigurationFactory getJoomlaServerConfigurationFactory() {
 		return (JoomlaServerConfigurationFactory)getEFactoryInstance();
 	}
@@ -440,6 +459,7 @@ public class JoomlaServerConfigurationPackageImpl extends EPackageImpl implement
 
 		// Create data types
 		iJoomlaHttpSessionEDataType = createEDataType(IJOOMLA_HTTP_SESSION);
+		fileEDataType = createEDataType(FILE);
 	}
 
 	/**
@@ -500,6 +520,9 @@ public class JoomlaServerConfigurationPackageImpl extends EPackageImpl implement
 		initEReference(getDeploymentRuntime_DeployedExtensions(), this.getJoomlaExtensionDeployment(), this.getJoomlaExtensionDeployment_Runtime(), "deployedExtensions", null, 0, -1, DeploymentRuntime.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getDeploymentRuntime_HttpSession(), this.getIJoomlaHttpSession(), "httpSession", null, 1, 1, DeploymentRuntime.class, IS_TRANSIENT, !IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
+		EOperation op = addEOperation(deploymentRuntimeEClass, this.getFile(), "getDestination", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, theJoomlaProjectModelPackage.getExtensionResource(), "resource", 0, 1, IS_UNIQUE, IS_ORDERED);
+
 		initEClass(joomlaExtensionDeploymentEClass, JoomlaExtensionDeployment.class, "JoomlaExtensionDeployment", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getJoomlaExtensionDeployment_Runtime(), this.getDeploymentRuntime(), this.getDeploymentRuntime_DeployedExtensions(), "runtime", null, 1, 1, JoomlaExtensionDeployment.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getJoomlaExtensionDeployment_Extension(), theJoomlaProjectModelPackage.getBasicExtensionModel(), null, "extension", null, 1, 1, JoomlaExtensionDeployment.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -511,6 +534,7 @@ public class JoomlaServerConfigurationPackageImpl extends EPackageImpl implement
 
 		// Initialize data types
 		initEDataType(iJoomlaHttpSessionEDataType, IJoomlaHttpSession.class, "IJoomlaHttpSession", !IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
+		initEDataType(fileEDataType, File.class, "File", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 
 		// Create resource
 		createResource(eNS_URI);

@@ -19,9 +19,11 @@ import org.eclipse.emf.ecore.EObject;
  * The following features are supported:
  * <ul>
  *   <li>{@link com.schmeedy.pdt.joomla.core.project.model.BasicExtensionModel#getName <em>Name</em>}</li>
+ *   <li>{@link com.schmeedy.pdt.joomla.core.project.model.BasicExtensionModel#getSymbolicName <em>Symbolic Name</em>}</li>
  *   <li>{@link com.schmeedy.pdt.joomla.core.project.model.BasicExtensionModel#getType <em>Type</em>}</li>
  *   <li>{@link com.schmeedy.pdt.joomla.core.project.model.BasicExtensionModel#getManifestVersion <em>Manifest Version</em>}</li>
  *   <li>{@link com.schmeedy.pdt.joomla.core.project.model.BasicExtensionModel#getManifestPath <em>Manifest Path</em>}</li>
+ *   <li>{@link com.schmeedy.pdt.joomla.core.project.model.BasicExtensionModel#getGroup <em>Group</em>}</li>
  *   <li>{@link com.schmeedy.pdt.joomla.core.project.model.BasicExtensionModel#getProject <em>Project</em>}</li>
  *   <li>{@link com.schmeedy.pdt.joomla.core.project.model.BasicExtensionModel#getResources <em>Resources</em>}</li>
  * </ul>
@@ -57,6 +59,32 @@ public interface BasicExtensionModel extends EObject {
 	 * @generated
 	 */
 	void setName(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Symbolic Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Symbolic Name</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Symbolic Name</em>' attribute.
+	 * @see #setSymbolicName(String)
+	 * @see com.schmeedy.pdt.joomla.core.project.model.JoomlaProjectModelPackage#getBasicExtensionModel_SymbolicName()
+	 * @model
+	 * @generated
+	 */
+	String getSymbolicName();
+
+	/**
+	 * Sets the value of the '{@link com.schmeedy.pdt.joomla.core.project.model.BasicExtensionModel#getSymbolicName <em>Symbolic Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Symbolic Name</em>' attribute.
+	 * @see #getSymbolicName()
+	 * @generated
+	 */
+	void setSymbolicName(String value);
 
 	/**
 	 * Returns the value of the '<em><b>Type</b></em>' attribute.
@@ -141,6 +169,32 @@ public interface BasicExtensionModel extends EObject {
 	 * @generated
 	 */
 	void setManifestPath(IPath value);
+
+	/**
+	 * Returns the value of the '<em><b>Group</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Group</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Group</em>' attribute.
+	 * @see #setGroup(String)
+	 * @see com.schmeedy.pdt.joomla.core.project.model.JoomlaProjectModelPackage#getBasicExtensionModel_Group()
+	 * @model
+	 * @generated
+	 */
+	String getGroup();
+
+	/**
+	 * Sets the value of the '{@link com.schmeedy.pdt.joomla.core.project.model.BasicExtensionModel#getGroup <em>Group</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Group</em>' attribute.
+	 * @see #getGroup()
+	 * @generated
+	 */
+	void setGroup(String value);
 
 	/**
 	 * Returns the value of the '<em><b>Project</b></em>' container reference.

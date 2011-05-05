@@ -6,6 +6,7 @@
  */
 package com.schmeedy.pdt.joomla.core.project.model.impl;
 
+import com.schmeedy.pdt.joomla.core.project.model.*;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.Path;

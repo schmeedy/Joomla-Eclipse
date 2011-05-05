@@ -6,9 +6,12 @@
  */
 package com.schmeedy.pdt.joomla.core.server.cfg;
 
+import java.io.File;
+
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 
+import com.schmeedy.pdt.joomla.core.project.model.ExtensionResource;
 import com.schmeedy.pdt.joomla.core.server.IJoomlaHttpSession;
 
 /**
@@ -88,5 +91,13 @@ public interface DeploymentRuntime extends EObject {
 	 * @generated
 	 */
 	IJoomlaHttpSession getHttpSession();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model dataType="com.schmeedy.pdt.joomla.core.server.cfg.File"
+	 * @generated
+	 */
+	File getDestination(ExtensionResource resource);
 
 } // DeploymentRuntime

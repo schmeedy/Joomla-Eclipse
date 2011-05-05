@@ -6,6 +6,8 @@
  */
 package com.schmeedy.pdt.joomla.core.server.cfg.impl;
 
+import java.io.File;
+
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
@@ -88,6 +90,8 @@ public class JoomlaServerConfigurationFactoryImpl extends EFactoryImpl implement
 		switch (eDataType.getClassifierID()) {
 			case JoomlaServerConfigurationPackage.MAJOR_JOOMLA_VERSION:
 				return createMajorJoomlaVersionFromString(eDataType, initialValue);
+			case JoomlaServerConfigurationPackage.FILE:
+				return createFileFromString(eDataType, initialValue);
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
@@ -103,6 +107,8 @@ public class JoomlaServerConfigurationFactoryImpl extends EFactoryImpl implement
 		switch (eDataType.getClassifierID()) {
 			case JoomlaServerConfigurationPackage.MAJOR_JOOMLA_VERSION:
 				return convertMajorJoomlaVersionToString(eDataType, instanceValue);
+			case JoomlaServerConfigurationPackage.FILE:
+				return convertFileToString(eDataType, instanceValue);
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
@@ -186,6 +192,24 @@ public class JoomlaServerConfigurationFactoryImpl extends EFactoryImpl implement
 	 */
 	public String convertMajorJoomlaVersionToString(EDataType eDataType, Object instanceValue) {
 		return instanceValue == null ? null : instanceValue.toString();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public File createFileFromString(EDataType eDataType, String initialValue) {
+		return (File)super.createFromString(eDataType, initialValue);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String convertFileToString(EDataType eDataType, Object instanceValue) {
+		return super.convertToString(eDataType, instanceValue);
 	}
 
 	/**

@@ -35,9 +35,11 @@ import com.schmeedy.pdt.joomla.core.project.model.ManifestVersion;
  * The following features are implemented:
  * <ul>
  *   <li>{@link com.schmeedy.pdt.joomla.core.project.model.impl.BasicExtensionModelImpl#getName <em>Name</em>}</li>
+ *   <li>{@link com.schmeedy.pdt.joomla.core.project.model.impl.BasicExtensionModelImpl#getSymbolicName <em>Symbolic Name</em>}</li>
  *   <li>{@link com.schmeedy.pdt.joomla.core.project.model.impl.BasicExtensionModelImpl#getType <em>Type</em>}</li>
  *   <li>{@link com.schmeedy.pdt.joomla.core.project.model.impl.BasicExtensionModelImpl#getManifestVersion <em>Manifest Version</em>}</li>
  *   <li>{@link com.schmeedy.pdt.joomla.core.project.model.impl.BasicExtensionModelImpl#getManifestPath <em>Manifest Path</em>}</li>
+ *   <li>{@link com.schmeedy.pdt.joomla.core.project.model.impl.BasicExtensionModelImpl#getGroup <em>Group</em>}</li>
  *   <li>{@link com.schmeedy.pdt.joomla.core.project.model.impl.BasicExtensionModelImpl#getProject <em>Project</em>}</li>
  *   <li>{@link com.schmeedy.pdt.joomla.core.project.model.impl.BasicExtensionModelImpl#getResources <em>Resources</em>}</li>
  * </ul>
@@ -65,6 +67,26 @@ public class BasicExtensionModelImpl extends EObjectImpl implements BasicExtensi
 	 * @ordered
 	 */
 	protected String name = NAME_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getSymbolicName() <em>Symbolic Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getSymbolicName()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String SYMBOLIC_NAME_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getSymbolicName() <em>Symbolic Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getSymbolicName()
+	 * @generated
+	 * @ordered
+	 */
+	protected String symbolicName = SYMBOLIC_NAME_EDEFAULT;
 
 	/**
 	 * The default value of the '{@link #getType() <em>Type</em>}' attribute.
@@ -127,6 +149,26 @@ public class BasicExtensionModelImpl extends EObjectImpl implements BasicExtensi
 	protected IPath manifestPath = MANIFEST_PATH_EDEFAULT;
 
 	/**
+	 * The default value of the '{@link #getGroup() <em>Group</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getGroup()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String GROUP_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getGroup() <em>Group</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getGroup()
+	 * @generated
+	 * @ordered
+	 */
+	protected String group = GROUP_EDEFAULT;
+
+	/**
 	 * The cached value of the '{@link #getResources() <em>Resources</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -174,6 +216,27 @@ public class BasicExtensionModelImpl extends EObjectImpl implements BasicExtensi
 		name = newName;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, JoomlaProjectModelPackage.BASIC_EXTENSION_MODEL__NAME, oldName, name));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getSymbolicName() {
+		return symbolicName;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setSymbolicName(String newSymbolicName) {
+		String oldSymbolicName = symbolicName;
+		symbolicName = newSymbolicName;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, JoomlaProjectModelPackage.BASIC_EXTENSION_MODEL__SYMBOLIC_NAME, oldSymbolicName, symbolicName));
 	}
 
 	/**
@@ -237,6 +300,27 @@ public class BasicExtensionModelImpl extends EObjectImpl implements BasicExtensi
 		manifestPath = newManifestPath;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, JoomlaProjectModelPackage.BASIC_EXTENSION_MODEL__MANIFEST_PATH, oldManifestPath, manifestPath));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getGroup() {
+		return group;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setGroup(String newGroup) {
+		String oldGroup = group;
+		group = newGroup;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, JoomlaProjectModelPackage.BASIC_EXTENSION_MODEL__GROUP, oldGroup, group));
 	}
 
 	/**
@@ -351,12 +435,16 @@ public class BasicExtensionModelImpl extends EObjectImpl implements BasicExtensi
 		switch (featureID) {
 			case JoomlaProjectModelPackage.BASIC_EXTENSION_MODEL__NAME:
 				return getName();
+			case JoomlaProjectModelPackage.BASIC_EXTENSION_MODEL__SYMBOLIC_NAME:
+				return getSymbolicName();
 			case JoomlaProjectModelPackage.BASIC_EXTENSION_MODEL__TYPE:
 				return getType();
 			case JoomlaProjectModelPackage.BASIC_EXTENSION_MODEL__MANIFEST_VERSION:
 				return getManifestVersion();
 			case JoomlaProjectModelPackage.BASIC_EXTENSION_MODEL__MANIFEST_PATH:
 				return getManifestPath();
+			case JoomlaProjectModelPackage.BASIC_EXTENSION_MODEL__GROUP:
+				return getGroup();
 			case JoomlaProjectModelPackage.BASIC_EXTENSION_MODEL__PROJECT:
 				return getProject();
 			case JoomlaProjectModelPackage.BASIC_EXTENSION_MODEL__RESOURCES:
@@ -377,6 +465,9 @@ public class BasicExtensionModelImpl extends EObjectImpl implements BasicExtensi
 			case JoomlaProjectModelPackage.BASIC_EXTENSION_MODEL__NAME:
 				setName((String)newValue);
 				return;
+			case JoomlaProjectModelPackage.BASIC_EXTENSION_MODEL__SYMBOLIC_NAME:
+				setSymbolicName((String)newValue);
+				return;
 			case JoomlaProjectModelPackage.BASIC_EXTENSION_MODEL__TYPE:
 				setType((ExtensionType)newValue);
 				return;
@@ -385,6 +476,9 @@ public class BasicExtensionModelImpl extends EObjectImpl implements BasicExtensi
 				return;
 			case JoomlaProjectModelPackage.BASIC_EXTENSION_MODEL__MANIFEST_PATH:
 				setManifestPath((IPath)newValue);
+				return;
+			case JoomlaProjectModelPackage.BASIC_EXTENSION_MODEL__GROUP:
+				setGroup((String)newValue);
 				return;
 			case JoomlaProjectModelPackage.BASIC_EXTENSION_MODEL__PROJECT:
 				setProject((JoomlaExtensionProject)newValue);
@@ -408,6 +502,9 @@ public class BasicExtensionModelImpl extends EObjectImpl implements BasicExtensi
 			case JoomlaProjectModelPackage.BASIC_EXTENSION_MODEL__NAME:
 				setName(NAME_EDEFAULT);
 				return;
+			case JoomlaProjectModelPackage.BASIC_EXTENSION_MODEL__SYMBOLIC_NAME:
+				setSymbolicName(SYMBOLIC_NAME_EDEFAULT);
+				return;
 			case JoomlaProjectModelPackage.BASIC_EXTENSION_MODEL__TYPE:
 				setType(TYPE_EDEFAULT);
 				return;
@@ -416,6 +513,9 @@ public class BasicExtensionModelImpl extends EObjectImpl implements BasicExtensi
 				return;
 			case JoomlaProjectModelPackage.BASIC_EXTENSION_MODEL__MANIFEST_PATH:
 				setManifestPath(MANIFEST_PATH_EDEFAULT);
+				return;
+			case JoomlaProjectModelPackage.BASIC_EXTENSION_MODEL__GROUP:
+				setGroup(GROUP_EDEFAULT);
 				return;
 			case JoomlaProjectModelPackage.BASIC_EXTENSION_MODEL__PROJECT:
 				setProject((JoomlaExtensionProject)null);
@@ -437,12 +537,16 @@ public class BasicExtensionModelImpl extends EObjectImpl implements BasicExtensi
 		switch (featureID) {
 			case JoomlaProjectModelPackage.BASIC_EXTENSION_MODEL__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
+			case JoomlaProjectModelPackage.BASIC_EXTENSION_MODEL__SYMBOLIC_NAME:
+				return SYMBOLIC_NAME_EDEFAULT == null ? symbolicName != null : !SYMBOLIC_NAME_EDEFAULT.equals(symbolicName);
 			case JoomlaProjectModelPackage.BASIC_EXTENSION_MODEL__TYPE:
 				return type != TYPE_EDEFAULT;
 			case JoomlaProjectModelPackage.BASIC_EXTENSION_MODEL__MANIFEST_VERSION:
 				return manifestVersion != MANIFEST_VERSION_EDEFAULT;
 			case JoomlaProjectModelPackage.BASIC_EXTENSION_MODEL__MANIFEST_PATH:
 				return MANIFEST_PATH_EDEFAULT == null ? manifestPath != null : !MANIFEST_PATH_EDEFAULT.equals(manifestPath);
+			case JoomlaProjectModelPackage.BASIC_EXTENSION_MODEL__GROUP:
+				return GROUP_EDEFAULT == null ? group != null : !GROUP_EDEFAULT.equals(group);
 			case JoomlaProjectModelPackage.BASIC_EXTENSION_MODEL__PROJECT:
 				return getProject() != null;
 			case JoomlaProjectModelPackage.BASIC_EXTENSION_MODEL__RESOURCES:
@@ -463,12 +567,16 @@ public class BasicExtensionModelImpl extends EObjectImpl implements BasicExtensi
 		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (name: ");
 		result.append(name);
+		result.append(", symbolicName: ");
+		result.append(symbolicName);
 		result.append(", type: ");
 		result.append(type);
 		result.append(", manifestVersion: ");
 		result.append(manifestVersion);
 		result.append(", manifestPath: ");
 		result.append(manifestPath);
+		result.append(", group: ");
+		result.append(group);
 		result.append(')');
 		return result.toString();
 	}

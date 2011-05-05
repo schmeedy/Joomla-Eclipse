@@ -207,7 +207,7 @@ public class JoomlaProjectModelPackageImpl extends EPackageImpl implements Jooml
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getBasicExtensionModel_Type() {
+	public EAttribute getBasicExtensionModel_SymbolicName() {
 		return (EAttribute)basicExtensionModelEClass.getEStructuralFeatures().get(1);
 	}
 
@@ -216,7 +216,7 @@ public class JoomlaProjectModelPackageImpl extends EPackageImpl implements Jooml
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getBasicExtensionModel_ManifestVersion() {
+	public EAttribute getBasicExtensionModel_Type() {
 		return (EAttribute)basicExtensionModelEClass.getEStructuralFeatures().get(2);
 	}
 
@@ -225,7 +225,7 @@ public class JoomlaProjectModelPackageImpl extends EPackageImpl implements Jooml
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getBasicExtensionModel_ManifestPath() {
+	public EAttribute getBasicExtensionModel_ManifestVersion() {
 		return (EAttribute)basicExtensionModelEClass.getEStructuralFeatures().get(3);
 	}
 
@@ -234,8 +234,26 @@ public class JoomlaProjectModelPackageImpl extends EPackageImpl implements Jooml
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getBasicExtensionModel_ManifestPath() {
+		return (EAttribute)basicExtensionModelEClass.getEStructuralFeatures().get(4);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getBasicExtensionModel_Group() {
+		return (EAttribute)basicExtensionModelEClass.getEStructuralFeatures().get(5);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EReference getBasicExtensionModel_Project() {
-		return (EReference)basicExtensionModelEClass.getEStructuralFeatures().get(4);
+		return (EReference)basicExtensionModelEClass.getEStructuralFeatures().get(6);
 	}
 
 	/**
@@ -244,7 +262,7 @@ public class JoomlaProjectModelPackageImpl extends EPackageImpl implements Jooml
 	 * @generated
 	 */
 	public EReference getBasicExtensionModel_Resources() {
-		return (EReference)basicExtensionModelEClass.getEStructuralFeatures().get(5);
+		return (EReference)basicExtensionModelEClass.getEStructuralFeatures().get(7);
 	}
 
 	/**
@@ -407,9 +425,11 @@ public class JoomlaProjectModelPackageImpl extends EPackageImpl implements Jooml
 
 		basicExtensionModelEClass = createEClass(BASIC_EXTENSION_MODEL);
 		createEAttribute(basicExtensionModelEClass, BASIC_EXTENSION_MODEL__NAME);
+		createEAttribute(basicExtensionModelEClass, BASIC_EXTENSION_MODEL__SYMBOLIC_NAME);
 		createEAttribute(basicExtensionModelEClass, BASIC_EXTENSION_MODEL__TYPE);
 		createEAttribute(basicExtensionModelEClass, BASIC_EXTENSION_MODEL__MANIFEST_VERSION);
 		createEAttribute(basicExtensionModelEClass, BASIC_EXTENSION_MODEL__MANIFEST_PATH);
+		createEAttribute(basicExtensionModelEClass, BASIC_EXTENSION_MODEL__GROUP);
 		createEReference(basicExtensionModelEClass, BASIC_EXTENSION_MODEL__PROJECT);
 		createEReference(basicExtensionModelEClass, BASIC_EXTENSION_MODEL__RESOURCES);
 
@@ -471,9 +491,11 @@ public class JoomlaProjectModelPackageImpl extends EPackageImpl implements Jooml
 
 		initEClass(basicExtensionModelEClass, BasicExtensionModel.class, "BasicExtensionModel", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getBasicExtensionModel_Name(), ecorePackage.getEString(), "name", null, 0, 1, BasicExtensionModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getBasicExtensionModel_SymbolicName(), ecorePackage.getEString(), "symbolicName", null, 0, 1, BasicExtensionModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getBasicExtensionModel_Type(), this.getExtensionType(), "type", null, 0, 1, BasicExtensionModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getBasicExtensionModel_ManifestVersion(), this.getManifestVersion(), "manifestVersion", null, 0, 1, BasicExtensionModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getBasicExtensionModel_ManifestPath(), this.getIPath(), "manifestPath", null, 0, 1, BasicExtensionModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getBasicExtensionModel_Group(), ecorePackage.getEString(), "group", null, 0, 1, BasicExtensionModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getBasicExtensionModel_Project(), this.getJoomlaExtensionProject(), this.getJoomlaExtensionProject_Extensions(), "project", null, 0, 1, BasicExtensionModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getBasicExtensionModel_Resources(), this.getExtensionResource(), this.getExtensionResource_ExtensionModel(), "resources", null, 0, -1, BasicExtensionModel.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 

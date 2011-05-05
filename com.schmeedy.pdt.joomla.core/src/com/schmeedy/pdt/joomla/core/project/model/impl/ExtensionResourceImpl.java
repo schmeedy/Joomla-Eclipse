@@ -180,7 +180,7 @@ public class ExtensionResourceImpl extends EObjectImpl implements ExtensionResou
 	 */
 	@Override
 	public void setManifestRelativePath(IPath newManifestRelativePath) {
-		final IPath oldManifestRelativePath = manifestRelativePath;
+		IPath oldManifestRelativePath = manifestRelativePath;
 		manifestRelativePath = newManifestRelativePath;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, JoomlaProjectModelPackage.EXTENSION_RESOURCE__MANIFEST_RELATIVE_PATH, oldManifestRelativePath, manifestRelativePath));
@@ -203,7 +203,7 @@ public class ExtensionResourceImpl extends EObjectImpl implements ExtensionResou
 	 */
 	@Override
 	public void setResourceType(ResourceType newResourceType) {
-		final ResourceType oldResourceType = resourceType;
+		ResourceType oldResourceType = resourceType;
 		resourceType = newResourceType == null ? RESOURCE_TYPE_EDEFAULT : newResourceType;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, JoomlaProjectModelPackage.EXTENSION_RESOURCE__RESOURCE_TYPE, oldResourceType, resourceType));
@@ -226,7 +226,7 @@ public class ExtensionResourceImpl extends EObjectImpl implements ExtensionResou
 	 */
 	@Override
 	public void setFolder(boolean newFolder) {
-		final boolean oldFolder = folder;
+		boolean oldFolder = folder;
 		folder = newFolder;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, JoomlaProjectModelPackage.EXTENSION_RESOURCE__FOLDER, oldFolder, folder));
@@ -249,7 +249,7 @@ public class ExtensionResourceImpl extends EObjectImpl implements ExtensionResou
 	 */
 	@Override
 	public void setInAdministration(boolean newInAdministration) {
-		final boolean oldInAdministration = inAdministration;
+		boolean oldInAdministration = inAdministration;
 		inAdministration = newInAdministration;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, JoomlaProjectModelPackage.EXTENSION_RESOURCE__IN_ADMINISTRATION, oldInAdministration, inAdministration));
@@ -453,7 +453,7 @@ public class ExtensionResourceImpl extends EObjectImpl implements ExtensionResou
 	public String toString() {
 		if (eIsProxy()) return super.toString();
 
-		final StringBuffer result = new StringBuffer(super.toString());
+		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (manifestRelativePath: ");
 		result.append(manifestRelativePath);
 		result.append(", resourceType: ");
