@@ -11,10 +11,16 @@ import javax.xml.stream.events.Attribute;
 import javax.xml.stream.events.StartElement;
 import javax.xml.stream.events.XMLEvent;
 
+import org.eclipse.core.runtime.IPath;
+import org.eclipse.core.runtime.Path;
+
 import com.schmeedy.pdt.joomla.core.project.model.BasicExtensionModel;
+import com.schmeedy.pdt.joomla.core.project.model.ExtensionResource;
 import com.schmeedy.pdt.joomla.core.project.model.ExtensionType;
 import com.schmeedy.pdt.joomla.core.project.model.JoomlaProjectModelFactory;
 import com.schmeedy.pdt.joomla.core.project.model.ManifestVersion;
+import com.schmeedy.pdt.joomla.core.project.model.MediaResource;
+import com.schmeedy.pdt.joomla.core.project.model.ResourceType;
 
 class BasicExtensionModelParser {
 
@@ -37,12 +43,17 @@ class BasicExtensionModelParser {
 	private BasicExtensionModel doParse(XMLEventReader eventReader) throws XMLStreamException {
 		final BasicExtensionModel extensionModel = factory.createBasicExtensionModel();
 		int elementDepth = 0;
+		boolean inAdministration = false;
+		ResourceType resourceType = null;
+		String resourceFolder = null;
+		String mediaDestination = null;
 		while (eventReader.hasNext()) {
 			final XMLEvent event = eventReader.nextEvent();
 			switch (event.getEventType()) {
 				case XMLStreamConstants.START_ELEMENT:
 					elementDepth++;
 					final StartElement startElement = event.asStartElement();
+					final String startElementName = startElement.getName().getLocalPart();
 					if (elementDepth == 1) {
 						final Attribute versionAtt = startElement.getAttributeByName(new QName("version"));
 						if (versionAtt != null) {
@@ -54,16 +65,57 @@ class BasicExtensionModelParser {
 						}
 						final Attribute typeAtt = startElement.getAttributeByName(new QName("type"));
 						if (typeAtt != null) {
-							final ExtensionType extensionType = getExtensionTypeByLiteral(typeAtt.getValue());
+							final ExtensionType extensionType = getExtensionTypeForLiteral(typeAtt.getValue());
 							if (extensionType != null) {
 								extensionModel.setType(extensionType);
 							}
 						}
-					} if (elementDepth == 2 && "name".equals(startElement.getName().getLocalPart())) {
-						extensionModel.setName(eventReader.getElementText());
+					} else if (elementDepth == 2) {
+						if ("name".equals(startElementName)) {
+							extensionModel.setName(eventReader.getElementText());
+						} else if ("administration".equals(startElementName)) {
+							inAdministration = true;
+						}
+					}
+					
+					if ("files".equals(startElementName)) {
+						resourceType = ResourceType.GENERIC_FILE;
+						resourceFolder = getAttributeValue(startElement, "folder");
+					} else if ("languages".equals(startElementName)) {
+						resourceType = ResourceType.LANGUAGE;
+						resourceFolder = getAttributeValue(startElement, "folder");
+					} else if ("media".equals(startElementName)) {
+						resourceType = ResourceType.MEDIA;
+						resourceFolder = getAttributeValue(startElement, "folder");
+						mediaDestination = getAttributeValue(startElement, "destination");
+					} else if ("filename".equals(startElementName) || "folder".equals(startElementName) || "language".equals(startElementName)) {
+						final String content = eventReader.getElementText();
+						final String manifestRelativePathPrefix = resourceFolder == null ? "" : resourceFolder.endsWith("/") || resourceFolder.endsWith("\\") ? resourceFolder : resourceFolder + "/";
+						final IPath manifestRelativePath = new Path(manifestRelativePathPrefix + content);
+						
+						final ExtensionResource resource;
+						if (resourceType == ResourceType.MEDIA) {
+							resource = JoomlaProjectModelFactory.eINSTANCE.createMediaResource();
+							((MediaResource) resource).setDestination(mediaDestination);
+						} else {
+							resource = JoomlaProjectModelFactory.eINSTANCE.createExtensionResource();
+							resource.setResourceType(resourceType);
+							resource.setFolder("folder".equals(startElementName));
+							resource.setInAdministration(inAdministration);
+							resource.setManifestRelativePath(manifestRelativePath);
+						}
+						extensionModel.getResources().add(resource);
 					}
 					break;
 				case XMLStreamConstants.END_ELEMENT:
+					final String endElementName = event.asEndElement().getName().getLocalPart();
+					if (elementDepth == 2 && "administration".equals(endElementName)) {
+						inAdministration = false;
+					} else if ("files".equals(endElementName) || "languages".equals(endElementName) || "media".equals(endElementName)) {
+						resourceType = null;
+						resourceFolder = null;
+						mediaDestination = null;
+					}
 					elementDepth--;
 					break;
 			}
@@ -71,7 +123,11 @@ class BasicExtensionModelParser {
 		return extensionModel;
 	}
 
-	private ExtensionType getExtensionTypeByLiteral(String value) {
+	private String getAttributeValue(StartElement startElement, String attName) {
+		return startElement.getAttributeByName(new QName(attName)) == null ? null : startElement.getAttributeByName(new QName(attName)).getValue().trim();
+	}
+
+	private ExtensionType getExtensionTypeForLiteral(String value) {
 		for (final ExtensionType type : ExtensionType.values()) {
 			if (type.getLiteral().equals(value)) {
 				return type;

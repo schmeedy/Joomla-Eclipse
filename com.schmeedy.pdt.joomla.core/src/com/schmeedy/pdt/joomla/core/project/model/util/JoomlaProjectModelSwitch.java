@@ -15,6 +15,7 @@ import com.schmeedy.pdt.joomla.core.project.model.BasicExtensionModel;
 import com.schmeedy.pdt.joomla.core.project.model.ExtensionResource;
 import com.schmeedy.pdt.joomla.core.project.model.JoomlaExtensionProject;
 import com.schmeedy.pdt.joomla.core.project.model.JoomlaProjectModelPackage;
+import com.schmeedy.pdt.joomla.core.project.model.MediaResource;
 
 /**
  * <!-- begin-user-doc -->
@@ -108,6 +109,13 @@ public class JoomlaProjectModelSwitch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case JoomlaProjectModelPackage.MEDIA_RESOURCE: {
+				MediaResource mediaResource = (MediaResource)theEObject;
+				T result = caseMediaResource(mediaResource);
+				if (result == null) result = caseExtensionResource(mediaResource);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			default: return defaultCase(theEObject);
 		}
 	}
@@ -154,6 +162,21 @@ public class JoomlaProjectModelSwitch<T> {
 	 * @generated
 	 */
 	public T caseExtensionResource(ExtensionResource object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Media Resource</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Media Resource</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseMediaResource(MediaResource object) {
 		return null;
 	}
 

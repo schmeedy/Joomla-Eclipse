@@ -53,6 +53,15 @@ public interface JoomlaProjectModelFactory extends EFactory {
 	ExtensionResource createExtensionResource();
 
 	/**
+	 * Returns a new object of class '<em>Media Resource</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Media Resource</em>'.
+	 * @generated
+	 */
+	MediaResource createMediaResource();
+
+	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

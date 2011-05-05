@@ -182,31 +182,58 @@ public interface JoomlaProjectModelPackage extends EPackage {
 	int EXTENSION_RESOURCE = 2;
 
 	/**
-	 * The feature id for the '<em><b>Source Path</b></em>' attribute.
+	 * The feature id for the '<em><b>Full Path</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int EXTENSION_RESOURCE__SOURCE_PATH = 0;
+	int EXTENSION_RESOURCE__FULL_PATH = 0;
 
 	/**
-	 * The feature id for the '<em><b>Destination Path</b></em>' attribute.
+	 * The feature id for the '<em><b>Manifest Relative Path</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int EXTENSION_RESOURCE__DESTINATION_PATH = 1;
+	int EXTENSION_RESOURCE__MANIFEST_RELATIVE_PATH = 1;
 
 	/**
-	 * The feature id for the '<em><b>Type</b></em>' attribute.
+	 * The feature id for the '<em><b>Resource Type</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int EXTENSION_RESOURCE__TYPE = 2;
+	int EXTENSION_RESOURCE__RESOURCE_TYPE = 2;
+
+	/**
+	 * The feature id for the '<em><b>Folder</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXTENSION_RESOURCE__FOLDER = 3;
+
+	/**
+	 * The feature id for the '<em><b>In Administration</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXTENSION_RESOURCE__IN_ADMINISTRATION = 4;
+
+	/**
+	 * The feature id for the '<em><b>Extension Model</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXTENSION_RESOURCE__EXTENSION_MODEL = 5;
 
 	/**
 	 * The number of structural features of the '<em>Extension Resource</em>' class.
@@ -215,7 +242,89 @@ public interface JoomlaProjectModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EXTENSION_RESOURCE_FEATURE_COUNT = 3;
+	int EXTENSION_RESOURCE_FEATURE_COUNT = 6;
+
+	/**
+	 * The meta object id for the '{@link com.schmeedy.pdt.joomla.core.project.model.impl.MediaResourceImpl <em>Media Resource</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see com.schmeedy.pdt.joomla.core.project.model.impl.MediaResourceImpl
+	 * @see com.schmeedy.pdt.joomla.core.project.model.impl.JoomlaProjectModelPackageImpl#getMediaResource()
+	 * @generated
+	 */
+	int MEDIA_RESOURCE = 3;
+
+	/**
+	 * The feature id for the '<em><b>Full Path</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MEDIA_RESOURCE__FULL_PATH = EXTENSION_RESOURCE__FULL_PATH;
+
+	/**
+	 * The feature id for the '<em><b>Manifest Relative Path</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MEDIA_RESOURCE__MANIFEST_RELATIVE_PATH = EXTENSION_RESOURCE__MANIFEST_RELATIVE_PATH;
+
+	/**
+	 * The feature id for the '<em><b>Resource Type</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MEDIA_RESOURCE__RESOURCE_TYPE = EXTENSION_RESOURCE__RESOURCE_TYPE;
+
+	/**
+	 * The feature id for the '<em><b>Folder</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MEDIA_RESOURCE__FOLDER = EXTENSION_RESOURCE__FOLDER;
+
+	/**
+	 * The feature id for the '<em><b>In Administration</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MEDIA_RESOURCE__IN_ADMINISTRATION = EXTENSION_RESOURCE__IN_ADMINISTRATION;
+
+	/**
+	 * The feature id for the '<em><b>Extension Model</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MEDIA_RESOURCE__EXTENSION_MODEL = EXTENSION_RESOURCE__EXTENSION_MODEL;
+
+	/**
+	 * The feature id for the '<em><b>Destination</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MEDIA_RESOURCE__DESTINATION = EXTENSION_RESOURCE_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Media Resource</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MEDIA_RESOURCE_FEATURE_COUNT = EXTENSION_RESOURCE_FEATURE_COUNT + 1;
 
 	/**
 	 * The meta object id for the '{@link com.schmeedy.pdt.joomla.core.project.model.ManifestVersion <em>Manifest Version</em>}' enum.
@@ -225,7 +334,7 @@ public interface JoomlaProjectModelPackage extends EPackage {
 	 * @see com.schmeedy.pdt.joomla.core.project.model.impl.JoomlaProjectModelPackageImpl#getManifestVersion()
 	 * @generated
 	 */
-	int MANIFEST_VERSION = 3;
+	int MANIFEST_VERSION = 4;
 
 	/**
 	 * The meta object id for the '{@link com.schmeedy.pdt.joomla.core.project.model.ExtensionType <em>Extension Type</em>}' enum.
@@ -235,7 +344,7 @@ public interface JoomlaProjectModelPackage extends EPackage {
 	 * @see com.schmeedy.pdt.joomla.core.project.model.impl.JoomlaProjectModelPackageImpl#getExtensionType()
 	 * @generated
 	 */
-	int EXTENSION_TYPE = 4;
+	int EXTENSION_TYPE = 5;
 
 	/**
 	 * The meta object id for the '{@link com.schmeedy.pdt.joomla.core.project.model.ResourceType <em>Resource Type</em>}' enum.
@@ -245,7 +354,7 @@ public interface JoomlaProjectModelPackage extends EPackage {
 	 * @see com.schmeedy.pdt.joomla.core.project.model.impl.JoomlaProjectModelPackageImpl#getResourceType()
 	 * @generated
 	 */
-	int RESOURCE_TYPE = 5;
+	int RESOURCE_TYPE = 6;
 
 	/**
 	 * The meta object id for the '<em>IPath</em>' data type.
@@ -255,7 +364,7 @@ public interface JoomlaProjectModelPackage extends EPackage {
 	 * @see com.schmeedy.pdt.joomla.core.project.model.impl.JoomlaProjectModelPackageImpl#getIPath()
 	 * @generated
 	 */
-	int IPATH = 6;
+	int IPATH = 7;
 
 	/**
 	 * The meta object id for the '<em>IProject</em>' data type.
@@ -265,18 +374,7 @@ public interface JoomlaProjectModelPackage extends EPackage {
 	 * @see com.schmeedy.pdt.joomla.core.project.model.impl.JoomlaProjectModelPackageImpl#getIProject()
 	 * @generated
 	 */
-	int IPROJECT = 7;
-
-
-	/**
-	 * The meta object id for the '<em>File</em>' data type.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see java.io.File
-	 * @see com.schmeedy.pdt.joomla.core.project.model.impl.JoomlaProjectModelPackageImpl#getFile()
-	 * @generated
-	 */
-	int FILE = 8;
+	int IPROJECT = 8;
 
 
 	/**
@@ -398,37 +496,91 @@ public interface JoomlaProjectModelPackage extends EPackage {
 	EClass getExtensionResource();
 
 	/**
-	 * Returns the meta object for the attribute '{@link com.schmeedy.pdt.joomla.core.project.model.ExtensionResource#getSourcePath <em>Source Path</em>}'.
+	 * Returns the meta object for the attribute '{@link com.schmeedy.pdt.joomla.core.project.model.ExtensionResource#getFullPath <em>Full Path</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Source Path</em>'.
-	 * @see com.schmeedy.pdt.joomla.core.project.model.ExtensionResource#getSourcePath()
+	 * @return the meta object for the attribute '<em>Full Path</em>'.
+	 * @see com.schmeedy.pdt.joomla.core.project.model.ExtensionResource#getFullPath()
 	 * @see #getExtensionResource()
 	 * @generated
 	 */
-	EAttribute getExtensionResource_SourcePath();
+	EAttribute getExtensionResource_FullPath();
 
 	/**
-	 * Returns the meta object for the attribute '{@link com.schmeedy.pdt.joomla.core.project.model.ExtensionResource#getDestinationPath <em>Destination Path</em>}'.
+	 * Returns the meta object for the attribute '{@link com.schmeedy.pdt.joomla.core.project.model.ExtensionResource#getManifestRelativePath <em>Manifest Relative Path</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Destination Path</em>'.
-	 * @see com.schmeedy.pdt.joomla.core.project.model.ExtensionResource#getDestinationPath()
+	 * @return the meta object for the attribute '<em>Manifest Relative Path</em>'.
+	 * @see com.schmeedy.pdt.joomla.core.project.model.ExtensionResource#getManifestRelativePath()
 	 * @see #getExtensionResource()
 	 * @generated
 	 */
-	EAttribute getExtensionResource_DestinationPath();
+	EAttribute getExtensionResource_ManifestRelativePath();
 
 	/**
-	 * Returns the meta object for the attribute '{@link com.schmeedy.pdt.joomla.core.project.model.ExtensionResource#getType <em>Type</em>}'.
+	 * Returns the meta object for the attribute '{@link com.schmeedy.pdt.joomla.core.project.model.ExtensionResource#getResourceType <em>Resource Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Type</em>'.
-	 * @see com.schmeedy.pdt.joomla.core.project.model.ExtensionResource#getType()
+	 * @return the meta object for the attribute '<em>Resource Type</em>'.
+	 * @see com.schmeedy.pdt.joomla.core.project.model.ExtensionResource#getResourceType()
 	 * @see #getExtensionResource()
 	 * @generated
 	 */
-	EAttribute getExtensionResource_Type();
+	EAttribute getExtensionResource_ResourceType();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.schmeedy.pdt.joomla.core.project.model.ExtensionResource#isFolder <em>Folder</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Folder</em>'.
+	 * @see com.schmeedy.pdt.joomla.core.project.model.ExtensionResource#isFolder()
+	 * @see #getExtensionResource()
+	 * @generated
+	 */
+	EAttribute getExtensionResource_Folder();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.schmeedy.pdt.joomla.core.project.model.ExtensionResource#isInAdministration <em>In Administration</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>In Administration</em>'.
+	 * @see com.schmeedy.pdt.joomla.core.project.model.ExtensionResource#isInAdministration()
+	 * @see #getExtensionResource()
+	 * @generated
+	 */
+	EAttribute getExtensionResource_InAdministration();
+
+	/**
+	 * Returns the meta object for the container reference '{@link com.schmeedy.pdt.joomla.core.project.model.ExtensionResource#getExtensionModel <em>Extension Model</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the container reference '<em>Extension Model</em>'.
+	 * @see com.schmeedy.pdt.joomla.core.project.model.ExtensionResource#getExtensionModel()
+	 * @see #getExtensionResource()
+	 * @generated
+	 */
+	EReference getExtensionResource_ExtensionModel();
+
+	/**
+	 * Returns the meta object for class '{@link com.schmeedy.pdt.joomla.core.project.model.MediaResource <em>Media Resource</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Media Resource</em>'.
+	 * @see com.schmeedy.pdt.joomla.core.project.model.MediaResource
+	 * @generated
+	 */
+	EClass getMediaResource();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.schmeedy.pdt.joomla.core.project.model.MediaResource#getDestination <em>Destination</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Destination</em>'.
+	 * @see com.schmeedy.pdt.joomla.core.project.model.MediaResource#getDestination()
+	 * @see #getMediaResource()
+	 * @generated
+	 */
+	EAttribute getMediaResource_Destination();
 
 	/**
 	 * Returns the meta object for enum '{@link com.schmeedy.pdt.joomla.core.project.model.ManifestVersion <em>Manifest Version</em>}'.
@@ -481,17 +633,6 @@ public interface JoomlaProjectModelPackage extends EPackage {
 	 * @generated
 	 */
 	EDataType getIProject();
-
-	/**
-	 * Returns the meta object for data type '{@link java.io.File <em>File</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for data type '<em>File</em>'.
-	 * @see java.io.File
-	 * @model instanceClass="java.io.File"
-	 * @generated
-	 */
-	EDataType getFile();
 
 	/**
 	 * Returns the factory that creates the instances of the model.
@@ -610,28 +751,70 @@ public interface JoomlaProjectModelPackage extends EPackage {
 		EClass EXTENSION_RESOURCE = eINSTANCE.getExtensionResource();
 
 		/**
-		 * The meta object literal for the '<em><b>Source Path</b></em>' attribute feature.
+		 * The meta object literal for the '<em><b>Full Path</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute EXTENSION_RESOURCE__SOURCE_PATH = eINSTANCE.getExtensionResource_SourcePath();
+		EAttribute EXTENSION_RESOURCE__FULL_PATH = eINSTANCE.getExtensionResource_FullPath();
 
 		/**
-		 * The meta object literal for the '<em><b>Destination Path</b></em>' attribute feature.
+		 * The meta object literal for the '<em><b>Manifest Relative Path</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute EXTENSION_RESOURCE__DESTINATION_PATH = eINSTANCE.getExtensionResource_DestinationPath();
+		EAttribute EXTENSION_RESOURCE__MANIFEST_RELATIVE_PATH = eINSTANCE.getExtensionResource_ManifestRelativePath();
 
 		/**
-		 * The meta object literal for the '<em><b>Type</b></em>' attribute feature.
+		 * The meta object literal for the '<em><b>Resource Type</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute EXTENSION_RESOURCE__TYPE = eINSTANCE.getExtensionResource_Type();
+		EAttribute EXTENSION_RESOURCE__RESOURCE_TYPE = eINSTANCE.getExtensionResource_ResourceType();
+
+		/**
+		 * The meta object literal for the '<em><b>Folder</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute EXTENSION_RESOURCE__FOLDER = eINSTANCE.getExtensionResource_Folder();
+
+		/**
+		 * The meta object literal for the '<em><b>In Administration</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute EXTENSION_RESOURCE__IN_ADMINISTRATION = eINSTANCE.getExtensionResource_InAdministration();
+
+		/**
+		 * The meta object literal for the '<em><b>Extension Model</b></em>' container reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference EXTENSION_RESOURCE__EXTENSION_MODEL = eINSTANCE.getExtensionResource_ExtensionModel();
+
+		/**
+		 * The meta object literal for the '{@link com.schmeedy.pdt.joomla.core.project.model.impl.MediaResourceImpl <em>Media Resource</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see com.schmeedy.pdt.joomla.core.project.model.impl.MediaResourceImpl
+		 * @see com.schmeedy.pdt.joomla.core.project.model.impl.JoomlaProjectModelPackageImpl#getMediaResource()
+		 * @generated
+		 */
+		EClass MEDIA_RESOURCE = eINSTANCE.getMediaResource();
+
+		/**
+		 * The meta object literal for the '<em><b>Destination</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute MEDIA_RESOURCE__DESTINATION = eINSTANCE.getMediaResource_Destination();
 
 		/**
 		 * The meta object literal for the '{@link com.schmeedy.pdt.joomla.core.project.model.ManifestVersion <em>Manifest Version</em>}' enum.
@@ -682,16 +865,6 @@ public interface JoomlaProjectModelPackage extends EPackage {
 		 * @generated
 		 */
 		EDataType IPROJECT = eINSTANCE.getIProject();
-
-		/**
-		 * The meta object literal for the '<em>File</em>' data type.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see java.io.File
-		 * @see com.schmeedy.pdt.joomla.core.project.model.impl.JoomlaProjectModelPackageImpl#getFile()
-		 * @generated
-		 */
-		EDataType FILE = eINSTANCE.getFile();
 
 	}
 

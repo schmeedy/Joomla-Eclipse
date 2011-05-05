@@ -6,8 +6,6 @@
  */
 package com.schmeedy.pdt.joomla.core.project.model.impl;
 
-import java.io.File;
-
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.Path;
@@ -25,6 +23,7 @@ import com.schmeedy.pdt.joomla.core.project.model.JoomlaExtensionProject;
 import com.schmeedy.pdt.joomla.core.project.model.JoomlaProjectModelFactory;
 import com.schmeedy.pdt.joomla.core.project.model.JoomlaProjectModelPackage;
 import com.schmeedy.pdt.joomla.core.project.model.ManifestVersion;
+import com.schmeedy.pdt.joomla.core.project.model.MediaResource;
 import com.schmeedy.pdt.joomla.core.project.model.ResourceType;
 
 /**
@@ -74,6 +73,7 @@ public class JoomlaProjectModelFactoryImpl extends EFactoryImpl implements Jooml
 			case JoomlaProjectModelPackage.JOOMLA_EXTENSION_PROJECT: return createJoomlaExtensionProject();
 			case JoomlaProjectModelPackage.BASIC_EXTENSION_MODEL: return createBasicExtensionModel();
 			case JoomlaProjectModelPackage.EXTENSION_RESOURCE: return createExtensionResource();
+			case JoomlaProjectModelPackage.MEDIA_RESOURCE: return createMediaResource();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -97,8 +97,6 @@ public class JoomlaProjectModelFactoryImpl extends EFactoryImpl implements Jooml
 				return createIPathFromString(eDataType, initialValue);
 			case JoomlaProjectModelPackage.IPROJECT:
 				return createIProjectFromString(eDataType, initialValue);
-			case JoomlaProjectModelPackage.FILE:
-				return createFileFromString(eDataType, initialValue);
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
@@ -122,8 +120,6 @@ public class JoomlaProjectModelFactoryImpl extends EFactoryImpl implements Jooml
 				return convertIPathToString(eDataType, instanceValue);
 			case JoomlaProjectModelPackage.IPROJECT:
 				return convertIProjectToString(eDataType, instanceValue);
-			case JoomlaProjectModelPackage.FILE:
-				return convertFileToString(eDataType, instanceValue);
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
@@ -159,6 +155,16 @@ public class JoomlaProjectModelFactoryImpl extends EFactoryImpl implements Jooml
 	public ExtensionResource createExtensionResource() {
 		ExtensionResourceImpl extensionResource = new ExtensionResourceImpl();
 		return extensionResource;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public MediaResource createMediaResource() {
+		MediaResourceImpl mediaResource = new MediaResourceImpl();
+		return mediaResource;
 	}
 
 	/**
@@ -254,24 +260,6 @@ public class JoomlaProjectModelFactoryImpl extends EFactoryImpl implements Jooml
 	 * @generated
 	 */
 	public String convertIProjectToString(EDataType eDataType, Object instanceValue) {
-		return super.convertToString(eDataType, instanceValue);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public File createFileFromString(EDataType eDataType, String initialValue) {
-		return (File)super.createFromString(eDataType, initialValue);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public String convertFileToString(EDataType eDataType, Object instanceValue) {
 		return super.convertToString(eDataType, instanceValue);
 	}
 

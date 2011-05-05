@@ -16,19 +16,23 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="project" eType="#//JoomlaExtensionProject"
         eOpposite="#//JoomlaExtensionProject/extensions"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="resources" upperBound="-1"
-        eType="#//ExtensionResource" transient="true" containment="true"/>
+        eType="#//ExtensionResource" transient="true" containment="true" eOpposite="#//ExtensionResource/extensionModel"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ExtensionResource">
-    <eOperations name="getDestinationAsFile" eType="#//File">
-      <eParameters name="joomlaInstallationDir" eType="#//File"/>
-    </eOperations>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="sourcePath" eType="#//IPath"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="destinationPath" eType="#//IPath"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" eType="#//ResourceType"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="fullPath" eType="#//IPath"
+        changeable="false" volatile="true" transient="true" derived="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="manifestRelativePath" eType="#//IPath"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="resourceType" eType="#//ResourceType"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="folder" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="inAdministration" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="extensionModel" eType="#//BasicExtensionModel"
+        transient="true" eOpposite="#//BasicExtensionModel/resources"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="MediaResource" eSuperTypes="#//ExtensionResource">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="destination" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EDataType" name="IPath" instanceClassName="org.eclipse.core.runtime.IPath"/>
   <eClassifiers xsi:type="ecore:EDataType" name="IProject" instanceClassName="org.eclipse.core.resources.IProject"/>
-  <eClassifiers xsi:type="ecore:EDataType" name="File" instanceClassName="java.io.File"/>
   <eClassifiers xsi:type="ecore:EEnum" name="ManifestVersion">
     <eLiterals name="UNKNOWN"/>
     <eLiterals name="ONE_FIVE" value="1" literal="1.5.0"/>
@@ -42,7 +46,8 @@
     <eLiterals name="TEMPLATE" value="4" literal="template"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="ResourceType">
-    <eLiterals name="FILE"/>
-    <eLiterals name="FOLDER" value="1"/>
+    <eLiterals name="GENERIC_FILE"/>
+    <eLiterals name="LANGUAGE" value="1"/>
+    <eLiterals name="MEDIA"/>
   </eClassifiers>
 </ecore:EPackage>

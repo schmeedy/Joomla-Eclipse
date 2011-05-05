@@ -173,6 +173,7 @@ public interface BasicExtensionModel extends EObject {
 	/**
 	 * Returns the value of the '<em><b>Resources</b></em>' containment reference list.
 	 * The list contents are of type {@link com.schmeedy.pdt.joomla.core.project.model.ExtensionResource}.
+	 * It is bidirectional and its opposite is '{@link com.schmeedy.pdt.joomla.core.project.model.ExtensionResource#getExtensionModel <em>Extension Model</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Resources</em>' containment reference list isn't clear,
@@ -181,7 +182,8 @@ public interface BasicExtensionModel extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Resources</em>' containment reference list.
 	 * @see com.schmeedy.pdt.joomla.core.project.model.JoomlaProjectModelPackage#getBasicExtensionModel_Resources()
-	 * @model containment="true" transient="true"
+	 * @see com.schmeedy.pdt.joomla.core.project.model.ExtensionResource#getExtensionModel
+	 * @model opposite="extensionModel" containment="true" transient="true"
 	 * @generated
 	 */
 	EList<ExtensionResource> getResources();

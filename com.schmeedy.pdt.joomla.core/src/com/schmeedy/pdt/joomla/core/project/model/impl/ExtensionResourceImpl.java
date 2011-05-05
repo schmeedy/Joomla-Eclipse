@@ -6,14 +6,16 @@
  */
 package com.schmeedy.pdt.joomla.core.project.model.impl;
 
-import java.io.File;
-
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 
+import com.schmeedy.pdt.joomla.core.project.model.BasicExtensionModel;
 import com.schmeedy.pdt.joomla.core.project.model.ExtensionResource;
 import com.schmeedy.pdt.joomla.core.project.model.JoomlaProjectModelPackage;
 import com.schmeedy.pdt.joomla.core.project.model.ResourceType;
@@ -25,9 +27,12 @@ import com.schmeedy.pdt.joomla.core.project.model.ResourceType;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link com.schmeedy.pdt.joomla.core.project.model.impl.ExtensionResourceImpl#getSourcePath <em>Source Path</em>}</li>
- *   <li>{@link com.schmeedy.pdt.joomla.core.project.model.impl.ExtensionResourceImpl#getDestinationPath <em>Destination Path</em>}</li>
- *   <li>{@link com.schmeedy.pdt.joomla.core.project.model.impl.ExtensionResourceImpl#getType <em>Type</em>}</li>
+ *   <li>{@link com.schmeedy.pdt.joomla.core.project.model.impl.ExtensionResourceImpl#getFullPath <em>Full Path</em>}</li>
+ *   <li>{@link com.schmeedy.pdt.joomla.core.project.model.impl.ExtensionResourceImpl#getManifestRelativePath <em>Manifest Relative Path</em>}</li>
+ *   <li>{@link com.schmeedy.pdt.joomla.core.project.model.impl.ExtensionResourceImpl#getResourceType <em>Resource Type</em>}</li>
+ *   <li>{@link com.schmeedy.pdt.joomla.core.project.model.impl.ExtensionResourceImpl#isFolder <em>Folder</em>}</li>
+ *   <li>{@link com.schmeedy.pdt.joomla.core.project.model.impl.ExtensionResourceImpl#isInAdministration <em>In Administration</em>}</li>
+ *   <li>{@link com.schmeedy.pdt.joomla.core.project.model.impl.ExtensionResourceImpl#getExtensionModel <em>Extension Model</em>}</li>
  * </ul>
  * </p>
  *
@@ -35,64 +40,94 @@ import com.schmeedy.pdt.joomla.core.project.model.ResourceType;
  */
 public class ExtensionResourceImpl extends EObjectImpl implements ExtensionResource {
 	/**
-	 * The default value of the '{@link #getSourcePath() <em>Source Path</em>}' attribute.
+	 * The default value of the '{@link #getFullPath() <em>Full Path</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getSourcePath()
+	 * @see #getFullPath()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final IPath SOURCE_PATH_EDEFAULT = null;
+	protected static final IPath FULL_PATH_EDEFAULT = null;
 
 	/**
-	 * The cached value of the '{@link #getSourcePath() <em>Source Path</em>}' attribute.
+	 * The default value of the '{@link #getManifestRelativePath() <em>Manifest Relative Path</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getSourcePath()
+	 * @see #getManifestRelativePath()
 	 * @generated
 	 * @ordered
 	 */
-	protected IPath sourcePath = SOURCE_PATH_EDEFAULT;
+	protected static final IPath MANIFEST_RELATIVE_PATH_EDEFAULT = null;
 
 	/**
-	 * The default value of the '{@link #getDestinationPath() <em>Destination Path</em>}' attribute.
+	 * The cached value of the '{@link #getManifestRelativePath() <em>Manifest Relative Path</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getDestinationPath()
+	 * @see #getManifestRelativePath()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final IPath DESTINATION_PATH_EDEFAULT = null;
+	protected IPath manifestRelativePath = MANIFEST_RELATIVE_PATH_EDEFAULT;
 
 	/**
-	 * The cached value of the '{@link #getDestinationPath() <em>Destination Path</em>}' attribute.
+	 * The default value of the '{@link #getResourceType() <em>Resource Type</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getDestinationPath()
+	 * @see #getResourceType()
 	 * @generated
 	 * @ordered
 	 */
-	protected IPath destinationPath = DESTINATION_PATH_EDEFAULT;
+	protected static final ResourceType RESOURCE_TYPE_EDEFAULT = ResourceType.GENERIC_FILE;
 
 	/**
-	 * The default value of the '{@link #getType() <em>Type</em>}' attribute.
+	 * The cached value of the '{@link #getResourceType() <em>Resource Type</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getType()
+	 * @see #getResourceType()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final ResourceType TYPE_EDEFAULT = ResourceType.FILE;
+	protected ResourceType resourceType = RESOURCE_TYPE_EDEFAULT;
 
 	/**
-	 * The cached value of the '{@link #getType() <em>Type</em>}' attribute.
+	 * The default value of the '{@link #isFolder() <em>Folder</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getType()
+	 * @see #isFolder()
 	 * @generated
 	 * @ordered
 	 */
-	protected ResourceType type = TYPE_EDEFAULT;
+	protected static final boolean FOLDER_EDEFAULT = false;
+
+	/**
+	 * The cached value of the '{@link #isFolder() <em>Folder</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isFolder()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean folder = FOLDER_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #isInAdministration() <em>In Administration</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isInAdministration()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean IN_ADMINISTRATION_EDEFAULT = false;
+
+	/**
+	 * The cached value of the '{@link #isInAdministration() <em>In Administration</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isInAdministration()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean inAdministration = IN_ADMINISTRATION_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -116,10 +151,16 @@ public class ExtensionResourceImpl extends EObjectImpl implements ExtensionResou
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
-	public IPath getSourcePath() {
-		return sourcePath;
+	@Override
+	public IPath getFullPath() {
+		final BasicExtensionModel extensionModel = getExtensionModel();
+		if (extensionModel == null) {
+			throw new IllegalArgumentException("Resource is not contained in an extension model.");
+		}
+		final IPath manifestPath = extensionModel.getManifestPath();
+		return manifestPath.removeLastSegments(1).append(getManifestRelativePath());
 	}
 
 	/**
@@ -127,11 +168,22 @@ public class ExtensionResourceImpl extends EObjectImpl implements ExtensionResou
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setSourcePath(IPath newSourcePath) {
-		IPath oldSourcePath = sourcePath;
-		sourcePath = newSourcePath;
+	@Override
+	public IPath getManifestRelativePath() {
+		return manifestRelativePath;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setManifestRelativePath(IPath newManifestRelativePath) {
+		final IPath oldManifestRelativePath = manifestRelativePath;
+		manifestRelativePath = newManifestRelativePath;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, JoomlaProjectModelPackage.EXTENSION_RESOURCE__SOURCE_PATH, oldSourcePath, sourcePath));
+			eNotify(new ENotificationImpl(this, Notification.SET, JoomlaProjectModelPackage.EXTENSION_RESOURCE__MANIFEST_RELATIVE_PATH, oldManifestRelativePath, manifestRelativePath));
 	}
 
 	/**
@@ -139,8 +191,9 @@ public class ExtensionResourceImpl extends EObjectImpl implements ExtensionResou
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public IPath getDestinationPath() {
-		return destinationPath;
+	@Override
+	public ResourceType getResourceType() {
+		return resourceType;
 	}
 
 	/**
@@ -148,11 +201,12 @@ public class ExtensionResourceImpl extends EObjectImpl implements ExtensionResou
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setDestinationPath(IPath newDestinationPath) {
-		IPath oldDestinationPath = destinationPath;
-		destinationPath = newDestinationPath;
+	@Override
+	public void setResourceType(ResourceType newResourceType) {
+		final ResourceType oldResourceType = resourceType;
+		resourceType = newResourceType == null ? RESOURCE_TYPE_EDEFAULT : newResourceType;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, JoomlaProjectModelPackage.EXTENSION_RESOURCE__DESTINATION_PATH, oldDestinationPath, destinationPath));
+			eNotify(new ENotificationImpl(this, Notification.SET, JoomlaProjectModelPackage.EXTENSION_RESOURCE__RESOURCE_TYPE, oldResourceType, resourceType));
 	}
 
 	/**
@@ -160,8 +214,9 @@ public class ExtensionResourceImpl extends EObjectImpl implements ExtensionResou
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ResourceType getType() {
-		return type;
+	@Override
+	public boolean isFolder() {
+		return folder;
 	}
 
 	/**
@@ -169,11 +224,12 @@ public class ExtensionResourceImpl extends EObjectImpl implements ExtensionResou
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setType(ResourceType newType) {
-		ResourceType oldType = type;
-		type = newType == null ? TYPE_EDEFAULT : newType;
+	@Override
+	public void setFolder(boolean newFolder) {
+		final boolean oldFolder = folder;
+		folder = newFolder;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, JoomlaProjectModelPackage.EXTENSION_RESOURCE__TYPE, oldType, type));
+			eNotify(new ENotificationImpl(this, Notification.SET, JoomlaProjectModelPackage.EXTENSION_RESOURCE__FOLDER, oldFolder, folder));
 	}
 
 	/**
@@ -181,10 +237,109 @@ public class ExtensionResourceImpl extends EObjectImpl implements ExtensionResou
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public File getDestinationAsFile(File joomlaInstallationDir) {
-		// TODO: implement this method
-		// Ensure that you remove @generated or mark it @generated NOT
-		throw new UnsupportedOperationException();
+	@Override
+	public boolean isInAdministration() {
+		return inAdministration;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setInAdministration(boolean newInAdministration) {
+		final boolean oldInAdministration = inAdministration;
+		inAdministration = newInAdministration;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, JoomlaProjectModelPackage.EXTENSION_RESOURCE__IN_ADMINISTRATION, oldInAdministration, inAdministration));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public BasicExtensionModel getExtensionModel() {
+		if (eContainerFeatureID() != JoomlaProjectModelPackage.EXTENSION_RESOURCE__EXTENSION_MODEL) return null;
+		return (BasicExtensionModel)eContainer();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetExtensionModel(BasicExtensionModel newExtensionModel, NotificationChain msgs) {
+		msgs = eBasicSetContainer((InternalEObject)newExtensionModel, JoomlaProjectModelPackage.EXTENSION_RESOURCE__EXTENSION_MODEL, msgs);
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setExtensionModel(BasicExtensionModel newExtensionModel) {
+		if (newExtensionModel != eInternalContainer() || (eContainerFeatureID() != JoomlaProjectModelPackage.EXTENSION_RESOURCE__EXTENSION_MODEL && newExtensionModel != null)) {
+			if (EcoreUtil.isAncestor(this, newExtensionModel))
+				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
+			NotificationChain msgs = null;
+			if (eInternalContainer() != null)
+				msgs = eBasicRemoveFromContainer(msgs);
+			if (newExtensionModel != null)
+				msgs = ((InternalEObject)newExtensionModel).eInverseAdd(this, JoomlaProjectModelPackage.BASIC_EXTENSION_MODEL__RESOURCES, BasicExtensionModel.class, msgs);
+			msgs = basicSetExtensionModel(newExtensionModel, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, JoomlaProjectModelPackage.EXTENSION_RESOURCE__EXTENSION_MODEL, newExtensionModel, newExtensionModel));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case JoomlaProjectModelPackage.EXTENSION_RESOURCE__EXTENSION_MODEL:
+				if (eInternalContainer() != null)
+					msgs = eBasicRemoveFromContainer(msgs);
+				return basicSetExtensionModel((BasicExtensionModel)otherEnd, msgs);
+		}
+		return super.eInverseAdd(otherEnd, featureID, msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case JoomlaProjectModelPackage.EXTENSION_RESOURCE__EXTENSION_MODEL:
+				return basicSetExtensionModel(null, msgs);
+		}
+		return super.eInverseRemove(otherEnd, featureID, msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
+		switch (eContainerFeatureID()) {
+			case JoomlaProjectModelPackage.EXTENSION_RESOURCE__EXTENSION_MODEL:
+				return eInternalContainer().eInverseRemove(this, JoomlaProjectModelPackage.BASIC_EXTENSION_MODEL__RESOURCES, BasicExtensionModel.class, msgs);
+		}
+		return super.eBasicRemoveFromContainerFeature(msgs);
 	}
 
 	/**
@@ -195,12 +350,18 @@ public class ExtensionResourceImpl extends EObjectImpl implements ExtensionResou
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case JoomlaProjectModelPackage.EXTENSION_RESOURCE__SOURCE_PATH:
-				return getSourcePath();
-			case JoomlaProjectModelPackage.EXTENSION_RESOURCE__DESTINATION_PATH:
-				return getDestinationPath();
-			case JoomlaProjectModelPackage.EXTENSION_RESOURCE__TYPE:
-				return getType();
+			case JoomlaProjectModelPackage.EXTENSION_RESOURCE__FULL_PATH:
+				return getFullPath();
+			case JoomlaProjectModelPackage.EXTENSION_RESOURCE__MANIFEST_RELATIVE_PATH:
+				return getManifestRelativePath();
+			case JoomlaProjectModelPackage.EXTENSION_RESOURCE__RESOURCE_TYPE:
+				return getResourceType();
+			case JoomlaProjectModelPackage.EXTENSION_RESOURCE__FOLDER:
+				return isFolder();
+			case JoomlaProjectModelPackage.EXTENSION_RESOURCE__IN_ADMINISTRATION:
+				return isInAdministration();
+			case JoomlaProjectModelPackage.EXTENSION_RESOURCE__EXTENSION_MODEL:
+				return getExtensionModel();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -213,14 +374,20 @@ public class ExtensionResourceImpl extends EObjectImpl implements ExtensionResou
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case JoomlaProjectModelPackage.EXTENSION_RESOURCE__SOURCE_PATH:
-				setSourcePath((IPath)newValue);
+			case JoomlaProjectModelPackage.EXTENSION_RESOURCE__MANIFEST_RELATIVE_PATH:
+				setManifestRelativePath((IPath)newValue);
 				return;
-			case JoomlaProjectModelPackage.EXTENSION_RESOURCE__DESTINATION_PATH:
-				setDestinationPath((IPath)newValue);
+			case JoomlaProjectModelPackage.EXTENSION_RESOURCE__RESOURCE_TYPE:
+				setResourceType((ResourceType)newValue);
 				return;
-			case JoomlaProjectModelPackage.EXTENSION_RESOURCE__TYPE:
-				setType((ResourceType)newValue);
+			case JoomlaProjectModelPackage.EXTENSION_RESOURCE__FOLDER:
+				setFolder((Boolean)newValue);
+				return;
+			case JoomlaProjectModelPackage.EXTENSION_RESOURCE__IN_ADMINISTRATION:
+				setInAdministration((Boolean)newValue);
+				return;
+			case JoomlaProjectModelPackage.EXTENSION_RESOURCE__EXTENSION_MODEL:
+				setExtensionModel((BasicExtensionModel)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -234,14 +401,20 @@ public class ExtensionResourceImpl extends EObjectImpl implements ExtensionResou
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case JoomlaProjectModelPackage.EXTENSION_RESOURCE__SOURCE_PATH:
-				setSourcePath(SOURCE_PATH_EDEFAULT);
+			case JoomlaProjectModelPackage.EXTENSION_RESOURCE__MANIFEST_RELATIVE_PATH:
+				setManifestRelativePath(MANIFEST_RELATIVE_PATH_EDEFAULT);
 				return;
-			case JoomlaProjectModelPackage.EXTENSION_RESOURCE__DESTINATION_PATH:
-				setDestinationPath(DESTINATION_PATH_EDEFAULT);
+			case JoomlaProjectModelPackage.EXTENSION_RESOURCE__RESOURCE_TYPE:
+				setResourceType(RESOURCE_TYPE_EDEFAULT);
 				return;
-			case JoomlaProjectModelPackage.EXTENSION_RESOURCE__TYPE:
-				setType(TYPE_EDEFAULT);
+			case JoomlaProjectModelPackage.EXTENSION_RESOURCE__FOLDER:
+				setFolder(FOLDER_EDEFAULT);
+				return;
+			case JoomlaProjectModelPackage.EXTENSION_RESOURCE__IN_ADMINISTRATION:
+				setInAdministration(IN_ADMINISTRATION_EDEFAULT);
+				return;
+			case JoomlaProjectModelPackage.EXTENSION_RESOURCE__EXTENSION_MODEL:
+				setExtensionModel((BasicExtensionModel)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -255,12 +428,18 @@ public class ExtensionResourceImpl extends EObjectImpl implements ExtensionResou
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case JoomlaProjectModelPackage.EXTENSION_RESOURCE__SOURCE_PATH:
-				return SOURCE_PATH_EDEFAULT == null ? sourcePath != null : !SOURCE_PATH_EDEFAULT.equals(sourcePath);
-			case JoomlaProjectModelPackage.EXTENSION_RESOURCE__DESTINATION_PATH:
-				return DESTINATION_PATH_EDEFAULT == null ? destinationPath != null : !DESTINATION_PATH_EDEFAULT.equals(destinationPath);
-			case JoomlaProjectModelPackage.EXTENSION_RESOURCE__TYPE:
-				return type != TYPE_EDEFAULT;
+			case JoomlaProjectModelPackage.EXTENSION_RESOURCE__FULL_PATH:
+				return FULL_PATH_EDEFAULT == null ? getFullPath() != null : !FULL_PATH_EDEFAULT.equals(getFullPath());
+			case JoomlaProjectModelPackage.EXTENSION_RESOURCE__MANIFEST_RELATIVE_PATH:
+				return MANIFEST_RELATIVE_PATH_EDEFAULT == null ? manifestRelativePath != null : !MANIFEST_RELATIVE_PATH_EDEFAULT.equals(manifestRelativePath);
+			case JoomlaProjectModelPackage.EXTENSION_RESOURCE__RESOURCE_TYPE:
+				return resourceType != RESOURCE_TYPE_EDEFAULT;
+			case JoomlaProjectModelPackage.EXTENSION_RESOURCE__FOLDER:
+				return folder != FOLDER_EDEFAULT;
+			case JoomlaProjectModelPackage.EXTENSION_RESOURCE__IN_ADMINISTRATION:
+				return inAdministration != IN_ADMINISTRATION_EDEFAULT;
+			case JoomlaProjectModelPackage.EXTENSION_RESOURCE__EXTENSION_MODEL:
+				return getExtensionModel() != null;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -274,13 +453,15 @@ public class ExtensionResourceImpl extends EObjectImpl implements ExtensionResou
 	public String toString() {
 		if (eIsProxy()) return super.toString();
 
-		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (sourcePath: ");
-		result.append(sourcePath);
-		result.append(", destinationPath: ");
-		result.append(destinationPath);
-		result.append(", type: ");
-		result.append(type);
+		final StringBuffer result = new StringBuffer(super.toString());
+		result.append(" (manifestRelativePath: ");
+		result.append(manifestRelativePath);
+		result.append(", resourceType: ");
+		result.append(resourceType);
+		result.append(", folder: ");
+		result.append(folder);
+		result.append(", inAdministration: ");
+		result.append(inAdministration);
 		result.append(')');
 		return result.toString();
 	}

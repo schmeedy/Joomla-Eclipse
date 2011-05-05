@@ -6,8 +6,6 @@
  */
 package com.schmeedy.pdt.joomla.core.project.model;
 
-import java.io.File;
-
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.emf.ecore.EObject;
 
@@ -19,9 +17,12 @@ import org.eclipse.emf.ecore.EObject;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link com.schmeedy.pdt.joomla.core.project.model.ExtensionResource#getSourcePath <em>Source Path</em>}</li>
- *   <li>{@link com.schmeedy.pdt.joomla.core.project.model.ExtensionResource#getDestinationPath <em>Destination Path</em>}</li>
- *   <li>{@link com.schmeedy.pdt.joomla.core.project.model.ExtensionResource#getType <em>Type</em>}</li>
+ *   <li>{@link com.schmeedy.pdt.joomla.core.project.model.ExtensionResource#getFullPath <em>Full Path</em>}</li>
+ *   <li>{@link com.schmeedy.pdt.joomla.core.project.model.ExtensionResource#getManifestRelativePath <em>Manifest Relative Path</em>}</li>
+ *   <li>{@link com.schmeedy.pdt.joomla.core.project.model.ExtensionResource#getResourceType <em>Resource Type</em>}</li>
+ *   <li>{@link com.schmeedy.pdt.joomla.core.project.model.ExtensionResource#isFolder <em>Folder</em>}</li>
+ *   <li>{@link com.schmeedy.pdt.joomla.core.project.model.ExtensionResource#isInAdministration <em>In Administration</em>}</li>
+ *   <li>{@link com.schmeedy.pdt.joomla.core.project.model.ExtensionResource#getExtensionModel <em>Extension Model</em>}</li>
  * </ul>
  * </p>
  *
@@ -31,92 +32,153 @@ import org.eclipse.emf.ecore.EObject;
  */
 public interface ExtensionResource extends EObject {
 	/**
-	 * Returns the value of the '<em><b>Source Path</b></em>' attribute.
+	 * Returns the value of the '<em><b>Full Path</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Source Path</em>' attribute isn't clear,
+	 * If the meaning of the '<em>Full Path</em>' attribute isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Source Path</em>' attribute.
-	 * @see #setSourcePath(IPath)
-	 * @see com.schmeedy.pdt.joomla.core.project.model.JoomlaProjectModelPackage#getExtensionResource_SourcePath()
-	 * @model dataType="com.schmeedy.pdt.joomla.core.project.model.IPath"
+	 * @return the value of the '<em>Full Path</em>' attribute.
+	 * @see com.schmeedy.pdt.joomla.core.project.model.JoomlaProjectModelPackage#getExtensionResource_FullPath()
+	 * @model dataType="com.schmeedy.pdt.joomla.core.project.model.IPath" transient="true" changeable="false" volatile="true" derived="true"
 	 * @generated
 	 */
-	IPath getSourcePath();
+	IPath getFullPath();
 
 	/**
-	 * Sets the value of the '{@link com.schmeedy.pdt.joomla.core.project.model.ExtensionResource#getSourcePath <em>Source Path</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Source Path</em>' attribute.
-	 * @see #getSourcePath()
-	 * @generated
-	 */
-	void setSourcePath(IPath value);
-
-	/**
-	 * Returns the value of the '<em><b>Destination Path</b></em>' attribute.
+	 * Returns the value of the '<em><b>Manifest Relative Path</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Destination Path</em>' attribute isn't clear,
+	 * If the meaning of the '<em>Manifest Relative Path</em>' attribute isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Destination Path</em>' attribute.
-	 * @see #setDestinationPath(IPath)
-	 * @see com.schmeedy.pdt.joomla.core.project.model.JoomlaProjectModelPackage#getExtensionResource_DestinationPath()
+	 * @return the value of the '<em>Manifest Relative Path</em>' attribute.
+	 * @see #setManifestRelativePath(IPath)
+	 * @see com.schmeedy.pdt.joomla.core.project.model.JoomlaProjectModelPackage#getExtensionResource_ManifestRelativePath()
 	 * @model dataType="com.schmeedy.pdt.joomla.core.project.model.IPath"
 	 * @generated
 	 */
-	IPath getDestinationPath();
+	IPath getManifestRelativePath();
 
 	/**
-	 * Sets the value of the '{@link com.schmeedy.pdt.joomla.core.project.model.ExtensionResource#getDestinationPath <em>Destination Path</em>}' attribute.
+	 * Sets the value of the '{@link com.schmeedy.pdt.joomla.core.project.model.ExtensionResource#getManifestRelativePath <em>Manifest Relative Path</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Destination Path</em>' attribute.
-	 * @see #getDestinationPath()
+	 * @param value the new value of the '<em>Manifest Relative Path</em>' attribute.
+	 * @see #getManifestRelativePath()
 	 * @generated
 	 */
-	void setDestinationPath(IPath value);
+	void setManifestRelativePath(IPath value);
 
 	/**
-	 * Returns the value of the '<em><b>Type</b></em>' attribute.
+	 * Returns the value of the '<em><b>Resource Type</b></em>' attribute.
 	 * The literals are from the enumeration {@link com.schmeedy.pdt.joomla.core.project.model.ResourceType}.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Type</em>' attribute isn't clear,
+	 * If the meaning of the '<em>Resource Type</em>' attribute isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Type</em>' attribute.
+	 * @return the value of the '<em>Resource Type</em>' attribute.
 	 * @see com.schmeedy.pdt.joomla.core.project.model.ResourceType
-	 * @see #setType(ResourceType)
-	 * @see com.schmeedy.pdt.joomla.core.project.model.JoomlaProjectModelPackage#getExtensionResource_Type()
+	 * @see #setResourceType(ResourceType)
+	 * @see com.schmeedy.pdt.joomla.core.project.model.JoomlaProjectModelPackage#getExtensionResource_ResourceType()
 	 * @model
 	 * @generated
 	 */
-	ResourceType getType();
+	ResourceType getResourceType();
 
 	/**
-	 * Sets the value of the '{@link com.schmeedy.pdt.joomla.core.project.model.ExtensionResource#getType <em>Type</em>}' attribute.
+	 * Sets the value of the '{@link com.schmeedy.pdt.joomla.core.project.model.ExtensionResource#getResourceType <em>Resource Type</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Type</em>' attribute.
+	 * @param value the new value of the '<em>Resource Type</em>' attribute.
 	 * @see com.schmeedy.pdt.joomla.core.project.model.ResourceType
-	 * @see #getType()
+	 * @see #getResourceType()
 	 * @generated
 	 */
-	void setType(ResourceType value);
+	void setResourceType(ResourceType value);
 
 	/**
+	 * Returns the value of the '<em><b>Folder</b></em>' attribute.
 	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Folder</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
 	 * <!-- end-user-doc -->
-	 * @model dataType="com.schmeedy.pdt.joomla.core.project.model.File" joomlaInstallationDirDataType="com.schmeedy.pdt.joomla.core.project.model.File"
+	 * @return the value of the '<em>Folder</em>' attribute.
+	 * @see #setFolder(boolean)
+	 * @see com.schmeedy.pdt.joomla.core.project.model.JoomlaProjectModelPackage#getExtensionResource_Folder()
+	 * @model
 	 * @generated
 	 */
-	File getDestinationAsFile(File joomlaInstallationDir);
+	boolean isFolder();
+
+	/**
+	 * Sets the value of the '{@link com.schmeedy.pdt.joomla.core.project.model.ExtensionResource#isFolder <em>Folder</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Folder</em>' attribute.
+	 * @see #isFolder()
+	 * @generated
+	 */
+	void setFolder(boolean value);
+
+	/**
+	 * Returns the value of the '<em><b>In Administration</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>In Administration</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>In Administration</em>' attribute.
+	 * @see #setInAdministration(boolean)
+	 * @see com.schmeedy.pdt.joomla.core.project.model.JoomlaProjectModelPackage#getExtensionResource_InAdministration()
+	 * @model
+	 * @generated
+	 */
+	boolean isInAdministration();
+
+	/**
+	 * Sets the value of the '{@link com.schmeedy.pdt.joomla.core.project.model.ExtensionResource#isInAdministration <em>In Administration</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>In Administration</em>' attribute.
+	 * @see #isInAdministration()
+	 * @generated
+	 */
+	void setInAdministration(boolean value);
+
+	/**
+	 * Returns the value of the '<em><b>Extension Model</b></em>' container reference.
+	 * It is bidirectional and its opposite is '{@link com.schmeedy.pdt.joomla.core.project.model.BasicExtensionModel#getResources <em>Resources</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Extension Model</em>' container reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Extension Model</em>' container reference.
+	 * @see #setExtensionModel(BasicExtensionModel)
+	 * @see com.schmeedy.pdt.joomla.core.project.model.JoomlaProjectModelPackage#getExtensionResource_ExtensionModel()
+	 * @see com.schmeedy.pdt.joomla.core.project.model.BasicExtensionModel#getResources
+	 * @model opposite="resources"
+	 * @generated
+	 */
+	BasicExtensionModel getExtensionModel();
+
+	/**
+	 * Sets the value of the '{@link com.schmeedy.pdt.joomla.core.project.model.ExtensionResource#getExtensionModel <em>Extension Model</em>}' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Extension Model</em>' container reference.
+	 * @see #getExtensionModel()
+	 * @generated
+	 */
+	void setExtensionModel(BasicExtensionModel value);
 
 } // ExtensionResource

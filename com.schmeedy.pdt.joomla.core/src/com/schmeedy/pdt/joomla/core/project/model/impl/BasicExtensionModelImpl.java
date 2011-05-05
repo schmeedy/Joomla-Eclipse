@@ -16,7 +16,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
-import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.InternalEList;
 
@@ -287,7 +287,7 @@ public class BasicExtensionModelImpl extends EObjectImpl implements BasicExtensi
 	 */
 	public EList<ExtensionResource> getResources() {
 		if (resources == null) {
-			resources = new EObjectContainmentEList<ExtensionResource>(ExtensionResource.class, this, JoomlaProjectModelPackage.BASIC_EXTENSION_MODEL__RESOURCES);
+			resources = new EObjectContainmentWithInverseEList<ExtensionResource>(ExtensionResource.class, this, JoomlaProjectModelPackage.BASIC_EXTENSION_MODEL__RESOURCES, JoomlaProjectModelPackage.EXTENSION_RESOURCE__EXTENSION_MODEL);
 		}
 		return resources;
 	}
@@ -297,6 +297,7 @@ public class BasicExtensionModelImpl extends EObjectImpl implements BasicExtensi
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@SuppressWarnings("unchecked")
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
@@ -304,6 +305,8 @@ public class BasicExtensionModelImpl extends EObjectImpl implements BasicExtensi
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
 				return basicSetProject((JoomlaExtensionProject)otherEnd, msgs);
+			case JoomlaProjectModelPackage.BASIC_EXTENSION_MODEL__RESOURCES:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getResources()).basicAdd(otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}

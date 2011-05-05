@@ -23,54 +23,75 @@ import org.eclipse.emf.common.util.Enumerator;
  */
 public enum ResourceType implements Enumerator {
 	/**
-	 * The '<em><b>FILE</b></em>' literal object.
+	 * The '<em><b>GENERIC FILE</b></em>' literal object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #FILE_VALUE
+	 * @see #GENERIC_FILE_VALUE
 	 * @generated
 	 * @ordered
 	 */
-	FILE(0, "FILE", "FILE"),
-
-	/**
-	 * The '<em><b>FOLDER</b></em>' literal object.
+	GENERIC_FILE(0, "GENERIC_FILE", "GENERIC_FILE"), /**
+	 * The '<em><b>LANGUAGE</b></em>' literal object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #FOLDER_VALUE
+	 * @see #LANGUAGE_VALUE
 	 * @generated
 	 * @ordered
 	 */
-	FOLDER(1, "FOLDER", "FOLDER");
+	LANGUAGE(1, "LANGUAGE", "LANGUAGE"), /**
+	 * The '<em><b>MEDIA</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #MEDIA_VALUE
+	 * @generated
+	 * @ordered
+	 */
+	MEDIA(0, "MEDIA", "MEDIA");
 
 	/**
-	 * The '<em><b>FILE</b></em>' literal value.
+	 * The '<em><b>GENERIC FILE</b></em>' literal value.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of '<em><b>FILE</b></em>' literal object isn't clear,
+	 * If the meaning of '<em><b>GENERIC FILE</b></em>' literal object isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @see #FILE
+	 * @see #GENERIC_FILE
 	 * @model
 	 * @generated
 	 * @ordered
 	 */
-	public static final int FILE_VALUE = 0;
+	public static final int GENERIC_FILE_VALUE = 0;
 
 	/**
-	 * The '<em><b>FOLDER</b></em>' literal value.
+	 * The '<em><b>LANGUAGE</b></em>' literal value.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of '<em><b>FOLDER</b></em>' literal object isn't clear,
+	 * If the meaning of '<em><b>LANGUAGE</b></em>' literal object isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @see #FOLDER
+	 * @see #LANGUAGE
 	 * @model
 	 * @generated
 	 * @ordered
 	 */
-	public static final int FOLDER_VALUE = 1;
+	public static final int LANGUAGE_VALUE = 1;
+
+	/**
+	 * The '<em><b>MEDIA</b></em>' literal value.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of '<em><b>MEDIA</b></em>' literal object isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @see #MEDIA
+	 * @model
+	 * @generated
+	 * @ordered
+	 */
+	public static final int MEDIA_VALUE = 0;
 
 	/**
 	 * An array of all the '<em><b>Resource Type</b></em>' enumerators.
@@ -80,8 +101,9 @@ public enum ResourceType implements Enumerator {
 	 */
 	private static final ResourceType[] VALUES_ARRAY =
 		new ResourceType[] {
-			FILE,
-			FOLDER,
+			GENERIC_FILE,
+			LANGUAGE,
+			MEDIA,
 		};
 
 	/**
@@ -132,8 +154,8 @@ public enum ResourceType implements Enumerator {
 	 */
 	public static ResourceType get(int value) {
 		switch (value) {
-			case FILE_VALUE: return FILE;
-			case FOLDER_VALUE: return FOLDER;
+			case GENERIC_FILE_VALUE: return GENERIC_FILE;
+			case LANGUAGE_VALUE: return LANGUAGE;
 		}
 		return null;
 	}
