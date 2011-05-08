@@ -218,13 +218,22 @@ public interface JoomlaProjectModelPackage extends EPackage {
 	int EXTENSION_RESOURCE__MANIFEST_RELATIVE_PATH = 1;
 
 	/**
+	 * The feature id for the '<em><b>Install Package Path Segments</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXTENSION_RESOURCE__INSTALL_PACKAGE_PATH_SEGMENTS = 2;
+
+	/**
 	 * The feature id for the '<em><b>Resource Type</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int EXTENSION_RESOURCE__RESOURCE_TYPE = 2;
+	int EXTENSION_RESOURCE__RESOURCE_TYPE = 3;
 
 	/**
 	 * The feature id for the '<em><b>Folder</b></em>' attribute.
@@ -233,7 +242,7 @@ public interface JoomlaProjectModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EXTENSION_RESOURCE__FOLDER = 3;
+	int EXTENSION_RESOURCE__FOLDER = 4;
 
 	/**
 	 * The feature id for the '<em><b>In Administration</b></em>' attribute.
@@ -242,7 +251,7 @@ public interface JoomlaProjectModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EXTENSION_RESOURCE__IN_ADMINISTRATION = 4;
+	int EXTENSION_RESOURCE__IN_ADMINISTRATION = 5;
 
 	/**
 	 * The feature id for the '<em><b>Extension Model</b></em>' container reference.
@@ -251,7 +260,7 @@ public interface JoomlaProjectModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EXTENSION_RESOURCE__EXTENSION_MODEL = 5;
+	int EXTENSION_RESOURCE__EXTENSION_MODEL = 6;
 
 	/**
 	 * The number of structural features of the '<em>Extension Resource</em>' class.
@@ -260,7 +269,7 @@ public interface JoomlaProjectModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EXTENSION_RESOURCE_FEATURE_COUNT = 6;
+	int EXTENSION_RESOURCE_FEATURE_COUNT = 7;
 
 	/**
 	 * The meta object id for the '{@link com.schmeedy.pdt.joomla.core.project.model.impl.MediaResourceImpl <em>Media Resource</em>}' class.
@@ -289,6 +298,15 @@ public interface JoomlaProjectModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int MEDIA_RESOURCE__MANIFEST_RELATIVE_PATH = EXTENSION_RESOURCE__MANIFEST_RELATIVE_PATH;
+
+	/**
+	 * The feature id for the '<em><b>Install Package Path Segments</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MEDIA_RESOURCE__INSTALL_PACKAGE_PATH_SEGMENTS = EXTENSION_RESOURCE__INSTALL_PACKAGE_PATH_SEGMENTS;
 
 	/**
 	 * The feature id for the '<em><b>Resource Type</b></em>' attribute.
@@ -345,6 +363,97 @@ public interface JoomlaProjectModelPackage extends EPackage {
 	int MEDIA_RESOURCE_FEATURE_COUNT = EXTENSION_RESOURCE_FEATURE_COUNT + 1;
 
 	/**
+	 * The meta object id for the '{@link com.schmeedy.pdt.joomla.core.project.model.impl.LanguageResourceImpl <em>Language Resource</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see com.schmeedy.pdt.joomla.core.project.model.impl.LanguageResourceImpl
+	 * @see com.schmeedy.pdt.joomla.core.project.model.impl.JoomlaProjectModelPackageImpl#getLanguageResource()
+	 * @generated
+	 */
+	int LANGUAGE_RESOURCE = 4;
+
+	/**
+	 * The feature id for the '<em><b>Full Path</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LANGUAGE_RESOURCE__FULL_PATH = EXTENSION_RESOURCE__FULL_PATH;
+
+	/**
+	 * The feature id for the '<em><b>Manifest Relative Path</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LANGUAGE_RESOURCE__MANIFEST_RELATIVE_PATH = EXTENSION_RESOURCE__MANIFEST_RELATIVE_PATH;
+
+	/**
+	 * The feature id for the '<em><b>Install Package Path Segments</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LANGUAGE_RESOURCE__INSTALL_PACKAGE_PATH_SEGMENTS = EXTENSION_RESOURCE__INSTALL_PACKAGE_PATH_SEGMENTS;
+
+	/**
+	 * The feature id for the '<em><b>Resource Type</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LANGUAGE_RESOURCE__RESOURCE_TYPE = EXTENSION_RESOURCE__RESOURCE_TYPE;
+
+	/**
+	 * The feature id for the '<em><b>Folder</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LANGUAGE_RESOURCE__FOLDER = EXTENSION_RESOURCE__FOLDER;
+
+	/**
+	 * The feature id for the '<em><b>In Administration</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LANGUAGE_RESOURCE__IN_ADMINISTRATION = EXTENSION_RESOURCE__IN_ADMINISTRATION;
+
+	/**
+	 * The feature id for the '<em><b>Extension Model</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LANGUAGE_RESOURCE__EXTENSION_MODEL = EXTENSION_RESOURCE__EXTENSION_MODEL;
+
+	/**
+	 * The feature id for the '<em><b>Language Tag</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LANGUAGE_RESOURCE__LANGUAGE_TAG = EXTENSION_RESOURCE_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Language Resource</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LANGUAGE_RESOURCE_FEATURE_COUNT = EXTENSION_RESOURCE_FEATURE_COUNT + 1;
+
+	/**
 	 * The meta object id for the '{@link com.schmeedy.pdt.joomla.core.project.model.ManifestVersion <em>Manifest Version</em>}' enum.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -352,7 +461,7 @@ public interface JoomlaProjectModelPackage extends EPackage {
 	 * @see com.schmeedy.pdt.joomla.core.project.model.impl.JoomlaProjectModelPackageImpl#getManifestVersion()
 	 * @generated
 	 */
-	int MANIFEST_VERSION = 4;
+	int MANIFEST_VERSION = 5;
 
 	/**
 	 * The meta object id for the '{@link com.schmeedy.pdt.joomla.core.project.model.ExtensionType <em>Extension Type</em>}' enum.
@@ -362,7 +471,7 @@ public interface JoomlaProjectModelPackage extends EPackage {
 	 * @see com.schmeedy.pdt.joomla.core.project.model.impl.JoomlaProjectModelPackageImpl#getExtensionType()
 	 * @generated
 	 */
-	int EXTENSION_TYPE = 5;
+	int EXTENSION_TYPE = 6;
 
 	/**
 	 * The meta object id for the '{@link com.schmeedy.pdt.joomla.core.project.model.ResourceType <em>Resource Type</em>}' enum.
@@ -372,7 +481,7 @@ public interface JoomlaProjectModelPackage extends EPackage {
 	 * @see com.schmeedy.pdt.joomla.core.project.model.impl.JoomlaProjectModelPackageImpl#getResourceType()
 	 * @generated
 	 */
-	int RESOURCE_TYPE = 6;
+	int RESOURCE_TYPE = 7;
 
 	/**
 	 * The meta object id for the '<em>IPath</em>' data type.
@@ -382,7 +491,7 @@ public interface JoomlaProjectModelPackage extends EPackage {
 	 * @see com.schmeedy.pdt.joomla.core.project.model.impl.JoomlaProjectModelPackageImpl#getIPath()
 	 * @generated
 	 */
-	int IPATH = 7;
+	int IPATH = 8;
 
 	/**
 	 * The meta object id for the '<em>IProject</em>' data type.
@@ -392,7 +501,7 @@ public interface JoomlaProjectModelPackage extends EPackage {
 	 * @see com.schmeedy.pdt.joomla.core.project.model.impl.JoomlaProjectModelPackageImpl#getIProject()
 	 * @generated
 	 */
-	int IPROJECT = 8;
+	int IPROJECT = 9;
 
 
 	/**
@@ -558,6 +667,17 @@ public interface JoomlaProjectModelPackage extends EPackage {
 	EAttribute getExtensionResource_ManifestRelativePath();
 
 	/**
+	 * Returns the meta object for the attribute '{@link com.schmeedy.pdt.joomla.core.project.model.ExtensionResource#getInstallPackagePathSegments <em>Install Package Path Segments</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Install Package Path Segments</em>'.
+	 * @see com.schmeedy.pdt.joomla.core.project.model.ExtensionResource#getInstallPackagePathSegments()
+	 * @see #getExtensionResource()
+	 * @generated
+	 */
+	EAttribute getExtensionResource_InstallPackagePathSegments();
+
+	/**
 	 * Returns the meta object for the attribute '{@link com.schmeedy.pdt.joomla.core.project.model.ExtensionResource#getResourceType <em>Resource Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -621,6 +741,27 @@ public interface JoomlaProjectModelPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getMediaResource_Destination();
+
+	/**
+	 * Returns the meta object for class '{@link com.schmeedy.pdt.joomla.core.project.model.LanguageResource <em>Language Resource</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Language Resource</em>'.
+	 * @see com.schmeedy.pdt.joomla.core.project.model.LanguageResource
+	 * @generated
+	 */
+	EClass getLanguageResource();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.schmeedy.pdt.joomla.core.project.model.LanguageResource#getLanguageTag <em>Language Tag</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Language Tag</em>'.
+	 * @see com.schmeedy.pdt.joomla.core.project.model.LanguageResource#getLanguageTag()
+	 * @see #getLanguageResource()
+	 * @generated
+	 */
+	EAttribute getLanguageResource_LanguageTag();
 
 	/**
 	 * Returns the meta object for enum '{@link com.schmeedy.pdt.joomla.core.project.model.ManifestVersion <em>Manifest Version</em>}'.
@@ -823,6 +964,14 @@ public interface JoomlaProjectModelPackage extends EPackage {
 		EAttribute EXTENSION_RESOURCE__MANIFEST_RELATIVE_PATH = eINSTANCE.getExtensionResource_ManifestRelativePath();
 
 		/**
+		 * The meta object literal for the '<em><b>Install Package Path Segments</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute EXTENSION_RESOURCE__INSTALL_PACKAGE_PATH_SEGMENTS = eINSTANCE.getExtensionResource_InstallPackagePathSegments();
+
+		/**
 		 * The meta object literal for the '<em><b>Resource Type</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -871,6 +1020,24 @@ public interface JoomlaProjectModelPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute MEDIA_RESOURCE__DESTINATION = eINSTANCE.getMediaResource_Destination();
+
+		/**
+		 * The meta object literal for the '{@link com.schmeedy.pdt.joomla.core.project.model.impl.LanguageResourceImpl <em>Language Resource</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see com.schmeedy.pdt.joomla.core.project.model.impl.LanguageResourceImpl
+		 * @see com.schmeedy.pdt.joomla.core.project.model.impl.JoomlaProjectModelPackageImpl#getLanguageResource()
+		 * @generated
+		 */
+		EClass LANGUAGE_RESOURCE = eINSTANCE.getLanguageResource();
+
+		/**
+		 * The meta object literal for the '<em><b>Language Tag</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute LANGUAGE_RESOURCE__LANGUAGE_TAG = eINSTANCE.getLanguageResource_LanguageTag();
 
 		/**
 		 * The meta object literal for the '{@link com.schmeedy.pdt.joomla.core.project.model.ManifestVersion <em>Manifest Version</em>}' enum.

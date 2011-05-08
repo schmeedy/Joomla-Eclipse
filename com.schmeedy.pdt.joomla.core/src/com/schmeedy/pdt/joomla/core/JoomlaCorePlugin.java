@@ -29,15 +29,22 @@ public class JoomlaCorePlugin implements BundleActivator {
 	}
 	
 	public static void log(IStatus status) {
-		getLog().log(status);
+		final ILog log = getLog();
+		if (log != null) {
+			log.log(status);
+		}
+	}
+	
+	public static void logError(String message) {
+		log(newStatus(IStatus.ERROR, message, null));
 	}
 	
 	public static void logError(String message, Throwable throwable) {
-		getLog().log(newStatus(IStatus.ERROR, message, throwable));
+		log(newStatus(IStatus.ERROR, message, throwable));
 	}
 
 	public static void logWarning(String message) {
-		getLog().log(newStatus(IStatus.WARNING, message, null));
+		log(newStatus(IStatus.WARNING, message, null));
 	}
 	
 	public static IStatus newStatus(int severity, String message) {

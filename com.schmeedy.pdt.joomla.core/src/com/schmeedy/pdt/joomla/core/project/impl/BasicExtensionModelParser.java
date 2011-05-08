@@ -18,6 +18,7 @@ import com.schmeedy.pdt.joomla.core.project.model.BasicExtensionModel;
 import com.schmeedy.pdt.joomla.core.project.model.ExtensionResource;
 import com.schmeedy.pdt.joomla.core.project.model.ExtensionType;
 import com.schmeedy.pdt.joomla.core.project.model.JoomlaProjectModelFactory;
+import com.schmeedy.pdt.joomla.core.project.model.LanguageResource;
 import com.schmeedy.pdt.joomla.core.project.model.ManifestVersion;
 import com.schmeedy.pdt.joomla.core.project.model.MediaResource;
 import com.schmeedy.pdt.joomla.core.project.model.ResourceType;
@@ -42,12 +43,12 @@ class BasicExtensionModelParser {
 	
 	private BasicExtensionModel doParse(XMLEventReader eventReader, String manifestName) throws XMLStreamException {
 		final BasicExtensionModel extensionModel = factory.createBasicExtensionModel();
-		extensionModel.setSymbolicName(manifestName.substring(0, manifestName.length() - 4));
 		int elementDepth = 0;
 		boolean inAdministration = false;
 		ResourceType resourceType = null;
 		String resourceFolder = null;
 		String mediaDestination = null;
+		String symbolicName = null;
 		while (eventReader.hasNext()) {
 			final XMLEvent event = eventReader.nextEvent();
 			switch (event.getEventType()) {
@@ -78,6 +79,7 @@ class BasicExtensionModelParser {
 					} else if (elementDepth == 2) {
 						if ("name".equals(startElementName)) {
 							extensionModel.setName(eventReader.getElementText());
+							elementDepth--; // eventReader.getElementText() skips end element event
 						} else if ("administration".equals(startElementName)) {
 							inAdministration = true;
 						}
@@ -95,13 +97,28 @@ class BasicExtensionModelParser {
 						mediaDestination = getAttributeValue(startElement, "destination");
 					} else if ("filename".equals(startElementName) || "folder".equals(startElementName) || "language".equals(startElementName)) {
 						final String content = eventReader.getElementText();
+						elementDepth--; // eventReader.getElementText() skips end element event
+						final int installPackagePathSegments = resourceFolder == null ? 0 : new Path(resourceFolder.replace("\\", "/")).segmentCount();
 						final String manifestRelativePathPrefix = resourceFolder == null ? "" : resourceFolder.endsWith("/") || resourceFolder.endsWith("\\") ? resourceFolder : resourceFolder + "/";
 						final IPath manifestRelativePath = new Path(manifestRelativePathPrefix + content);
+						/*
+						 * This mimics logic in installation commands for plugin / module - pretty nasty
+						 */
+						if (symbolicName == null) {
+							if (getAttributeValue(startElement, "plugin") != null) {
+								symbolicName = getAttributeValue(startElement, "plugin");
+							} else if (getAttributeValue(startElement, "module") != null) {
+								symbolicName = getAttributeValue(startElement, "module");
+							}
+						}
 						
 						final ExtensionResource resource;
 						if (resourceType == ResourceType.MEDIA) {
 							resource = JoomlaProjectModelFactory.eINSTANCE.createMediaResource();
 							((MediaResource) resource).setDestination(mediaDestination);
+						} else if (resourceType == ResourceType.LANGUAGE) {
+							resource = JoomlaProjectModelFactory.eINSTANCE.createLanguageResource();
+							((LanguageResource) resource).setLanguageTag(getAttributeValue(startElement, "tag"));
 						} else {
 							resource = JoomlaProjectModelFactory.eINSTANCE.createExtensionResource();
 						}
@@ -109,6 +126,7 @@ class BasicExtensionModelParser {
 						resource.setFolder("folder".equals(startElementName));
 						resource.setInAdministration(inAdministration);
 						resource.setManifestRelativePath(manifestRelativePath);
+						resource.setInstallPackagePathSegments(installPackagePathSegments);
 						extensionModel.getResources().add(resource);
 					}
 					break;
@@ -125,6 +143,7 @@ class BasicExtensionModelParser {
 					break;
 			}
 		}
+		extensionModel.setSymbolicName(symbolicName);
 		return extensionModel;
 	}
 

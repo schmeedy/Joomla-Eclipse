@@ -117,6 +117,13 @@ public class JoomlaProjectModelSwitch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case JoomlaProjectModelPackage.LANGUAGE_RESOURCE: {
+				LanguageResource languageResource = (LanguageResource)theEObject;
+				T result = caseLanguageResource(languageResource);
+				if (result == null) result = caseExtensionResource(languageResource);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			default: return defaultCase(theEObject);
 		}
 	}
@@ -178,6 +185,21 @@ public class JoomlaProjectModelSwitch<T> {
 	 * @generated
 	 */
 	public T caseMediaResource(MediaResource object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Language Resource</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Language Resource</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseLanguageResource(LanguageResource object) {
 		return null;
 	}
 

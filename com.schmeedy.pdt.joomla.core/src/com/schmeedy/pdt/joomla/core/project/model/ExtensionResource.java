@@ -19,6 +19,7 @@ import org.eclipse.emf.ecore.EObject;
  * <ul>
  *   <li>{@link com.schmeedy.pdt.joomla.core.project.model.ExtensionResource#getFullPath <em>Full Path</em>}</li>
  *   <li>{@link com.schmeedy.pdt.joomla.core.project.model.ExtensionResource#getManifestRelativePath <em>Manifest Relative Path</em>}</li>
+ *   <li>{@link com.schmeedy.pdt.joomla.core.project.model.ExtensionResource#getInstallPackagePathSegments <em>Install Package Path Segments</em>}</li>
  *   <li>{@link com.schmeedy.pdt.joomla.core.project.model.ExtensionResource#getResourceType <em>Resource Type</em>}</li>
  *   <li>{@link com.schmeedy.pdt.joomla.core.project.model.ExtensionResource#isFolder <em>Folder</em>}</li>
  *   <li>{@link com.schmeedy.pdt.joomla.core.project.model.ExtensionResource#isInAdministration <em>In Administration</em>}</li>
@@ -71,6 +72,32 @@ public interface ExtensionResource extends EObject {
 	 * @generated
 	 */
 	void setManifestRelativePath(IPath value);
+
+	/**
+	 * Returns the value of the '<em><b>Install Package Path Segments</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Install Package Path Segments</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Install Package Path Segments</em>' attribute.
+	 * @see #setInstallPackagePathSegments(int)
+	 * @see com.schmeedy.pdt.joomla.core.project.model.JoomlaProjectModelPackage#getExtensionResource_InstallPackagePathSegments()
+	 * @model
+	 * @generated
+	 */
+	int getInstallPackagePathSegments();
+
+	/**
+	 * Sets the value of the '{@link com.schmeedy.pdt.joomla.core.project.model.ExtensionResource#getInstallPackagePathSegments <em>Install Package Path Segments</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Install Package Path Segments</em>' attribute.
+	 * @see #getInstallPackagePathSegments()
+	 * @generated
+	 */
+	void setInstallPackagePathSegments(int value);
 
 	/**
 	 * Returns the value of the '<em><b>Resource Type</b></em>' attribute.

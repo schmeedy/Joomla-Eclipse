@@ -32,6 +32,8 @@ public class JoomlaExtensionProjectBuilder extends IncrementalProjectBuilder {
 	private final IJoomlaDeployer deployer = ServiceRegistry.getInstance().getService(IJoomlaDeployer.class);
 	private final IJoomlaProjectManager projectManager = ServiceRegistry.getInstance().getService(IJoomlaProjectManager.class);
 	
+	private final ResourceSynchronizer resourceSynchronizer = new ResourceSynchronizer();
+	
 	@Override
 	protected IProject[] build(int kind, @SuppressWarnings("rawtypes") Map args, IProgressMonitor monitor) throws CoreException {
 		final List<ExtensionWithTargetRuntime> extensions = getExtensionsToBuild();
@@ -50,13 +52,15 @@ public class JoomlaExtensionProjectBuilder extends IncrementalProjectBuilder {
 					final IResource resource = delta.getResource();
 					
 					if (resourceMap.containsKey(resource.getFullPath())) {
+						final FileOrFolder destination = resourceMap.get(resource.getFullPath());
 						switch (delta.getKind()) {
 							case IResourceDelta.ADDED:
 							case IResourceDelta.CHANGED:
-								System.out.println("Copy " + resource.getFullPath() + " TO " + resourceMap.get(resource.getFullPath()).file);
+								resourceSynchronizer.copy(resource, destination);
 								break;
 							case IResourceDelta.REMOVED:
-								System.out.println("Remove " + resourceMap.get(resource.getFullPath()).file);
+								resourceSynchronizer.remove(destination);
+								break;
 						}
 					}
 					
@@ -68,6 +72,20 @@ public class JoomlaExtensionProjectBuilder extends IncrementalProjectBuilder {
 					return false;
 				}
 			});
+		} else if (kind == FULL_BUILD || kind == CLEAN_BUILD) {
+			for (final IPath fullResourcePath : resourceMap.keySet()) {
+				IResource sourceResource;
+				final IPath relativeResourcePath = fullResourcePath.makeRelativeTo(getProject().getFullPath());
+				final FileOrFolder target = resourceMap.get(fullResourcePath);
+				if (target.isFolder()) {
+					sourceResource = getProject().getFolder(relativeResourcePath);
+				} else {
+					sourceResource = getProject().getFile(relativeResourcePath);
+				}
+				if (sourceResource.exists()) {
+					resourceSynchronizer.copy(sourceResource, target);
+				}
+			}
 		}
 	}
 
@@ -109,16 +127,6 @@ public class JoomlaExtensionProjectBuilder extends IncrementalProjectBuilder {
 		public ExtensionWithTargetRuntime(BasicExtensionModel extension, DeploymentRuntime runtime) {
 			this.extension = extension;
 			this.runtime = runtime;
-		}
-	}
-	
-	private static class FileOrFolder {
-		final File file;
-		final boolean isFolder;
-
-		public FileOrFolder(File file, boolean isFolder) {
-			this.file = file;
-			this.isFolder = isFolder;
 		}
 	}
 

@@ -22,6 +22,7 @@ import com.schmeedy.pdt.joomla.core.project.model.ExtensionType;
 import com.schmeedy.pdt.joomla.core.project.model.JoomlaExtensionProject;
 import com.schmeedy.pdt.joomla.core.project.model.JoomlaProjectModelFactory;
 import com.schmeedy.pdt.joomla.core.project.model.JoomlaProjectModelPackage;
+import com.schmeedy.pdt.joomla.core.project.model.LanguageResource;
 import com.schmeedy.pdt.joomla.core.project.model.ManifestVersion;
 import com.schmeedy.pdt.joomla.core.project.model.MediaResource;
 import com.schmeedy.pdt.joomla.core.project.model.ResourceType;
@@ -60,6 +61,13 @@ public class JoomlaProjectModelPackageImpl extends EPackageImpl implements Jooml
 	 * @generated
 	 */
 	private EClass mediaResourceEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass languageResourceEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -297,7 +305,7 @@ public class JoomlaProjectModelPackageImpl extends EPackageImpl implements Jooml
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getExtensionResource_ResourceType() {
+	public EAttribute getExtensionResource_InstallPackagePathSegments() {
 		return (EAttribute)extensionResourceEClass.getEStructuralFeatures().get(2);
 	}
 
@@ -306,7 +314,7 @@ public class JoomlaProjectModelPackageImpl extends EPackageImpl implements Jooml
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getExtensionResource_Folder() {
+	public EAttribute getExtensionResource_ResourceType() {
 		return (EAttribute)extensionResourceEClass.getEStructuralFeatures().get(3);
 	}
 
@@ -315,7 +323,7 @@ public class JoomlaProjectModelPackageImpl extends EPackageImpl implements Jooml
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getExtensionResource_InAdministration() {
+	public EAttribute getExtensionResource_Folder() {
 		return (EAttribute)extensionResourceEClass.getEStructuralFeatures().get(4);
 	}
 
@@ -324,8 +332,17 @@ public class JoomlaProjectModelPackageImpl extends EPackageImpl implements Jooml
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getExtensionResource_InAdministration() {
+		return (EAttribute)extensionResourceEClass.getEStructuralFeatures().get(5);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EReference getExtensionResource_ExtensionModel() {
-		return (EReference)extensionResourceEClass.getEStructuralFeatures().get(5);
+		return (EReference)extensionResourceEClass.getEStructuralFeatures().get(6);
 	}
 
 	/**
@@ -344,6 +361,24 @@ public class JoomlaProjectModelPackageImpl extends EPackageImpl implements Jooml
 	 */
 	public EAttribute getMediaResource_Destination() {
 		return (EAttribute)mediaResourceEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getLanguageResource() {
+		return languageResourceEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getLanguageResource_LanguageTag() {
+		return (EAttribute)languageResourceEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -436,6 +471,7 @@ public class JoomlaProjectModelPackageImpl extends EPackageImpl implements Jooml
 		extensionResourceEClass = createEClass(EXTENSION_RESOURCE);
 		createEAttribute(extensionResourceEClass, EXTENSION_RESOURCE__FULL_PATH);
 		createEAttribute(extensionResourceEClass, EXTENSION_RESOURCE__MANIFEST_RELATIVE_PATH);
+		createEAttribute(extensionResourceEClass, EXTENSION_RESOURCE__INSTALL_PACKAGE_PATH_SEGMENTS);
 		createEAttribute(extensionResourceEClass, EXTENSION_RESOURCE__RESOURCE_TYPE);
 		createEAttribute(extensionResourceEClass, EXTENSION_RESOURCE__FOLDER);
 		createEAttribute(extensionResourceEClass, EXTENSION_RESOURCE__IN_ADMINISTRATION);
@@ -443,6 +479,9 @@ public class JoomlaProjectModelPackageImpl extends EPackageImpl implements Jooml
 
 		mediaResourceEClass = createEClass(MEDIA_RESOURCE);
 		createEAttribute(mediaResourceEClass, MEDIA_RESOURCE__DESTINATION);
+
+		languageResourceEClass = createEClass(LANGUAGE_RESOURCE);
+		createEAttribute(languageResourceEClass, LANGUAGE_RESOURCE__LANGUAGE_TAG);
 
 		// Create enums
 		manifestVersionEEnum = createEEnum(MANIFEST_VERSION);
@@ -483,6 +522,7 @@ public class JoomlaProjectModelPackageImpl extends EPackageImpl implements Jooml
 
 		// Add supertypes to classes
 		mediaResourceEClass.getESuperTypes().add(this.getExtensionResource());
+		languageResourceEClass.getESuperTypes().add(this.getExtensionResource());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(joomlaExtensionProjectEClass, JoomlaExtensionProject.class, "JoomlaExtensionProject", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -502,6 +542,7 @@ public class JoomlaProjectModelPackageImpl extends EPackageImpl implements Jooml
 		initEClass(extensionResourceEClass, ExtensionResource.class, "ExtensionResource", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getExtensionResource_FullPath(), this.getIPath(), "fullPath", null, 0, 1, ExtensionResource.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 		initEAttribute(getExtensionResource_ManifestRelativePath(), this.getIPath(), "manifestRelativePath", null, 0, 1, ExtensionResource.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getExtensionResource_InstallPackagePathSegments(), ecorePackage.getEInt(), "installPackagePathSegments", null, 0, 1, ExtensionResource.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getExtensionResource_ResourceType(), this.getResourceType(), "resourceType", null, 0, 1, ExtensionResource.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getExtensionResource_Folder(), ecorePackage.getEBoolean(), "folder", null, 0, 1, ExtensionResource.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getExtensionResource_InAdministration(), ecorePackage.getEBoolean(), "inAdministration", null, 0, 1, ExtensionResource.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -509,6 +550,9 @@ public class JoomlaProjectModelPackageImpl extends EPackageImpl implements Jooml
 
 		initEClass(mediaResourceEClass, MediaResource.class, "MediaResource", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getMediaResource_Destination(), ecorePackage.getEString(), "destination", null, 0, 1, MediaResource.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(languageResourceEClass, LanguageResource.class, "LanguageResource", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getLanguageResource_LanguageTag(), ecorePackage.getEString(), "languageTag", null, 0, 1, LanguageResource.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Initialize enums and add enum literals
 		initEEnum(manifestVersionEEnum, ManifestVersion.class, "ManifestVersion");

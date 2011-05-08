@@ -9,6 +9,7 @@ package com.schmeedy.pdt.joomla.core.server.cfg.impl;
 import java.io.File;
 import java.util.Collection;
 
+import org.eclipse.core.runtime.IPath;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EList;
@@ -21,6 +22,8 @@ import org.eclipse.emf.ecore.util.InternalEList;
 
 import com.schmeedy.pdt.joomla.core.project.model.BasicExtensionModel;
 import com.schmeedy.pdt.joomla.core.project.model.ExtensionResource;
+import com.schmeedy.pdt.joomla.core.project.model.LanguageResource;
+import com.schmeedy.pdt.joomla.core.project.model.ResourceType;
 import com.schmeedy.pdt.joomla.core.server.IJoomlaHttpSession;
 import com.schmeedy.pdt.joomla.core.server.cfg.DeploymentRuntime;
 import com.schmeedy.pdt.joomla.core.server.cfg.JoomlaExtensionDeployment;
@@ -182,6 +185,16 @@ public class DeploymentRuntimeImpl extends EObjectImpl implements DeploymentRunt
 		if (resource.isInAdministration()) {
 			baseDir = new File(baseDir, "administrator");
 		}
+		
+		if (resource.getResourceType() == ResourceType.LANGUAGE) {
+			final LanguageResource languageResource = (LanguageResource) resource;
+			if (languageResource.getLanguageTag() == null) {
+				// cannot determine destination folder
+				return null;
+			}
+			return new File(baseDir, "language" + File.separator + languageResource.getLanguageTag() + File.separator + languageResource.getManifestRelativePath().lastSegment());
+		}
+		
 		final BasicExtensionModel extension = resource.getExtensionModel();
 		switch (extension.getType()) {
 			case COMPONENT:
@@ -203,8 +216,39 @@ public class DeploymentRuntimeImpl extends EObjectImpl implements DeploymentRunt
 			case UNKNOWN:
 				return null; // cannot reliably determine target path
 		}
-		baseDir = new File(baseDir, extension.getSymbolicName());
-		return new File(baseDir, resource.getManifestRelativePath().toString());
+		final String extensionDirName = getExtensionDirName(extension);
+		if (extensionDirName == null) {
+			return null; // failed to determine extension directory name
+		}
+		baseDir = new File(baseDir, extensionDirName);
+		
+		final int prefixSegments = resource.getInstallPackagePathSegments();
+		final IPath targetFilePath = prefixSegments == 0 ? resource.getManifestRelativePath() : resource.getManifestRelativePath().removeFirstSegments(prefixSegments);
+		return new File(baseDir, targetFilePath.toString());
+	}
+
+	/**
+	 * @generated NOT
+	 */
+	private String getExtensionDirName(BasicExtensionModel extension) {
+		switch (extension.getType()) {
+			case COMPONENT:
+				if (extension.getName() == null) {
+					return null;
+				}
+				final String lowerCaseName = extension.getName().toLowerCase();
+				return lowerCaseName.startsWith("com_") ? lowerCaseName : "com_" + lowerCaseName;
+			case PLUGIN:
+			case MODULE:
+				return extension.getSymbolicName();
+			case TEMPLATE:
+				if (extension.getName() == null) {
+					return null;
+				}
+				return extension.getName().toLowerCase().replace(" ", "_");
+			default:
+				return null;
+		}
 	}
 
 	/**

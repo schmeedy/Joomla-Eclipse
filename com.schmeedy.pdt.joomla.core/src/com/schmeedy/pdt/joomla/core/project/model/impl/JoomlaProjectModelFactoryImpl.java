@@ -75,6 +75,7 @@ public class JoomlaProjectModelFactoryImpl extends EFactoryImpl implements Jooml
 			case JoomlaProjectModelPackage.BASIC_EXTENSION_MODEL: return createBasicExtensionModel();
 			case JoomlaProjectModelPackage.EXTENSION_RESOURCE: return createExtensionResource();
 			case JoomlaProjectModelPackage.MEDIA_RESOURCE: return createMediaResource();
+			case JoomlaProjectModelPackage.LANGUAGE_RESOURCE: return createLanguageResource();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -166,6 +167,16 @@ public class JoomlaProjectModelFactoryImpl extends EFactoryImpl implements Jooml
 	public MediaResource createMediaResource() {
 		MediaResourceImpl mediaResource = new MediaResourceImpl();
 		return mediaResource;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public LanguageResource createLanguageResource() {
+		LanguageResourceImpl languageResource = new LanguageResourceImpl();
+		return languageResource;
 	}
 
 	/**

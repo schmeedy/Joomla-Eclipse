@@ -29,6 +29,7 @@ import com.schmeedy.pdt.joomla.core.project.model.ResourceType;
  * <ul>
  *   <li>{@link com.schmeedy.pdt.joomla.core.project.model.impl.ExtensionResourceImpl#getFullPath <em>Full Path</em>}</li>
  *   <li>{@link com.schmeedy.pdt.joomla.core.project.model.impl.ExtensionResourceImpl#getManifestRelativePath <em>Manifest Relative Path</em>}</li>
+ *   <li>{@link com.schmeedy.pdt.joomla.core.project.model.impl.ExtensionResourceImpl#getInstallPackagePathSegments <em>Install Package Path Segments</em>}</li>
  *   <li>{@link com.schmeedy.pdt.joomla.core.project.model.impl.ExtensionResourceImpl#getResourceType <em>Resource Type</em>}</li>
  *   <li>{@link com.schmeedy.pdt.joomla.core.project.model.impl.ExtensionResourceImpl#isFolder <em>Folder</em>}</li>
  *   <li>{@link com.schmeedy.pdt.joomla.core.project.model.impl.ExtensionResourceImpl#isInAdministration <em>In Administration</em>}</li>
@@ -68,6 +69,26 @@ public class ExtensionResourceImpl extends EObjectImpl implements ExtensionResou
 	 * @ordered
 	 */
 	protected IPath manifestRelativePath = MANIFEST_RELATIVE_PATH_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getInstallPackagePathSegments() <em>Install Package Path Segments</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getInstallPackagePathSegments()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final int INSTALL_PACKAGE_PATH_SEGMENTS_EDEFAULT = 0;
+
+	/**
+	 * The cached value of the '{@link #getInstallPackagePathSegments() <em>Install Package Path Segments</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getInstallPackagePathSegments()
+	 * @generated
+	 * @ordered
+	 */
+	protected int installPackagePathSegments = INSTALL_PACKAGE_PATH_SEGMENTS_EDEFAULT;
 
 	/**
 	 * The default value of the '{@link #getResourceType() <em>Resource Type</em>}' attribute.
@@ -184,6 +205,27 @@ public class ExtensionResourceImpl extends EObjectImpl implements ExtensionResou
 		manifestRelativePath = newManifestRelativePath;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, JoomlaProjectModelPackage.EXTENSION_RESOURCE__MANIFEST_RELATIVE_PATH, oldManifestRelativePath, manifestRelativePath));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public int getInstallPackagePathSegments() {
+		return installPackagePathSegments;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setInstallPackagePathSegments(int newInstallPackagePathSegments) {
+		int oldInstallPackagePathSegments = installPackagePathSegments;
+		installPackagePathSegments = newInstallPackagePathSegments;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, JoomlaProjectModelPackage.EXTENSION_RESOURCE__INSTALL_PACKAGE_PATH_SEGMENTS, oldInstallPackagePathSegments, installPackagePathSegments));
 	}
 
 	/**
@@ -354,6 +396,8 @@ public class ExtensionResourceImpl extends EObjectImpl implements ExtensionResou
 				return getFullPath();
 			case JoomlaProjectModelPackage.EXTENSION_RESOURCE__MANIFEST_RELATIVE_PATH:
 				return getManifestRelativePath();
+			case JoomlaProjectModelPackage.EXTENSION_RESOURCE__INSTALL_PACKAGE_PATH_SEGMENTS:
+				return getInstallPackagePathSegments();
 			case JoomlaProjectModelPackage.EXTENSION_RESOURCE__RESOURCE_TYPE:
 				return getResourceType();
 			case JoomlaProjectModelPackage.EXTENSION_RESOURCE__FOLDER:
@@ -376,6 +420,9 @@ public class ExtensionResourceImpl extends EObjectImpl implements ExtensionResou
 		switch (featureID) {
 			case JoomlaProjectModelPackage.EXTENSION_RESOURCE__MANIFEST_RELATIVE_PATH:
 				setManifestRelativePath((IPath)newValue);
+				return;
+			case JoomlaProjectModelPackage.EXTENSION_RESOURCE__INSTALL_PACKAGE_PATH_SEGMENTS:
+				setInstallPackagePathSegments((Integer)newValue);
 				return;
 			case JoomlaProjectModelPackage.EXTENSION_RESOURCE__RESOURCE_TYPE:
 				setResourceType((ResourceType)newValue);
@@ -403,6 +450,9 @@ public class ExtensionResourceImpl extends EObjectImpl implements ExtensionResou
 		switch (featureID) {
 			case JoomlaProjectModelPackage.EXTENSION_RESOURCE__MANIFEST_RELATIVE_PATH:
 				setManifestRelativePath(MANIFEST_RELATIVE_PATH_EDEFAULT);
+				return;
+			case JoomlaProjectModelPackage.EXTENSION_RESOURCE__INSTALL_PACKAGE_PATH_SEGMENTS:
+				setInstallPackagePathSegments(INSTALL_PACKAGE_PATH_SEGMENTS_EDEFAULT);
 				return;
 			case JoomlaProjectModelPackage.EXTENSION_RESOURCE__RESOURCE_TYPE:
 				setResourceType(RESOURCE_TYPE_EDEFAULT);
@@ -432,6 +482,8 @@ public class ExtensionResourceImpl extends EObjectImpl implements ExtensionResou
 				return FULL_PATH_EDEFAULT == null ? getFullPath() != null : !FULL_PATH_EDEFAULT.equals(getFullPath());
 			case JoomlaProjectModelPackage.EXTENSION_RESOURCE__MANIFEST_RELATIVE_PATH:
 				return MANIFEST_RELATIVE_PATH_EDEFAULT == null ? manifestRelativePath != null : !MANIFEST_RELATIVE_PATH_EDEFAULT.equals(manifestRelativePath);
+			case JoomlaProjectModelPackage.EXTENSION_RESOURCE__INSTALL_PACKAGE_PATH_SEGMENTS:
+				return installPackagePathSegments != INSTALL_PACKAGE_PATH_SEGMENTS_EDEFAULT;
 			case JoomlaProjectModelPackage.EXTENSION_RESOURCE__RESOURCE_TYPE:
 				return resourceType != RESOURCE_TYPE_EDEFAULT;
 			case JoomlaProjectModelPackage.EXTENSION_RESOURCE__FOLDER:
@@ -456,6 +508,8 @@ public class ExtensionResourceImpl extends EObjectImpl implements ExtensionResou
 		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (manifestRelativePath: ");
 		result.append(manifestRelativePath);
+		result.append(", installPackagePathSegments: ");
+		result.append(installPackagePathSegments);
 		result.append(", resourceType: ");
 		result.append(resourceType);
 		result.append(", folder: ");

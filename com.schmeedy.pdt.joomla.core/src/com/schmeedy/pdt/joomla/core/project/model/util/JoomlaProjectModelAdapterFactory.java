@@ -91,6 +91,10 @@ public class JoomlaProjectModelAdapterFactory extends AdapterFactoryImpl {
 				return createMediaResourceAdapter();
 			}
 			@Override
+			public Adapter caseLanguageResource(LanguageResource object) {
+				return createLanguageResourceAdapter();
+			}
+			@Override
 			public Adapter defaultCase(EObject object) {
 				return createEObjectAdapter();
 			}
@@ -163,6 +167,20 @@ public class JoomlaProjectModelAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createMediaResourceAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link com.schmeedy.pdt.joomla.core.project.model.LanguageResource <em>Language Resource</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see com.schmeedy.pdt.joomla.core.project.model.LanguageResource
+	 * @generated
+	 */
+	public Adapter createLanguageResourceAdapter() {
 		return null;
 	}
 
