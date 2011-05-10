@@ -28,9 +28,11 @@ public class AddOrRemoveExtensionsWizardPerformReviewPage extends WizardPage {
 	private final IDeploymentChangeRequestProvider changeRequestProvider;
 	private final DeploymentRuntime targetRuntime;
 	private final IJoomlaDeployer deployer;
+	private final StringBuilder reportBuffer = new StringBuilder(); 
 	
 	private boolean visible = false;
 	private Text resultText;
+	
 	
 	public AddOrRemoveExtensionsWizardPerformReviewPage(IDeploymentChangeRequestProvider changeRequestProvider, DeploymentRuntime targetRuntime, IJoomlaDeployer deployer) {
 		super("Add or remove extensions - results");
@@ -62,35 +64,33 @@ public class AddOrRemoveExtensionsWizardPerformReviewPage extends WizardPage {
 		getContainer().getShell().getDisplay().asyncExec(new Runnable() {
 			@Override
 			public void run() {
-				final StringBuilder sb = new StringBuilder();
-				sb.append(resultText.getText());
 				switch (request.getType()) {
 					case INSTALL:
-						sb.append("Installing ");
+						reportBuffer.append("Installing ");
 						break;
 					case UNINSTALL:
-						sb.append("Uninstalling ");
+						reportBuffer.append("Uninstalling ");
 						break;
 				}
 				switch (request.getExtension().getType()) {
 					case COMPONENT:
-						sb.append("component ");
+						reportBuffer.append("component ");
 						break;
 					case PLUGIN:
-						sb.append("plugin ");
+						reportBuffer.append("plugin ");
 						break;
 					case MODULE:
-						sb.append("module ");
+						reportBuffer.append("module ");
 						break;
 					case TEMPLATE:
-						sb.append("template ");
+						reportBuffer.append("template ");
 						break;
 				}
-				sb.append(request.getExtension().getName());
-				sb.append(" ");
-				sb.append(request.getExtension().getManifestVersion());
-				sb.append("\n");
-				resultText.setText(sb.toString());
+				reportBuffer.append(request.getExtension().getName());
+				reportBuffer.append(" ");
+				reportBuffer.append(request.getExtension().getManifestVersion());
+				reportBuffer.append("\n");
+				resultText.setText(reportBuffer.toString());
 			}
 		});
 	}
@@ -99,32 +99,30 @@ public class AddOrRemoveExtensionsWizardPerformReviewPage extends WizardPage {
 		getContainer().getShell().getDisplay().asyncExec(new Runnable() {
 			@Override
 			public void run() {
-				final StringBuilder sb = new StringBuilder();
-				sb.append(resultText.getText());
 				switch (request.getType()) {
 					case INSTALL:
-						sb.append("Installation ");
+						reportBuffer.append("\tInstallation ");
 						break;
 					case UNINSTALL:
-						sb.append("Uninstallation ");
+						reportBuffer.append("\tUninstallation ");
 						break;
 				}
 				switch (status.getSeverity()) {
 					case IStatus.ERROR:
-						sb.append(" FAILED: ");
+						reportBuffer.append(" FAILED.");
 						break;
 					case IStatus.WARNING:
-						sb.append(" FINISHED WITH WARNING: ");
+						reportBuffer.append(" FINISHED WITH WARNING.");
 						break;
 					default:
-						sb.append("SUCCESSFUL");
-						sb.append(status.getMessage() == null || status.getMessage().isEmpty() ? "." : ": ");
+						reportBuffer.append("SUCCESSFUL.");
 				}
 				if (status.getMessage() != null) {
-					sb.append(status.getMessage());
+					reportBuffer.append("\n\tJoomla! message: ");
+					reportBuffer.append(status.getMessage());
 				}
-				sb.append("\n\n");
-				resultText.setText(sb.toString());
+				reportBuffer.append("\n\n");
+				resultText.setText(reportBuffer.toString());
 			}
 		});
 	}
