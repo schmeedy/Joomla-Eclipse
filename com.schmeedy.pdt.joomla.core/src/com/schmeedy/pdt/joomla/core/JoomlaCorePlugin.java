@@ -25,7 +25,8 @@ public class JoomlaCorePlugin implements BundleActivator {
 	}
 	
 	private static ILog getLog() {
-		return InternalPlatform.getDefault().getLog(bundleContext.getBundle());
+		final InternalPlatform platform = InternalPlatform.getDefault();
+		return platform == null ? null : platform.getLog(bundleContext.getBundle());
 	}
 	
 	public static void log(IStatus status) {

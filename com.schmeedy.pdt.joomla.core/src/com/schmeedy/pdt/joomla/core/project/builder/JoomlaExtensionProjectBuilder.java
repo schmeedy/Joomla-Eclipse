@@ -16,6 +16,7 @@ import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.SubProgressMonitor;
 
 import com.schmeedy.pdt.joomla.core.project.IJoomlaProjectManager;
 import com.schmeedy.pdt.joomla.core.project.model.BasicExtensionModel;
@@ -43,9 +44,18 @@ public class JoomlaExtensionProjectBuilder extends IncrementalProjectBuilder {
 		return EMPTY_PROJECTS;
 	}
 
-	private void build(int kind, List<ExtensionWithTargetRuntime> extensions, IProgressMonitor monitor) throws CoreException {
+	private void build(int kind, List<ExtensionWithTargetRuntime> extensions, final IProgressMonitor monitor) throws CoreException {
 		final Map<IPath, FileOrFolder> resourceMap = buildResourceMap(extensions);
 		if (kind == AUTO_BUILD || kind == INCREMENTAL_BUILD) {
+			partialSync(resourceMap, monitor);
+		} else if (kind == FULL_BUILD || kind == CLEAN_BUILD) {
+			fullSync(resourceMap, monitor);
+		}
+	}
+
+	private void partialSync(final Map<IPath, FileOrFolder> resourceMap, final IProgressMonitor monitor) throws CoreException {
+		try {
+			monitor.beginTask("Synchronize changed resources with Joomla! for " + getProject().getName(), resourceMap.keySet().size() * 1000);
 			getDelta(getProject()).accept(new IResourceDeltaVisitor() {
 				@Override
 				public boolean visit(IResourceDelta delta) throws CoreException {
@@ -56,10 +66,11 @@ public class JoomlaExtensionProjectBuilder extends IncrementalProjectBuilder {
 						switch (delta.getKind()) {
 							case IResourceDelta.ADDED:
 							case IResourceDelta.CHANGED:
-								resourceSynchronizer.copy(resource, destination);
+								resourceSynchronizer.copy(resource, destination, new SubProgressMonitor(monitor, 1000));
 								break;
 							case IResourceDelta.REMOVED:
 								resourceSynchronizer.remove(destination);
+								monitor.worked(1000);
 								break;
 						}
 					}
@@ -72,7 +83,14 @@ public class JoomlaExtensionProjectBuilder extends IncrementalProjectBuilder {
 					return false;
 				}
 			});
-		} else if (kind == FULL_BUILD || kind == CLEAN_BUILD) {
+		} finally {
+			monitor.done();
+		}
+	}
+
+	private void fullSync(final Map<IPath, FileOrFolder> resourceMap, IProgressMonitor monitor) {
+		try {
+			monitor.beginTask("Fully synchronize workspace state with Joomla! for " + getProject().getName(), resourceMap.keySet().size() * 1000);
 			for (final IPath fullResourcePath : resourceMap.keySet()) {
 				IResource sourceResource;
 				final IPath relativeResourcePath = fullResourcePath.makeRelativeTo(getProject().getFullPath());
@@ -83,9 +101,11 @@ public class JoomlaExtensionProjectBuilder extends IncrementalProjectBuilder {
 					sourceResource = getProject().getFile(relativeResourcePath);
 				}
 				if (sourceResource.exists()) {
-					resourceSynchronizer.copy(sourceResource, target);
+					resourceSynchronizer.copy(sourceResource, target, new SubProgressMonitor(monitor, 1000));
 				}
 			}
+		} finally {
+			monitor.done();
 		}
 	}
 

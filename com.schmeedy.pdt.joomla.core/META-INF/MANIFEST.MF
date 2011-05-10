@@ -25,4 +25,6 @@ Require-Bundle: com.schmeedy.pdt.service.registry;bundle-version="0.1.0",
 Bundle-ActivationPolicy: lazy
 Service-Component: OSGI-INF/*.xml
 Import-Package: org.apache.commons.codec;version="1.3.0",
- org.apache.commons.logging;version="1.0.4"
+ org.apache.commons.logging;version="1.0.4",
+ org.eclipse.core.filesystem
+Bundle-Activator: com.schmeedy.pdt.joomla.core.JoomlaCorePlugin

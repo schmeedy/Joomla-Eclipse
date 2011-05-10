@@ -23,6 +23,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
 import com.schmeedy.pdt.joomla.core.project.model.BasicExtensionModel;
 import com.schmeedy.pdt.joomla.core.project.model.ExtensionResource;
 import com.schmeedy.pdt.joomla.core.project.model.LanguageResource;
+import com.schmeedy.pdt.joomla.core.project.model.MediaResource;
 import com.schmeedy.pdt.joomla.core.project.model.ResourceType;
 import com.schmeedy.pdt.joomla.core.server.IJoomlaHttpSession;
 import com.schmeedy.pdt.joomla.core.server.cfg.DeploymentRuntime;
@@ -182,6 +183,16 @@ public class DeploymentRuntimeImpl extends EObjectImpl implements DeploymentRunt
 	@Override
 	public File getDestination(ExtensionResource resource) {
 		File baseDir = new File(getServer().getInstallDir());
+		
+		if (resource.getResourceType() == ResourceType.MEDIA) {
+			final String destination = ((MediaResource) resource).getDestination();
+			if (destination == null) {
+				// cannot determine destination folder
+				return null;
+			}
+			return new File(baseDir, "media" + File.separator + destination + File.separator + resource.getManifestRelativePath().lastSegment());
+		}
+		
 		if (resource.isInAdministration()) {
 			baseDir = new File(baseDir, "administrator");
 		}
