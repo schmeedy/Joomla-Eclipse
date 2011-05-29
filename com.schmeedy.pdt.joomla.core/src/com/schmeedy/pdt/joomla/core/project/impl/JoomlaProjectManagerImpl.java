@@ -38,6 +38,8 @@ public class JoomlaProjectManagerImpl implements IJoomlaProjectManager {
 	
 	private final BasicExtensionModelParser extensionModelParser = new BasicExtensionModelParser();
 	
+	private final Map<IProject, List<IFile>> extensionManifestFileCache = new ConcurrentHashMap<IProject, List<IFile>>();   
+	
 	private final Map<IFile, SoftReference<ExtensionModelWithModificationStamp>> extensionModelCache = new ConcurrentHashMap<IFile, SoftReference<ExtensionModelWithModificationStamp>>();
 
 	private final ResourceChangeListener workspaceResourceListener = new ResourceChangeListener(); 
@@ -84,6 +86,24 @@ public class JoomlaProjectManagerImpl implements IJoomlaProjectManager {
 		final JoomlaExtensionProject extensionProject = JoomlaProjectModelFactory.eINSTANCE.createJoomlaExtensionProject();
 		extensionProject.setProject(project);
 		
+		final List<IFile> manifestFiles = getManifestFiles(project);
+		
+		for (final IFile manifestFile : manifestFiles) {
+			final BasicExtensionModel extensionModel = getBasicExtensionModel(manifestFile);
+			if (extensionModel != null) {
+				extensionProject.getExtensions().add(extensionModel);
+			}
+		}
+		
+		return extensionProject;
+	}
+
+	private List<IFile> getManifestFiles(IProject project) {
+		final List<IFile> cachedFiles = extensionManifestFileCache.get(project);
+		if (cachedFiles != null) {
+			return cachedFiles;
+		}
+		
 		final List<IFile> manifestFiles = new LinkedList<IFile>();
 		try {
 			project.accept(new IResourceVisitor() {
@@ -103,15 +123,8 @@ public class JoomlaProjectManagerImpl implements IJoomlaProjectManager {
 		} catch (final CoreException e) {
 			throw new RuntimeException("Failed to find Joomla! manifest files within " + project.getName(), e);
 		}
-		
-		for (final IFile manifestFile : manifestFiles) {
-			final BasicExtensionModel extensionModel = getBasicExtensionModel(manifestFile);
-			if (extensionModel != null) {
-				extensionProject.getExtensions().add(extensionModel);
-			}
-		}
-		
-		return extensionProject;
+		extensionManifestFileCache.put(project, new CopyOnWriteArrayList<IFile>(manifestFiles));
+		return manifestFiles;
 	}
 
 	private boolean isJoomlaManifest(final IFile file) throws CoreException {
@@ -223,11 +236,26 @@ public class JoomlaProjectManagerImpl implements IJoomlaProjectManager {
 		private void processManifestDelta(IFile manifestFile, int deltaKind) {
 			switch (deltaKind) {
 				case IResourceDelta.ADDED:
+					{
+						final List<IFile> cachedFiles = extensionManifestFileCache.get(manifestFile.getProject());
+						if (cachedFiles != null) {
+							cachedFiles.add(manifestFile);
+						}
+					}
+					// force to reload the model
+					getBasicExtensionModel(manifestFile);
+					break;
 				case IResourceDelta.CHANGED:
 					// force to reload the model
 					getBasicExtensionModel(manifestFile);
 					break;
 				case IResourceDelta.REMOVED:
+					{
+						final List<IFile> cachedFiles = extensionManifestFileCache.get(manifestFile.getProject());
+						if (cachedFiles != null) {
+							cachedFiles.remove(manifestFile);
+						}
+					}
 					extensionModelCache.remove(manifestFile);
 					break;
 			}

@@ -122,8 +122,9 @@ public class JoomlaDeployerImpl implements IJoomlaDeployer, IExtensionModelChang
 				return JoomlaCorePlugin.newStatus(IStatus.WARNING, systemMessage.getMessage());
 			}
 		} catch (final RuntimeException e) {
-			// TODO: log?
-			return JoomlaCorePlugin.newStatus(IStatus.ERROR, "Unexpected exception while installing extension " + extension.getName(), e);
+			final String message = "Unexpected exception while installing extension " + extension.getName();
+			JoomlaCorePlugin.logError(message, e);
+			return JoomlaCorePlugin.newStatus(IStatus.ERROR, message, e);
 		} finally {
 			progressMonitor.done();
 		}
@@ -185,8 +186,9 @@ public class JoomlaDeployerImpl implements IJoomlaDeployer, IExtensionModelChang
 				return JoomlaCorePlugin.newStatus(IStatus.WARNING, systemMessage.getMessage());
 			}
 		} catch (final RuntimeException e) {
-			// TODO: log?
-			return JoomlaCorePlugin.newStatus(IStatus.ERROR, "Unexpected exception while installing extension " + transientDeployment.getExtension().getName(), e);
+			final String message = "Unexpected exception while installing extension" + transientDeployment.getExtension().getName();
+			JoomlaCorePlugin.logError(message, e);
+			return JoomlaCorePlugin.newStatus(IStatus.ERROR, message, e);
 		} finally  {
 			progressMonitor.done();
 		}
