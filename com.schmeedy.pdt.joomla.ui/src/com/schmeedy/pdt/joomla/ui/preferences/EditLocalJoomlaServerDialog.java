@@ -18,15 +18,22 @@ import org.eclipse.emf.databinding.EMFObservables;
 import org.eclipse.emf.databinding.EMFProperties;
 import org.eclipse.emf.databinding.FeaturePath;
 import org.eclipse.jface.databinding.swt.SWTObservables;
+import org.eclipse.jface.databinding.viewers.ViewersObservables;
 import org.eclipse.jface.dialogs.IDialogConstants;
 import org.eclipse.jface.dialogs.IMessageProvider;
 import org.eclipse.jface.dialogs.TitleAreaDialog;
+import org.eclipse.jface.viewers.ArrayContentProvider;
+import org.eclipse.jface.viewers.ComboViewer;
+import org.eclipse.jface.viewers.ISelectionChangedListener;
+import org.eclipse.jface.viewers.IStructuredSelection;
+import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
+import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.DirectoryDialog;
@@ -50,13 +57,15 @@ public class EditLocalJoomlaServerDialog extends TitleAreaDialog {
 	private Text installRootText;
 	private Text nameText;
 	private Text baseUrlText;
-	private Text versionFamilyText;
 	private Text exactVersionText;
 	
 	private DataBindingContext dataBindingContext;
 	private Text adminUsernameText;
 	private Text adminPasswordText;
 	private Text teamIdText;
+	private ComboViewer versionFamilyComboViewer;
+	
+	private boolean manuallyConfiguredVersion = false;
 
 	public EditLocalJoomlaServerDialog(Shell parent, LocalJoomlaServer serverConfiguration, boolean edit) {
 		super(parent);
@@ -154,12 +163,29 @@ public class EditLocalJoomlaServerDialog extends TitleAreaDialog {
 		teamIdText = new Text(serverPropertiesGroup, SWT.BORDER);
 		teamIdText.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
 		
-		final Label lblVersionFamily = new Label(serverPropertiesGroup, SWT.NONE);
-		lblVersionFamily.setText("Version Family:");
+		final Label lblVersionFamily_1 = new Label(serverPropertiesGroup, SWT.NONE);
+		lblVersionFamily_1.setText("Version Family:");
 		
-		versionFamilyText = new Text(serverPropertiesGroup, SWT.BORDER);
-		versionFamilyText.setEnabled(false);
-		versionFamilyText.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
+		versionFamilyComboViewer = new ComboViewer(serverPropertiesGroup, SWT.READ_ONLY);
+		final Combo versionFamilyCombo = versionFamilyComboViewer.getCombo();
+		versionFamilyCombo.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
+		versionFamilyCombo.setEnabled(false);
+		versionFamilyComboViewer.setContentProvider(new ArrayContentProvider());
+		versionFamilyComboViewer.setInput(new MajorJoomlaVersion[] {MajorJoomlaVersion.ONE_FIVE, MajorJoomlaVersion.ONE_SIX});
+		versionFamilyComboViewer.addSelectionChangedListener(new ISelectionChangedListener() {
+			@Override
+			public void selectionChanged(SelectionChangedEvent event) {
+				if (versionFamilyCombo.isEnabled()) { // enabled when version auto-detection fails
+					final IStructuredSelection selection = (IStructuredSelection) event.getSelection();
+					if (!selection.isEmpty()) {
+						final MajorJoomlaVersion majorVersion = (MajorJoomlaVersion) selection.getFirstElement();
+						serverConfiguration.setExactVersion(majorVersion.getLiteral().replace('x', '0'));
+						manuallyConfiguredVersion = true;
+						dataBindingContext.updateModels(); // trigger validation
+					}
+				}
+			}
+		});
 		
 		final Label lblExactVersion = new Label(serverPropertiesGroup, SWT.NONE);
 		lblExactVersion.setText("Exact Version:");
@@ -182,10 +208,7 @@ public class EditLocalJoomlaServerDialog extends TitleAreaDialog {
 				}
 				final Button okButton = getButton(IDialogConstants.OK_ID);
 				if (okButton != null) {
-					// it's a little bit weird that IStatus.INFO disables OK button, but it's intentional 
-					// (this status is returned from JoomlaInstallDirValidator when install directory is empty)
-					final boolean okButtonEnabled = status.getSeverity() == IStatus.OK || status.getSeverity() == IStatus.WARNING;
-					okButton.setEnabled(okButtonEnabled);
+					okButton.setEnabled(status.isOK());
 				}
 			}
 			
@@ -239,32 +262,43 @@ public class EditLocalJoomlaServerDialog extends TitleAreaDialog {
 			if (statusAndInfo.getStatus().isOK()) {
 				serverConfiguration.setMajorVersion(statusAndInfo.getMajorVersion());
 				serverConfiguration.setExactVersion(statusAndInfo.getExactVersion());
-			} else {
-				clearVersionInfo();
+				versionFamilyComboViewer.getCombo().setEnabled(false);
+			} else if (statusAndInfo.getStatus().getSeverity() < IStatus.ERROR) {
+				versionFamilyComboViewer.getCombo().setEnabled(true);
+				manuallyConfiguredVersion = !versionFamilyComboViewer.getSelection().isEmpty();
 			}
-			return statusAndInfo.getStatus();
+			return manuallyConfiguredVersion ? Status.OK_STATUS : statusAndInfo.getStatus();
 		}
 
 		private void clearVersionInfo() {
+			manuallyConfiguredVersion = false;
 			serverConfiguration.setMajorVersion(null);
 			serverConfiguration.setExactVersion(null);
+			versionFamilyComboViewer.getCombo().setEnabled(false);
 		}
 	}
 	
-	public static class NonEmptyStringValidator implements IValidator {
+	public class NonEmptyStringValidator implements IValidator {
 		private final String errorMessage;
+		private final String pleaseEnterMessage;
 		
 		public NonEmptyStringValidator(String errorMessage) {
+			this(errorMessage, null);
+		}
+		
+		public NonEmptyStringValidator(String errorMessage, String pleaseEnterMessage) {
 			this.errorMessage = errorMessage;
+			this.pleaseEnterMessage = pleaseEnterMessage;
 		}
 
 		@Override
 		public IStatus validate(Object value) {
+			final IStatus errorStatus = !edit && pleaseEnterMessage != null ? ValidationStatus.info(errorMessage) : ValidationStatus.error(errorMessage);
 			if (value == null) {
-				return ValidationStatus.error(errorMessage);
+				return errorStatus;
 			}
 			final String stringVal = (String) value;
-			return stringVal.trim().length() == 0 ? ValidationStatus.error(errorMessage) : Status.OK_STATUS;
+			return stringVal.trim().length() == 0 ? errorStatus : Status.OK_STATUS;
 		}
 	}
 	
@@ -289,7 +323,6 @@ public class EditLocalJoomlaServerDialog extends TitleAreaDialog {
 			}
 		}
 	}
-	
 	protected DataBindingContext initDataBindings() {
 		final DataBindingContext bindingContext = new DataBindingContext();
 		//
@@ -311,12 +344,6 @@ public class EditLocalJoomlaServerDialog extends TitleAreaDialog {
 		strategy_2.setAfterConvertValidator(new NonEmptyStringValidator("Server base URL cannot be empty."));
 		bindingContext.bindValue(baseUrlTextObserveTextObserveWidget, serverConfigurationBaseUrlObserveValue, strategy_2, null);
 		//
-		final IObservableValue versionFamilyTextObserveTextObserveWidget = SWTObservables.observeText(versionFamilyText, SWT.Modify);
-		final IObservableValue serverConfigurationMajorVersionObserveValue = EMFObservables.observeValue(serverConfiguration, Literals.LOCAL_JOOMLA_SERVER__MAJOR_VERSION);
-		final UpdateValueStrategy strategy_3 = new UpdateValueStrategy();
-		strategy_3.setConverter(new VersionFamilyConverter());
-		bindingContext.bindValue(versionFamilyTextObserveTextObserveWidget, serverConfigurationMajorVersionObserveValue, new UpdateValueStrategy(UpdateValueStrategy.POLICY_NEVER), strategy_3);
-		//
 		final IObservableValue exactVersionTextObserveTextObserveWidget = SWTObservables.observeText(exactVersionText, SWT.Modify);
 		final IObservableValue serverConfigurationExactVersionObserveValue = EMFObservables.observeValue(serverConfiguration, Literals.LOCAL_JOOMLA_SERVER__EXACT_VERSION);
 		bindingContext.bindValue(exactVersionTextObserveTextObserveWidget, serverConfigurationExactVersionObserveValue, new UpdateValueStrategy(UpdateValueStrategy.POLICY_NEVER), null);
@@ -324,13 +351,13 @@ public class EditLocalJoomlaServerDialog extends TitleAreaDialog {
 		final IObservableValue adminUsernameTextObserveTextObserveWidget = SWTObservables.observeText(adminUsernameText, SWT.Modify);
 		final IObservableValue serverConfigurationUsernameObserveValue = EMFProperties.value(FeaturePath.fromList(Literals.LOCAL_JOOMLA_SERVER__ADMIN_USER_CREDENTIALS, Literals.USER_CREDENTIALS__USERNAME)).observe(serverConfiguration);
 		final UpdateValueStrategy strategy_4 = new UpdateValueStrategy();
-		strategy_4.setAfterConvertValidator(new NonEmptyStringValidator("Admin username cannot be empty."));
+		strategy_4.setAfterConvertValidator(new NonEmptyStringValidator("Admin username cannot be empty.", "Please enter admin user's login name."));
 		bindingContext.bindValue(adminUsernameTextObserveTextObserveWidget, serverConfigurationUsernameObserveValue, strategy_4, null);
 		//
 		final IObservableValue adminPasswordTextObserveTextObserveWidget = SWTObservables.observeText(adminPasswordText, SWT.Modify);
 		final IObservableValue serverConfigurationPasswordObserveValue = EMFProperties.value(FeaturePath.fromList(Literals.LOCAL_JOOMLA_SERVER__ADMIN_USER_CREDENTIALS, Literals.USER_CREDENTIALS__PASSWORD)).observe(serverConfiguration);
 		final UpdateValueStrategy strategy_5 = new UpdateValueStrategy();
-		strategy_5.setAfterConvertValidator(new NonEmptyStringValidator("Admin password cannot be empty."));
+		strategy_5.setAfterConvertValidator(new NonEmptyStringValidator("Admin password cannot be empty.", "Please enter admin user's password."));
 		bindingContext.bindValue(adminPasswordTextObserveTextObserveWidget, serverConfigurationPasswordObserveValue, strategy_5, null);
 		//
 		final IObservableValue teamIdTextObserveTextObserveWidget = SWTObservables.observeText(teamIdText, SWT.Modify);
@@ -338,6 +365,10 @@ public class EditLocalJoomlaServerDialog extends TitleAreaDialog {
 		final UpdateValueStrategy strategy_6 = new UpdateValueStrategy();
 		strategy_6.setAfterConvertValidator(new NonEmptyStringValidator("Team ID cannot be empty."));
 		bindingContext.bindValue(teamIdTextObserveTextObserveWidget, serverConfigurationTeamIdObserveValue, strategy_6, null);
+		//
+		final IObservableValue comboViewerObserveSingleSelection = ViewersObservables.observeSingleSelection(versionFamilyComboViewer);
+		final IObservableValue serverConfigurationMajorVersionObserveValue = EMFObservables.observeValue(serverConfiguration, Literals.LOCAL_JOOMLA_SERVER__MAJOR_VERSION);
+		bindingContext.bindValue(comboViewerObserveSingleSelection, serverConfigurationMajorVersionObserveValue, null, null);
 		//
 		return bindingContext;
 	}

@@ -83,7 +83,7 @@ public class ExtensionFileLabelDecorator implements ILightweightLabelDecorator, 
 	}
 
 	@Override
-	public void onExtensionModelChange(BasicExtensionModel extensionModel) {
+	public void onExtensionModelChange(final BasicExtensionModel extensionModel) {
 		Display.getDefault().asyncExec(new Runnable() {
 			@Override
 			public void run() {

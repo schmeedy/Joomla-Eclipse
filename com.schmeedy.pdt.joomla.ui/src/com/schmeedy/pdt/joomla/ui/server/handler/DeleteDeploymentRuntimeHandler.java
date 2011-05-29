@@ -31,7 +31,7 @@ public class DeleteDeploymentRuntimeHandler extends AbstractHandler {
 		confirmationDialog.setMessage("Are you sure you want to remove " + runtime.getServer().getName() + "?");
 		confirmationDialog.setText("Confirm Delete");
 		final int result = confirmationDialog.open();
-		if (result != SWT.YES) {
+		if (result != SWT.OK) {
 			return null;
 		}
 		
