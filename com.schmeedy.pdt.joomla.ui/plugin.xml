@@ -2,6 +2,14 @@
 <?eclipse version="3.4"?>
 <plugin>
    <extension
+         point="org.eclipse.ui.ide.projectNatureImages">
+      <image
+            icon="icons/ovr16/joomla_project_ovr.png"
+            id="com.schmeedy.pdt.joomla.ui.ExtensionProjectDecoration"
+            natureId="com.schmeedy.pdt.joomla.core.JoomlaExtensionNature">
+      </image>
+   </extension>
+   <extension
          point="org.eclipse.ui.views">
       <category
             id="com.schmeedy.pdt.joomla.ui.JoomlaViewCategory"
@@ -138,5 +146,43 @@
             name="Joomla! API"
             nature="com.schmeedy.pdt.joomla.core.JoomlaExtensionNature">
       </buildpathContainerPage>
+   </extension>
+   <extension
+         point="org.eclipse.ui.decorators">
+      <decorator
+            class="com.schmeedy.pdt.joomla.ui.project.ExtensionFileLabelDecorator"
+            id="com.schmeedy.pdt.joomla.ui.ExtensionFileDecorator"
+            label="Joomla! Extension File Decorator"
+            lightweight="true"
+            state="true">
+         <enablement>
+            <or>
+               <objectClass
+                     name="org.eclipse.core.resources.IFile">
+               </objectClass>
+               <objectClass
+                     name="org.eclipse.core.resources.IFolder">
+               </objectClass>
+               <objectClass
+                     name="org.eclipse.dltk.internal.core.ModelElement">
+               </objectClass>
+            </or>
+         </enablement>
+      </decorator>
+   </extension>
+   <extension
+         point="org.eclipse.ui.editors">
+      <editor
+            class="org.eclipse.wst.sse.ui.StructuredTextEditor"
+            contributorClass="org.eclipse.wst.sse.ui.internal.actions.ActionContributor"
+            default="false"
+            icon="platform:/plugin/com.schmeedy.pdt.joomla.common.ui/icons/obj16/joomla.png"
+            id="com.schmeedy.pdt.joomla.ui.XMLExtensionEditor"
+            name="XML Joomla! Extension Editor"
+            symbolicFontName="org.eclipse.wst.sse.ui.textfont">
+         <contentTypeBinding
+               contentTypeId="com.schmeedy.pdt.joomla.core.ExtensionManifest">
+         </contentTypeBinding>
+      </editor>
    </extension>
  </plugin>

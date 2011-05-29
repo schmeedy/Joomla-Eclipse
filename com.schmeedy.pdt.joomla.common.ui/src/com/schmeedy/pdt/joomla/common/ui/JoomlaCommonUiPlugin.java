@@ -17,6 +17,9 @@ public class JoomlaCommonUiPlugin extends AbstractUIPlugin {
 	public static final String IMG_OBJ_EXT_MODULE = BUNDLE_ID + ".obj16.ext.mod";
 	public static final String IMG_OBJ_EXT_LANGUAGE = BUNDLE_ID + ".obj16.ext.lang";
 
+	public static final String OVR_SYNC_SITE = BUNDLE_ID + ".ovr16.sync.site";
+	public static final String OVR_SYNC_ADMIN = BUNDLE_ID + ".ovr16.sync.admin";
+	
 	private static JoomlaCommonUiPlugin INSTANCE;
 
 	public static JoomlaCommonUiPlugin getInstance() {
@@ -25,6 +28,15 @@ public class JoomlaCommonUiPlugin extends AbstractUIPlugin {
 
 	public Image getImage(String symbolicName) {
 		return getImageRegistry().get(symbolicName);
+	}
+	
+	public ImageDescriptor getImageDescriptor(String symbolicName) {
+		if (OVR_SYNC_ADMIN.equals(symbolicName)) {
+			return createImageDescriptor("/icons/ovr16/ovr_sync_admin.png");
+		} else if (OVR_SYNC_SITE.equals(symbolicName)) {
+			return createImageDescriptor("/icons/ovr16/ovr_sync_site.png");
+		}
+		return null;
 	}
 	
 	@Override
@@ -36,8 +48,12 @@ public class JoomlaCommonUiPlugin extends AbstractUIPlugin {
 		reg.put(IMG_OBJ_EXT_LANGUAGE, loadImage("/icons/obj16/ext_lang.png"));
 	}
 	
+	private ImageDescriptor createImageDescriptor(String path) {
+		return ImageDescriptor.createFromFile(JoomlaCommonUiPlugin.class, path);
+	}
+	
 	private Image loadImage(String path) {
-		return ImageDescriptor.createFromFile(JoomlaCommonUiPlugin.class, path).createImage();
+		return createImageDescriptor(path).createImage();
 	}
 	
 	@Override

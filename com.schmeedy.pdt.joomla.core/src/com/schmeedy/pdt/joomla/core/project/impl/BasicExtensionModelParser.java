@@ -96,7 +96,7 @@ class BasicExtensionModelParser {
 						resourceFolder = getAttributeValue(startElement, "folder");
 						mediaDestination = getAttributeValue(startElement, "destination");
 					} else if ("filename".equals(startElementName) || "folder".equals(startElementName) || "language".equals(startElementName)) {
-						final String content = eventReader.getElementText();
+						final String content = eventReader.getElementText().trim();
 						elementDepth--; // eventReader.getElementText() skips end element event
 						final int installPackagePathSegments = resourceFolder == null ? 0 : new Path(resourceFolder.replace("\\", "/")).segmentCount();
 						final String manifestRelativePathPrefix = resourceFolder == null ? "" : resourceFolder.endsWith("/") || resourceFolder.endsWith("\\") ? resourceFolder : resourceFolder + "/";
