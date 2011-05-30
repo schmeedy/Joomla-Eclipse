@@ -6,7 +6,6 @@
  */
 package com.schmeedy.pdt.joomla.core.project.model.util;
 
-import com.schmeedy.pdt.joomla.core.project.model.*;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EClass;
@@ -16,6 +15,7 @@ import com.schmeedy.pdt.joomla.core.project.model.BasicExtensionModel;
 import com.schmeedy.pdt.joomla.core.project.model.ExtensionResource;
 import com.schmeedy.pdt.joomla.core.project.model.JoomlaExtensionProject;
 import com.schmeedy.pdt.joomla.core.project.model.JoomlaProjectModelPackage;
+import com.schmeedy.pdt.joomla.core.project.model.LanguageResource;
 import com.schmeedy.pdt.joomla.core.project.model.MediaResource;
 
 /**

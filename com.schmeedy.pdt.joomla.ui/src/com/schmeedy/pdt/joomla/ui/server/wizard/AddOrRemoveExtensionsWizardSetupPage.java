@@ -68,6 +68,7 @@ public class AddOrRemoveExtensionsWizardSetupPage extends WizardPage implements 
 		super("Add or remove extensions - setup");
 		this.targetRuntime = EcoreUtil.copy(targetRuntime); // we do not want to modify persistent state directly
 		this.extensionProjects = new ArrayList<JoomlaExtensionProject>(EcoreUtil.copyAll(extensionProjects));
+		removeUnsupportedExtensions(this.extensionProjects, targetRuntime);
 		removeDeployedExtensions(this.extensionProjects);
 		initExtensionToProjectMap(this.extensionProjects);
 		setPageComplete(false);
@@ -75,6 +76,26 @@ public class AddOrRemoveExtensionsWizardSetupPage extends WizardPage implements 
 		setTitle("Add or remove extensions");
 	}
 
+	private void removeUnsupportedExtensions(List<JoomlaExtensionProject> projects, DeploymentRuntime targetRuntime) {
+		final Iterator<JoomlaExtensionProject> projectIterator = projects.iterator();
+		while (projectIterator.hasNext()) {
+			final JoomlaExtensionProject project = projectIterator.next();
+			int supportedExtensions = 0;
+			final Iterator<BasicExtensionModel> extensionIterator = project.getExtensions().iterator();
+			while (extensionIterator.hasNext()) {
+				final BasicExtensionModel extension = extensionIterator.next();
+				if (targetRuntime.supports(extension)) {
+					supportedExtensions++;
+				} else {
+					extensionIterator.remove();
+				}
+			}
+			if (supportedExtensions == 0) {
+				projectIterator.remove();
+			}
+		}
+	}
+	
 	private void removeDeployedExtensions(List<JoomlaExtensionProject> projects) {
 		for (final JoomlaExtensionProject project : projects) {
 			final Iterator<BasicExtensionModel> i = project.getExtensions().iterator();

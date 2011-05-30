@@ -41,7 +41,7 @@ public class DeploymentTreeLabelProvider extends StyledCellLabelProvider {
 	private final ExtensionModelLabelProvider extensionModelLabelProvider = new ExtensionModelLabelProvider();
 
 	public DeploymentTreeLabelProvider(IObservableSet knownRuntimes) {
-		final IObservableMap[] lpMaps = new IObservableMap[4];
+		final IObservableMap[] lpMaps = new IObservableMap[5];
 		
 		lpMaps[0] = EMFProperties.value(FeaturePath.fromList(
 				JoomlaServerConfigurationPackage.Literals.DEPLOYMENT_RUNTIME__SERVER,
@@ -61,6 +61,11 @@ public class DeploymentTreeLabelProvider extends StyledCellLabelProvider {
 		lpMaps[3] = EMFProperties.value(FeaturePath.fromList(
 				JoomlaServerConfigurationPackage.Literals.JOOMLA_EXTENSION_DEPLOYMENT__EXTENSION,
 				JoomlaProjectModelPackage.Literals.BASIC_EXTENSION_MODEL__NAME
+		)).observeDetail(knownRuntimes);
+		
+		lpMaps[4] = EMFProperties.value(FeaturePath.fromList(
+				JoomlaServerConfigurationPackage.Literals.JOOMLA_EXTENSION_DEPLOYMENT__EXTENSION,
+				JoomlaProjectModelPackage.Literals.BASIC_EXTENSION_MODEL__MANIFEST_VERSION
 		)).observeDetail(knownRuntimes);
 		
 		init(lpMaps);
@@ -84,14 +89,7 @@ public class DeploymentTreeLabelProvider extends StyledCellLabelProvider {
 			cell.setStyleRanges(label.getStyleRanges());
 		} else if (cell.getElement() instanceof JoomlaExtensionDeployment) {
 			final BasicExtensionModel extension = ((JoomlaExtensionDeployment) cell.getElement()).getExtension();
-			final Image image = extensionModelLabelProvider.getImage(extension);
-			if (image != null) {
-				cell.setImage(image);
-			}
-			final String text = extensionModelLabelProvider.getText(extension);
-			if (text != null) {
-				cell.setText(text);
-			}
+			extensionModelLabelProvider.update(cell, extension);
 		}
 	}
 	

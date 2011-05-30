@@ -23,6 +23,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
 import com.schmeedy.pdt.joomla.core.project.model.BasicExtensionModel;
 import com.schmeedy.pdt.joomla.core.project.model.ExtensionResource;
 import com.schmeedy.pdt.joomla.core.project.model.LanguageResource;
+import com.schmeedy.pdt.joomla.core.project.model.ManifestVersion;
 import com.schmeedy.pdt.joomla.core.project.model.MediaResource;
 import com.schmeedy.pdt.joomla.core.project.model.ResourceType;
 import com.schmeedy.pdt.joomla.core.server.IJoomlaHttpSession;
@@ -236,6 +237,23 @@ public class DeploymentRuntimeImpl extends EObjectImpl implements DeploymentRunt
 		final int prefixSegments = resource.getInstallPackagePathSegments();
 		final IPath targetFilePath = prefixSegments == 0 ? resource.getManifestRelativePath() : resource.getManifestRelativePath().removeFirstSegments(prefixSegments);
 		return new File(baseDir, targetFilePath.toString());
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	@Override
+	public boolean supports(BasicExtensionModel extension) {
+		switch (getServer().getMajorVersion()) {
+			case ONE_FIVE:
+				return extension.getManifestVersion() == ManifestVersion.ONE_FIVE;
+			case ONE_SIX:
+				return extension.getManifestVersion() == ManifestVersion.ONE_SIX || extension.getManifestVersion() == ManifestVersion.ONE_FIVE;
+			default:
+				return true;
+		}
 	}
 
 	/**

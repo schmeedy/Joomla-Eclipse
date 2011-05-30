@@ -11,6 +11,7 @@ import java.io.File;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 
+import com.schmeedy.pdt.joomla.core.project.model.BasicExtensionModel;
 import com.schmeedy.pdt.joomla.core.project.model.ExtensionResource;
 import com.schmeedy.pdt.joomla.core.server.IJoomlaHttpSession;
 
@@ -99,5 +100,13 @@ public interface DeploymentRuntime extends EObject {
 	 * @generated
 	 */
 	File getDestination(ExtensionResource resource);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model
+	 * @generated
+	 */
+	boolean supports(BasicExtensionModel extension);
 
 } // DeploymentRuntime

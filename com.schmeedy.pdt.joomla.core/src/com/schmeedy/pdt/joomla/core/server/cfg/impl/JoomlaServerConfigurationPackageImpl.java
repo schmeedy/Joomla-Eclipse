@@ -523,6 +523,9 @@ public class JoomlaServerConfigurationPackageImpl extends EPackageImpl implement
 		EOperation op = addEOperation(deploymentRuntimeEClass, this.getFile(), "getDestination", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, theJoomlaProjectModelPackage.getExtensionResource(), "resource", 0, 1, IS_UNIQUE, IS_ORDERED);
 
+		op = addEOperation(deploymentRuntimeEClass, ecorePackage.getEBoolean(), "supports", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, theJoomlaProjectModelPackage.getBasicExtensionModel(), "extension", 0, 1, IS_UNIQUE, IS_ORDERED);
+
 		initEClass(joomlaExtensionDeploymentEClass, JoomlaExtensionDeployment.class, "JoomlaExtensionDeployment", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getJoomlaExtensionDeployment_Runtime(), this.getDeploymentRuntime(), this.getDeploymentRuntime_DeployedExtensions(), "runtime", null, 1, 1, JoomlaExtensionDeployment.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getJoomlaExtensionDeployment_Extension(), theJoomlaProjectModelPackage.getBasicExtensionModel(), null, "extension", null, 1, 1, JoomlaExtensionDeployment.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

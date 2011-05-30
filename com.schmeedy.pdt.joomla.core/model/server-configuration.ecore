@@ -35,6 +35,9 @@
     <eOperations name="getDestination" eType="#//File">
       <eParameters name="resource" eType="ecore:EClass project-model.ecore#//ExtensionResource"/>
     </eOperations>
+    <eOperations name="supports" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eParameters name="extension" eType="ecore:EClass project-model.ecore#//BasicExtensionModel"/>
+    </eOperations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="server" lowerBound="1"
         eType="#//LocalJoomlaServer" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="deployedExtensions" upperBound="-1"
