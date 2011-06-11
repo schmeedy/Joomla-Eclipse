@@ -50,7 +50,7 @@ public class ExtensionFileLabelDecorator implements ILightweightLabelDecorator, 
 		}
 		final IResource resource = (IResource) adapterElement;
 		final IProject project = resource.getProject();
-		if (project == null) {
+		if (project == null || !project.isOpen()) {
 			return;
 		}
 		final JoomlaExtensionProject extensionProject = projectManager.getExtensionProjectModel(project);
@@ -65,7 +65,9 @@ public class ExtensionFileLabelDecorator implements ILightweightLabelDecorator, 
 	}
 
 	private void doDecorate(ExtensionResource extensionResource, IDecoration decoration) {
-		decoration.addOverlay(extensionResource.isInAdministration() ? adminOverlay : siteOverlay, IDecoration.TOP_LEFT);		
+		if (!extensionResource.isSpecialResource()) { // no decoration (yet?) for "special" resources like install / uninstall scripts
+			decoration.addOverlay(extensionResource.isInAdministration() ? adminOverlay : siteOverlay, IDecoration.TOP_LEFT);		
+		}
 	}
 
 	private ExtensionResource getExtensionResource(IResource resource, JoomlaExtensionProject extensionProject) {

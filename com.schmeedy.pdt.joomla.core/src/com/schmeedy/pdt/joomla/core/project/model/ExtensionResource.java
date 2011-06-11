@@ -24,6 +24,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link com.schmeedy.pdt.joomla.core.project.model.ExtensionResource#isFolder <em>Folder</em>}</li>
  *   <li>{@link com.schmeedy.pdt.joomla.core.project.model.ExtensionResource#isInAdministration <em>In Administration</em>}</li>
  *   <li>{@link com.schmeedy.pdt.joomla.core.project.model.ExtensionResource#getExtensionModel <em>Extension Model</em>}</li>
+ *   <li>{@link com.schmeedy.pdt.joomla.core.project.model.ExtensionResource#isSpecialResource <em>Special Resource</em>}</li>
  * </ul>
  * </p>
  *
@@ -207,5 +208,20 @@ public interface ExtensionResource extends EObject {
 	 * @generated
 	 */
 	void setExtensionModel(BasicExtensionModel value);
+
+	/**
+	 * Returns the value of the '<em><b>Special Resource</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Special Resource</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Special Resource</em>' attribute.
+	 * @see com.schmeedy.pdt.joomla.core.project.model.JoomlaProjectModelPackage#getExtensionResource_SpecialResource()
+	 * @model transient="true" changeable="false" volatile="true" derived="true"
+	 * @generated
+	 */
+	boolean isSpecialResource();
 
 } // ExtensionResource

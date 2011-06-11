@@ -23,7 +23,7 @@ import com.schmeedy.pdt.joomla.core.project.model.ManifestVersion;
 import com.schmeedy.pdt.joomla.core.project.model.MediaResource;
 import com.schmeedy.pdt.joomla.core.project.model.ResourceType;
 
-class BasicExtensionModelParser {
+public class BasicExtensionModelParser {
 
 	private final JoomlaProjectModelFactory factory = JoomlaProjectModelFactory.eINSTANCE;
 	
@@ -95,7 +95,10 @@ class BasicExtensionModelParser {
 						resourceType = ResourceType.MEDIA;
 						resourceFolder = getAttributeValue(startElement, "folder");
 						mediaDestination = getAttributeValue(startElement, "destination");
-					} else if ("filename".equals(startElementName) || "folder".equals(startElementName) || "language".equals(startElementName)) {
+					} else if (elementDepth == 2 && ("install".equals(startElementName) || "uninstall".equals(startElementName))) {
+						resourceType = "install".equals(startElementName) ? ResourceType.SPECIAL_INSTALL_SQL : ResourceType.SPECIAL_UNINSTALL_SQL;
+						resourceFolder = null;
+					} else if ("file".equals(startElementName) || "filename".equals(startElementName) || "folder".equals(startElementName) || "language".equals(startElementName)) {
 						final String content = eventReader.getElementText().trim();
 						elementDepth--; // eventReader.getElementText() skips end element event
 						final int installPackagePathSegments = resourceFolder == null ? 0 : new Path(resourceFolder.replace("\\", "/")).segmentCount();
@@ -127,6 +130,12 @@ class BasicExtensionModelParser {
 						resource.setInAdministration(inAdministration);
 						resource.setManifestRelativePath(manifestRelativePath);
 						resource.setInstallPackagePathSegments(installPackagePathSegments);
+						extensionModel.getResources().add(resource);
+					} else if ("installfile".equals(startElementName) || "uninstallfile".equals(startElementName)) {
+						final IPath manifestRelativePath = new Path(eventReader.getElementText().trim());
+						final ExtensionResource resource = JoomlaProjectModelFactory.eINSTANCE.createExtensionResource();
+						resource.setResourceType("installfile".equals(startElementName) ? ResourceType.SPECIAL_INSTALL_SCRIPT : ResourceType.SPECIAL_UNINSTALL_SCRIPT);
+						resource.setManifestRelativePath(manifestRelativePath);
 						extensionModel.getResources().add(resource);
 					}
 					break;

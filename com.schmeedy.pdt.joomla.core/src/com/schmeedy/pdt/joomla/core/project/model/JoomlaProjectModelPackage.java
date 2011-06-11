@@ -263,13 +263,22 @@ public interface JoomlaProjectModelPackage extends EPackage {
 	int EXTENSION_RESOURCE__EXTENSION_MODEL = 6;
 
 	/**
+	 * The feature id for the '<em><b>Special Resource</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXTENSION_RESOURCE__SPECIAL_RESOURCE = 7;
+
+	/**
 	 * The number of structural features of the '<em>Extension Resource</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int EXTENSION_RESOURCE_FEATURE_COUNT = 7;
+	int EXTENSION_RESOURCE_FEATURE_COUNT = 8;
 
 	/**
 	 * The meta object id for the '{@link com.schmeedy.pdt.joomla.core.project.model.impl.MediaResourceImpl <em>Media Resource</em>}' class.
@@ -343,6 +352,15 @@ public interface JoomlaProjectModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int MEDIA_RESOURCE__EXTENSION_MODEL = EXTENSION_RESOURCE__EXTENSION_MODEL;
+
+	/**
+	 * The feature id for the '<em><b>Special Resource</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MEDIA_RESOURCE__SPECIAL_RESOURCE = EXTENSION_RESOURCE__SPECIAL_RESOURCE;
 
 	/**
 	 * The feature id for the '<em><b>Destination</b></em>' attribute.
@@ -434,6 +452,15 @@ public interface JoomlaProjectModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int LANGUAGE_RESOURCE__EXTENSION_MODEL = EXTENSION_RESOURCE__EXTENSION_MODEL;
+
+	/**
+	 * The feature id for the '<em><b>Special Resource</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LANGUAGE_RESOURCE__SPECIAL_RESOURCE = EXTENSION_RESOURCE__SPECIAL_RESOURCE;
 
 	/**
 	 * The feature id for the '<em><b>Language Tag</b></em>' attribute.
@@ -722,6 +749,17 @@ public interface JoomlaProjectModelPackage extends EPackage {
 	EReference getExtensionResource_ExtensionModel();
 
 	/**
+	 * Returns the meta object for the attribute '{@link com.schmeedy.pdt.joomla.core.project.model.ExtensionResource#isSpecialResource <em>Special Resource</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Special Resource</em>'.
+	 * @see com.schmeedy.pdt.joomla.core.project.model.ExtensionResource#isSpecialResource()
+	 * @see #getExtensionResource()
+	 * @generated
+	 */
+	EAttribute getExtensionResource_SpecialResource();
+
+	/**
 	 * Returns the meta object for class '{@link com.schmeedy.pdt.joomla.core.project.model.MediaResource <em>Media Resource</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1002,6 +1040,14 @@ public interface JoomlaProjectModelPackage extends EPackage {
 		 * @generated
 		 */
 		EReference EXTENSION_RESOURCE__EXTENSION_MODEL = eINSTANCE.getExtensionResource_ExtensionModel();
+
+		/**
+		 * The meta object literal for the '<em><b>Special Resource</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute EXTENSION_RESOURCE__SPECIAL_RESOURCE = eINSTANCE.getExtensionResource_SpecialResource();
 
 		/**
 		 * The meta object literal for the '{@link com.schmeedy.pdt.joomla.core.project.model.impl.MediaResourceImpl <em>Media Resource</em>}' class.

@@ -11,6 +11,7 @@ Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Export-Package: com.schmeedy.pdt.joomla.core,
  com.schmeedy.pdt.joomla.core.project,
  com.schmeedy.pdt.joomla.core.project.buildpath,
+ com.schmeedy.pdt.joomla.core.project.importer,
  com.schmeedy.pdt.joomla.core.project.model,
  com.schmeedy.pdt.joomla.core.server,
  com.schmeedy.pdt.joomla.core.server.cfg
@@ -21,7 +22,8 @@ Require-Bundle: com.schmeedy.pdt.service.registry;bundle-version="0.1.0",
  org.eclipse.php.core;bundle-version="2.2.1",
  org.eclipse.emf.ecore;visibility:=reexport,
  org.eclipse.emf.ecore.xmi;bundle-version="2.5.0",
- org.apache.commons.httpclient;bundle-version="3.1.0"
+ org.apache.commons.httpclient;bundle-version="3.1.0",
+ org.apache.ant;bundle-version="1.7.1"
 Bundle-ActivationPolicy: lazy
 Service-Component: OSGI-INF/*.xml
 Import-Package: org.apache.commons.codec;version="1.3.0",

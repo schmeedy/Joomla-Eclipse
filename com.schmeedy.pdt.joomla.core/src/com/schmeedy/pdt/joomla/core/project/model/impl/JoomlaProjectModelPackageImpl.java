@@ -350,6 +350,15 @@ public class JoomlaProjectModelPackageImpl extends EPackageImpl implements Jooml
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getExtensionResource_SpecialResource() {
+		return (EAttribute)extensionResourceEClass.getEStructuralFeatures().get(7);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getMediaResource() {
 		return mediaResourceEClass;
 	}
@@ -476,6 +485,7 @@ public class JoomlaProjectModelPackageImpl extends EPackageImpl implements Jooml
 		createEAttribute(extensionResourceEClass, EXTENSION_RESOURCE__FOLDER);
 		createEAttribute(extensionResourceEClass, EXTENSION_RESOURCE__IN_ADMINISTRATION);
 		createEReference(extensionResourceEClass, EXTENSION_RESOURCE__EXTENSION_MODEL);
+		createEAttribute(extensionResourceEClass, EXTENSION_RESOURCE__SPECIAL_RESOURCE);
 
 		mediaResourceEClass = createEClass(MEDIA_RESOURCE);
 		createEAttribute(mediaResourceEClass, MEDIA_RESOURCE__DESTINATION);
@@ -547,6 +557,7 @@ public class JoomlaProjectModelPackageImpl extends EPackageImpl implements Jooml
 		initEAttribute(getExtensionResource_Folder(), ecorePackage.getEBoolean(), "folder", null, 0, 1, ExtensionResource.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getExtensionResource_InAdministration(), ecorePackage.getEBoolean(), "inAdministration", null, 0, 1, ExtensionResource.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getExtensionResource_ExtensionModel(), this.getBasicExtensionModel(), this.getBasicExtensionModel_Resources(), "extensionModel", null, 0, 1, ExtensionResource.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getExtensionResource_SpecialResource(), ecorePackage.getEBoolean(), "specialResource", null, 0, 1, ExtensionResource.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 
 		initEClass(mediaResourceEClass, MediaResource.class, "MediaResource", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getMediaResource_Destination(), ecorePackage.getEString(), "destination", null, 0, 1, MediaResource.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -566,11 +577,16 @@ public class JoomlaProjectModelPackageImpl extends EPackageImpl implements Jooml
 		addEEnumLiteral(extensionTypeEEnum, ExtensionType.PLUGIN);
 		addEEnumLiteral(extensionTypeEEnum, ExtensionType.MODULE);
 		addEEnumLiteral(extensionTypeEEnum, ExtensionType.TEMPLATE);
+		addEEnumLiteral(extensionTypeEEnum, ExtensionType.PACKAGE);
 
 		initEEnum(resourceTypeEEnum, ResourceType.class, "ResourceType");
 		addEEnumLiteral(resourceTypeEEnum, ResourceType.GENERIC_FILE);
 		addEEnumLiteral(resourceTypeEEnum, ResourceType.LANGUAGE);
 		addEEnumLiteral(resourceTypeEEnum, ResourceType.MEDIA);
+		addEEnumLiteral(resourceTypeEEnum, ResourceType.SPECIAL_INSTALL_SCRIPT);
+		addEEnumLiteral(resourceTypeEEnum, ResourceType.SPECIAL_UNINSTALL_SCRIPT);
+		addEEnumLiteral(resourceTypeEEnum, ResourceType.SPECIAL_INSTALL_SQL);
+		addEEnumLiteral(resourceTypeEEnum, ResourceType.SPECIAL_UNINSTALL_SQL);
 
 		// Initialize data types
 		initEDataType(iPathEDataType, IPath.class, "IPath", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);

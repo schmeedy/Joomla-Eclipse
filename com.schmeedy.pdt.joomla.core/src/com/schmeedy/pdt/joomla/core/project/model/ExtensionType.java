@@ -70,7 +70,15 @@ public enum ExtensionType implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	TEMPLATE(4, "TEMPLATE", "template");
+	TEMPLATE(4, "TEMPLATE", "template"), /**
+	 * The '<em><b>PACKAGE</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #PACKAGE_VALUE
+	 * @generated
+	 * @ordered
+	 */
+	PACKAGE(5, "PACKAGE", "package");
 
 	/**
 	 * The '<em><b>UNKNOWN</b></em>' literal value.
@@ -148,6 +156,21 @@ public enum ExtensionType implements Enumerator {
 	public static final int TEMPLATE_VALUE = 4;
 
 	/**
+	 * The '<em><b>PACKAGE</b></em>' literal value.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of '<em><b>PACKAGE</b></em>' literal object isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @see #PACKAGE
+	 * @model literal="package"
+	 * @generated
+	 * @ordered
+	 */
+	public static final int PACKAGE_VALUE = 5;
+
+	/**
 	 * An array of all the '<em><b>Extension Type</b></em>' enumerators.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -160,6 +183,7 @@ public enum ExtensionType implements Enumerator {
 			PLUGIN,
 			MODULE,
 			TEMPLATE,
+			PACKAGE,
 		};
 
 	/**
@@ -215,6 +239,7 @@ public enum ExtensionType implements Enumerator {
 			case PLUGIN_VALUE: return PLUGIN;
 			case MODULE_VALUE: return MODULE;
 			case TEMPLATE_VALUE: return TEMPLATE;
+			case PACKAGE_VALUE: return PACKAGE;
 		}
 		return null;
 	}

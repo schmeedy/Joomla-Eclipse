@@ -113,9 +113,11 @@ public class JoomlaExtensionProjectBuilder extends IncrementalProjectBuilder {
 		final Map<IPath, FileOrFolder> resourceMap = new HashMap<IPath, FileOrFolder>();
 		for (final ExtensionWithTargetRuntime extensionAndRuntime : extensions) {
 			for (final ExtensionResource resource : extensionAndRuntime.extension.getResources()) {
-				final File targetFile = extensionAndRuntime.runtime.getDestination(resource);
-				if (targetFile != null) {
-					resourceMap.put(resource.getFullPath(), new FileOrFolder(targetFile, resource.isFolder()));
+				if (!resource.isSpecialResource()) { // special resources (install / uninstall stuff) should not be deployed
+					final File targetFile = extensionAndRuntime.runtime.getDestination(resource);
+					if (targetFile != null) {
+						resourceMap.put(resource.getFullPath(), new FileOrFolder(targetFile, resource.isFolder()));
+					}
 				}
 			}
 		}

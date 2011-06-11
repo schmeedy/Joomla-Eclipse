@@ -6,6 +6,7 @@
  */
 package com.schmeedy.pdt.joomla.core.project.model.util;
 
+import com.schmeedy.pdt.joomla.core.project.model.*;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EClass;

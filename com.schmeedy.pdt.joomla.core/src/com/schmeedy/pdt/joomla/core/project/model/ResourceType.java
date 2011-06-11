@@ -46,7 +46,39 @@ public enum ResourceType implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	MEDIA(0, "MEDIA", "MEDIA");
+	MEDIA(2, "MEDIA", "MEDIA"), /**
+	 * The '<em><b>SPECIAL INSTALL SCRIPT</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #SPECIAL_INSTALL_SCRIPT_VALUE
+	 * @generated
+	 * @ordered
+	 */
+	SPECIAL_INSTALL_SCRIPT(3, "SPECIAL_INSTALL_SCRIPT", "SPECIAL_INSTALL_SCRIPT"), /**
+	 * The '<em><b>SPECIAL UNINSTALL SCRIPT</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #SPECIAL_UNINSTALL_SCRIPT_VALUE
+	 * @generated
+	 * @ordered
+	 */
+	SPECIAL_UNINSTALL_SCRIPT(4, "SPECIAL_UNINSTALL_SCRIPT", "SPECIAL_UNINSTALL_SCRIPT"), /**
+	 * The '<em><b>SPECIAL INSTALL SQL</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #SPECIAL_INSTALL_SQL_VALUE
+	 * @generated
+	 * @ordered
+	 */
+	SPECIAL_INSTALL_SQL(5, "SPECIAL_INSTALL_SQL", "SPECIAL_INSTALL_SQL"), /**
+	 * The '<em><b>SPECIAL UNINSTALL SQL</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #SPECIAL_UNINSTALL_SQL_VALUE
+	 * @generated
+	 * @ordered
+	 */
+	SPECIAL_UNINSTALL_SQL(6, "SPECIAL_UNINSTALL_SQL", "SPECIAL_UNINSTALL_SQL");
 
 	/**
 	 * The '<em><b>GENERIC FILE</b></em>' literal value.
@@ -91,7 +123,67 @@ public enum ResourceType implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	public static final int MEDIA_VALUE = 0;
+	public static final int MEDIA_VALUE = 2;
+
+	/**
+	 * The '<em><b>SPECIAL INSTALL SCRIPT</b></em>' literal value.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of '<em><b>SPECIAL INSTALL SCRIPT</b></em>' literal object isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @see #SPECIAL_INSTALL_SCRIPT
+	 * @model
+	 * @generated
+	 * @ordered
+	 */
+	public static final int SPECIAL_INSTALL_SCRIPT_VALUE = 3;
+
+	/**
+	 * The '<em><b>SPECIAL UNINSTALL SCRIPT</b></em>' literal value.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of '<em><b>SPECIAL UNINSTALL SCRIPT</b></em>' literal object isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @see #SPECIAL_UNINSTALL_SCRIPT
+	 * @model
+	 * @generated
+	 * @ordered
+	 */
+	public static final int SPECIAL_UNINSTALL_SCRIPT_VALUE = 4;
+
+	/**
+	 * The '<em><b>SPECIAL INSTALL SQL</b></em>' literal value.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of '<em><b>SPECIAL INSTALL SQL</b></em>' literal object isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @see #SPECIAL_INSTALL_SQL
+	 * @model
+	 * @generated
+	 * @ordered
+	 */
+	public static final int SPECIAL_INSTALL_SQL_VALUE = 5;
+
+	/**
+	 * The '<em><b>SPECIAL UNINSTALL SQL</b></em>' literal value.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of '<em><b>SPECIAL UNINSTALL SQL</b></em>' literal object isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @see #SPECIAL_UNINSTALL_SQL
+	 * @model
+	 * @generated
+	 * @ordered
+	 */
+	public static final int SPECIAL_UNINSTALL_SQL_VALUE = 6;
 
 	/**
 	 * An array of all the '<em><b>Resource Type</b></em>' enumerators.
@@ -104,6 +196,10 @@ public enum ResourceType implements Enumerator {
 			GENERIC_FILE,
 			LANGUAGE,
 			MEDIA,
+			SPECIAL_INSTALL_SCRIPT,
+			SPECIAL_UNINSTALL_SCRIPT,
+			SPECIAL_INSTALL_SQL,
+			SPECIAL_UNINSTALL_SQL,
 		};
 
 	/**
@@ -156,6 +252,11 @@ public enum ResourceType implements Enumerator {
 		switch (value) {
 			case GENERIC_FILE_VALUE: return GENERIC_FILE;
 			case LANGUAGE_VALUE: return LANGUAGE;
+			case MEDIA_VALUE: return MEDIA;
+			case SPECIAL_INSTALL_SCRIPT_VALUE: return SPECIAL_INSTALL_SCRIPT;
+			case SPECIAL_UNINSTALL_SCRIPT_VALUE: return SPECIAL_UNINSTALL_SCRIPT;
+			case SPECIAL_INSTALL_SQL_VALUE: return SPECIAL_INSTALL_SQL;
+			case SPECIAL_UNINSTALL_SQL_VALUE: return SPECIAL_UNINSTALL_SQL;
 		}
 		return null;
 	}

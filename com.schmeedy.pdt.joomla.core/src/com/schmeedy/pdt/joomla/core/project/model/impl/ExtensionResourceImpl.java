@@ -34,6 +34,7 @@ import com.schmeedy.pdt.joomla.core.project.model.ResourceType;
  *   <li>{@link com.schmeedy.pdt.joomla.core.project.model.impl.ExtensionResourceImpl#isFolder <em>Folder</em>}</li>
  *   <li>{@link com.schmeedy.pdt.joomla.core.project.model.impl.ExtensionResourceImpl#isInAdministration <em>In Administration</em>}</li>
  *   <li>{@link com.schmeedy.pdt.joomla.core.project.model.impl.ExtensionResourceImpl#getExtensionModel <em>Extension Model</em>}</li>
+ *   <li>{@link com.schmeedy.pdt.joomla.core.project.model.impl.ExtensionResourceImpl#isSpecialResource <em>Special Resource</em>}</li>
  * </ul>
  * </p>
  *
@@ -151,6 +152,16 @@ public class ExtensionResourceImpl extends EObjectImpl implements ExtensionResou
 	protected boolean inAdministration = IN_ADMINISTRATION_EDEFAULT;
 
 	/**
+	 * The default value of the '{@link #isSpecialResource() <em>Special Resource</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isSpecialResource()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean SPECIAL_RESOURCE_EDEFAULT = false;
+
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -201,7 +212,7 @@ public class ExtensionResourceImpl extends EObjectImpl implements ExtensionResou
 	 */
 	@Override
 	public void setManifestRelativePath(IPath newManifestRelativePath) {
-		IPath oldManifestRelativePath = manifestRelativePath;
+		final IPath oldManifestRelativePath = manifestRelativePath;
 		manifestRelativePath = newManifestRelativePath;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, JoomlaProjectModelPackage.EXTENSION_RESOURCE__MANIFEST_RELATIVE_PATH, oldManifestRelativePath, manifestRelativePath));
@@ -212,6 +223,7 @@ public class ExtensionResourceImpl extends EObjectImpl implements ExtensionResou
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public int getInstallPackagePathSegments() {
 		return installPackagePathSegments;
 	}
@@ -221,8 +233,9 @@ public class ExtensionResourceImpl extends EObjectImpl implements ExtensionResou
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setInstallPackagePathSegments(int newInstallPackagePathSegments) {
-		int oldInstallPackagePathSegments = installPackagePathSegments;
+		final int oldInstallPackagePathSegments = installPackagePathSegments;
 		installPackagePathSegments = newInstallPackagePathSegments;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, JoomlaProjectModelPackage.EXTENSION_RESOURCE__INSTALL_PACKAGE_PATH_SEGMENTS, oldInstallPackagePathSegments, installPackagePathSegments));
@@ -245,7 +258,7 @@ public class ExtensionResourceImpl extends EObjectImpl implements ExtensionResou
 	 */
 	@Override
 	public void setResourceType(ResourceType newResourceType) {
-		ResourceType oldResourceType = resourceType;
+		final ResourceType oldResourceType = resourceType;
 		resourceType = newResourceType == null ? RESOURCE_TYPE_EDEFAULT : newResourceType;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, JoomlaProjectModelPackage.EXTENSION_RESOURCE__RESOURCE_TYPE, oldResourceType, resourceType));
@@ -268,7 +281,7 @@ public class ExtensionResourceImpl extends EObjectImpl implements ExtensionResou
 	 */
 	@Override
 	public void setFolder(boolean newFolder) {
-		boolean oldFolder = folder;
+		final boolean oldFolder = folder;
 		folder = newFolder;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, JoomlaProjectModelPackage.EXTENSION_RESOURCE__FOLDER, oldFolder, folder));
@@ -291,7 +304,7 @@ public class ExtensionResourceImpl extends EObjectImpl implements ExtensionResou
 	 */
 	@Override
 	public void setInAdministration(boolean newInAdministration) {
-		boolean oldInAdministration = inAdministration;
+		final boolean oldInAdministration = inAdministration;
 		inAdministration = newInAdministration;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, JoomlaProjectModelPackage.EXTENSION_RESOURCE__IN_ADMINISTRATION, oldInAdministration, inAdministration));
@@ -338,6 +351,21 @@ public class ExtensionResourceImpl extends EObjectImpl implements ExtensionResou
 		}
 		else if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, JoomlaProjectModelPackage.EXTENSION_RESOURCE__EXTENSION_MODEL, newExtensionModel, newExtensionModel));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	@Override
+	public boolean isSpecialResource() {
+		return resourceType != null && (
+					resourceType == ResourceType.SPECIAL_INSTALL_SQL ||
+					resourceType == ResourceType.SPECIAL_UNINSTALL_SQL ||
+					resourceType == ResourceType.SPECIAL_INSTALL_SCRIPT ||
+					resourceType == ResourceType.SPECIAL_UNINSTALL_SCRIPT
+				);
 	}
 
 	/**
@@ -406,6 +434,8 @@ public class ExtensionResourceImpl extends EObjectImpl implements ExtensionResou
 				return isInAdministration();
 			case JoomlaProjectModelPackage.EXTENSION_RESOURCE__EXTENSION_MODEL:
 				return getExtensionModel();
+			case JoomlaProjectModelPackage.EXTENSION_RESOURCE__SPECIAL_RESOURCE:
+				return isSpecialResource();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -492,6 +522,8 @@ public class ExtensionResourceImpl extends EObjectImpl implements ExtensionResou
 				return inAdministration != IN_ADMINISTRATION_EDEFAULT;
 			case JoomlaProjectModelPackage.EXTENSION_RESOURCE__EXTENSION_MODEL:
 				return getExtensionModel() != null;
+			case JoomlaProjectModelPackage.EXTENSION_RESOURCE__SPECIAL_RESOURCE:
+				return isSpecialResource() != SPECIAL_RESOURCE_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -505,7 +537,7 @@ public class ExtensionResourceImpl extends EObjectImpl implements ExtensionResou
 	public String toString() {
 		if (eIsProxy()) return super.toString();
 
-		StringBuffer result = new StringBuffer(super.toString());
+		final StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (manifestRelativePath: ");
 		result.append(manifestRelativePath);
 		result.append(", installPackagePathSegments: ");
