@@ -8,8 +8,13 @@ import java.util.List;
 import java.util.Set;
 
 import org.eclipse.core.resources.IProject;
+import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.ResourcesPlugin;
+import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.SubProgressMonitor;
+import org.eclipse.dltk.core.IScriptProject;
 import org.eclipse.dltk.ui.wizards.NewElementWizardPage;
 import org.eclipse.jface.dialogs.IMessageProvider;
 import org.eclipse.jface.layout.TableColumnLayout;
@@ -53,6 +58,8 @@ public class ImportExtensionWizardSecondPage extends NewElementWizardPage {
 	private final IJoomlaExtensionPackageImporter extensionPackageImporter;
 	
 	private final ExtensionProjectFactory projectFactory = new ExtensionProjectFactory();
+	
+	private final List<IScriptProject> importedProjects = new LinkedList<IScriptProject>();
 	
 	public ImportExtensionWizardSecondPage(IExtensionPackageFileProvider extensionPackageFileProvider, IJoomlaExtensionPackageImporter extensionPackageImporter) {
 		super("Import Joomla! Extension");
@@ -271,6 +278,42 @@ public class ImportExtensionWizardSecondPage extends NewElementWizardPage {
 		setPageComplete(!importedProjectNamesLowerCase.isEmpty());
 	}
 
+	public void performFinish(IProgressMonitor monitor) throws CoreException {
+		final List<TableRow> projectsToImport = new LinkedList<ImportExtensionWizardSecondPage.TableRow>();
+		for (final TableRow tableRow : tableModel) {
+			if (tableRow.doImport) {
+				projectsToImport.add(tableRow);
+			}
+		}
+		if (projectsToImport.isEmpty()) {
+			return;
+		}
+		try {
+			monitor.beginTask("Import selected Joomla! extensions.", projectsToImport.size() * 1000);
+			for (final TableRow project : projectsToImport) {
+				doImport(project.extension, project.projectName, new SubProgressMonitor(monitor, 1000));
+			}
+		} finally {
+			monitor.done();
+		}
+	}
+	
+	private void doImport(ArchivedExtensionManifest extension, String projectName, IProgressMonitor monitor) throws CoreException {
+		try {
+			monitor.beginTask("Import extension '" + extension.getModel().getName(), 3000);
+			final IScriptProject scriptProject = projectFactory.createJoomlaExtensionProject(projectName, extension.getModel(), new SubProgressMonitor(monitor, 1000));
+			final IPath projectLocation = scriptProject.getProject().getLocation();
+			extensionPackageImporter.importExtension(extension, projectLocation.toFile(), new SubProgressMonitor(monitor, 1000));
+			scriptProject.getProject().refreshLocal(IResource.DEPTH_INFINITE, new SubProgressMonitor(monitor, 1000));
+		} finally {
+			monitor.done();
+		}
+	}
+
+	public List<IScriptProject> getImportedProjects() {
+		return importedProjects;
+	}
+	
 	private static class TableRow {
 		boolean doImport;
 		ArchivedExtensionManifest extension;
