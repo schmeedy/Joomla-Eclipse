@@ -159,7 +159,7 @@
          point="org.eclipse.dltk.ui.buildpathContainerPage">
       <buildpathContainerPage
             class="com.schmeedy.pdt.joomla.ui.buildpath.JoomlaContainerWizardPage"
-            id="com.schmeedy.pdt.joomla.ui.JoomlaBuildpathContainerPage"
+            id="com.schmeedy.pdt.JoomlaAPI"
             name="Joomla! API"
             nature="com.schmeedy.pdt.joomla.core.JoomlaExtensionNature">
       </buildpathContainerPage>

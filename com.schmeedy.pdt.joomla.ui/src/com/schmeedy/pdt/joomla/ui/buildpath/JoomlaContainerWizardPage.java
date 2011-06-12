@@ -81,8 +81,10 @@ public class JoomlaContainerWizardPage extends NewElementWizardPage implements I
 			newEntry = null;
 			updateStatus(ValidationStatus.info("This entry is already present on the project's classpath."));
 		} else {
+			// there's been a warning about overriding current build path entry, but this wizard will most likely
+			// be used for editing current entry and thus it's common situation and should not cause warnings
 			newEntry = entry;
-			updateStatus(ValidationStatus.warning("Different entry with Joomla! API library is already on project's classpath and will be overwritten."));
+			updateStatus(OK_STATUS);
 		}		
 	}
 	
