@@ -4,9 +4,9 @@ import java.io.InputStream;
 
 import org.eclipse.core.runtime.IPath;
 
-public interface ArchiveEntry {
+public interface IArchiveEntry {
 
-	ArchiveFile getArchiveFile();
+	IArchiveFile getArchiveFile();
 	
 	IPath getPath();
 	

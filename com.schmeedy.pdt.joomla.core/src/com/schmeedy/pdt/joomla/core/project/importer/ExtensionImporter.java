@@ -17,8 +17,8 @@ import com.schmeedy.pdt.joomla.core.project.model.ExtensionResource;
 class ExtensionImporter {
 	
 	void importExtension(ArchivedExtensionManifest extension, File destinationDir, IProgressMonitor progressMonitor) throws ExtensionImportException {
-		final ArchiveEntry manifestEntry = extension.getArchiveEntry();
-		final ArchiveFile archiveFile = manifestEntry.getArchiveFile();
+		final IArchiveEntry manifestEntry = extension.getArchiveEntry();
+		final IArchiveFile archiveFile = manifestEntry.getArchiveFile();
 		final BasicExtensionModel model = extension.getModel();
 		
 		try {			
@@ -33,7 +33,7 @@ class ExtensionImporter {
 				resourceMap.put(resource.getFullPath().makeAbsolute(), resource);
 			}
 			
-			for (final ArchiveEntry archiveEntry : archiveFile) {
+			for (final IArchiveEntry archiveEntry : archiveFile) {
 				if (archiveEntry.isDirectory()) {
 					progressMonitor.worked(100);
 					continue;
@@ -55,7 +55,7 @@ class ExtensionImporter {
 		}
 	}
 
-	private void copyFile(ArchiveEntry fileEntry, File target) throws ExtensionImportException {
+	private void copyFile(IArchiveEntry fileEntry, File target) throws ExtensionImportException {
 		InputStream in = null;
 		OutputStream out = null;
 		try {

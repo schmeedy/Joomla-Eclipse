@@ -5,7 +5,7 @@ import java.util.List;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 
-public interface JoomlaExtensionPackageImporter {
+public interface IJoomlaExtensionPackageImporter {
 
 	List<ArchivedExtensionManifest> findExtensionManifests(File extensionArchive, IProgressMonitor progresMonitor);
 	

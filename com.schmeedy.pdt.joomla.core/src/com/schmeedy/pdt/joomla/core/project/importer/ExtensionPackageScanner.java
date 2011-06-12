@@ -31,7 +31,7 @@ private final File TMP_DIR = new File(new File(System.getProperty("java.io.tmpdi
 	private final BasicExtensionModelParser extensionModelParser = new BasicExtensionModelParser();
 
 	List<ArchivedExtensionManifest> findExtensionManifests(File extensionArchive, IProgressMonitor progresMonitor) {
-		final ArchiveFile archiveFile = createArchiveFile(extensionArchive);
+		final IArchiveFile archiveFile = createArchiveFile(extensionArchive);
 		try {
 			return findExtensionManifests(archiveFile, progresMonitor);
 		} finally {
@@ -39,13 +39,13 @@ private final File TMP_DIR = new File(new File(System.getProperty("java.io.tmpdi
 		}
 	}
 	
-	private List<ArchivedExtensionManifest> findExtensionManifests(ArchiveFile archiveFile, IProgressMonitor progresMonitor)
+	private List<ArchivedExtensionManifest> findExtensionManifests(IArchiveFile archiveFile, IProgressMonitor progresMonitor)
 			throws ArchiveException {
 		
 		final List<ArchivedExtensionManifest> manifests = new LinkedList<ArchivedExtensionManifest>();
 		try {
 			progresMonitor.beginTask("Scan archive for extension manifests.", archiveFile.getNumberOfEntries() * 1000);
-			for (final ArchiveEntry entry : archiveFile) {
+			for (final IArchiveEntry entry : archiveFile) {
 				if (isManifestFileEntry(entry)) {
 					final BasicExtensionModel model = parseExtensionModel(entry);
 					if (model.getType() == null) {
@@ -75,7 +75,7 @@ private final File TMP_DIR = new File(new File(System.getProperty("java.io.tmpdi
 		return manifests;
 	}
 
-	private List<ArchivedExtensionManifest> findExtensionManifestsInJoomlaPackage(BasicExtensionModel packageManifest, ArchiveFile archiveFile,
+	private List<ArchivedExtensionManifest> findExtensionManifestsInJoomlaPackage(BasicExtensionModel packageManifest, IArchiveFile archiveFile,
 			IProgressMonitor progresMonitor) {
 		
 		if (packageManifest.getResources().isEmpty()) {
@@ -86,13 +86,13 @@ private final File TMP_DIR = new File(new File(System.getProperty("java.io.tmpdi
 		try {
 			progresMonitor.beginTask("Scan Joomla! package for contained extensions.", packageManifest.getResources().size() * 1000);
 			for (final ExtensionResource resource : packageManifest.getResources()) {
-				final ArchiveEntry entry = archiveFile.getEntry(resource.getManifestRelativePath());
+				final IArchiveEntry entry = archiveFile.getEntry(resource.getManifestRelativePath());
 				if (entry == null) {
 					progresMonitor.worked(1000);
 					continue;
 				}
 				
-				final ArchiveFile extensionArchive = copyExtensionFromArchiveToTmpDir(entry, new SubProgressMonitor(progresMonitor, 200));
+				final IArchiveFile extensionArchive = copyExtensionFromArchiveToTmpDir(entry, new SubProgressMonitor(progresMonitor, 200));
 				if (extensionArchive != null) {
 					try {
 						final List<ArchivedExtensionManifest> extensionManifest = findExtensionManifests(extensionArchive, new SubProgressMonitor(progresMonitor, 800));
@@ -110,7 +110,7 @@ private final File TMP_DIR = new File(new File(System.getProperty("java.io.tmpdi
 		}
 	}
 	
-	private ArchiveFile copyExtensionFromArchiveToTmpDir(ArchiveEntry packageEntry, IProgressMonitor progressMonitor) {
+	private IArchiveFile copyExtensionFromArchiveToTmpDir(IArchiveEntry packageEntry, IProgressMonitor progressMonitor) {
 		InputStream in = null;
 		OutputStream out = null;
 		try {
@@ -145,7 +145,7 @@ private final File TMP_DIR = new File(new File(System.getProperty("java.io.tmpdi
 		}
 	}
 	
-	private ArchiveFile createArchiveFile(File file) {
+	private IArchiveFile createArchiveFile(File file) {
 		if (file.getName().endsWith(".zip") || file.getName().endsWith(".phar")) {
 			return new ZipArchiveFile(file);
 		} else {
@@ -153,7 +153,7 @@ private final File TMP_DIR = new File(new File(System.getProperty("java.io.tmpdi
 		}
 	}
 
-	private BasicExtensionModel parseExtensionModel(ArchiveEntry entry) {
+	private BasicExtensionModel parseExtensionModel(IArchiveEntry entry) {
 		final InputStream in = entry.openStream();
 		try {
 			final BasicExtensionModel model = extensionModelParser.parse(in, entry.getPath().lastSegment());
@@ -168,7 +168,7 @@ private final File TMP_DIR = new File(new File(System.getProperty("java.io.tmpdi
 		return null;
 	}
 
-	private boolean isManifestFileEntry(ArchiveEntry entry) throws ArchiveException {
+	private boolean isManifestFileEntry(IArchiveEntry entry) throws ArchiveException {
 		if (entry.getPath().lastSegment().endsWith(".xml")) {
 			InputStream in = null;
 			try {

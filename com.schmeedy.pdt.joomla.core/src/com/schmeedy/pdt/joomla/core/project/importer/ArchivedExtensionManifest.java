@@ -6,9 +6,9 @@ public class ArchivedExtensionManifest {
 
 	private final BasicExtensionModel model;
 	
-	private final ArchiveEntry archiveEntry;
+	private final IArchiveEntry archiveEntry;
 
-	public ArchivedExtensionManifest(BasicExtensionModel model, ArchiveEntry archiveEntry) {
+	public ArchivedExtensionManifest(BasicExtensionModel model, IArchiveEntry archiveEntry) {
 		this.model = model;
 		this.archiveEntry = archiveEntry;
 	}
@@ -17,7 +17,7 @@ public class ArchivedExtensionManifest {
 		return model;
 	}
 
-	ArchiveEntry getArchiveEntry() {
+	IArchiveEntry getArchiveEntry() {
 		return archiveEntry;
 	}
 	

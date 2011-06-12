@@ -27,16 +27,33 @@
    <extension
          point="org.eclipse.ui.newWizards">
       <category
-            id="com.schmeedy.pdt.joomla.ui"
+            id="com.schmeedy.pdt.joomla.ui.newCategory"
             name="Joomla!">
       </category>
       <wizard
-            category="com.schmeedy.pdt.joomla.ui"
+            category="com.schmeedy.pdt.joomla.ui.newCategory"
             class="com.schmeedy.pdt.joomla.ui.project.wizard.NewJoomlaExtensionProjectWizard"
             icon="platform:/plugin/com.schmeedy.pdt.joomla.common.ui/icons/obj16/joomla.png"
             id="com.schmeedy.pdt.joomla.ui.NewExtensionProject"
             name="Joomla! Extension Project"
             project="true">
+      </wizard>
+   </extension>
+   <extension
+         point="org.eclipse.ui.importWizards">
+      <category
+            id="com.schmeedy.pdt.joomla.ui.importCategory"
+            name="Joomla!">
+      </category>
+      <wizard
+            category="com.schmeedy.pdt.joomla.ui.importCategory"
+            class="com.schmeedy.pdt.joomla.ui.project.wizard.ImportExtensionWizard"
+            icon="platform:/plugin/com.schmeedy.pdt.joomla.common.ui/icons/obj16/joomla.png"
+            id="com.schmeedy.pdt.joomla.ui.ImportExtensionPackage"
+            name="Import Joomla! Extension">
+         <description>
+            Import Joomla! extension from an existing installation package.
+         </description>
       </wizard>
    </extension> 
    <extension

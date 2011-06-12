@@ -2,6 +2,6 @@
 <scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0" name="com.schmeedy.pdt.joomla.core.package-importer">
    <implementation class="com.schmeedy.pdt.joomla.core.project.importer.JoomlaExtensionPackageImporterImpl"/>
    <service>
-      <provide interface="com.schmeedy.pdt.joomla.core.project.importer.JoomlaExtensionPackageImporter"/>
+      <provide interface="com.schmeedy.pdt.joomla.core.project.importer.IJoomlaExtensionPackageImporter"/>
    </service>
 </scr:component>

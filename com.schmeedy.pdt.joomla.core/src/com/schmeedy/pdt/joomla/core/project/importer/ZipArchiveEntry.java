@@ -8,7 +8,7 @@ import org.apache.tools.zip.ZipEntry;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.Path;
 
-public class ZipArchiveEntry implements ArchiveEntry {
+public class ZipArchiveEntry implements IArchiveEntry {
 
 	private final ZipArchiveFile zipArchive;
 	
@@ -20,7 +20,7 @@ public class ZipArchiveEntry implements ArchiveEntry {
 	}
 	
 	@Override
-	public ArchiveFile getArchiveFile() {
+	public IArchiveFile getArchiveFile() {
 		return zipArchive;
 	}
 	

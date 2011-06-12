@@ -5,7 +5,7 @@ import java.util.List;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 
-public class JoomlaExtensionPackageImporterImpl implements JoomlaExtensionPackageImporter {
+public class JoomlaExtensionPackageImporterImpl implements IJoomlaExtensionPackageImporter {
 
 	private final ExtensionPackageScanner extensionPackageScanner = new ExtensionPackageScanner();
 	

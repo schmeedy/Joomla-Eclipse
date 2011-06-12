@@ -2,9 +2,9 @@ package com.schmeedy.pdt.joomla.core.project.importer;
 
 import org.eclipse.core.runtime.IPath;
 
-public interface ArchiveFile extends Iterable<ArchiveEntry> {
+public interface IArchiveFile extends Iterable<IArchiveEntry> {
 
-	ArchiveEntry getEntry(IPath path);
+	IArchiveEntry getEntry(IPath path);
 
 	int getNumberOfEntries();
 

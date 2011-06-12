@@ -10,7 +10,7 @@ import org.apache.tools.zip.ZipFile;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.Path;
 
-public class ZipArchiveFile implements ArchiveFile {
+public class ZipArchiveFile implements IArchiveFile {
 
 	private ZipFile zipFile;
 	private final File zipFileHandle;
@@ -29,7 +29,7 @@ public class ZipArchiveFile implements ArchiveFile {
 	}
 	
 	@Override
-	public ArchiveEntry getEntry(IPath path) {
+	public IArchiveEntry getEntry(IPath path) {
 		@SuppressWarnings("unchecked")
 		final Enumeration<ZipEntry> entries = zipFile.getEntries();
 		while (entries.hasMoreElements()) {
@@ -62,8 +62,8 @@ public class ZipArchiveFile implements ArchiveFile {
 	}
 	
 	@Override
-	public Iterator<ArchiveEntry> iterator() {
-		return new Iterator<ArchiveEntry>() {
+	public Iterator<IArchiveEntry> iterator() {
+		return new Iterator<IArchiveEntry>() {
 			@SuppressWarnings("unchecked")
 			private final Enumeration<ZipEntry> zipEntries = zipFile.getEntries();
 			
@@ -73,7 +73,7 @@ public class ZipArchiveFile implements ArchiveFile {
 			}
 			
 			@Override
-			public ArchiveEntry next() {
+			public IArchiveEntry next() {
 				if (!zipEntries.hasMoreElements()) {
 					throw new IllegalStateException("This iterator has no more elements.");
 				}
