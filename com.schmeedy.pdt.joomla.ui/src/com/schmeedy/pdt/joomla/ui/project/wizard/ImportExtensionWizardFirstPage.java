@@ -26,6 +26,8 @@ public class ImportExtensionWizardFirstPage extends NewElementWizardPage impleme
 		super("Import Joomla! Extension");
 		setTitle("Import Joomla! Extension");
 		setDescription("Import Joomla! extension or multiple extensions from installation package.");
+		
+		setPageComplete(false);
 	}
 
 	@Override

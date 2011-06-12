@@ -3,6 +3,7 @@ package com.schmeedy.pdt.joomla.core.server;
 import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.regex.Pattern;
 
 import org.apache.commons.httpclient.NameValuePair;
 import org.eclipse.core.runtime.Assert;
@@ -194,6 +195,17 @@ public class ServerUtils {
 				target.eSet(attribute, sourceValue);
 			}
 		}
+	}
+	
+	/**
+	 * Emulates JFilterInput::clean(x, 'cmd')
+	 */
+	public static String jfilterInputCleanCommand(String string) {
+		if (string == null) {
+			return null;
+		}
+		final Pattern pattern = Pattern.compile("[^A-Z0-9_\\.-]", Pattern.CASE_INSENSITIVE);
+		return pattern.matcher(string).replaceAll("");
 	}
 	
 }

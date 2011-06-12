@@ -27,6 +27,7 @@ import com.schmeedy.pdt.joomla.core.project.model.ManifestVersion;
 import com.schmeedy.pdt.joomla.core.project.model.MediaResource;
 import com.schmeedy.pdt.joomla.core.project.model.ResourceType;
 import com.schmeedy.pdt.joomla.core.server.IJoomlaHttpSession;
+import com.schmeedy.pdt.joomla.core.server.ServerUtils;
 import com.schmeedy.pdt.joomla.core.server.cfg.DeploymentRuntime;
 import com.schmeedy.pdt.joomla.core.server.cfg.JoomlaExtensionDeployment;
 import com.schmeedy.pdt.joomla.core.server.cfg.JoomlaServerConfigurationPackage;
@@ -265,8 +266,8 @@ public class DeploymentRuntimeImpl extends EObjectImpl implements DeploymentRunt
 				if (extension.getName() == null) {
 					return null;
 				}
-				final String lowerCaseName = extension.getName().toLowerCase();
-				return lowerCaseName.startsWith("com_") ? lowerCaseName : "com_" + lowerCaseName;
+				final String cleanedName = ServerUtils.jfilterInputCleanCommand(extension.getName().toLowerCase());
+				return cleanedName.startsWith("com_") ? cleanedName : "com_" + cleanedName;
 			case PLUGIN:
 			case MODULE:
 				return extension.getSymbolicName();
@@ -274,7 +275,7 @@ public class DeploymentRuntimeImpl extends EObjectImpl implements DeploymentRunt
 				if (extension.getName() == null) {
 					return null;
 				}
-				return extension.getName().toLowerCase().replace(" ", "_");
+				return ServerUtils.jfilterInputCleanCommand(extension.getName()).toLowerCase();
 			default:
 				return null;
 		}

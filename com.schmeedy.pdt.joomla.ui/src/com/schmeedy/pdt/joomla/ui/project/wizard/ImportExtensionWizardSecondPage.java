@@ -38,6 +38,7 @@ import com.schmeedy.pdt.joomla.core.project.importer.ArchivedExtensionManifest;
 import com.schmeedy.pdt.joomla.core.project.importer.IJoomlaExtensionPackageImporter;
 import com.schmeedy.pdt.joomla.core.project.model.BasicExtensionModel;
 import com.schmeedy.pdt.joomla.ui.JoomlaUiPlugin;
+import com.schmeedy.pdt.joomla.ui.project.ExtensionProjectFactory;
 
 public class ImportExtensionWizardSecondPage extends NewElementWizardPage {
 
@@ -51,13 +52,17 @@ public class ImportExtensionWizardSecondPage extends NewElementWizardPage {
 	
 	private final IJoomlaExtensionPackageImporter extensionPackageImporter;
 	
+	private final ExtensionProjectFactory projectFactory = new ExtensionProjectFactory();
+	
 	public ImportExtensionWizardSecondPage(IExtensionPackageFileProvider extensionPackageFileProvider, IJoomlaExtensionPackageImporter extensionPackageImporter) {
 		super("Import Joomla! Extension");
 		setTitle("Import Joomla! Extension");
 		setDescription(DESCRIPTION);
-		
+				
 		this.extensionPackageFileProvider = extensionPackageFileProvider;
 		this.extensionPackageImporter = extensionPackageImporter;
+		
+		setPageComplete(false);
 	}
 
 	@Override
@@ -202,7 +207,10 @@ public class ImportExtensionWizardSecondPage extends NewElementWizardPage {
 					final List<TableRow> tableRows = new LinkedList<ImportExtensionWizardSecondPage.TableRow>();
 					for (final ArchivedExtensionManifest archivedExtensionManifest : manifests) {
 						final TableRow tableRow = new TableRow(archivedExtensionManifest);
-						tableRow.projectName = archivedExtensionManifest.getModel().getName();
+						if (manifests.size() == 1) {
+							tableRow.doImport = true;
+						}
+						tableRow.projectName = projectFactory.suggestProjectName(archivedExtensionManifest.getModel());
 						tableRows.add(tableRow);
 					}
 					getShell().getDisplay().asyncExec(new Runnable() {
@@ -234,21 +242,33 @@ public class ImportExtensionWizardSecondPage extends NewElementWizardPage {
 			lowerCaseProjectNames.add(project.getName().toLowerCase());
 		}
 		
+		final Set<String> importedProjectNamesLowerCase = new HashSet<String>();
 		for (final TableRow row : tableModel) {
-			final String projectName = row.projectName;
-			if (projectName == null || projectName.equals("")) {
-				setErrorMessage("Project name cannot be empty - enter project name for '" + row.extension.getModel().getName() + "'");
-				return;
-			}
-			final String requestedProjectNameLC = (projectName).trim().toLowerCase();
-			if (lowerCaseProjectNames.contains(requestedProjectNameLC)) {
-				setErrorMessage("Project with name '" + projectName + "' already exists, please choose another name.");
-				return;
+			if (row.doImport) {
+				final String projectName = row.projectName;
+				if (projectName == null || projectName.equals("")) {
+					setErrorMessage("Project name cannot be empty - enter project name for '" + row.extension.getModel().getName() + "'");
+					setPageComplete(false);
+					return;
+				}
+				final String requestedProjectNameLC = (projectName).trim().toLowerCase();
+				if (lowerCaseProjectNames.contains(requestedProjectNameLC)) {
+					setErrorMessage("Project with name '" + projectName + "' already exists, please choose another name.");
+					setPageComplete(false);
+					return;
+				}
+				if (importedProjectNamesLowerCase.contains(projectName.toLowerCase())) {
+					setErrorMessage("Multiple imported projects share the same name: " + projectName);
+					setPageComplete(false);
+					return;
+				}
+				importedProjectNamesLowerCase.add(projectName);
 			}
 		}
 		
 		setErrorMessage(null);
 		setMessage(DESCRIPTION + " You can modify name of the extension's project directly in the table.", IMessageProvider.INFORMATION);
+		setPageComplete(!importedProjectNamesLowerCase.isEmpty());
 	}
 
 	private static class TableRow {
