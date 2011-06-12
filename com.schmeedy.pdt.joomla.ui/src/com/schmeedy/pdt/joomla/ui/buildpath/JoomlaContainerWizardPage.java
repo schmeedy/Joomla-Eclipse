@@ -28,6 +28,8 @@ public class JoomlaContainerWizardPage extends NewElementWizardPage implements I
 
 	private IBuildpathEntry alreadyPresentJoomlaEntry;
 	private IBuildpathEntry newEntry;
+
+	private boolean isEdit = false;
 	
 	private IScriptProject project;
 	private IBuildpathEntry[] buildpath;
@@ -95,10 +97,10 @@ public class JoomlaContainerWizardPage extends NewElementWizardPage implements I
 
 	@Override
 	public IBuildpathEntry getSelection() {
-		if (newEntry != null && alreadyPresentJoomlaEntry != null) {
-			final List<IBuildpathEntry> entries = new ArrayList<IBuildpathEntry>(Arrays.asList(buildpath));
-			entries.remove(alreadyPresentJoomlaEntry);
+		if (!isEdit && newEntry != null && alreadyPresentJoomlaEntry != null) {
 			try {
+				final List<IBuildpathEntry> entries = new ArrayList<IBuildpathEntry>(Arrays.asList(project.getRawBuildpath()));
+				entries.remove(alreadyPresentJoomlaEntry);
 				project.setRawBuildpath(entries.toArray(new IBuildpathEntry[entries.size()]), null);
 			} catch (final ModelException e) {
 				JoomlaUiPlugin.getInstance().logError("Failed to remove buildpath entry. New Joomla! API container entry cannot be created.", e);
@@ -109,7 +111,9 @@ public class JoomlaContainerWizardPage extends NewElementWizardPage implements I
 	}
 
 	@Override
-	public void setSelection(IBuildpathEntry containerEntry) {}
+	public void setSelection(IBuildpathEntry containerEntry) {
+		isEdit = containerEntry != null;		
+	}
 
 	@Override
 	public void dispose() {

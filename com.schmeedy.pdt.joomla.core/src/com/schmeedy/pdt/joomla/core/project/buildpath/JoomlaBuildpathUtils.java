@@ -29,7 +29,11 @@ public class JoomlaBuildpathUtils {
 	}
 	
 	public static boolean isExtendedJoomlaContainerEntry(IBuildpathEntry entry) {
-		return isJoomlaContainerEntry(entry) && entry.getPath().segmentCount() > 1;
+		return entry != null && isExtendedJoomlaContainerPath(entry.getPath());
+	}
+	
+	public static boolean isExtendedJoomlaContainerPath(IPath path) {
+		return isJoomlaContainerPath(path) && path.segmentCount() > 1;
 	}
 	
 	public static IBuildpathEntry newDefaultJoomlaContainerEntry() {
@@ -45,6 +49,13 @@ public class JoomlaBuildpathUtils {
 			throw new IllegalArgumentException("Entry is not an extended Joomla! container entry.");
 		}
 		return entry.getPath().segment(1);
+	}
+	
+	public static String getJoomlaServerTeamId(IPath containerPath) {
+		if (!isExtendedJoomlaContainerPath(containerPath)) {
+			throw new IllegalArgumentException("Path is not an extended Joomla! container path.");
+		}
+		return containerPath.segment(1);
 	}
 	
 }
