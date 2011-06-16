@@ -25,7 +25,7 @@ import com.schmeedy.pdt.joomla.core.project.model.ExtensionType;
 import com.schmeedy.pdt.joomla.core.server.ServerUtils;
 
 public class ExtensionProjectFactory {
-
+	
 	public String suggestProjectName(BasicExtensionModel extension) {
 		if ((extension.getType() == null || extension.getType() == ExtensionType.UNKNOWN)) {
 			if (extension.getName() == null) {
