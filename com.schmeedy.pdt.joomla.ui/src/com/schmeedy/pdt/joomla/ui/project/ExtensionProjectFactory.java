@@ -61,7 +61,7 @@ public class ExtensionProjectFactory {
 					return "unknown_template";
 				} else {
 					final String cleanedName = ServerUtils.jfilterInputCleanCommand(extension.getName().toLowerCase());
-					return cleanedName.startsWith("tpl_") ? cleanedName : "tpl" + cleanedName;
+					return cleanedName.startsWith("tpl_") ? cleanedName : "tpl_" + cleanedName;
 				}
 			default:
 				if (extension.getName() == null) {

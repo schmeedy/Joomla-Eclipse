@@ -1,9 +1,7 @@
 package com.schmeedy.pdt.joomla.ui.project.wizard;
 
 import org.eclipse.dltk.ui.wizards.NewElementWizardPage;
-import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.common.notify.impl.AdapterImpl;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
@@ -12,6 +10,7 @@ import org.eclipse.jface.viewers.ComboViewer;
 import org.eclipse.jface.viewers.ISelectionChangedListener;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.SelectionChangedEvent;
+import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.StackLayout;
 import org.eclipse.swt.layout.GridData;
@@ -24,20 +23,15 @@ import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
 
-import com.schmeedy.pdt.joomla.core.project.model.BasicExtensionModel;
-import com.schmeedy.pdt.joomla.core.project.model.ExtensionType;
-import com.schmeedy.pdt.joomla.core.project.model.JoomlaProjectModelFactory;
 import com.schmeedy.pdt.joomla.manifest.model.JoomlaExtensionManifest;
+import com.schmeedy.pdt.joomla.manifest.model.JoomlaExtensionManifestFactory;
 import com.schmeedy.pdt.joomla.manifest.model.JoomlaExtensionManifestPackage;
 import com.schmeedy.pdt.joomla.manifest.model.ManifestType;
-import com.schmeedy.pdt.joomla.ui.project.ExtensionProjectFactory;
+import com.schmeedy.pdt.joomla.manifest.model.ManifestVersion;
 
-public class NewExtensionProjectWizardFirstPage extends NewElementWizardPage {
+public class NewExtensionProjectWizardFirstPage extends NewElementWizardPage implements IExtensionManifestProvider {
 
-	private final JoomlaExtensionManifest manifest;
-	private final Adapter extensionNameChangeAdapter;
-	
-	private final ExtensionProjectFactory projectFactory;
+	private final JoomlaExtensionManifest manifest = JoomlaExtensionManifestFactory.eINSTANCE.createJoomlaExtensionManifest();
 	
 	private Text componentMenuText;
 	
@@ -52,20 +46,13 @@ public class NewExtensionProjectWizardFirstPage extends NewElementWizardPage {
 	private Composite componentComposite;
 	private Composite moduleComposite;
 	private Composite pluginComposite;
-	
-	private Label projectNameLabel;
-	private Text projectNameText;
 
-	public NewExtensionProjectWizardFirstPage(final JoomlaExtensionManifest manifest, final ExtensionProjectFactory projectFactory) {
+	private ComboViewer versionComboViewer;
+
+	public NewExtensionProjectWizardFirstPage() {
 		super("New Joomla! Extension Project");
 		setTitle("New Joomla! Extension Project");
-		setDescription("Create a new workspace project for Joomla! extension.");
-		
-		this.manifest = manifest;
-		this.projectFactory = projectFactory;
-		
-		this.extensionNameChangeAdapter = new ExtensionNameChangeAdapter();
-		this.manifest.eAdapters().add(extensionNameChangeAdapter);
+		setDescription("Enter basic extension metadata.");
 	}
 
 	@Override
@@ -105,17 +92,25 @@ public class NewExtensionProjectWizardFirstPage extends NewElementWizardPage {
 					}
 					commonMetadataContainer.setVisible(true);
 					extensionSpecificSettingsGroup.setVisible(true);
-					projectNameLabel.setVisible(true);
-					projectNameText.setVisible(true);
 					
 					{ // refresh project name
-						projectNameText.setText("");
 						final String name = manifest.getName();
 						manifest.eNotify(new ENotificationImpl((InternalEObject) manifest, Notification.SET, JoomlaExtensionManifestPackage.JOOMLA_EXTENSION_MANIFEST__NAME, name, name));
 					}
 				}
 			}
 		});
+
+		final Label lblTargetJoomlaVersion = new Label(container, SWT.NONE);
+		lblTargetJoomlaVersion.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
+		lblTargetJoomlaVersion.setText("Joomla! version:");
+		
+		versionComboViewer = new ComboViewer(container, SWT.READ_ONLY);
+		final Combo versionCombo = versionComboViewer.getCombo();
+		versionCombo.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
+		versionComboViewer.setContentProvider(new ArrayContentProvider());
+		versionComboViewer.setInput(new ManifestVersion[] { ManifestVersion.ONE_SIX, ManifestVersion.ONE_FIVE });
+		versionComboViewer.setSelection(new StructuredSelection(ManifestVersion.ONE_SIX));
 		
 		commonMetadata = new CommonExtensionMetadataBlock(manifest);
 		commonMetadataContainer = commonMetadata.createControl(container);
@@ -125,7 +120,7 @@ public class NewExtensionProjectWizardFirstPage extends NewElementWizardPage {
 		extensionSpecificSettingsGroup = new Group(container, SWT.NONE);
 		extensionSpecificSettingsGroup.setText("Type Specific Settings");
 		extensionSpecificSettingsGroup.setLayout(new StackLayout());
-		final GridData gd_extensionSpecificSettingsGroup = new GridData(SWT.FILL, SWT.TOP, false, false, 2, 1);
+		final GridData gd_extensionSpecificSettingsGroup = new GridData(SWT.FILL, SWT.FILL, false, true, 2, 1);
 		gd_extensionSpecificSettingsGroup.heightHint = 57;
 		extensionSpecificSettingsGroup.setLayoutData(gd_extensionSpecificSettingsGroup);
 		extensionSpecificSettingsGroup.setVisible(false);
@@ -155,14 +150,18 @@ public class NewExtensionProjectWizardFirstPage extends NewElementWizardPage {
 		btnBackendModule.setText("Back-end module");
 		
 		pluginComposite = new Composite(extensionSpecificSettingsGroup, SWT.NONE);
+	}
+	
+	@Override
+	public JoomlaExtensionManifest getManifest() {
+		final JoomlaExtensionManifest copy = EcoreUtil.copy(manifest);
 		
-		projectNameLabel = new Label(container, SWT.NONE);
-		projectNameLabel.setText("Project name:");
-		projectNameLabel.setVisible(false);
+		if (versionComboViewer != null) {
+			final ManifestVersion version = (ManifestVersion) ((IStructuredSelection) versionComboViewer.getSelection()).getFirstElement();
+			copy.setManifestVersion(version);
+		}
 		
-		projectNameText = new Text(container, SWT.BORDER);
-		projectNameText.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
-		projectNameText.setVisible(false);
+		return copy;
 	}
 	
 	private void revealExtensionSpecificSettings(Composite composite) {
@@ -175,46 +174,6 @@ public class NewExtensionProjectWizardFirstPage extends NewElementWizardPage {
 	public void dispose() {
 		if (commonMetadata != null) {
 			commonMetadata.dispose();
-		}
-		manifest.eAdapters().remove(extensionNameChangeAdapter);
-	}
-	
-	private final class ExtensionNameChangeAdapter extends AdapterImpl {
-		@Override
-		public void notifyChanged(Notification msg) {
-			if (msg.getEventType() == Notification.SET && msg.getFeature() == JoomlaExtensionManifestPackage.Literals.JOOMLA_EXTENSION_MANIFEST__NAME && msg.getNewStringValue() != null) {
-				final BasicExtensionModel basicExtensionModel = toBasicExtensionModel(manifest);
-				
-				final BasicExtensionModel oldBasicExtensionModel = EcoreUtil.copy(basicExtensionModel);
-				oldBasicExtensionModel.setName(msg.getOldStringValue());
-				final String oldSuggestedName = projectFactory.suggestProjectName(oldBasicExtensionModel);
-			
-				if (isEmpty(projectNameText.getText()) || oldSuggestedName.equals(projectNameText.getText())) {
-					final String newSuggestedName = projectFactory.suggestProjectName(basicExtensionModel);
-					projectNameText.setText(newSuggestedName);
-				}
-			}
-		}
-
-		private BasicExtensionModel toBasicExtensionModel(JoomlaExtensionManifest manifest) {
-			final BasicExtensionModel model = JoomlaProjectModelFactory.eINSTANCE.createBasicExtensionModel();
-			model.setName(manifest.getName());
-			switch (manifest.getManifestType()) {
-				case COMPONENT:
-					model.setType(ExtensionType.COMPONENT);
-					break;
-				case MODULE:
-					model.setType(ExtensionType.MODULE);
-					break;
-				case PLUGIN:
-					model.setType(ExtensionType.PLUGIN);
-					break;
-			}
-			return model;
-		}
-
-		private boolean isEmpty(String string) {
-			return string == null || "".equals(string);
 		}
 	}
 

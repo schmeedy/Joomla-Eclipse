@@ -19,6 +19,7 @@ public class ImportExtensionWizard extends NewElementWizard {
 	private ImportExtensionWizardSecondPage secondPage;
 	
 	public ImportExtensionWizard() {
+		setWindowTitle("Import Joomla! Extension");
 		setNeedsProgressMonitor(true);
 	}
 	

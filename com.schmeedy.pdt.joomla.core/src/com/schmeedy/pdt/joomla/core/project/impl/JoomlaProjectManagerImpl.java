@@ -154,6 +154,10 @@ public class JoomlaProjectManagerImpl implements IJoomlaProjectManager {
 			}
 		}
 		
+		if (!manifestFile.exists()) {
+			return null;
+		}
+		
 		try {
 			final InputStream inputStream = manifestFile.getContents();
 			try {

@@ -5,36 +5,35 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.dltk.core.IModelElement;
 import org.eclipse.dltk.ui.wizards.NewElementWizard;
 
-import com.schmeedy.pdt.joomla.manifest.model.JoomlaExtensionManifest;
-import com.schmeedy.pdt.joomla.manifest.model.JoomlaExtensionManifestFactory;
-import com.schmeedy.pdt.joomla.ui.project.ExtensionProjectFactory;
-
 public class NewExtensionProjectWizard extends NewElementWizard {
 
-	private final JoomlaExtensionManifest manifest = JoomlaExtensionManifestFactory.eINSTANCE.createJoomlaExtensionManifest();
-	
 	private NewExtensionProjectWizardFirstPage firstPage;
+	private NewExtensionProjectWizardSecondPage secondPage;
 	
 	public NewExtensionProjectWizard() {
+		setWindowTitle("New Joomla! Extension Project");
 		setNeedsProgressMonitor(true);
 	}
 	
 	@Override
 	public void addPages() {
-		firstPage = new NewExtensionProjectWizardFirstPage(manifest, new ExtensionProjectFactory());
+		firstPage = new NewExtensionProjectWizardFirstPage();
 		addPage(firstPage);
+
+		secondPage = new NewExtensionProjectWizardSecondPage(firstPage);
+		addPage(secondPage);
 	}
 	
 	@Override
 	protected void finishPage(IProgressMonitor monitor) throws InterruptedException, CoreException {
-		// TODO Auto-generated method stub
-		
+		if (secondPage != null) {
+			secondPage.performFinish(monitor);
+		}
 	}
 
 	@Override
 	public IModelElement getCreatedElement() {
-		// TODO Auto-generated method stub
-		return null;
+		return secondPage == null ? null : secondPage.getCreatedProject();
 	}
 
 }
