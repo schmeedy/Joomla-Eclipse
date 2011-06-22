@@ -1,78 +1,77 @@
 package com.schmeedy.pdt.joomla.core.project.impl;
 
-import java.util.Arrays;
-
+import org.eclipse.core.resources.ICommand;
 import org.eclipse.core.resources.IProject;
+import org.eclipse.core.resources.IProjectDescription;
 import org.eclipse.core.resources.IProjectNature;
 import org.eclipse.core.runtime.CoreException;
-import org.eclipse.core.runtime.Path;
-import org.eclipse.dltk.core.DLTKCore;
-import org.eclipse.dltk.core.IBuildpathEntry;
-import org.eclipse.dltk.core.IScriptProject;
-import org.eclipse.dltk.core.ModelException;
 
-import com.schmeedy.pdt.joomla.core.project.buildpath.impl.JoomlaBuildpathContainer;
+import com.schmeedy.pdt.joomla.core.project.builder.JoomlaExtensionProjectBuilder;
 
 public class JoomlaExtensionProjectNature implements IProjectNature {
 
 	public static final String ID = "com.schmeedy.pdt.joomla.core.JoomlaExtensionNature";
-	
+
 	private IProject project;
-	
+
 	@Override
 	public void configure() throws CoreException {
-		final IScriptProject scriptProject = DLTKCore.create(project);
-		if (!scriptProject.isValid()) {
-			return;
-		}
-		
-//		addJoomlaBuildpathContainer(scriptProject);
+		addToFrontOfBuildSpec(JoomlaExtensionProjectBuilder.ID);
 	}
 
 	@Override
 	public void deconfigure() throws CoreException {
-		final IScriptProject scriptProject = DLTKCore.create(project);
-		if (!scriptProject.isValid()) {
-			return;
-		}
-		
-//		removeJoomlaBuildpathContainer(scriptProject);
-	}
-	
-	private void addJoomlaBuildpathContainer(final IScriptProject scriptProject) throws ModelException {
-		final IBuildpathEntry[] buildpath = scriptProject.getRawBuildpath();
-		for (final IBuildpathEntry entry : buildpath) {
-			if (JoomlaBuildpathContainer.ID.equals(entry.getPath().segment(0))) {
-				return;
-			}
-		}
-		final IBuildpathEntry[] extendedBuildpath = Arrays.copyOf(buildpath, buildpath.length + 1);
-		extendedBuildpath[extendedBuildpath.length - 1] = DLTKCore.newContainerEntry(new Path(JoomlaBuildpathContainer.ID));
-		scriptProject.setRawBuildpath(extendedBuildpath, null);
+		removeFromBuildSpec(JoomlaExtensionProjectBuilder.ID);
 	}
 
-	private void removeJoomlaBuildpathContainer(IScriptProject scriptProject) throws ModelException {
-		final IBuildpathEntry[] buildpath = scriptProject.getRawBuildpath();
-		int joomlaContainerIdx = -1;
-		for (int i = 0; i < buildpath.length; i++) {
-			final IBuildpathEntry entry = buildpath[i];
-			if (JoomlaBuildpathContainer.ID.equals(entry.getPath().segment(0))) {
-				joomlaContainerIdx = i;
+	private ICommand addToFrontOfBuildSpec(String builderID) throws CoreException {
+		ICommand command = null;
+		final IProjectDescription description = project.getDescription();
+		final ICommand[] commands = description.getBuildSpec();
+		boolean found = false;
+		for (int i = 0; i < commands.length; ++i) {
+			if (commands[i].getBuilderName().equals(builderID)) {
+				found = true;
+				command = commands[i];
 				break;
 			}
 		}
-		if (joomlaContainerIdx >= 0) {
-			final IBuildpathEntry[] newBuildpath = new IBuildpathEntry[buildpath.length - 1];
-			int idx = 0, newIdx = 0;
-			for (; idx < buildpath.length; idx++) {
-				if (idx != joomlaContainerIdx) {
-					newBuildpath[newIdx++] = buildpath[idx];
-				}
-			}
-			scriptProject.setRawBuildpath(newBuildpath, null);
+		if (!found) {
+			command = description.newCommand();
+			command.setBuilderName(builderID);
+			final ICommand[] newCommands = new ICommand[commands.length + 1];
+			System.arraycopy(commands, 0, newCommands, 1, commands.length);
+			newCommands[0] = command;
+			final IProjectDescription desc = getProject().getDescription();
+			desc.setBuildSpec(newCommands);
+			getProject().setDescription(desc, null);
 		}
+		return command;
 	}
 
+	private void removeFromBuildSpec(String builderID) throws org.eclipse.core.runtime.CoreException {
+		final IProjectDescription description = project.getDescription();
+		final ICommand[] commands = description.getBuildSpec();
+		boolean found = false;
+		for (int i = 0; i < commands.length; ++i) {
+			if (commands[i].getBuilderName().equals(builderID)) {
+				found = true;
+				break;
+			}
+		}
+		if (!found) {
+			final ICommand command = description.newCommand();
+			command.setBuilderName(builderID);
+			final ICommand[] newCommands = new ICommand[commands.length + 1];
+			System.arraycopy(commands, 0, newCommands, 1, commands.length);
+			newCommands[0] = command;
+			final IProjectDescription desc = getProject().getDescription();
+			desc.setBuildSpec(newCommands);
+			getProject().setDescription(desc, null);
+		}
+
+	}
+	
 	@Override
 	public IProject getProject() {
 		return project;

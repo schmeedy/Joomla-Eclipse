@@ -28,6 +28,8 @@ import com.schmeedy.pdt.service.registry.ServiceRegistry;
 
 public class JoomlaExtensionProjectBuilder extends IncrementalProjectBuilder {
 
+	public static final String ID = "com.schmeedy.pdt.joomla.core.extensionbuilder";
+	
 	private static final IProject[] EMPTY_PROJECTS = new IProject[0];
 
 	private final IJoomlaDeployer deployer = ServiceRegistry.getInstance().getService(IJoomlaDeployer.class);

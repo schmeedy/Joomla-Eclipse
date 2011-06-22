@@ -102,7 +102,8 @@
          id="extensionbuilder"
          name="Joomla! Extension Project Builder"
          point="org.eclipse.core.resources.builders">
-      <builder>
+      <builder
+            hasNature="true">
          <run
                class="com.schmeedy.pdt.joomla.core.project.builder.JoomlaExtensionProjectBuilder">
          </run></builder>
