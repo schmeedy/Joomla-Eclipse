@@ -34,6 +34,30 @@
                systemId="http://dev.joomla.org/xml/1.5/component-install.dtd"
                uri="model/xml/component-1.5.dtd">
          </system>
+         <public
+               publicId="-//Joomla! 1.5//DTD module 1.0//EN"
+               uri="model/xml/module-1.5.dtd">
+         </public>
+         <system
+               systemId="http://dev.joomla.org/xml/1.5/module-install.dtd"
+               uri="model/xml/module-1.5.dtd">
+         </system>
+         <public
+               publicId="-//Joomla! 1.5//DTD plugin 1.0//EN"
+               uri="model/xml/plugin-1.5.dtd">
+         </public>
+         <system
+               systemId="http://dev.joomla.org/xml/1.5/plugin-install.dtd"
+               uri="model/xml/plugin-1.5.dtd">
+         </system>
+         <public
+               publicId="-//Joomla! 1.5//DTD template 1.0//EN"
+               uri="model/xml/template-1.5.dtd">
+         </public>
+         <system
+               systemId="http://dev.joomla.org/xml/1.5/template-install.dtd"
+               uri="model/xml/template-1.5.dtd">
+         </system>
       </catalogContribution>
    </extension>
 

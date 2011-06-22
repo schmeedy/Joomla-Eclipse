@@ -1,4 +1,5 @@
-<!ELEMENT install (name,creationDate,author,authorEmail,authorUrl,copyright,license,version,description,files*,languages*,administration*,positions*,params*)>
+<!ELEMENT install (name | creationDate | author | authorEmail | authorUrl | copyright | license | version | 
+	description | files | languages | administration | positions | params)*>
 <!ATTLIST install
 	type NMTOKEN #FIXED "template"
 	client (site|administrator) "site"

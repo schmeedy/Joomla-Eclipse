@@ -1,4 +1,4 @@
-<!ELEMENT install (name, creationDate, author, authorEmail, authorUrl, copyright, license, version, description, files*, languages*, media*, params?) >
+<!ELEMENT install (name | creationDate | author | authorEmail | authorUrl | copyright | license | version | description | files | languages | media | params)* >
 <!ATTLIST install
 	type NMTOKEN #FIXED 'module'
 	client NMTOKEN #IMPLIED
