@@ -14,6 +14,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 import com.schmeedy.pdt.joomla.manifest.model.Administration;
 import com.schmeedy.pdt.joomla.manifest.model.InstallDb;
+import com.schmeedy.pdt.joomla.manifest.model.JoomlaDestination;
 import com.schmeedy.pdt.joomla.manifest.model.JoomlaExtensionManifest;
 import com.schmeedy.pdt.joomla.manifest.model.JoomlaExtensionManifestPackage;
 import com.schmeedy.pdt.joomla.manifest.model.ManifestType;
@@ -40,6 +41,8 @@ import com.schmeedy.pdt.joomla.manifest.model.UninstallDb;
  *   <li>{@link com.schmeedy.pdt.joomla.manifest.model.impl.JoomlaExtensionManifestImpl#getDescription <em>Description</em>}</li>
  *   <li>{@link com.schmeedy.pdt.joomla.manifest.model.impl.JoomlaExtensionManifestImpl#getInstallFile <em>Install File</em>}</li>
  *   <li>{@link com.schmeedy.pdt.joomla.manifest.model.impl.JoomlaExtensionManifestImpl#getUninstallFile <em>Uninstall File</em>}</li>
+ *   <li>{@link com.schmeedy.pdt.joomla.manifest.model.impl.JoomlaExtensionManifestImpl#getDestination <em>Destination</em>}</li>
+ *   <li>{@link com.schmeedy.pdt.joomla.manifest.model.impl.JoomlaExtensionManifestImpl#getPluginGroup <em>Plugin Group</em>}</li>
  *   <li>{@link com.schmeedy.pdt.joomla.manifest.model.impl.JoomlaExtensionManifestImpl#getInstall <em>Install</em>}</li>
  *   <li>{@link com.schmeedy.pdt.joomla.manifest.model.impl.JoomlaExtensionManifestImpl#getUninstall <em>Uninstall</em>}</li>
  *   <li>{@link com.schmeedy.pdt.joomla.manifest.model.impl.JoomlaExtensionManifestImpl#getAdministration <em>Administration</em>}</li>
@@ -308,6 +311,46 @@ public class JoomlaExtensionManifestImpl extends AbstractMultiResourceContainerI
 	 * @ordered
 	 */
 	protected String uninstallFile = UNINSTALL_FILE_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getDestination() <em>Destination</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getDestination()
+	 * @generated NOT
+	 * @ordered
+	 */
+	protected static final JoomlaDestination DESTINATION_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getDestination() <em>Destination</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getDestination()
+	 * @generated
+	 * @ordered
+	 */
+	protected JoomlaDestination destination = DESTINATION_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getPluginGroup() <em>Plugin Group</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getPluginGroup()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String PLUGIN_GROUP_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getPluginGroup() <em>Plugin Group</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getPluginGroup()
+	 * @generated
+	 * @ordered
+	 */
+	protected String pluginGroup = PLUGIN_GROUP_EDEFAULT;
 
 	/**
 	 * The cached value of the '{@link #getInstall() <em>Install</em>}' containment reference.
@@ -662,6 +705,51 @@ public class JoomlaExtensionManifestImpl extends AbstractMultiResourceContainerI
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
+	public JoomlaDestination getDestination() {
+		return destination;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setDestination(JoomlaDestination newDestination) {
+		JoomlaDestination oldDestination = destination;
+		destination = newDestination == null ? DESTINATION_EDEFAULT : newDestination;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, JoomlaExtensionManifestPackage.JOOMLA_EXTENSION_MANIFEST__DESTINATION, oldDestination, destination));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getPluginGroup() {
+		return pluginGroup;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setPluginGroup(String newPluginGroup) {
+		String oldPluginGroup = pluginGroup;
+		pluginGroup = newPluginGroup;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, JoomlaExtensionManifestPackage.JOOMLA_EXTENSION_MANIFEST__PLUGIN_GROUP, oldPluginGroup, pluginGroup));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public InstallDb getInstall() {
 		return install;
 	}
@@ -686,6 +774,7 @@ public class JoomlaExtensionManifestImpl extends AbstractMultiResourceContainerI
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setInstall(InstallDb newInstall) {
 		if (newInstall != install) {
 			NotificationChain msgs = null;
@@ -705,6 +794,7 @@ public class JoomlaExtensionManifestImpl extends AbstractMultiResourceContainerI
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public UninstallDb getUninstall() {
 		return uninstall;
 	}
@@ -729,6 +819,7 @@ public class JoomlaExtensionManifestImpl extends AbstractMultiResourceContainerI
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setUninstall(UninstallDb newUninstall) {
 		if (newUninstall != uninstall) {
 			NotificationChain msgs = null;
@@ -748,6 +839,7 @@ public class JoomlaExtensionManifestImpl extends AbstractMultiResourceContainerI
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Administration getAdministration() {
 		return administration;
 	}
@@ -772,6 +864,7 @@ public class JoomlaExtensionManifestImpl extends AbstractMultiResourceContainerI
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setAdministration(Administration newAdministration) {
 		if (newAdministration != administration) {
 			NotificationChain msgs = null;
@@ -838,6 +931,10 @@ public class JoomlaExtensionManifestImpl extends AbstractMultiResourceContainerI
 				return getInstallFile();
 			case JoomlaExtensionManifestPackage.JOOMLA_EXTENSION_MANIFEST__UNINSTALL_FILE:
 				return getUninstallFile();
+			case JoomlaExtensionManifestPackage.JOOMLA_EXTENSION_MANIFEST__DESTINATION:
+				return getDestination();
+			case JoomlaExtensionManifestPackage.JOOMLA_EXTENSION_MANIFEST__PLUGIN_GROUP:
+				return getPluginGroup();
 			case JoomlaExtensionManifestPackage.JOOMLA_EXTENSION_MANIFEST__INSTALL:
 				return getInstall();
 			case JoomlaExtensionManifestPackage.JOOMLA_EXTENSION_MANIFEST__UNINSTALL:
@@ -894,6 +991,12 @@ public class JoomlaExtensionManifestImpl extends AbstractMultiResourceContainerI
 				return;
 			case JoomlaExtensionManifestPackage.JOOMLA_EXTENSION_MANIFEST__UNINSTALL_FILE:
 				setUninstallFile((String)newValue);
+				return;
+			case JoomlaExtensionManifestPackage.JOOMLA_EXTENSION_MANIFEST__DESTINATION:
+				setDestination((JoomlaDestination)newValue);
+				return;
+			case JoomlaExtensionManifestPackage.JOOMLA_EXTENSION_MANIFEST__PLUGIN_GROUP:
+				setPluginGroup((String)newValue);
 				return;
 			case JoomlaExtensionManifestPackage.JOOMLA_EXTENSION_MANIFEST__INSTALL:
 				setInstall((InstallDb)newValue);
@@ -955,6 +1058,12 @@ public class JoomlaExtensionManifestImpl extends AbstractMultiResourceContainerI
 			case JoomlaExtensionManifestPackage.JOOMLA_EXTENSION_MANIFEST__UNINSTALL_FILE:
 				setUninstallFile(UNINSTALL_FILE_EDEFAULT);
 				return;
+			case JoomlaExtensionManifestPackage.JOOMLA_EXTENSION_MANIFEST__DESTINATION:
+				setDestination(DESTINATION_EDEFAULT);
+				return;
+			case JoomlaExtensionManifestPackage.JOOMLA_EXTENSION_MANIFEST__PLUGIN_GROUP:
+				setPluginGroup(PLUGIN_GROUP_EDEFAULT);
+				return;
 			case JoomlaExtensionManifestPackage.JOOMLA_EXTENSION_MANIFEST__INSTALL:
 				setInstall((InstallDb)null);
 				return;
@@ -1002,6 +1111,10 @@ public class JoomlaExtensionManifestImpl extends AbstractMultiResourceContainerI
 				return INSTALL_FILE_EDEFAULT == null ? installFile != null : !INSTALL_FILE_EDEFAULT.equals(installFile);
 			case JoomlaExtensionManifestPackage.JOOMLA_EXTENSION_MANIFEST__UNINSTALL_FILE:
 				return UNINSTALL_FILE_EDEFAULT == null ? uninstallFile != null : !UNINSTALL_FILE_EDEFAULT.equals(uninstallFile);
+			case JoomlaExtensionManifestPackage.JOOMLA_EXTENSION_MANIFEST__DESTINATION:
+				return destination != DESTINATION_EDEFAULT;
+			case JoomlaExtensionManifestPackage.JOOMLA_EXTENSION_MANIFEST__PLUGIN_GROUP:
+				return PLUGIN_GROUP_EDEFAULT == null ? pluginGroup != null : !PLUGIN_GROUP_EDEFAULT.equals(pluginGroup);
 			case JoomlaExtensionManifestPackage.JOOMLA_EXTENSION_MANIFEST__INSTALL:
 				return install != null;
 			case JoomlaExtensionManifestPackage.JOOMLA_EXTENSION_MANIFEST__UNINSTALL:
@@ -1048,6 +1161,10 @@ public class JoomlaExtensionManifestImpl extends AbstractMultiResourceContainerI
 		result.append(installFile);
 		result.append(", uninstallFile: ");
 		result.append(uninstallFile);
+		result.append(", destination: ");
+		result.append(destination);
+		result.append(", pluginGroup: ");
+		result.append(pluginGroup);
 		result.append(')');
 		return result.toString();
 	}

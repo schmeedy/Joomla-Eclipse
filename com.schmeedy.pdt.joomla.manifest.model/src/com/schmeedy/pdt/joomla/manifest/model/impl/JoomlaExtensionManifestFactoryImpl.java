@@ -18,6 +18,7 @@ import com.schmeedy.pdt.joomla.manifest.model.FileResource;
 import com.schmeedy.pdt.joomla.manifest.model.FileSet;
 import com.schmeedy.pdt.joomla.manifest.model.FolderResource;
 import com.schmeedy.pdt.joomla.manifest.model.InstallDb;
+import com.schmeedy.pdt.joomla.manifest.model.JoomlaDestination;
 import com.schmeedy.pdt.joomla.manifest.model.JoomlaExtensionManifest;
 import com.schmeedy.pdt.joomla.manifest.model.JoomlaExtensionManifestFactory;
 import com.schmeedy.pdt.joomla.manifest.model.JoomlaExtensionManifestPackage;
@@ -107,6 +108,8 @@ public class JoomlaExtensionManifestFactoryImpl extends EFactoryImpl implements 
 				return createManifestVersionFromString(eDataType, initialValue);
 			case JoomlaExtensionManifestPackage.MANIFEST_TYPE:
 				return createManifestTypeFromString(eDataType, initialValue);
+			case JoomlaExtensionManifestPackage.JOOMLA_DESTINATION:
+				return createJoomlaDestinationFromString(eDataType, initialValue);
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
@@ -124,6 +127,8 @@ public class JoomlaExtensionManifestFactoryImpl extends EFactoryImpl implements 
 				return convertManifestVersionToString(eDataType, instanceValue);
 			case JoomlaExtensionManifestPackage.MANIFEST_TYPE:
 				return convertManifestTypeToString(eDataType, instanceValue);
+			case JoomlaExtensionManifestPackage.JOOMLA_DESTINATION:
+				return convertJoomlaDestinationToString(eDataType, instanceValue);
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
@@ -306,6 +311,26 @@ public class JoomlaExtensionManifestFactoryImpl extends EFactoryImpl implements 
 	 * @generated
 	 */
 	public String convertManifestTypeToString(EDataType eDataType, Object instanceValue) {
+		return instanceValue == null ? null : instanceValue.toString();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public JoomlaDestination createJoomlaDestinationFromString(EDataType eDataType, String initialValue) {
+		JoomlaDestination result = JoomlaDestination.get(initialValue);
+		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
+		return result;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String convertJoomlaDestinationToString(EDataType eDataType, Object instanceValue) {
 		return instanceValue == null ? null : instanceValue.toString();
 	}
 

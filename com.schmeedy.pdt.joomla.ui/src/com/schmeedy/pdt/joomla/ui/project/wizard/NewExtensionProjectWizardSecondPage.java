@@ -1,8 +1,10 @@
 package com.schmeedy.pdt.joomla.ui.project.wizard;
 
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.util.Collections;
 
+import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
@@ -29,7 +31,10 @@ import com.schmeedy.pdt.joomla.core.project.model.BasicExtensionModel;
 import com.schmeedy.pdt.joomla.core.project.model.ExtensionType;
 import com.schmeedy.pdt.joomla.core.project.model.JoomlaProjectModelFactory;
 import com.schmeedy.pdt.joomla.core.server.ServerUtils;
+import com.schmeedy.pdt.joomla.manifest.model.FileResource;
+import com.schmeedy.pdt.joomla.manifest.model.FileSet;
 import com.schmeedy.pdt.joomla.manifest.model.JoomlaExtensionManifest;
+import com.schmeedy.pdt.joomla.manifest.model.JoomlaExtensionManifestFactory;
 import com.schmeedy.pdt.joomla.manifest.model.ManifestType;
 import com.schmeedy.pdt.joomla.manifest.model.util.JoomlaExtensionManifestResourceFactoryImpl;
 import com.schmeedy.pdt.joomla.ui.JoomlaUiPlugin;
@@ -39,6 +44,8 @@ import com.schmeedy.pdt.joomla.ui.project.ExtensionProjectFactory;
 
 public class NewExtensionProjectWizardSecondPage extends NewElementWizardPage {
 
+	private static final String EMPTY_PHP_FILE_CONTENTS = "<?php \n\n?>";
+	
 	private final ExtensionProjectFactory projectFactory = new ExtensionProjectFactory();
 	private final IExtensionManifestProvider manifestProvider;
 	
@@ -66,6 +73,7 @@ public class NewExtensionProjectWizardSecondPage extends NewElementWizardPage {
 	private void updateProjectName(final JoomlaExtensionManifest manifest) {
 		final BasicExtensionModel extension = JoomlaProjectModelFactory.eINSTANCE.createBasicExtensionModel();
 		extension.setName(manifest.getName());
+		extension.setSymbolicName(manifest.getName());
 		extension.setType(toExtensionType(manifest.getManifestType()));
 		projectNameText.setText(projectFactory.suggestProjectName(extension));
 	}
@@ -147,7 +155,7 @@ public class NewExtensionProjectWizardSecondPage extends NewElementWizardPage {
 	
 	public void performFinish(IProgressMonitor monitor) throws CoreException {		
 		try {
-			monitor.beginTask("Creating project and resources.", 3000);
+			monitor.beginTask("Creating project and resources.",  4000);
 			
 			class SwtValues { // these values must be accessed through UI thread...
 				String projectName;
@@ -165,12 +173,29 @@ public class NewExtensionProjectWizardSecondPage extends NewElementWizardPage {
 			
 			final String projectName = swt.projectName;
 			final JoomlaExtensionManifest manifest = swt.manifest;
+			final String cleanProjectName = ServerUtils.jfilterInputCleanCommand(projectName);
 			
 			final boolean jsSupport = manifest.getManifestType() == ManifestType.COMPONENT || manifest.getManifestType() == ManifestType.MODULE;
 			createdProject = projectFactory.createJoomlaExtensionProject(projectName, buildPathEntry, jsSupport, new SubProgressMonitor(monitor, 1000));
+
+			if (manifest.getManifestType() == ManifestType.MODULE || manifest.getManifestType() == ManifestType.PLUGIN) {
+				final IFile extensionScriptFile = createdProject.getProject().getFile(cleanProjectName + ".php");
+				extensionScriptFile.create(new ByteArrayInputStream(EMPTY_PHP_FILE_CONTENTS.getBytes()), IFile.FORCE, new SubProgressMonitor(monitor, 1000));
+				final FileSet fileSet = JoomlaExtensionManifestFactory.eINSTANCE.createFileSet();
+				manifest.getFileSets().add(fileSet);
+				final FileResource extensionScriptResource = JoomlaExtensionManifestFactory.eINSTANCE.createFileResource();
+				if (manifest.getManifestType() == ManifestType.MODULE) {
+					extensionScriptResource.setModule(cleanProjectName);
+				} else {
+					extensionScriptResource.setPlugin(cleanProjectName);
+				}
+				extensionScriptResource.setPath(extensionScriptFile.getName());
+				fileSet.getFiles().add(extensionScriptResource);
+			} else {
+				monitor.worked(1000);
+			}
 			
-			final String manifestResourceFileName = ServerUtils.jfilterInputCleanCommand(projectName) + ".xml";
-			final URI manifestResourceUri = URI.createPlatformResourceURI(createdProject.getProject().getFullPath().append(manifestResourceFileName).toString(), true);
+			final URI manifestResourceUri = URI.createPlatformResourceURI(createdProject.getProject().getFullPath().append(cleanProjectName + ".xml").toString(), true);
 			final Resource manifestResource = new JoomlaExtensionManifestResourceFactoryImpl().createResource(manifestResourceUri);
 			manifestResource.getContents().add(manifest);
 			try {

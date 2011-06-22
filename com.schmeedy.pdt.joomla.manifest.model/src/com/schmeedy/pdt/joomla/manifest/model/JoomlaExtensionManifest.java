@@ -28,6 +28,8 @@ package com.schmeedy.pdt.joomla.manifest.model;
  *   <li>{@link com.schmeedy.pdt.joomla.manifest.model.JoomlaExtensionManifest#getDescription <em>Description</em>}</li>
  *   <li>{@link com.schmeedy.pdt.joomla.manifest.model.JoomlaExtensionManifest#getInstallFile <em>Install File</em>}</li>
  *   <li>{@link com.schmeedy.pdt.joomla.manifest.model.JoomlaExtensionManifest#getUninstallFile <em>Uninstall File</em>}</li>
+ *   <li>{@link com.schmeedy.pdt.joomla.manifest.model.JoomlaExtensionManifest#getDestination <em>Destination</em>}</li>
+ *   <li>{@link com.schmeedy.pdt.joomla.manifest.model.JoomlaExtensionManifest#getPluginGroup <em>Plugin Group</em>}</li>
  *   <li>{@link com.schmeedy.pdt.joomla.manifest.model.JoomlaExtensionManifest#getInstall <em>Install</em>}</li>
  *   <li>{@link com.schmeedy.pdt.joomla.manifest.model.JoomlaExtensionManifest#getUninstall <em>Uninstall</em>}</li>
  *   <li>{@link com.schmeedy.pdt.joomla.manifest.model.JoomlaExtensionManifest#getAdministration <em>Administration</em>}</li>
@@ -382,6 +384,61 @@ public interface JoomlaExtensionManifest extends AbstractMultiResourceContainer 
 	 * @generated
 	 */
 	void setUninstallFile(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Destination</b></em>' attribute.
+	 * The literals are from the enumeration {@link com.schmeedy.pdt.joomla.manifest.model.JoomlaDestination}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Destination</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Destination</em>' attribute.
+	 * @see com.schmeedy.pdt.joomla.manifest.model.JoomlaDestination
+	 * @see #setDestination(JoomlaDestination)
+	 * @see com.schmeedy.pdt.joomla.manifest.model.JoomlaExtensionManifestPackage#getJoomlaExtensionManifest_Destination()
+	 * @model extendedMetaData="name='client' kind='attribute'"
+	 * @generated
+	 */
+	JoomlaDestination getDestination();
+
+	/**
+	 * Sets the value of the '{@link com.schmeedy.pdt.joomla.manifest.model.JoomlaExtensionManifest#getDestination <em>Destination</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Destination</em>' attribute.
+	 * @see com.schmeedy.pdt.joomla.manifest.model.JoomlaDestination
+	 * @see #getDestination()
+	 * @generated
+	 */
+	void setDestination(JoomlaDestination value);
+
+	/**
+	 * Returns the value of the '<em><b>Plugin Group</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Plugin Group</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Plugin Group</em>' attribute.
+	 * @see #setPluginGroup(String)
+	 * @see com.schmeedy.pdt.joomla.manifest.model.JoomlaExtensionManifestPackage#getJoomlaExtensionManifest_PluginGroup()
+	 * @model extendedMetaData="name='group' kind='attribute'"
+	 * @generated
+	 */
+	String getPluginGroup();
+
+	/**
+	 * Sets the value of the '{@link com.schmeedy.pdt.joomla.manifest.model.JoomlaExtensionManifest#getPluginGroup <em>Plugin Group</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Plugin Group</em>' attribute.
+	 * @see #getPluginGroup()
+	 * @generated
+	 */
+	void setPluginGroup(String value);
 
 	/**
 	 * Returns the value of the '<em><b>Install</b></em>' containment reference.

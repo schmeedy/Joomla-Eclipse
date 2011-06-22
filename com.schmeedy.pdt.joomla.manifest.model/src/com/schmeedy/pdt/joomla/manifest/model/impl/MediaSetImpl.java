@@ -107,7 +107,7 @@ public class MediaSetImpl extends AbstractResourceContainerImpl implements Media
 	 */
 	@Override
 	public void setDestination(String newDestination) {
-		final String oldDestination = destination;
+		String oldDestination = destination;
 		destination = newDestination;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, JoomlaExtensionManifestPackage.MEDIA_SET__DESTINATION, oldDestination, destination));
@@ -235,7 +235,7 @@ public class MediaSetImpl extends AbstractResourceContainerImpl implements Media
 	public String toString() {
 		if (eIsProxy()) return super.toString();
 
-		final StringBuffer result = new StringBuffer(super.toString());
+		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (destination: ");
 		result.append(destination);
 		result.append(')');

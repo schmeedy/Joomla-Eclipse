@@ -84,7 +84,7 @@ public abstract class AbstractResourceImpl extends EObjectImpl implements Abstra
 	 */
 	@Override
 	public void setPath(String newPath) {
-		final String oldPath = path;
+		String oldPath = path;
 		path = newPath;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, JoomlaExtensionManifestPackage.ABSTRACT_RESOURCE__PATH, oldPath, path));
@@ -171,7 +171,7 @@ public abstract class AbstractResourceImpl extends EObjectImpl implements Abstra
 	public String toString() {
 		if (eIsProxy()) return super.toString();
 
-		final StringBuffer result = new StringBuffer(super.toString());
+		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (path: ");
 		result.append(path);
 		result.append(')');

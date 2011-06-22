@@ -21,6 +21,7 @@ import com.schmeedy.pdt.joomla.manifest.model.FileResource;
 import com.schmeedy.pdt.joomla.manifest.model.FileSet;
 import com.schmeedy.pdt.joomla.manifest.model.FolderResource;
 import com.schmeedy.pdt.joomla.manifest.model.InstallDb;
+import com.schmeedy.pdt.joomla.manifest.model.JoomlaDestination;
 import com.schmeedy.pdt.joomla.manifest.model.JoomlaExtensionManifest;
 import com.schmeedy.pdt.joomla.manifest.model.JoomlaExtensionManifestFactory;
 import com.schmeedy.pdt.joomla.manifest.model.JoomlaExtensionManifestPackage;
@@ -173,6 +174,13 @@ public class JoomlaExtensionManifestPackageImpl extends EPackageImpl implements 
 	 * @generated
 	 */
 	private EEnum manifestTypeEEnum = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EEnum joomlaDestinationEEnum = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -411,8 +419,26 @@ public class JoomlaExtensionManifestPackageImpl extends EPackageImpl implements 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getJoomlaExtensionManifest_Destination() {
+		return (EAttribute)joomlaExtensionManifestEClass.getEStructuralFeatures().get(13);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getJoomlaExtensionManifest_PluginGroup() {
+		return (EAttribute)joomlaExtensionManifestEClass.getEStructuralFeatures().get(14);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EReference getJoomlaExtensionManifest_Install() {
-		return (EReference)joomlaExtensionManifestEClass.getEStructuralFeatures().get(13);
+		return (EReference)joomlaExtensionManifestEClass.getEStructuralFeatures().get(15);
 	}
 
 	/**
@@ -421,7 +447,7 @@ public class JoomlaExtensionManifestPackageImpl extends EPackageImpl implements 
 	 * @generated
 	 */
 	public EReference getJoomlaExtensionManifest_Uninstall() {
-		return (EReference)joomlaExtensionManifestEClass.getEStructuralFeatures().get(14);
+		return (EReference)joomlaExtensionManifestEClass.getEStructuralFeatures().get(16);
 	}
 
 	/**
@@ -430,7 +456,7 @@ public class JoomlaExtensionManifestPackageImpl extends EPackageImpl implements 
 	 * @generated
 	 */
 	public EReference getJoomlaExtensionManifest_Administration() {
-		return (EReference)joomlaExtensionManifestEClass.getEStructuralFeatures().get(15);
+		return (EReference)joomlaExtensionManifestEClass.getEStructuralFeatures().get(17);
 	}
 
 	/**
@@ -593,6 +619,24 @@ public class JoomlaExtensionManifestPackageImpl extends EPackageImpl implements 
 	 */
 	public EClass getFileResource() {
 		return fileResourceEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getFileResource_Module() {
+		return (EAttribute)fileResourceEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getFileResource_Plugin() {
+		return (EAttribute)fileResourceEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -825,6 +869,15 @@ public class JoomlaExtensionManifestPackageImpl extends EPackageImpl implements 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EEnum getJoomlaDestination() {
+		return joomlaDestinationEEnum;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public JoomlaExtensionManifestFactory getJoomlaExtensionManifestFactory() {
 		return (JoomlaExtensionManifestFactory)getEFactoryInstance();
 	}
@@ -868,6 +921,8 @@ public class JoomlaExtensionManifestPackageImpl extends EPackageImpl implements 
 		createEAttribute(joomlaExtensionManifestEClass, JOOMLA_EXTENSION_MANIFEST__DESCRIPTION);
 		createEAttribute(joomlaExtensionManifestEClass, JOOMLA_EXTENSION_MANIFEST__INSTALL_FILE);
 		createEAttribute(joomlaExtensionManifestEClass, JOOMLA_EXTENSION_MANIFEST__UNINSTALL_FILE);
+		createEAttribute(joomlaExtensionManifestEClass, JOOMLA_EXTENSION_MANIFEST__DESTINATION);
+		createEAttribute(joomlaExtensionManifestEClass, JOOMLA_EXTENSION_MANIFEST__PLUGIN_GROUP);
 		createEReference(joomlaExtensionManifestEClass, JOOMLA_EXTENSION_MANIFEST__INSTALL);
 		createEReference(joomlaExtensionManifestEClass, JOOMLA_EXTENSION_MANIFEST__UNINSTALL);
 		createEReference(joomlaExtensionManifestEClass, JOOMLA_EXTENSION_MANIFEST__ADMINISTRATION);
@@ -897,6 +952,8 @@ public class JoomlaExtensionManifestPackageImpl extends EPackageImpl implements 
 		createEReference(fileSetEClass, FILE_SET__FOLDERS);
 
 		fileResourceEClass = createEClass(FILE_RESOURCE);
+		createEAttribute(fileResourceEClass, FILE_RESOURCE__MODULE);
+		createEAttribute(fileResourceEClass, FILE_RESOURCE__PLUGIN);
 
 		folderResourceEClass = createEClass(FOLDER_RESOURCE);
 
@@ -931,6 +988,7 @@ public class JoomlaExtensionManifestPackageImpl extends EPackageImpl implements 
 		// Create enums
 		manifestVersionEEnum = createEEnum(MANIFEST_VERSION);
 		manifestTypeEEnum = createEEnum(MANIFEST_TYPE);
+		joomlaDestinationEEnum = createEEnum(JOOMLA_DESTINATION);
 	}
 
 	/**
@@ -992,6 +1050,8 @@ public class JoomlaExtensionManifestPackageImpl extends EPackageImpl implements 
 		initEAttribute(getJoomlaExtensionManifest_Description(), ecorePackage.getEString(), "description", null, 0, 1, JoomlaExtensionManifest.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getJoomlaExtensionManifest_InstallFile(), ecorePackage.getEString(), "installFile", null, 0, 1, JoomlaExtensionManifest.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getJoomlaExtensionManifest_UninstallFile(), ecorePackage.getEString(), "uninstallFile", null, 0, 1, JoomlaExtensionManifest.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getJoomlaExtensionManifest_Destination(), this.getJoomlaDestination(), "destination", null, 0, 1, JoomlaExtensionManifest.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getJoomlaExtensionManifest_PluginGroup(), ecorePackage.getEString(), "pluginGroup", null, 0, 1, JoomlaExtensionManifest.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getJoomlaExtensionManifest_Install(), this.getInstallDb(), null, "install", null, 0, 1, JoomlaExtensionManifest.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getJoomlaExtensionManifest_Uninstall(), this.getUninstallDb(), null, "uninstall", null, 0, 1, JoomlaExtensionManifest.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getJoomlaExtensionManifest_Administration(), this.getAdministration(), null, "administration", null, 0, 1, JoomlaExtensionManifest.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1021,6 +1081,8 @@ public class JoomlaExtensionManifestPackageImpl extends EPackageImpl implements 
 		initEReference(getFileSet_Folders(), this.getFolderResource(), null, "folders", null, 0, -1, FileSet.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(fileResourceEClass, FileResource.class, "FileResource", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getFileResource_Module(), ecorePackage.getEString(), "module", null, 0, 1, FileResource.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getFileResource_Plugin(), ecorePackage.getEString(), "plugin", null, 0, 1, FileResource.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(folderResourceEClass, FolderResource.class, "FolderResource", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
@@ -1064,6 +1126,10 @@ public class JoomlaExtensionManifestPackageImpl extends EPackageImpl implements 
 		addEEnumLiteral(manifestTypeEEnum, ManifestType.PLUGIN);
 		addEEnumLiteral(manifestTypeEEnum, ManifestType.MODULE);
 		addEEnumLiteral(manifestTypeEEnum, ManifestType.TEMPLATE);
+
+		initEEnum(joomlaDestinationEEnum, JoomlaDestination.class, "JoomlaDestination");
+		addEEnumLiteral(joomlaDestinationEEnum, JoomlaDestination.SITE);
+		addEEnumLiteral(joomlaDestinationEEnum, JoomlaDestination.ADMINISTRATION);
 
 		// Create resource
 		createResource(eNS_URI);
@@ -1185,6 +1251,20 @@ public class JoomlaExtensionManifestPackageImpl extends EPackageImpl implements 
 			 "name", "uninstallfile"
 		   });		
 		addAnnotation
+		  (getJoomlaExtensionManifest_Destination(), 
+		   source, 
+		   new String[] {
+			 "name", "client",
+			 "kind", "attribute"
+		   });		
+		addAnnotation
+		  (getJoomlaExtensionManifest_PluginGroup(), 
+		   source, 
+		   new String[] {
+			 "name", "group",
+			 "kind", "attribute"
+		   });		
+		addAnnotation
 		  (getJoomlaExtensionManifest_Install(), 
 		   source, 
 		   new String[] {
@@ -1277,6 +1357,20 @@ public class JoomlaExtensionManifestPackageImpl extends EPackageImpl implements 
 		   source, 
 		   new String[] {
 			 "kind", "simple"
+		   });		
+		addAnnotation
+		  (getFileResource_Module(), 
+		   source, 
+		   new String[] {
+			 "name", "module",
+			 "kind", "attribute"
+		   });		
+		addAnnotation
+		  (getFileResource_Plugin(), 
+		   source, 
+		   new String[] {
+			 "name", "module",
+			 "kind", "plugin"
 		   });		
 		addAnnotation
 		  (folderResourceEClass, 

@@ -287,13 +287,31 @@ public interface JoomlaExtensionManifestPackage extends EPackage {
 	int JOOMLA_EXTENSION_MANIFEST__UNINSTALL_FILE = ABSTRACT_MULTI_RESOURCE_CONTAINER_FEATURE_COUNT + 12;
 
 	/**
+	 * The feature id for the '<em><b>Destination</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int JOOMLA_EXTENSION_MANIFEST__DESTINATION = ABSTRACT_MULTI_RESOURCE_CONTAINER_FEATURE_COUNT + 13;
+
+	/**
+	 * The feature id for the '<em><b>Plugin Group</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int JOOMLA_EXTENSION_MANIFEST__PLUGIN_GROUP = ABSTRACT_MULTI_RESOURCE_CONTAINER_FEATURE_COUNT + 14;
+
+	/**
 	 * The feature id for the '<em><b>Install</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int JOOMLA_EXTENSION_MANIFEST__INSTALL = ABSTRACT_MULTI_RESOURCE_CONTAINER_FEATURE_COUNT + 13;
+	int JOOMLA_EXTENSION_MANIFEST__INSTALL = ABSTRACT_MULTI_RESOURCE_CONTAINER_FEATURE_COUNT + 15;
 
 	/**
 	 * The feature id for the '<em><b>Uninstall</b></em>' containment reference.
@@ -302,7 +320,7 @@ public interface JoomlaExtensionManifestPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int JOOMLA_EXTENSION_MANIFEST__UNINSTALL = ABSTRACT_MULTI_RESOURCE_CONTAINER_FEATURE_COUNT + 14;
+	int JOOMLA_EXTENSION_MANIFEST__UNINSTALL = ABSTRACT_MULTI_RESOURCE_CONTAINER_FEATURE_COUNT + 16;
 
 	/**
 	 * The feature id for the '<em><b>Administration</b></em>' containment reference.
@@ -311,7 +329,7 @@ public interface JoomlaExtensionManifestPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int JOOMLA_EXTENSION_MANIFEST__ADMINISTRATION = ABSTRACT_MULTI_RESOURCE_CONTAINER_FEATURE_COUNT + 15;
+	int JOOMLA_EXTENSION_MANIFEST__ADMINISTRATION = ABSTRACT_MULTI_RESOURCE_CONTAINER_FEATURE_COUNT + 17;
 
 	/**
 	 * The number of structural features of the '<em>Joomla Extension Manifest</em>' class.
@@ -320,7 +338,7 @@ public interface JoomlaExtensionManifestPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int JOOMLA_EXTENSION_MANIFEST_FEATURE_COUNT = ABSTRACT_MULTI_RESOURCE_CONTAINER_FEATURE_COUNT + 16;
+	int JOOMLA_EXTENSION_MANIFEST_FEATURE_COUNT = ABSTRACT_MULTI_RESOURCE_CONTAINER_FEATURE_COUNT + 18;
 
 
 	/**
@@ -593,13 +611,31 @@ public interface JoomlaExtensionManifestPackage extends EPackage {
 	int FILE_RESOURCE__PATH = ABSTRACT_RESOURCE__PATH;
 
 	/**
+	 * The feature id for the '<em><b>Module</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FILE_RESOURCE__MODULE = ABSTRACT_RESOURCE_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Plugin</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FILE_RESOURCE__PLUGIN = ABSTRACT_RESOURCE_FEATURE_COUNT + 1;
+
+	/**
 	 * The number of structural features of the '<em>File Resource</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int FILE_RESOURCE_FEATURE_COUNT = ABSTRACT_RESOURCE_FEATURE_COUNT + 0;
+	int FILE_RESOURCE_FEATURE_COUNT = ABSTRACT_RESOURCE_FEATURE_COUNT + 2;
 
 	/**
 	 * The meta object id for the '{@link com.schmeedy.pdt.joomla.manifest.model.impl.FolderResourceImpl <em>Folder Resource</em>}' class.
@@ -990,6 +1026,17 @@ public interface JoomlaExtensionManifestPackage extends EPackage {
 
 
 	/**
+	 * The meta object id for the '{@link com.schmeedy.pdt.joomla.manifest.model.JoomlaDestination <em>Joomla Destination</em>}' enum.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see com.schmeedy.pdt.joomla.manifest.model.JoomlaDestination
+	 * @see com.schmeedy.pdt.joomla.manifest.model.impl.JoomlaExtensionManifestPackageImpl#getJoomlaDestination()
+	 * @generated
+	 */
+	int JOOMLA_DESTINATION = 19;
+
+
+	/**
 	 * Returns the meta object for class '{@link com.schmeedy.pdt.joomla.manifest.model.AbstractMultiResourceContainer <em>Abstract Multi Resource Container</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1195,6 +1242,28 @@ public interface JoomlaExtensionManifestPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getJoomlaExtensionManifest_UninstallFile();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.schmeedy.pdt.joomla.manifest.model.JoomlaExtensionManifest#getDestination <em>Destination</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Destination</em>'.
+	 * @see com.schmeedy.pdt.joomla.manifest.model.JoomlaExtensionManifest#getDestination()
+	 * @see #getJoomlaExtensionManifest()
+	 * @generated
+	 */
+	EAttribute getJoomlaExtensionManifest_Destination();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.schmeedy.pdt.joomla.manifest.model.JoomlaExtensionManifest#getPluginGroup <em>Plugin Group</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Plugin Group</em>'.
+	 * @see com.schmeedy.pdt.joomla.manifest.model.JoomlaExtensionManifest#getPluginGroup()
+	 * @see #getJoomlaExtensionManifest()
+	 * @generated
+	 */
+	EAttribute getJoomlaExtensionManifest_PluginGroup();
 
 	/**
 	 * Returns the meta object for the containment reference '{@link com.schmeedy.pdt.joomla.manifest.model.JoomlaExtensionManifest#getInstall <em>Install</em>}'.
@@ -1418,6 +1487,28 @@ public interface JoomlaExtensionManifestPackage extends EPackage {
 	 * @generated
 	 */
 	EClass getFileResource();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.schmeedy.pdt.joomla.manifest.model.FileResource#getModule <em>Module</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Module</em>'.
+	 * @see com.schmeedy.pdt.joomla.manifest.model.FileResource#getModule()
+	 * @see #getFileResource()
+	 * @generated
+	 */
+	EAttribute getFileResource_Module();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.schmeedy.pdt.joomla.manifest.model.FileResource#getPlugin <em>Plugin</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Plugin</em>'.
+	 * @see com.schmeedy.pdt.joomla.manifest.model.FileResource#getPlugin()
+	 * @see #getFileResource()
+	 * @generated
+	 */
+	EAttribute getFileResource_Plugin();
 
 	/**
 	 * Returns the meta object for class '{@link com.schmeedy.pdt.joomla.manifest.model.FolderResource <em>Folder Resource</em>}'.
@@ -1686,6 +1777,16 @@ public interface JoomlaExtensionManifestPackage extends EPackage {
 	EEnum getManifestType();
 
 	/**
+	 * Returns the meta object for enum '{@link com.schmeedy.pdt.joomla.manifest.model.JoomlaDestination <em>Joomla Destination</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for enum '<em>Joomla Destination</em>'.
+	 * @see com.schmeedy.pdt.joomla.manifest.model.JoomlaDestination
+	 * @generated
+	 */
+	EEnum getJoomlaDestination();
+
+	/**
 	 * Returns the factory that creates the instances of the model.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1862,6 +1963,22 @@ public interface JoomlaExtensionManifestPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute JOOMLA_EXTENSION_MANIFEST__UNINSTALL_FILE = eINSTANCE.getJoomlaExtensionManifest_UninstallFile();
+
+		/**
+		 * The meta object literal for the '<em><b>Destination</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute JOOMLA_EXTENSION_MANIFEST__DESTINATION = eINSTANCE.getJoomlaExtensionManifest_Destination();
+
+		/**
+		 * The meta object literal for the '<em><b>Plugin Group</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute JOOMLA_EXTENSION_MANIFEST__PLUGIN_GROUP = eINSTANCE.getJoomlaExtensionManifest_PluginGroup();
 
 		/**
 		 * The meta object literal for the '<em><b>Install</b></em>' containment reference feature.
@@ -2046,6 +2163,22 @@ public interface JoomlaExtensionManifestPackage extends EPackage {
 		 * @generated
 		 */
 		EClass FILE_RESOURCE = eINSTANCE.getFileResource();
+
+		/**
+		 * The meta object literal for the '<em><b>Module</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute FILE_RESOURCE__MODULE = eINSTANCE.getFileResource_Module();
+
+		/**
+		 * The meta object literal for the '<em><b>Plugin</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute FILE_RESOURCE__PLUGIN = eINSTANCE.getFileResource_Plugin();
 
 		/**
 		 * The meta object literal for the '{@link com.schmeedy.pdt.joomla.manifest.model.impl.FolderResourceImpl <em>Folder Resource</em>}' class.
@@ -2264,6 +2397,16 @@ public interface JoomlaExtensionManifestPackage extends EPackage {
 		 * @generated
 		 */
 		EEnum MANIFEST_TYPE = eINSTANCE.getManifestType();
+
+		/**
+		 * The meta object literal for the '{@link com.schmeedy.pdt.joomla.manifest.model.JoomlaDestination <em>Joomla Destination</em>}' enum.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see com.schmeedy.pdt.joomla.manifest.model.JoomlaDestination
+		 * @see com.schmeedy.pdt.joomla.manifest.model.impl.JoomlaExtensionManifestPackageImpl#getJoomlaDestination()
+		 * @generated
+		 */
+		EEnum JOOMLA_DESTINATION = eINSTANCE.getJoomlaDestination();
 
 	}
 
