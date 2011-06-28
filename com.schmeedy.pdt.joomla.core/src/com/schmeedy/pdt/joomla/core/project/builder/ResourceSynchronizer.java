@@ -52,7 +52,7 @@ class ResourceSynchronizer {
 	}
 
 	public void remove(final FileOrFolder destination) {
-		System.out.println("REMOVE " + destination.getFile());
+		// System.out.println("REMOVE " + destination.getFile());
 		delete(destination.getFile());
 	}
 
@@ -130,7 +130,7 @@ class ResourceSynchronizer {
 			final IFileStore sourceStore = EFS.getStore(source.getLocationURI());
 			final IFileInfo sourceInfo = sourceStore.fetchInfo();
 			if (destination.lastModified() < sourceInfo.getLastModified()) {
-				System.out.println("COPY (" + (destination.exists() ? "+" : "-") + ") " + source + " TO " + destination);
+				// System.out.println("COPY (" + (destination.exists() ? "+" : "-") + ") " + source + " TO " + destination);
 				doCopy(source, sourceInfo, destination, progressMonitor);
 			}
 		} catch (final IOException e) {
