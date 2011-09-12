@@ -181,7 +181,10 @@ public class EditLocalJoomlaServerDialog extends TitleAreaDialog {
 						final MajorJoomlaVersion majorVersion = (MajorJoomlaVersion) selection.getFirstElement();
 						serverConfiguration.setExactVersion(majorVersion.getLiteral().replace('x', '0'));
 						manuallyConfiguredVersion = true;
-						dataBindingContext.updateModels(); // trigger validation
+						
+						if (dataBindingContext != null) {
+							dataBindingContext.updateModels(); // trigger validation
+						}
 					}
 				}
 			}
